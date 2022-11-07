@@ -1,0 +1,55 @@
+//
+//  OnboardingViewController.swift
+//  SLP_LocationApp
+//
+//  Created by SeungYeon Yoo on 2022/11/07.
+//
+import UIKit
+import SnapKit
+
+class OnboardingViewController: BaseViewController {
+    
+    var slides: [OnboardingSlide] = []
+        
+    var mainView = OnboardingView()
+
+    override func loadView() {
+        self.view = mainView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mainView.collectionView.delegate = self
+        mainView.collectionView.dataSource = self
+        mainView.collectionView.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: "OnboardingCollectionViewCell")
+        mainView.collectionView.showsHorizontalScrollIndicator = false
+        mainView.collectionView.isPagingEnabled = true
+        
+        slides = [
+            OnboardingSlide(labelContent: "위치기반으로 빠르게 주위 친구를 확인", image: UIImage(named: "onboarding_img1")!),
+            OnboardingSlide(labelContent: "스터디를 원하는 친구를 찾을 수 있어요", image: UIImage(named: "onboarding_img2")!),
+            OnboardingSlide(labelContent: "SeSAC Study", image: UIImage(named: "onboarding_img3")!)
+        ]
+        
+        mainView.startBtn.addTarget(self, action: #selector(startBtnClicked), for: .touchUpInside)
+    }
+    @objc func startBtnClicked() {
+        
+    }
+}
+
+extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return slides.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OnboardingCollectionViewCell", for: indexPath) as? OnboardingCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.setup(slides[indexPath.row])
+        return cell
+    }
+    
+    
+}
