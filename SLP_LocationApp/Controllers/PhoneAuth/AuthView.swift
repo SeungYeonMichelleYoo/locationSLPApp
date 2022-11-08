@@ -21,6 +21,7 @@ class AuthView: BaseView {
     lazy var textField: UITextField = {
         let view = UITextField()
         view.textAlignment = .left
+        view.addLeftPadding()
         view.attributedPlaceholder = NSAttributedString(string: "휴대폰 번호(-없이 숫자만 입력)", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.gray7])
         view.textColor = Constants.BaseColor.black
         return view
