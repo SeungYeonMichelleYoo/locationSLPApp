@@ -22,6 +22,6 @@ class OKButton: UIButton {
         layer.cornerRadius = 8
         clipsToBounds = true
         tintColor = UIColor.white
-        backgroundColor = Constants.BaseColor.green
+        backgroundColor = Constants.BaseColor.gray6
     }
 }

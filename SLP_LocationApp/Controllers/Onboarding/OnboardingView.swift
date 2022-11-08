@@ -35,6 +35,7 @@ class OnboardingView: BaseView {
     
     lazy var startBtn: OKButton = {
         let view = OKButton(frame: .zero)
+        view.backgroundColor = Constants.BaseColor.green
         view.setTitle("시작하기", for: .normal)
         return view
     }()

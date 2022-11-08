@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
+		545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEAFC291A484900CF861F /* MainMapViewController.swift */; };
+		545BEAFF291A485500CF861F /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEAFE291A485500CF861F /* MainMapView.swift */; };
+		545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEB00291A48B900CF861F /* SMSCodeViewController.swift */; };
+		545BEB03291A48C000CF861F /* SMSCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEB02291A48C000CF861F /* SMSCodeView.swift */; };
 		5461B4A92918B6440000D726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461B4A82918B6440000D726 /* AppDelegate.swift */; };
 		5461B4AB2918B6440000D726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461B4AA2918B6440000D726 /* SceneDelegate.swift */; };
 		5461B4B22918B6450000D726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5461B4B12918B6450000D726 /* Assets.xcassets */; };
@@ -35,10 +39,17 @@
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
 		54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */; };
 		54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19EC291A32CD0033BCE4 /* OKButton.swift */; };
+		54FE19F2291A3A010033BCE4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54FE19F1291A3A010033BCE4 /* GoogleService-Info.plist */; };
+		54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19F3291A3BA70033BCE4 /* AuthManager.swift */; };
+		54FE19F7291A3D690033BCE4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54FE19F6291A3D690033BCE4 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		543CBF09291947D300563856 /* Transition+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+Extension.swift"; sourceTree = "<group>"; };
+		545BEAFC291A484900CF861F /* MainMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewController.swift; sourceTree = "<group>"; };
+		545BEAFE291A485500CF861F /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
+		545BEB00291A48B900CF861F /* SMSCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSCodeViewController.swift; sourceTree = "<group>"; };
+		545BEB02291A48C000CF861F /* SMSCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSCodeView.swift; sourceTree = "<group>"; };
 		5461B4A52918B6440000D726 /* SLP_LocationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SLP_LocationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461B4A82918B6440000D726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5461B4AA2918B6440000D726 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +78,8 @@
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		54FE19EC291A32CD0033BCE4 /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
+		54FE19F1291A3A010033BCE4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		54FE19F3291A3BA70033BCE4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +88,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5461B4E02918CBF70000D726 /* SnapKit in Frameworks */,
+				54FE19F7291A3D690033BCE4 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +103,15 @@
 				5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		545BEAFB291A481000CF861F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				545BEAFC291A484900CF861F /* MainMapViewController.swift */,
+				545BEAFE291A485500CF861F /* MainMapView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		5461B49C2918B6440000D726 = {
@@ -111,6 +134,7 @@
 		5461B4A72918B6440000D726 /* SLP_LocationApp */ = {
 			isa = PBXGroup;
 			children = (
+				54FE19F1291A3A010033BCE4 /* GoogleService-Info.plist */,
 				549868302918DF9C005DBF6E /* Models */,
 				5461B4D92918CB940000D726 /* Utility */,
 				5461B4BE2918C4CC0000D726 /* Controllers */,
@@ -127,19 +151,23 @@
 			isa = PBXGroup;
 			children = (
 				543CBF0B2919512700563856 /* Onboarding */,
-				5461B4D72918C71B0000D726 /* PhoneAuth */,
+				5461B4D72918C71B0000D726 /* AuthLogin */,
 				5461B4D82918C76F0000D726 /* Signup */,
+				545BEAFB291A481000CF861F /* Home */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		5461B4D72918C71B0000D726 /* PhoneAuth */ = {
+		5461B4D72918C71B0000D726 /* AuthLogin */ = {
 			isa = PBXGroup;
 			children = (
+				54FE19F3291A3BA70033BCE4 /* AuthManager.swift */,
 				5461B4BF2918C50F0000D726 /* AuthViewController.swift */,
 				5461B4C12918C5170000D726 /* AuthView.swift */,
+				545BEB00291A48B900CF861F /* SMSCodeViewController.swift */,
+				545BEB02291A48C000CF861F /* SMSCodeView.swift */,
 			);
-			path = PhoneAuth;
+			path = AuthLogin;
 			sourceTree = "<group>";
 		};
 		5461B4D82918C76F0000D726 /* Signup */ = {
@@ -230,6 +258,7 @@
 			name = SLP_LocationApp;
 			packageProductDependencies = (
 				5461B4DF2918CBF70000D726 /* SnapKit */,
+				54FE19F6291A3D690033BCE4 /* FirebaseAuth */,
 			);
 			productName = SLP_LocationApp;
 			productReference = 5461B4A52918B6440000D726 /* SLP_LocationApp.app */;
@@ -261,6 +290,7 @@
 			mainGroup = 5461B49C2918B6440000D726;
 			packageReferences = (
 				5461B4DE2918CBF70000D726 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				54FE19F5291A3D690033BCE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5461B4A62918B6440000D726 /* Products */;
 			projectDirPath = "";
@@ -276,6 +306,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54FE19F2291A3A010033BCE4 /* GoogleService-Info.plist in Resources */,
 				5461B4BD2918BED00000D726 /* .gitignore in Resources */,
 				5461B4B52918B6450000D726 /* LaunchScreen.storyboard in Resources */,
 				5461B4B22918B6450000D726 /* Assets.xcassets in Resources */,
@@ -292,11 +323,14 @@
 				5461B4C02918C50F0000D726 /* AuthViewController.swift in Sources */,
 				5461B4A92918B6440000D726 /* AppDelegate.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
+				545BEB03291A48C000CF861F /* SMSCodeView.swift in Sources */,
+				545BEAFF291A485500CF861F /* MainMapView.swift in Sources */,
 				5461B4CE2918C5A60000D726 /* EmailView.swift in Sources */,
 				5461B4D22918C5BF0000D726 /* GenderView.swift in Sources */,
 				5461B4DB2918CBAD0000D726 /* BaseViewController.swift in Sources */,
 				543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */,
 				5461B4C22918C5170000D726 /* AuthView.swift in Sources */,
+				545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */,
 				5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */,
 				5461B4C82918C5660000D726 /* BirthViewController.swift in Sources */,
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,
@@ -310,9 +344,11 @@
 				5461B4E32918CD090000D726 /* Color+Extension.swift in Sources */,
 				54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */,
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
+				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
 				5461B4DD2918CBB50000D726 /* BaseView.swift in Sources */,
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
+				54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +576,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		54FE19F5291A3D690033BCE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -547,6 +591,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5461B4DE2918CBF70000D726 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		54FE19F6291A3D690033BCE4 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54FE19F5291A3D690033BCE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

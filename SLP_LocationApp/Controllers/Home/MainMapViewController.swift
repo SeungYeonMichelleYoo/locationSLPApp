@@ -1,15 +1,16 @@
 //
-//  AuthViewController.swift
+//  MainMapViewController.swift
 //  SLP_LocationApp
 //
-//  Created by SeungYeon Yoo on 2022/11/07.
+//  Created by SeungYeon Yoo on 2022/11/08.
 //
+
 import UIKit
 import SnapKit
 
-class AuthViewController: BaseViewController {
+class MainMapViewController: BaseViewController {
         
-    var mainView = AuthView()
+    var mainView = MainMapView()
 
     override func loadView() {
         self.view = mainView
