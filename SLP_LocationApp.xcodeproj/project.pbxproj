@@ -34,6 +34,7 @@
 		5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */; };
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
 		54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */; };
+		54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19EC291A32CD0033BCE4 /* OKButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		54FE19EC291A32CD0033BCE4 /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		5461B4D92918CB940000D726 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				54FE19EB291A32BC0033BCE4 /* CustomView */,
 				549E57D42919D1EF00CACF54 /* BaseViews */,
 				5461B4E42918CD360000D726 /* Constants */,
 				5461B4E12918CCF50000D726 /* Extensions */,
@@ -199,6 +202,14 @@
 				5461B4DC2918CBB50000D726 /* BaseView.swift */,
 			);
 			path = BaseViews;
+			sourceTree = "<group>";
+		};
+		54FE19EB291A32BC0033BCE4 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				54FE19EC291A32CD0033BCE4 /* OKButton.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,6 +312,7 @@
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
 				5461B4DD2918CBB50000D726 /* BaseView.swift in Sources */,
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
+				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,13 +33,9 @@ class OnboardingView: BaseView {
         return view
     }()
     
-    lazy var startBtn: UIButton = {
-        let view = UIButton()
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
+    lazy var startBtn: OKButton = {
+        let view = OKButton(frame: .zero)
         view.setTitle("시작하기", for: .normal)
-        view.tintColor = UIColor.white
-        view.backgroundColor = Constants.BaseColor.green
         return view
     }()
     
@@ -75,6 +71,7 @@ class OnboardingView: BaseView {
             make.top.equalTo(pageControl.snp.bottom).offset(42)
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(48)
         }
     }
 }

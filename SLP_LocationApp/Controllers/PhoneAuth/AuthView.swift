@@ -27,13 +27,9 @@ class AuthView: BaseView {
         return view
     }()
     
-    lazy var sendBtn: UIButton = {
-        let view = UIButton()
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
+    lazy var sendBtn: OKButton = {
+        let view = OKButton(frame: .zero)
         view.setTitle("인증 문자 받기", for: .normal)
-        view.tintColor = UIColor.white
-        view.backgroundColor = Constants.BaseColor.green
         return view
     }()
     
