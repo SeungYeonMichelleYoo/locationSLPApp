@@ -9,10 +9,31 @@ import SnapKit
 
 class AuthView: BaseView {
     
-    lazy var mainTableView: UITableView = {
-        let tableview = UITableView()
-        tableview.separatorStyle = .none
-        return tableview
+    lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.numberOfLines = 2
+        label.textAlignment = .center
+        label.text = "새싹 서비스 이용을 위해\n 휴대폰 번호를 입력해 주세요"
+        return label
+    }()
+    
+    lazy var textField: UITextField = {
+        let view = UITextField()
+        view.textAlignment = .left
+        view.attributedPlaceholder = NSAttributedString(string: "휴대폰 번호(-없이 숫자만 입력)", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.gray7])
+        view.textColor = Constants.BaseColor.black
+        return view
+    }()
+    
+    lazy var sendBtn: UIButton = {
+        let view = UIButton()
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        view.setTitle("인증 문자 받기", for: .normal)
+        view.tintColor = UIColor.white
+        view.backgroundColor = Constants.BaseColor.green
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -24,16 +45,27 @@ class AuthView: BaseView {
     }
     
     override func configureUI() {
-        [mainTableView].forEach {
+        [infoLabel, textField, sendBtn].forEach {
             self.addSubview($0)
         }
     }
     
     override func setConstraints() {
-        mainTableView.snp.makeConstraints { make in
-            make.top.bottom.equalTo(self.safeAreaLayoutGuide)
-            make.leading.equalTo(self.safeAreaLayoutGuide).inset(10)
-            make.trailing.equalTo(self.safeAreaLayoutGuide)
+        infoLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).inset(125)
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.width.equalTo(228)
+        }
+        
+        textField.snp.makeConstraints { make in
+            make.top.equalTo(infoLabel.snp.bottom).offset(64)
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+        }
+        
+        sendBtn.snp.makeConstraints { make in
+            make.top.equalTo(textField.snp.bottom).offset(72)
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.height.equalTo(48)
         }
     }
 }

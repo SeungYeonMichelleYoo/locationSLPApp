@@ -10,9 +10,11 @@ import SnapKit
 class OnboardingViewController: BaseViewController {
     
     var slides: [OnboardingSlide] = []
-        
+    
+    var currentPage = 0
+    
     var mainView = OnboardingView()
-
+    
     override func loadView() {
         self.view = mainView
     }
@@ -22,8 +24,6 @@ class OnboardingViewController: BaseViewController {
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         mainView.collectionView.register(OnboardingCollectionViewCell.self, forCellWithReuseIdentifier: "OnboardingCollectionViewCell")
-        mainView.collectionView.showsHorizontalScrollIndicator = false
-        mainView.collectionView.isPagingEnabled = true
         
         slides = [
             OnboardingSlide(labelContent: "위치기반으로 빠르게 주위 친구를 확인", image: UIImage(named: "onboarding_img1")!),
@@ -34,7 +34,8 @@ class OnboardingViewController: BaseViewController {
         mainView.startBtn.addTarget(self, action: #selector(startBtnClicked), for: .touchUpInside)
     }
     @objc func startBtnClicked() {
-        
+        let vc = AuthViewController()
+        transition(vc, transitionStyle: .presentFullScreen)
     }
 }
 
@@ -51,5 +52,15 @@ extension OnboardingViewController: UICollectionViewDelegate, UICollectionViewDa
         return cell
     }
     
-    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = scrollView.frame.width
+        currentPage = Int(scrollView.contentOffset.x / width)
+        mainView.pageControl.currentPage = currentPage
+    }
+}
+
+extension OnboardingViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
 }

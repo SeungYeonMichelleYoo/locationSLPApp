@@ -77,6 +77,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		543CBF0B2919512700563856 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5461B4D32918C5F90000D726 /* OnboardingViewController.swift */,
+				5461B4D52918C6050000D726 /* OnboardingView.swift */,
+				5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		5461B49C2918B6440000D726 = {
 			isa = PBXGroup;
 			children = (
@@ -112,9 +122,7 @@
 		5461B4BE2918C4CC0000D726 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5461B4D32918C5F90000D726 /* OnboardingViewController.swift */,
-				5461B4D52918C6050000D726 /* OnboardingView.swift */,
-				5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */,
+				543CBF0B2919512700563856 /* Onboarding */,
 				5461B4D72918C71B0000D726 /* PhoneAuth */,
 				5461B4D82918C76F0000D726 /* Signup */,
 			);
@@ -148,10 +156,9 @@
 		5461B4D92918CB940000D726 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				549E57D42919D1EF00CACF54 /* BaseViews */,
 				5461B4E42918CD360000D726 /* Constants */,
 				5461B4E12918CCF50000D726 /* Extensions */,
-				5461B4DA2918CBAD0000D726 /* BaseViewController.swift */,
-				5461B4DC2918CBB50000D726 /* BaseView.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -180,6 +187,15 @@
 				549868312918DFA9005DBF6E /* OnboardingSlide.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		549E57D42919D1EF00CACF54 /* BaseViews */ = {
+			isa = PBXGroup;
+			children = (
+				5461B4DA2918CBAD0000D726 /* BaseViewController.swift */,
+				5461B4DC2918CBB50000D726 /* BaseView.swift */,
+			);
+			path = BaseViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

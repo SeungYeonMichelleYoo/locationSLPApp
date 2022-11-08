@@ -18,6 +18,9 @@ class OnboardingView: BaseView {
         layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 14, height: UIScreen.main.bounds.height - 120) //height 값???
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.isScrollEnabled = true
+        cv.isPagingEnabled = true
+        cv.showsHorizontalScrollIndicator = false
         return cv
     }()
     
@@ -26,6 +29,7 @@ class OnboardingView: BaseView {
         view.pageIndicatorTintColor = Constants.BaseColor.gray5
         view.currentPageIndicatorTintColor = Constants.BaseColor.black
         view.numberOfPages = 3
+        view.isUserInteractionEnabled = false
         return view
     }()
     
@@ -62,7 +66,7 @@ class OnboardingView: BaseView {
         
         pageControl.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.bottom).offset(56)
-            make.width.equalTo(48)
+            make.width.greaterThanOrEqualTo(48)
             make.height.equalTo(8)
             make.centerX.equalTo(self.safeAreaLayoutGuide)
         }

@@ -53,7 +53,9 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
         
         image.snp.makeConstraints { make in
             make.top.equalTo(contentLabel.snp.bottom).offset(56)
-            make.center.equalToSuperview()
+            make.leading.equalTo(contentView.snp.leading)
+            make.trailing.equalTo(contentView.snp.trailing)
+            make.bottom.equalTo(contentView.snp.bottom)
         }
     }
 }
