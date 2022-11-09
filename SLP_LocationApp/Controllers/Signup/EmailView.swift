@@ -11,7 +11,7 @@ class EmailView: BaseView {
     
     lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.Font.font(.Display1_R20)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "이메일을 입력해 주세요"
@@ -20,8 +20,9 @@ class EmailView: BaseView {
     
     lazy var detailLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.numberOfLines = 2
+        label.font = UIFont.Font.font(.Title2_R16)
+        label.textColor = Constants.BaseColor.gray7
+        label.numberOfLines = 1
         label.textAlignment = .center
         label.text = "휴데폰 번호 변경 시 인증을 위해 사용해요"
         return label
@@ -60,17 +61,15 @@ class EmailView: BaseView {
         infoLabel.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(125)
             make.centerX.equalTo(self.safeAreaLayoutGuide)
-            make.width.equalTo(228)
         }
         
         detailLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(125)
+            make.top.equalTo(infoLabel.snp.bottom).offset(8)
             make.centerX.equalTo(self.safeAreaLayoutGuide)
-            make.width.equalTo(228)
         }
         
         textField.snp.makeConstraints { make in
-            make.top.equalTo(infoLabel.snp.bottom).offset(64)
+            make.top.equalTo(detailLabel.snp.bottom).offset(76)
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
         

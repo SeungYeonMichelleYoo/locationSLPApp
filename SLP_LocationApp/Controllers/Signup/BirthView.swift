@@ -11,7 +11,7 @@ class BirthView: BaseView {
     
     lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.Font.font(.Display1_R20)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "생년월일을 알려주세요"
