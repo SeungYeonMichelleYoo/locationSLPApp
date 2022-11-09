@@ -11,7 +11,7 @@ class AuthView: BaseView {
     
     lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.Font.font(.Display1_R20)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "새싹 서비스 이용을 위해\n 휴대폰 번호를 입력해 주세요"
@@ -51,7 +51,6 @@ class AuthView: BaseView {
         infoLabel.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(125)
             make.centerX.equalTo(self.safeAreaLayoutGuide)
-            make.width.equalTo(228)
         }
         
         textField.snp.makeConstraints { make in

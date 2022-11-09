@@ -29,7 +29,7 @@ class AuthViewController: BaseViewController, UITextFieldDelegate {
                 guard success else { return }
                 DispatchQueue.main.async {
                     let vc = SMSCodeViewController()
-                    self?.transition(vc, transitionStyle: .presentFullScreen)
+                    self?.transition(vc, transitionStyle: .push)
                 }
             }
         }

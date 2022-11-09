@@ -9,7 +9,7 @@ import SnapKit
 import FirebaseAuth
 
 class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
-        
+    
     var mainView = SMSCodeView()
 
     override func loadView() {
@@ -30,13 +30,15 @@ class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
             AuthManager.shared.verifyCode(smsCode: code) { [weak self] success in
                 guard success else { return }
                 DispatchQueue.main.async {
-                    if Auth.auth().currentUser == nil {
-                        let vc = NicknameViewController()
-                        self?.transition(vc, transitionStyle: .presentFullScreen)
-                    } else {
-                        let vc = MainMapViewController()
-                        self?.transition(vc, transitionStyle: .presentFullScreen)
-                    }
+                    let vc = NicknameViewController()
+                    self?.transition(vc, transitionStyle: .push)
+//                    if Auth.auth().currentUser == nil {
+//                        let vc = NicknameViewController()
+//                        self?.transition(vc, transitionStyle: .presentFullScreen)
+//                    } else {
+//                        let vc = MainMapViewController()
+//                        self?.transition(vc, transitionStyle: .presentFullScreen)
+//                    } //결과값: 메인으로 자꾸 가버림. 서버랑 연동해서 회원가입 안되어있을 경우 nickname vc 로 가야함.
                 }
             }
         }

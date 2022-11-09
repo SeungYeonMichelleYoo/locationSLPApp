@@ -6,6 +6,7 @@
 //
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class OnboardingViewController: BaseViewController {
     
@@ -30,12 +31,28 @@ class OnboardingViewController: BaseViewController {
             OnboardingSlide(labelContent: "스터디를 원하는 친구를 찾을 수 있어요", image: UIImage(named: "onboarding_img2")!),
             OnboardingSlide(labelContent: "SeSAC Study", image: UIImage(named: "onboarding_img3")!)
         ]
-        
+                
         mainView.startBtn.addTarget(self, action: #selector(startBtnClicked), for: .touchUpInside)
+        
+        idtokenGetTest()
+    
     }
     @objc func startBtnClicked() {
         let vc = AuthViewController()
         transition(vc, transitionStyle: .presentFullScreen)
+    }
+    
+    func idtokenGetTest() {
+        let currentUser = Auth.auth().currentUser
+        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+          if let error = error {
+            // Handle error
+            return;
+          }
+            print(idToken)
+          // Send token to your backend via HTTPS
+          // ...
+        }
     }
 }
 

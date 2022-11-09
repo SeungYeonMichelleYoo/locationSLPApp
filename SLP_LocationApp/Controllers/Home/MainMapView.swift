@@ -14,7 +14,7 @@ class MainMapView: BaseView {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "메인"
+        label.text = "메인뷰"
         return label
     }()
     

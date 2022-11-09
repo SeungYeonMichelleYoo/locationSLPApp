@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418D542291BAF3E00BCEF30 /* Font+Extension.swift */; };
+		5418D547291BB54900BCEF30 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */; };
+		5418D548291BB54900BCEF30 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */; };
+		5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418D54B291BCAE700BCEF30 /* String+Extension.swift */; };
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
 		545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEAFC291A484900CF861F /* MainMapViewController.swift */; };
 		545BEAFF291A485500CF861F /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEAFE291A485500CF861F /* MainMapView.swift */; };
@@ -45,6 +49,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5418D542291BAF3E00BCEF30 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
+		5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		5418D54B291BCAE700BCEF30 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		543CBF09291947D300563856 /* Transition+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+Extension.swift"; sourceTree = "<group>"; };
 		545BEAFC291A484900CF861F /* MainMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapViewController.swift; sourceTree = "<group>"; };
 		545BEAFE291A485500CF861F /* MainMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMapView.swift; sourceTree = "<group>"; };
@@ -95,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5418D544291BB52B00BCEF30 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */,
+				5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		543CBF0B2919512700563856 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +205,7 @@
 		5461B4D92918CB940000D726 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				5418D544291BB52B00BCEF30 /* Font */,
 				54FE19EB291A32BC0033BCE4 /* CustomView */,
 				549E57D42919D1EF00CACF54 /* BaseViews */,
 				5461B4E42918CD360000D726 /* Constants */,
@@ -200,8 +218,10 @@
 			isa = PBXGroup;
 			children = (
 				5461B4E22918CD090000D726 /* Color+Extension.swift */,
+				5418D542291BAF3E00BCEF30 /* Font+Extension.swift */,
 				543CBF09291947D300563856 /* Transition+Extension.swift */,
 				54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */,
+				5418D54B291BCAE700BCEF30 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -308,7 +328,9 @@
 			files = (
 				54FE19F2291A3A010033BCE4 /* GoogleService-Info.plist in Resources */,
 				5461B4BD2918BED00000D726 /* .gitignore in Resources */,
+				5418D547291BB54900BCEF30 /* NotoSansKR-Medium.otf in Resources */,
 				5461B4B52918B6450000D726 /* LaunchScreen.storyboard in Resources */,
+				5418D548291BB54900BCEF30 /* NotoSansKR-Regular.otf in Resources */,
 				5461B4B22918B6450000D726 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +358,7 @@
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,
 				5461B4C62918C5430000D726 /* NickNameView.swift in Sources */,
 				5461B4C42918C5360000D726 /* NicknameViewController.swift in Sources */,
+				5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */,
 				5461B4AB2918B6440000D726 /* SceneDelegate.swift in Sources */,
 				5461B4E82918CD570000D726 /* Color.swift in Sources */,
 				5461B4D02918C5B70000D726 /* GenderViewController.swift in Sources */,
@@ -346,6 +369,7 @@
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
 				5461B4DD2918CBB50000D726 /* BaseView.swift in Sources */,
+				5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */,
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
 				54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */,
