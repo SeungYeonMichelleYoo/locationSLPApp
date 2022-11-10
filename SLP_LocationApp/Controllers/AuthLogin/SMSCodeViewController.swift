@@ -31,7 +31,7 @@ class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
                 guard success else { return }
                 DispatchQueue.main.async {
                     let vc = NicknameViewController()
-                    self?.transition(vc, transitionStyle: .push)
+                    self?.transition(vc, transitionStyle: .presentFullScreen)
 //                    if Auth.auth().currentUser == nil {
 //                        let vc = NicknameViewController()
 //                        self?.transition(vc, transitionStyle: .presentFullScreen)

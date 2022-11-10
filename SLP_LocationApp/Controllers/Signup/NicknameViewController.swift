@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Toast
 
 class NicknameViewController: BaseViewController {
         
@@ -18,6 +19,10 @@ class NicknameViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView.textField.becomeFirstResponder()
+        mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
     }
-   
+    @objc func sendBtnClicked() {
+        
+    }
 }

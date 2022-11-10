@@ -11,6 +11,7 @@
 		5418D547291BB54900BCEF30 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */; };
 		5418D548291BB54900BCEF30 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */; };
 		5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418D54B291BCAE700BCEF30 /* String+Extension.swift */; };
+		542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 542FAEF4291BFBA800E71C87 /* AnyFormatKit */; };
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
 		545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEAFC291A484900CF861F /* MainMapViewController.swift */; };
 		545BEAFF291A485500CF861F /* MainMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545BEAFE291A485500CF861F /* MainMapView.swift */; };
@@ -39,11 +40,14 @@
 		5461B4E32918CD090000D726 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461B4E22918CD090000D726 /* Color+Extension.swift */; };
 		5461B4E62918CD470000D726 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461B4E52918CD470000D726 /* Constants.swift */; };
 		5461B4E82918CD570000D726 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461B4E72918CD570000D726 /* Color.swift */; };
+		5471A1E4291D1A2B002C80D8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5471A1E3291D1A2B002C80D8 /* IQKeyboardManagerSwift */; };
 		5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */; };
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
+		54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54ACF64A291D2B320002A121 /* GoogleService-Info.plist */; };
+		54ACF64E291D361A0002A121 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 54ACF64D291D361A0002A121 /* Toast */; };
+		54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACF650291D39220002A121 /* Toast+Extension.swift */; };
 		54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */; };
 		54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19EC291A32CD0033BCE4 /* OKButton.swift */; };
-		54FE19F2291A3A010033BCE4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54FE19F1291A3A010033BCE4 /* GoogleService-Info.plist */; };
 		54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19F3291A3BA70033BCE4 /* AuthManager.swift */; };
 		54FE19F7291A3D690033BCE4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54FE19F6291A3D690033BCE4 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
@@ -84,9 +88,10 @@
 		5461B4E72918CD570000D726 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
+		54ACF64A291D2B320002A121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		54ACF650291D39220002A121 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		54FE19EC291A32CD0033BCE4 /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
-		54FE19F1291A3A010033BCE4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54FE19F3291A3BA70033BCE4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +101,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5461B4E02918CBF70000D726 /* SnapKit in Frameworks */,
+				5471A1E4291D1A2B002C80D8 /* IQKeyboardManagerSwift in Frameworks */,
+				542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */,
+				54ACF64E291D361A0002A121 /* Toast in Frameworks */,
 				54FE19F7291A3D690033BCE4 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				5461B4BC2918BED00000D726 /* .gitignore */,
+				54ACF64A291D2B320002A121 /* GoogleService-Info.plist */,
 				5461B4A72918B6440000D726 /* SLP_LocationApp */,
 				5461B4A62918B6440000D726 /* Products */,
 			);
@@ -151,7 +160,6 @@
 		5461B4A72918B6440000D726 /* SLP_LocationApp */ = {
 			isa = PBXGroup;
 			children = (
-				54FE19F1291A3A010033BCE4 /* GoogleService-Info.plist */,
 				549868302918DF9C005DBF6E /* Models */,
 				5461B4D92918CB940000D726 /* Utility */,
 				5461B4BE2918C4CC0000D726 /* Controllers */,
@@ -222,6 +230,7 @@
 				543CBF09291947D300563856 /* Transition+Extension.swift */,
 				54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */,
 				5418D54B291BCAE700BCEF30 /* String+Extension.swift */,
+				54ACF650291D39220002A121 /* Toast+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -279,6 +288,9 @@
 			packageProductDependencies = (
 				5461B4DF2918CBF70000D726 /* SnapKit */,
 				54FE19F6291A3D690033BCE4 /* FirebaseAuth */,
+				542FAEF4291BFBA800E71C87 /* AnyFormatKit */,
+				5471A1E3291D1A2B002C80D8 /* IQKeyboardManagerSwift */,
+				54ACF64D291D361A0002A121 /* Toast */,
 			);
 			productName = SLP_LocationApp;
 			productReference = 5461B4A52918B6440000D726 /* SLP_LocationApp.app */;
@@ -311,6 +323,9 @@
 			packageReferences = (
 				5461B4DE2918CBF70000D726 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				54FE19F5291A3D690033BCE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				542FAEF3291BFBA800E71C87 /* XCRemoteSwiftPackageReference "AnyFormatKit" */,
+				5471A1E2291D1A2B002C80D8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				54ACF64C291D361A0002A121 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 			);
 			productRefGroup = 5461B4A62918B6440000D726 /* Products */;
 			projectDirPath = "";
@@ -326,12 +341,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54FE19F2291A3A010033BCE4 /* GoogleService-Info.plist in Resources */,
 				5461B4BD2918BED00000D726 /* .gitignore in Resources */,
 				5418D547291BB54900BCEF30 /* NotoSansKR-Medium.otf in Resources */,
 				5461B4B52918B6450000D726 /* LaunchScreen.storyboard in Resources */,
 				5418D548291BB54900BCEF30 /* NotoSansKR-Regular.otf in Resources */,
 				5461B4B22918B6450000D726 /* Assets.xcassets in Resources */,
+				54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +360,7 @@
 				5461B4C02918C50F0000D726 /* AuthViewController.swift in Sources */,
 				5461B4A92918B6440000D726 /* AppDelegate.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
+				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,
 				545BEB03291A48C000CF861F /* SMSCodeView.swift in Sources */,
 				545BEAFF291A485500CF861F /* MainMapView.swift in Sources */,
 				5461B4CE2918C5A60000D726 /* EmailView.swift in Sources */,
@@ -511,7 +527,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N67R5W6U5A;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SLP_LocationApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -525,7 +541,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "michelle.SLP-LocationApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memolease.sesacslp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -543,7 +559,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N67R5W6U5A;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SLP_LocationApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -557,7 +573,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "michelle.SLP-LocationApp";
+				PRODUCT_BUNDLE_IDENTIFIER = com.memolease.sesacslp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -592,9 +608,33 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		542FAEF3291BFBA800E71C87 /* XCRemoteSwiftPackageReference "AnyFormatKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/luximetr/AnyFormatKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		5461B4DE2918CBF70000D726 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		5471A1E2291D1A2B002C80D8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
+		54ACF64C291D361A0002A121 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
@@ -611,10 +651,25 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		542FAEF4291BFBA800E71C87 /* AnyFormatKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 542FAEF3291BFBA800E71C87 /* XCRemoteSwiftPackageReference "AnyFormatKit" */;
+			productName = AnyFormatKit;
+		};
 		5461B4DF2918CBF70000D726 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5461B4DE2918CBF70000D726 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		5471A1E3291D1A2B002C80D8 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5471A1E2291D1A2B002C80D8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		54ACF64D291D361A0002A121 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54ACF64C291D361A0002A121 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
 		};
 		54FE19F6291A3D690033BCE4 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

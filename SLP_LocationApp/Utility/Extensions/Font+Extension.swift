@@ -40,17 +40,17 @@ extension UIFont {
         case Body3_R14
         case Body4_R12
         case caption_R10
-        
-        static func font(_ type: Font) -> UIFont {
-            let rightSide = type.rawValue.split(separator: "_")[1] //R12
-            let weight = String(rightSide.prefix(1)) //R
-            let startIndex = rightSide.index(rightSide.startIndex, offsetBy: 1) //1
-            let size = CGFloat(NSString(string: String(rightSide[startIndex...])).floatValue)
-            if weight == "M" {
-                return WeightFont.medium(size: size)
-            } else {
-                return WeightFont.regular(size: size)
-            }
+    }
+    
+    static func font(_ type: Font) -> UIFont {
+        let rightSide = type.rawValue.split(separator: "_")[1] //R12
+        let weight = String(rightSide.prefix(1)) //R
+        let startIndex = rightSide.index(rightSide.startIndex, offsetBy: 1) //1
+        let size = CGFloat(NSString(string: String(rightSide[startIndex...])).floatValue)
+        if weight == "M" {
+            return WeightFont.medium(size: size)
+        } else {
+            return WeightFont.regular(size: size)
         }
     }
 }

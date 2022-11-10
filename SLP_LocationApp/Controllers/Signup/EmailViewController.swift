@@ -14,6 +14,7 @@ class EmailViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView.textField.becomeFirstResponder()
     }
    
 }

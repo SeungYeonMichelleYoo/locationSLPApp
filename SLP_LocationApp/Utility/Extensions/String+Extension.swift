@@ -7,12 +7,12 @@
 
 import Foundation
 extension String {
-
-  func CGFloatValue() -> CGFloat? {
-    guard let doubleValue = Double(self) else {
-      return nil
+    
+    func CGFloatValue() -> CGFloat? {
+        guard let doubleValue = Double(self) else {
+            return nil
+        }
+        
+        return CGFloat(doubleValue)
     }
-
-    return CGFloat(doubleValue)
-  }
 }

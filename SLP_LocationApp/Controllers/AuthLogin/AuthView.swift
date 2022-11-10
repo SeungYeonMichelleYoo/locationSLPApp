@@ -11,7 +11,7 @@ class AuthView: BaseView {
     
     lazy var infoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Font.font(.Display1_R20)
+        label.font = UIFont.font(.Display1_R20)
         label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "새싹 서비스 이용을 위해\n 휴대폰 번호를 입력해 주세요"
