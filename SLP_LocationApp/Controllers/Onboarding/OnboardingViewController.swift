@@ -33,26 +33,10 @@ class OnboardingViewController: BaseViewController {
         ]
                 
         mainView.startBtn.addTarget(self, action: #selector(startBtnClicked), for: .touchUpInside)
-        
-        idtokenGetTest()
-    
     }
     @objc func startBtnClicked() {
         let vc = AuthViewController()
         transition(vc, transitionStyle: .presentFullScreen)
-    }
-    
-    func idtokenGetTest() {
-        let currentUser = Auth.auth().currentUser
-        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-          if let error = error {
-            // Handle error
-            return;
-          }
-            print(idToken)
-          // Send token to your backend via HTTPS
-          // ...
-        }
     }
 }
 

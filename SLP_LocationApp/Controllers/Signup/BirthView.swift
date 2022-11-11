@@ -87,7 +87,7 @@ class BirthView: BaseView {
     }
     
     override func configureUI() {
-        [infoLabel, yeartextField, yearLabel, monthtextField, monthLabel, daytextField, dayLabel].forEach {
+        [infoLabel, yeartextField, yearLabel, monthtextField, monthLabel, daytextField, dayLabel, sendBtn].forEach {
             self.addSubview($0)
         }
     }
@@ -101,17 +101,19 @@ class BirthView: BaseView {
         
         yeartextField.snp.makeConstraints { make in
             make.top.equalTo(infoLabel.snp.bottom).offset(64)
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.leading.equalTo(self.safeAreaLayoutGuide).inset(40)
+            make.width.equalTo(80)
         }
         
         yearLabel.snp.makeConstraints { make in
             make.centerY.equalTo(yeartextField)
-            make.leading.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.leading.equalTo(yeartextField.snp.trailing)
         }
         
         monthtextField.snp.makeConstraints { make in
             make.centerY.equalTo(yearLabel)
             make.leading.equalTo(yearLabel.snp.trailing).offset(16)
+            make.width.equalTo(80)
         }
         
         monthLabel.snp.makeConstraints { make in
@@ -122,6 +124,7 @@ class BirthView: BaseView {
         daytextField.snp.makeConstraints { make in
             make.centerY.equalTo(monthLabel)
             make.leading.equalTo(monthLabel.snp.trailing).offset(16)
+            make.width.equalTo(80)
         }
         
         dayLabel.snp.makeConstraints { make in
@@ -130,7 +133,7 @@ class BirthView: BaseView {
         }
         
         sendBtn.snp.makeConstraints { make in
-            make.top.equalTo(yeartextField.snp.bottom).offset(72)
+            make.top.equalTo(yeartextField.snp.bottom).offset(60)
             make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.height.equalTo(48)
         }

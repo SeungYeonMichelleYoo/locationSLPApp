@@ -19,15 +19,10 @@ class AuthViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.textField.delegate = self
+        
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
-                
-        mainView.textField.addTarget(self, action: #selector(AuthViewController.textFieldDidChange(_:)),
-                                  for: .editingChanged)
     }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        mainView.textField.textColor = .black
-    }
+
     
     //유효성 검사
     func validatePhone(phone: String) {
@@ -59,11 +54,10 @@ class AuthViewController: BaseViewController, UITextFieldDelegate {
         return false
     }
     
-    
-    
     @objc func sendBtnClicked() {
         mainView.textField.resignFirstResponder()
         
+        //파이어베이스 인증
         if let text = mainView.textField.text, !text.isEmpty {
             let number = "+82\(text)"
             AuthManager.shared.startAuth(phoneNumber: number) { [weak self] success in
@@ -78,7 +72,6 @@ class AuthViewController: BaseViewController, UITextFieldDelegate {
                 }
             }
         }
-    }
-    
+    }    
 }
 

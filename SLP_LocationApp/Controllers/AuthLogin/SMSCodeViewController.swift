@@ -22,23 +22,48 @@ class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
         mainView.textField.delegate = self
         mainView.startBtn.addTarget(self, action: #selector(startBtnClicked), for: .touchUpInside)
     }
+    
+    func idtokenGetTest() {
+        let currentUser = Auth.auth().currentUser
+        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+          if let error = error {
+            // Handle error
+              print("error")
+            return;
+          }
+            print("idToken: \(idToken)")
+          // Send token to your backend via HTTPS
+            UserAPI.userCheck(idToken: idToken!) { statusCode, error in
+                switch statusCode {
+                case 200:
+                    print("서버 가입된 회원 : 메인으로 이동")
+                    let vc = MainMapViewController()
+                    self.transition(vc, transitionStyle: .presentFullScreen)
+                case 406, 202: print("미가입 회원. 닉네임화면으로 이동 / 또는 금지된 닉네임 사용한 자")
+                    let vc = NicknameViewController()
+                    self.transition(vc, transitionStyle: .push)
+                case 401: print("firebase 인증 오류")
+                    self.showToast(message: "휴대폰 인증을 다시 해주세요.")
+                case 500, 501: print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                    self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                default: ""
+                }
+            }
+        }
+    }
+    
     @objc func startBtnClicked() {
         mainView.textField.resignFirstResponder()
         
         if let text = mainView.textField.text, !text.isEmpty {
             let code = text
             AuthManager.shared.verifyCode(smsCode: code) { [weak self] success in
+                print("smscode 클로저 진입")
                 guard success else { return }
                 DispatchQueue.main.async {
-                    let vc = NicknameViewController()
-                    self?.transition(vc, transitionStyle: .presentFullScreen)
-//                    if Auth.auth().currentUser == nil {
-//                        let vc = NicknameViewController()
-//                        self?.transition(vc, transitionStyle: .presentFullScreen)
-//                    } else {
-//                        let vc = MainMapViewController()
-//                        self?.transition(vc, transitionStyle: .presentFullScreen)
-//                    } //결과값: 메인으로 자꾸 가버림. 서버랑 연동해서 회원가입 안되어있을 경우 nickname vc 로 가야함.
+                    print("idtokenGetTest하기 전")
+                    self!.idtokenGetTest()
+                    print("idtokenGetTest완료")
                 }
             }
         }
