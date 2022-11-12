@@ -10,11 +10,19 @@ import SnapKit
 
 class NoNetworkView: BaseView {
     
-    lazy var startBtn: OKButton = {
-        let view = OKButton(frame: .zero)
-        view.backgroundColor = Constants.BaseColor.green
-        view.setTitle("시작하기", for: .normal)
+    lazy var splashImg: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleToFill
+        view.image = UIImage(named: "splash_logo")
         return view
+    }()
+    
+    lazy var splashLabel: UILabel = {
+        let label = UILabel()
+        label.text = "SeSAC Study"
+        label.textColor = Constants.BaseColor.green
+        label.font = UIFont(name: "Dongle-Regular", size: 72)
+        return label
     }()
     
     override init(frame: CGRect) {
@@ -26,18 +34,22 @@ class NoNetworkView: BaseView {
     }
     
     override func configureUI() {
-        [startBtn].forEach {
+        [splashImg, splashLabel].forEach {
             self.addSubview($0)
         }
     }
     
     override func setConstraints() {
-            
-        startBtn.snp.makeConstraints { make in
-//            make.top.equalTo(pageControl.snp.bottom).offset(42)
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.height.equalTo(48)
+        splashImg.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).inset(120)
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
+            make.width.equalTo(220)
+            make.height.equalTo(264)
+        }
+        
+        splashLabel.snp.makeConstraints { make in
+            make.top.equalTo(splashImg.snp.bottom).offset(36)
+            make.centerX.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

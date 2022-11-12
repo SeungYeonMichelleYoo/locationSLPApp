@@ -31,6 +31,5 @@ class UserAPI {
     private init() {
         
     }
-    
 }
 
