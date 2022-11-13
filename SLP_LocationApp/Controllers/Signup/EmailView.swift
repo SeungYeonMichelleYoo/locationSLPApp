@@ -12,7 +12,6 @@ class EmailView: BaseView {
     lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.Display1_R20)
-        label.numberOfLines = 2
         label.textAlignment = .center
         label.text = "이메일을 입력해 주세요"
         return label

@@ -8,17 +8,11 @@
 import UIKit
 
 extension UIButton {
-    func fillBtn() {
-        layer.cornerRadius = 8
-        clipsToBounds = true
-        tintColor = UIColor.white
+    func fill() {
         backgroundColor = Constants.BaseColor.green
     }
     
-    func disableBtn() {
-        layer.cornerRadius = 8
-        clipsToBounds = true
-        tintColor = UIColor.white
+    func disable() {
         backgroundColor = Constants.BaseColor.gray6
     }
 }

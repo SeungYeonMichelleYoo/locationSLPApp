@@ -29,9 +29,9 @@ class NicknameViewController: BaseViewController, UITextFieldDelegate {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         if mainView.textField.text!.count >= 1 {
-            mainView.sendBtn.backgroundColor = Constants.BaseColor.green
+            mainView.sendBtn.fill()
         } else {
-            mainView.sendBtn.backgroundColor = Constants.BaseColor.gray6
+            mainView.sendBtn.disable()
         }
       }
     

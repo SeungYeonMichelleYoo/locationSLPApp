@@ -15,6 +15,7 @@
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
 		543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543D579B291E354F00481019 /* OKButton+Extension.swift */; };
 		543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F042C291FBE5C0029F088 /* UserViewModel.swift */; };
+		543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1FDF2921193900C31F8E /* Date+Extension.swift */; };
 		545AE797291E5FBA000F73C3 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE796291E5FBA000F73C3 /* UserAPI.swift */; };
 		545AE79A291E6015000F73C3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 545AE799291E6015000F73C3 /* Alamofire */; };
 		545AE79C291E608D000F73C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE79B291E608D000F73C3 /* User.swift */; };
@@ -69,6 +70,7 @@
 		543CBF09291947D300563856 /* Transition+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+Extension.swift"; sourceTree = "<group>"; };
 		543D579B291E354F00481019 /* OKButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OKButton+Extension.swift"; sourceTree = "<group>"; };
 		543F042C291FBE5C0029F088 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		543F1FDF2921193900C31F8E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		545AE796291E5FBA000F73C3 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		545AE79B291E608D000F73C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		545AE7A0291E77DC000F73C3 /* NoNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				5418D54B291BCAE700BCEF30 /* String+Extension.swift */,
 				54ACF650291D39220002A121 /* Toast+Extension.swift */,
 				543D579B291E354F00481019 /* OKButton+Extension.swift */,
+				543F1FDF2921193900C31F8E /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 			files = (
 				5461B4C02918C50F0000D726 /* AuthViewController.swift in Sources */,
 				5461B4A92918B6440000D726 /* AppDelegate.swift in Sources */,
+				543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
 				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,
 				545BEB03291A48C000CF861F /* SMSCodeView.swift in Sources */,
