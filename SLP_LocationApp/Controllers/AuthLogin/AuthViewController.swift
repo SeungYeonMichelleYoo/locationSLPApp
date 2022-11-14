@@ -67,6 +67,8 @@ class AuthViewController: BaseViewController, UITextFieldDelegate {
                 DispatchQueue.main.async {
                     print("transition")
                     let vc = SMSCodeViewController()
+                    vc.phoneNumber = number
+                    
                     self?.transition(vc, transitionStyle: .presentFullScreen)
                     print("완료")
                 }

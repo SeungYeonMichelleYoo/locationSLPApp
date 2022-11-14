@@ -11,6 +11,14 @@ import SnapKit
 class MainMapViewController: BaseViewController {
         
     var mainView = MainMapView()
+    
+    var gender = 0
+    
+    var emailAddress = ""
+    
+    var phoneNumber = ""
+    
+    var FCMtoken = ""
 
     override func loadView() {
         self.view = mainView

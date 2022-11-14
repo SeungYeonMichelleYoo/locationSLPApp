@@ -18,19 +18,19 @@
         <scene sceneID="EHf-IW-A2E">
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Ze5-6b-2t3">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="wWq-b4-X1l">
-                                <rect key="frame" x="97" y="214" width="220" height="264"/>
+                                <rect key="frame" x="97" y="204" width="220" height="264"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="264" id="zU0-2H-nlY"/>
                                     <constraint firstAttribute="width" constant="220" id="zxr-Ov-zhg"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeSAC Study" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnH-Yw-CF0">
-                                <rect key="frame" x="119.66666666666669" y="514" width="175" height="69.666666666666629"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SeSAC Study" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TnH-Yw-CF0">
+                                <rect key="frame" x="119.66666666666669" y="504.00000000000006" width="175" height="69.666666666666686"/>
                                 <fontDescription key="fontDescription" name="Dongle-Regular" family="Dongle" pointSize="48"/>
                                 <color key="textColor" red="0.4588235021" green="0.84313726430000002" blue="0.58823531870000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
@@ -39,10 +39,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wWq-b4-X1l" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5ic-if-8Wn"/>
+                            <constraint firstItem="wWq-b4-X1l" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="0.75" id="5ic-if-8Wn"/>
                             <constraint firstItem="wWq-b4-X1l" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="JdZ-q7-Btd"/>
                             <constraint firstItem="TnH-Yw-CF0" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Pnv-pe-PTZ"/>
-                            <constraint firstItem="wWq-b4-X1l" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="170" id="gx6-Si-lCr"/>
                             <constraint firstItem="TnH-Yw-CF0" firstAttribute="top" secondItem="wWq-b4-X1l" secondAttribute="bottom" constant="36" id="ttX-QI-MXc"/>
                         </constraints>
                     </view>

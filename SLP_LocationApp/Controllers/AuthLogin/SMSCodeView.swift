@@ -24,6 +24,7 @@ class SMSCodeView: BaseView {
         view.addLeftPadding()
         view.attributedPlaceholder = NSAttributedString(string: "인증번호 입력", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.gray7])
         view.textColor = Constants.BaseColor.black
+        view.keyboardType = .numberPad
         return view
     }()
     

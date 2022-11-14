@@ -15,7 +15,7 @@ class GenderView: BaseView {
         label.font = UIFont.font(.Display1_R20)
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "성별을 선택헤 주세요"
+        label.text = "성별을 선택해 주세요"
         return label
     }()
     
@@ -81,7 +81,6 @@ class GenderView: BaseView {
         femaleBtn.snp.makeConstraints { make in
             make.top.equalTo(maleBtn.snp.top)
             make.leading.equalTo(maleBtn.snp.trailing).offset(16)
-            make.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.width.equalTo(maleBtn.snp.width)
         }
         

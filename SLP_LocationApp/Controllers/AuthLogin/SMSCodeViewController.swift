@@ -12,6 +12,8 @@ class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
     var mainView = SMSCodeView()
     
     var viewModel = UserViewModel()
+    
+    var phoneNumber = ""
 
     override func loadView() {
         self.view = mainView
@@ -19,9 +21,11 @@ class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+            
         mainView.textField.delegate = self
         mainView.startBtn.addTarget(self, action: #selector(startBtnClicked), for: .touchUpInside)
+        
+        mainView.textField.textContentType = .oneTimeCode //SMSCode 문자 내용 자동완성 붙여넣기
     }
         
     @objc func startBtnClicked() {
@@ -34,15 +38,19 @@ class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
                 guard success else { return }
                 DispatchQueue.main.async {
                     print("idtokenGetTest하기 전")
-                    self!.viewModel.idtokenGetTest() { statusCode in
+                    self!.viewModel.userCheckVM { user, statusCode in
                         switch statusCode {
                         case 200:
+                            UserDefaults.standard.set(self?.phoneNumber, forKey: "phoneNumber")
                             print("서버 가입된 회원 : 메인으로 이동")
                             let vc = MainMapViewController()
+                            vc.FCMtoken = user!.FCMtoken
                             self!.transition(vc, transitionStyle: .presentFullScreen)
                         case 406, 202: print("미가입 회원. 닉네임화면으로 이동 / 또는 금지된 닉네임 사용한 자")
+                            UserDefaults.standard.set(self?.phoneNumber, forKey: "phoneNumber")
                             let vc = NicknameViewController()
-                            self!.transition(vc, transitionStyle: .push)
+                            vc.FCMtoken = UserDefaults.standard.string(forKey: "FCMtoken")!
+                            self!.transition(vc, transitionStyle: .presentFullScreen)
                         case 401: print("firebase 인증 오류")
                             self!.showToast(message: "휴대폰 인증을 다시 해주세요.")
                         case 500, 501: print("서버 점검중입니다. 관리자에게 문의해주세요.")

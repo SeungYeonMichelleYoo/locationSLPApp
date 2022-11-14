@@ -33,6 +33,7 @@ class EmailView: BaseView {
         view.addLeftPadding()
         view.attributedPlaceholder = NSAttributedString(string: "SeSAC@email.com", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.gray7])
         view.textColor = Constants.BaseColor.black
+        view.keyboardType = .emailAddress
         return view
     }()
     

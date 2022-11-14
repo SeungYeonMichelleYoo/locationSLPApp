@@ -25,6 +25,7 @@ class NicknameView: BaseView {
         view.addLeftPadding()
         view.attributedPlaceholder = NSAttributedString(string: "10자 이내로 입력", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.gray7])
         view.textColor = Constants.BaseColor.black
+        view.keyboardType = .default
         return view
     }()
     

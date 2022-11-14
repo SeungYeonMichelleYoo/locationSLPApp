@@ -13,6 +13,9 @@ import IQKeyboardManagerSwift
 class NicknameViewController: BaseViewController, UITextFieldDelegate {
         
     var mainView = NicknameView()
+    
+    var phoneNumber = ""
+    var FCMtoken = ""
 
     override func loadView() {
         self.view = mainView
@@ -25,6 +28,10 @@ class NicknameViewController: BaseViewController, UITextFieldDelegate {
         mainView.textField.addTarget(self, action: #selector(NicknameViewController.textFieldDidChange(_:)), for: .editingChanged)
         
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
+        
+        self.navigationItem.hidesBackButton = true
+        
+        phoneNumber = UserDefaults.standard.string(forKey: "phoneNumber")!
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
@@ -40,6 +47,8 @@ class NicknameViewController: BaseViewController, UITextFieldDelegate {
             showToast(message: "닉네임은 1자 이상 10자 이내로 부탁드려요.")
         } else {
             let vc = BirthViewController()
+            vc.nickname = mainView.textField.text!
+            vc.FCMtoken = FCMtoken
             self.transition(vc, transitionStyle: .push)
         }
 //        회원가입 플로우 실패

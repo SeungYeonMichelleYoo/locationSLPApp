@@ -12,12 +12,18 @@ class BirthViewController: BaseViewController {
     
     var mainView = BirthView()
     
+    var nickname = ""
+    var phoneNumber = ""
+    var FCMtoken = ""
+    
     override func loadView() {
+        print("loadview")
         self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewdidload")
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
         navigationItem.leftBarButtonItem?.tintColor = Constants.BaseColor.black
@@ -33,6 +39,10 @@ class BirthViewController: BaseViewController {
     @objc func sendBtnClicked() {
         if checkAge(birth: mainView.datePicker.date) {
             let vc = EmailViewController()
+            vc.phoneNumber = phoneNumber
+            vc.FCMtoken = FCMtoken
+            vc.nickname = nickname
+            vc.birth = mainView.datePicker.date
             self.transition(vc, transitionStyle: .push)
         } else {
             showToast(message: "새싹스터디는 만 17세 이상만 사용할 수 있습니다.")
@@ -44,7 +54,6 @@ class BirthViewController: BaseViewController {
     }
     
     private func setAttributes() {
-        mainView.datePicker.preferredDatePickerStyle = .wheels
         mainView.datePicker.datePickerMode = .date
         mainView.datePicker.locale = Locale(identifier: "ko-KR")
         mainView.datePicker.timeZone = .autoupdatingCurrent

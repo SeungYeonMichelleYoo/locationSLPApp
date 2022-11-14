@@ -12,6 +12,9 @@
 		5418D548291BB54900BCEF30 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */; };
 		5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418D54B291BCAE700BCEF30 /* String+Extension.swift */; };
 		542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 542FAEF4291BFBA800E71C87 /* AnyFormatKit */; };
+		54360A38292259AD004B2CBA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A37292259AD004B2CBA /* FirebaseAuth */; };
+		54360A3A292259AD004B2CBA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A39292259AD004B2CBA /* FirebaseMessaging */; };
+		54360A3C29226350004B2CBA /* RenewIDToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54360A3B29226350004B2CBA /* RenewIDToken.swift */; };
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
 		543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543D579B291E354F00481019 /* OKButton+Extension.swift */; };
 		543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F042C291FBE5C0029F088 /* UserViewModel.swift */; };
@@ -59,7 +62,6 @@
 		54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */; };
 		54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19EC291A32CD0033BCE4 /* OKButton.swift */; };
 		54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19F3291A3BA70033BCE4 /* AuthManager.swift */; };
-		54FE19F7291A3D690033BCE4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54FE19F6291A3D690033BCE4 /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,7 @@
 		5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		5418D54B291BCAE700BCEF30 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		54360A3B29226350004B2CBA /* RenewIDToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenewIDToken.swift; sourceTree = "<group>"; };
 		543CBF09291947D300563856 /* Transition+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+Extension.swift"; sourceTree = "<group>"; };
 		543D579B291E354F00481019 /* OKButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OKButton+Extension.swift"; sourceTree = "<group>"; };
 		543F042C291FBE5C0029F088 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -118,13 +121,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54360A3A292259AD004B2CBA /* FirebaseMessaging in Frameworks */,
 				5461B4E02918CBF70000D726 /* SnapKit in Frameworks */,
 				5471A1E4291D1A2B002C80D8 /* IQKeyboardManagerSwift in Frameworks */,
 				542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */,
 				545AE79F291E66B0000F73C3 /* KeychainSwift in Frameworks */,
 				545AE79A291E6015000F73C3 /* Alamofire in Frameworks */,
+				54360A38292259AD004B2CBA /* FirebaseAuth in Frameworks */,
 				54ACF64E291D361A0002A121 /* Toast in Frameworks */,
-				54FE19F7291A3D690033BCE4 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,6 +169,7 @@
 				545AE796291E5FBA000F73C3 /* UserAPI.swift */,
 				545AE7A0291E77DC000F73C3 /* NoNetworkViewController.swift */,
 				545AE7A2291E7811000F73C3 /* NoNetworkView.swift */,
+				54360A3B29226350004B2CBA /* RenewIDToken.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -331,12 +336,13 @@
 			name = SLP_LocationApp;
 			packageProductDependencies = (
 				5461B4DF2918CBF70000D726 /* SnapKit */,
-				54FE19F6291A3D690033BCE4 /* FirebaseAuth */,
 				542FAEF4291BFBA800E71C87 /* AnyFormatKit */,
 				5471A1E3291D1A2B002C80D8 /* IQKeyboardManagerSwift */,
 				54ACF64D291D361A0002A121 /* Toast */,
 				545AE799291E6015000F73C3 /* Alamofire */,
 				545AE79E291E66B0000F73C3 /* KeychainSwift */,
+				54360A37292259AD004B2CBA /* FirebaseAuth */,
+				54360A39292259AD004B2CBA /* FirebaseMessaging */,
 			);
 			productName = SLP_LocationApp;
 			productReference = 5461B4A52918B6440000D726 /* SLP_LocationApp.app */;
@@ -368,12 +374,12 @@
 			mainGroup = 5461B49C2918B6440000D726;
 			packageReferences = (
 				5461B4DE2918CBF70000D726 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				54FE19F5291A3D690033BCE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				542FAEF3291BFBA800E71C87 /* XCRemoteSwiftPackageReference "AnyFormatKit" */,
 				5471A1E2291D1A2B002C80D8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				54ACF64C291D361A0002A121 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				545AE798291E6015000F73C3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				545AE79D291E66B0000F73C3 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				54360A36292259AD004B2CBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 5461B4A62918B6440000D726 /* Products */;
 			projectDirPath = "";
@@ -442,6 +448,7 @@
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
 				5461B4DD2918CBB50000D726 /* BaseView.swift in Sources */,
 				5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */,
+				54360A3C29226350004B2CBA /* RenewIDToken.swift in Sources */,
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
 				54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */,
@@ -672,6 +679,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		54360A36292259AD004B2CBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		545AE798291E6015000F73C3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -712,14 +727,6 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		54FE19F5291A3D690033BCE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -727,6 +734,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 542FAEF3291BFBA800E71C87 /* XCRemoteSwiftPackageReference "AnyFormatKit" */;
 			productName = AnyFormatKit;
+		};
+		54360A37292259AD004B2CBA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54360A36292259AD004B2CBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		54360A39292259AD004B2CBA /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54360A36292259AD004B2CBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		545AE799291E6015000F73C3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -752,11 +769,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54ACF64C291D361A0002A121 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
-		};
-		54FE19F6291A3D690033BCE4 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 54FE19F5291A3D690033BCE4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

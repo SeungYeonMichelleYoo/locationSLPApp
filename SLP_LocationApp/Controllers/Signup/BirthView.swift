@@ -105,15 +105,17 @@ class BirthView: BaseView {
     
     override func setConstraints() {
         infoLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(125)
+            make.centerY.equalToSuperview().multipliedBy(0.5)
             make.centerX.equalTo(self.safeAreaLayoutGuide)
             make.width.equalTo(228)
+            make.height.equalTo(60)
         }
         
         yeartextField.snp.makeConstraints { make in
-            make.top.equalTo(infoLabel.snp.bottom).offset(64)
+            make.top.equalTo(infoLabel.snp.bottom).offset(20)
             make.leading.equalTo(self.safeAreaLayoutGuide).inset(40)
             make.width.equalTo(60)
+            make.height.equalTo(60)
         }
         
         yearLabel.snp.makeConstraints { make in
@@ -150,9 +152,8 @@ class BirthView: BaseView {
         }
         
         datePicker.snp.makeConstraints { make in
-            make.top.equalTo(sendBtn.snp.bottom).offset(20)
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.bottom.equalTo(self.safeAreaLayoutGuide)
+            make.top.equalTo(sendBtn.snp.bottom).offset(10)
+            make.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
     }
 }

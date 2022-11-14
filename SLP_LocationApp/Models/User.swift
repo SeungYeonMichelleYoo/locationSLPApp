@@ -9,4 +9,5 @@ import Foundation
 
 struct User: Codable {
     let idToken: String
+    let FCMtoken: String
 }

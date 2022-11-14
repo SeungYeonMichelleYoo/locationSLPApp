@@ -41,7 +41,7 @@ class NoNetworkView: BaseView {
     
     override func setConstraints() {
         splashImg.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(120)
+            make.centerY.equalToSuperview().multipliedBy(0.75)
             make.centerX.equalTo(self.safeAreaLayoutGuide)
             make.width.equalTo(220)
             make.height.equalTo(264)
