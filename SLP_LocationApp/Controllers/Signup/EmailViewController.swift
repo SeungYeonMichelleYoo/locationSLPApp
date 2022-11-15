@@ -23,6 +23,8 @@ class EmailViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.textField.becomeFirstResponder()
+        mainView.textField.delegate = self
+        mainView.textField.addTarget(self, action: #selector(EmailViewController.textFieldDidChange(_:)), for: .editingChanged)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
         navigationItem.leftBarButtonItem?.tintColor = Constants.BaseColor.black
@@ -31,9 +33,19 @@ class EmailViewController: BaseViewController, UITextFieldDelegate {
         
         mainView.textField.delegate = self
     }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if isValidEmail(testStr: mainView.textField.text!) {
+            mainView.sendBtn.fill()
+        } else {
+            mainView.sendBtn.disable()
+        }
+      }
+    
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
+    
     @objc func sendBtnClicked() {
         if isValidEmail(testStr: mainView.textField.text!) {
             let vc = GenderViewController()
@@ -52,13 +64,5 @@ class EmailViewController: BaseViewController, UITextFieldDelegate {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: testStr)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if isValidEmail(testStr: mainView.textField.text!) {
-            mainView.sendBtn.fill()
-        } else {
-            mainView.sendBtn.disable()
-        }
     }
 }

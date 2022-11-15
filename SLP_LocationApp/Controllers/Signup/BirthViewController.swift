@@ -27,7 +27,7 @@ class BirthViewController: BaseViewController {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
         navigationItem.leftBarButtonItem?.tintColor = Constants.BaseColor.black
-    
+
         datePickerConfigureUI()
         
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)

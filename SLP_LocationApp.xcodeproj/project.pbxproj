@@ -14,11 +14,19 @@
 		542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 542FAEF4291BFBA800E71C87 /* AnyFormatKit */; };
 		54360A38292259AD004B2CBA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A37292259AD004B2CBA /* FirebaseAuth */; };
 		54360A3A292259AD004B2CBA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A39292259AD004B2CBA /* FirebaseMessaging */; };
-		54360A3C29226350004B2CBA /* RenewIDToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54360A3B29226350004B2CBA /* RenewIDToken.swift */; };
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
 		543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543D579B291E354F00481019 /* OKButton+Extension.swift */; };
 		543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F042C291FBE5C0029F088 /* UserViewModel.swift */; };
 		543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1FDF2921193900C31F8E /* Date+Extension.swift */; };
+		5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A0292366C400728EC3 /* MyInfoViewController.swift */; };
+		5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A2292366CD00728EC3 /* MyInfoView.swift */; };
+		5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A429236B7C00728EC3 /* TabBarViewController.swift */; };
+		5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A629236C1F00728EC3 /* ShopViewController.swift */; };
+		5444C0A929236C3900728EC3 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A829236C3900728EC3 /* FriendViewController.swift */; };
+		5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0AA29236C4D00728EC3 /* ShopView.swift */; };
+		5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0AC29236C7100728EC3 /* FriendView.swift */; };
+		5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */; };
+		5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B62923820D00728EC3 /* NameTableViewCell.swift */; };
 		545AE797291E5FBA000F73C3 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE796291E5FBA000F73C3 /* UserAPI.swift */; };
 		545AE79A291E6015000F73C3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 545AE799291E6015000F73C3 /* Alamofire */; };
 		545AE79C291E608D000F73C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE79B291E608D000F73C3 /* User.swift */; };
@@ -69,11 +77,19 @@
 		5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		5418D54B291BCAE700BCEF30 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
-		54360A3B29226350004B2CBA /* RenewIDToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenewIDToken.swift; sourceTree = "<group>"; };
 		543CBF09291947D300563856 /* Transition+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+Extension.swift"; sourceTree = "<group>"; };
 		543D579B291E354F00481019 /* OKButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OKButton+Extension.swift"; sourceTree = "<group>"; };
 		543F042C291FBE5C0029F088 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		543F1FDF2921193900C31F8E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		5444C0A0292366C400728EC3 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		5444C0A2292366CD00728EC3 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
+		5444C0A429236B7C00728EC3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		5444C0A629236C1F00728EC3 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		5444C0A829236C3900728EC3 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
+		5444C0AA29236C4D00728EC3 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
+		5444C0AC29236C7100728EC3 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
+		5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
+		5444C0B62923820D00728EC3 /* NameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
 		545AE796291E5FBA000F73C3 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		545AE79B291E608D000F73C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		545AE7A0291E77DC000F73C3 /* NoNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkViewController.swift; sourceTree = "<group>"; };
@@ -163,24 +179,63 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		5444C09F2923669000728EC3 /* The4thMyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				5444C0A0292366C400728EC3 /* MyInfoViewController.swift */,
+				5444C0A2292366CD00728EC3 /* MyInfoView.swift */,
+				5444C0B62923820D00728EC3 /* NameTableViewCell.swift */,
+				5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */,
+			);
+			path = The4thMyInfo;
+			sourceTree = "<group>";
+		};
+		5444C0AE2923766A00728EC3 /* The1stHomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				545BEAFC291A484900CF861F /* MainMapViewController.swift */,
+				545BEAFE291A485500CF861F /* MainMapView.swift */,
+			);
+			path = The1stHomeVC;
+			sourceTree = "<group>";
+		};
+		5444C0AF2923768900728EC3 /* The2ndShopVC */ = {
+			isa = PBXGroup;
+			children = (
+				5444C0A629236C1F00728EC3 /* ShopViewController.swift */,
+				5444C0AA29236C4D00728EC3 /* ShopView.swift */,
+			);
+			path = The2ndShopVC;
+			sourceTree = "<group>";
+		};
+		5444C0B02923769D00728EC3 /* The3rdFriendVC */ = {
+			isa = PBXGroup;
+			children = (
+				5444C0A829236C3900728EC3 /* FriendViewController.swift */,
+				5444C0AC29236C7100728EC3 /* FriendView.swift */,
+			);
+			path = The3rdFriendVC;
+			sourceTree = "<group>";
+		};
 		545AE795291E5F9B000F73C3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				545AE796291E5FBA000F73C3 /* UserAPI.swift */,
 				545AE7A0291E77DC000F73C3 /* NoNetworkViewController.swift */,
 				545AE7A2291E7811000F73C3 /* NoNetworkView.swift */,
-				54360A3B29226350004B2CBA /* RenewIDToken.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
 		};
-		545BEAFB291A481000CF861F /* Home */ = {
+		545BEAFB291A481000CF861F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				545BEAFC291A484900CF861F /* MainMapViewController.swift */,
-				545BEAFE291A485500CF861F /* MainMapView.swift */,
+				5444C0AE2923766A00728EC3 /* The1stHomeVC */,
+				5444C0AF2923768900728EC3 /* The2ndShopVC */,
+				5444C0B02923769D00728EC3 /* The3rdFriendVC */,
+				5444C09F2923669000728EC3 /* The4thMyInfo */,
 			);
-			path = Home;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		5461B49C2918B6440000D726 = {
@@ -221,10 +276,11 @@
 		5461B4BE2918C4CC0000D726 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5444C0A429236B7C00728EC3 /* TabBarViewController.swift */,
 				543CBF0B2919512700563856 /* Onboarding */,
 				5461B4D72918C71B0000D726 /* AuthLogin */,
 				5461B4D82918C76F0000D726 /* Signup */,
-				545BEAFB291A481000CF861F /* Home */,
+				545BEAFB291A481000CF861F /* Main */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -415,7 +471,12 @@
 				5461B4C02918C50F0000D726 /* AuthViewController.swift in Sources */,
 				5461B4A92918B6440000D726 /* AppDelegate.swift in Sources */,
 				543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */,
+				5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */,
+				5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
+				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
+				5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */,
+				5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */,
 				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,
 				545BEB03291A48C000CF861F /* SMSCodeView.swift in Sources */,
 				545AE7A3291E7811000F73C3 /* NoNetworkView.swift in Sources */,
@@ -426,14 +487,18 @@
 				543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */,
 				5461B4C22918C5170000D726 /* AuthView.swift in Sources */,
 				545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */,
+				5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */,
 				543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */,
 				5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */,
 				545AE79C291E608D000F73C3 /* User.swift in Sources */,
+				5444C0A929236C3900728EC3 /* FriendViewController.swift in Sources */,
 				5461B4C82918C5660000D726 /* BirthViewController.swift in Sources */,
 				543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */,
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,
 				5461B4C62918C5430000D726 /* NickNameView.swift in Sources */,
 				545AE7A1291E77DC000F73C3 /* NoNetworkViewController.swift in Sources */,
+				5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */,
+				5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */,
 				5461B4C42918C5360000D726 /* NicknameViewController.swift in Sources */,
 				5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */,
 				5461B4AB2918B6440000D726 /* SceneDelegate.swift in Sources */,
@@ -448,7 +513,6 @@
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
 				5461B4DD2918CBB50000D726 /* BaseView.swift in Sources */,
 				5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */,
-				54360A3C29226350004B2CBA /* RenewIDToken.swift in Sources */,
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
 				54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */,

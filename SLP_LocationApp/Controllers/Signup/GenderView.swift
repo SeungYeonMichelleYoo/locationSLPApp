@@ -81,6 +81,7 @@ class GenderView: BaseView {
         femaleBtn.snp.makeConstraints { make in
             make.top.equalTo(maleBtn.snp.top)
             make.leading.equalTo(maleBtn.snp.trailing).offset(16)
+            make.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.width.equalTo(maleBtn.snp.width)
         }
         

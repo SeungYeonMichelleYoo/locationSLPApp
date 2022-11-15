@@ -38,6 +38,7 @@ class UserViewModel {
         }
     }
     
+    //로그인
     func userCheckVM(completion: @escaping (User?, Int?) -> Void) {
         refreshIDToken { idToken in
             switch idToken {
@@ -51,6 +52,7 @@ class UserViewModel {
         }
     }
     
+    //회원가입
     func signUpVM(phoneNumber: String, FCMtoken: String, nick: String, birth: Date, email: String, gender: Int, completion: @escaping (Int?) -> Void) {
         refreshIDToken { idToken in
             switch idToken {

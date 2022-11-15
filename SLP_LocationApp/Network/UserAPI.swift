@@ -34,7 +34,9 @@ class UserAPI {
         KeychainSwift().set(idToken, forKey: "idToken")
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         
-        AF.request(url, method: .post, parameters: ["phoneNumber": phoneNumber, "FCMtoken": FCMtoken, "nick": nick, "birth": birth, "email": email, "gender": gender], headers: headers).responseDecodable(of: User.self) { response in
+        let params: Parameters = ["phoneNumber": phoneNumber, "FCMtoken": FCMtoken, "nick": nick, "birth": birth.toString(), "email": email, "gender": gender]
+        print(params)
+        AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: User.self) { response in
             
             let statusCode = response.response?.statusCode
             print(response)
@@ -50,4 +52,3 @@ class UserAPI {
         
     }
 }
-
