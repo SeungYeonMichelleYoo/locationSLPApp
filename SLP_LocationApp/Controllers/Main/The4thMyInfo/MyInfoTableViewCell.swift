@@ -38,7 +38,6 @@ class MyInfoTableViewCell: UITableViewCell {
         titleLabel.text = nil
     }
     
-    //MARK: - subview 추가 및 제약조건
     private func layout() {
         
         [image, titleLabel].forEach {
@@ -47,13 +46,13 @@ class MyInfoTableViewCell: UITableViewCell {
         
         image.snp.makeConstraints { make in
             make.leading.equalTo(contentView.snp.leading).inset(14)
-            make.top.equalTo(contentView.snp.top).inset(14)
-            make.bottom.equalTo(contentView.snp.bottom).inset(20)
-            make.width.equalTo(50)
+            make.centerY.equalTo(contentView)
+            make.width.equalTo(24)
+            make.height.equalTo(24)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).inset(14)
+            make.centerY.equalTo(contentView)
             make.leading.equalTo(image.snp.trailing).offset(14)
         }
     }

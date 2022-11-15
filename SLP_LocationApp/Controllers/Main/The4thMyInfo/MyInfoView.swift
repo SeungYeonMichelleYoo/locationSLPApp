@@ -10,10 +10,13 @@ import SnapKit
 class MyInfoView: BaseView {
 
     lazy var mainTableView: UITableView = {
-        let tableview = UITableView()
-        return tableview
-    }()
-    
+        let view = UITableView()
+        view.separatorStyle = .singleLine
+        view.register(NameTableViewCell.self, forCellReuseIdentifier: "NameTableViewCell")
+        view.register(MyInfoTableViewCell.self, forCellReuseIdentifier: "MyInfoTableViewCell")
+        return view
+      }()
+          
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -30,9 +33,7 @@ class MyInfoView: BaseView {
     
     override func setConstraints() {
         mainTableView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(125)
-            make.centerX.equalTo(self.safeAreaLayoutGuide)
-            make.width.equalTo(228)
+            make.edges.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

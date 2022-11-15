@@ -27,6 +27,8 @@
 		5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0AC29236C7100728EC3 /* FriendView.swift */; };
 		5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */; };
 		5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B62923820D00728EC3 /* NameTableViewCell.swift */; };
+		5444C0BB292393A600728EC3 /* DetailProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */; };
+		5444C0BD292393B600728EC3 /* DetailProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BC292393B600728EC3 /* DetailProfileView.swift */; };
 		545AE797291E5FBA000F73C3 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE796291E5FBA000F73C3 /* UserAPI.swift */; };
 		545AE79A291E6015000F73C3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 545AE799291E6015000F73C3 /* Alamofire */; };
 		545AE79C291E608D000F73C3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE79B291E608D000F73C3 /* User.swift */; };
@@ -61,6 +63,7 @@
 		5461B4E62918CD470000D726 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461B4E52918CD470000D726 /* Constants.swift */; };
 		5461B4E82918CD570000D726 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461B4E72918CD570000D726 /* Color.swift */; };
 		5471A1E4291D1A2B002C80D8 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5471A1E3291D1A2B002C80D8 /* IQKeyboardManagerSwift */; };
+		547264B42923D1E00010953B /* ExpandableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547264B32923D1E00010953B /* ExpandableTableViewCell.swift */; };
 		5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */; };
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
 		54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54ACF64A291D2B320002A121 /* GoogleService-Info.plist */; };
@@ -90,6 +93,8 @@
 		5444C0AC29236C7100728EC3 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
 		5444C0B62923820D00728EC3 /* NameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
+		5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
+		5444C0BC292393B600728EC3 /* DetailProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileView.swift; sourceTree = "<group>"; };
 		545AE796291E5FBA000F73C3 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		545AE79B291E608D000F73C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		545AE7A0291E77DC000F73C3 /* NoNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoNetworkViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 		5461B4E22918CD090000D726 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		5461B4E52918CD470000D726 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5461B4E72918CD570000D726 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		547264B32923D1E00010953B /* ExpandableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewCell.swift; sourceTree = "<group>"; };
 		5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		54ACF64A291D2B320002A121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -186,6 +192,9 @@
 				5444C0A2292366CD00728EC3 /* MyInfoView.swift */,
 				5444C0B62923820D00728EC3 /* NameTableViewCell.swift */,
 				5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */,
+				5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */,
+				5444C0BC292393B600728EC3 /* DetailProfileView.swift */,
+				547264B32923D1E00010953B /* ExpandableTableViewCell.swift */,
 			);
 			path = The4thMyInfo;
 			sourceTree = "<group>";
@@ -470,6 +479,7 @@
 			files = (
 				5461B4C02918C50F0000D726 /* AuthViewController.swift in Sources */,
 				5461B4A92918B6440000D726 /* AppDelegate.swift in Sources */,
+				5444C0BD292393B600728EC3 /* DetailProfileView.swift in Sources */,
 				543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */,
 				5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */,
 				5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */,
@@ -478,6 +488,7 @@
 				5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */,
 				5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */,
 				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,
+				547264B42923D1E00010953B /* ExpandableTableViewCell.swift in Sources */,
 				545BEB03291A48C000CF861F /* SMSCodeView.swift in Sources */,
 				545AE7A3291E7811000F73C3 /* NoNetworkView.swift in Sources */,
 				545BEAFF291A485500CF861F /* MainMapView.swift in Sources */,
@@ -492,6 +503,7 @@
 				5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */,
 				545AE79C291E608D000F73C3 /* User.swift in Sources */,
 				5444C0A929236C3900728EC3 /* FriendViewController.swift in Sources */,
+				5444C0BB292393A600728EC3 /* DetailProfileViewController.swift in Sources */,
 				5461B4C82918C5660000D726 /* BirthViewController.swift in Sources */,
 				543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */,
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,

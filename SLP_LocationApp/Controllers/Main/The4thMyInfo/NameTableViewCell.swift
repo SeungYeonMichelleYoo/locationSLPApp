@@ -26,7 +26,8 @@ class NameTableViewCell: UITableViewCell {
     
     lazy var nextBtn: UIButton = {
         let btn = UIButton()
-        btn.setImage(UIImage(systemName: "star"), for: .normal)
+        btn.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        btn.tintColor = Constants.BaseColor.gray7
         return btn
     }()
     
@@ -40,13 +41,6 @@ class NameTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        image.image = nil
-        titleLabel.text = nil
-//        nextBtn.title = nil ????
-    }
-    
     private func layout() {
         
         [image, titleLabel, nextBtn].forEach {
@@ -55,18 +49,18 @@ class NameTableViewCell: UITableViewCell {
         
         image.snp.makeConstraints { make in
             make.leading.equalTo(contentView.snp.leading).inset(14)
-            make.top.equalTo(contentView.snp.top).inset(14)
-            make.bottom.equalTo(contentView.snp.bottom).inset(20)
+            make.centerY.equalTo(contentView)
             make.width.equalTo(50)
+            make.height.equalTo(50)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).inset(14)
+            make.centerY.equalTo(contentView)
             make.leading.equalTo(image.snp.trailing).offset(14)
         }
         
         nextBtn.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).inset(14)
+            make.centerY.equalTo(contentView)
             make.width.equalTo(10)
             make.trailing.equalTo(contentView.snp.trailing).inset(22)
         }

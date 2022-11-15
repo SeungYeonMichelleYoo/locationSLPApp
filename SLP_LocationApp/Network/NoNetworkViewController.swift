@@ -42,7 +42,7 @@ class NoNetworkViewController: BaseViewController {
 
                 switch statusCode {
                 case 200:
-                    let vc = MainMapViewController()
+                    let vc = TabBarViewController()
                     self.transition(vc, transitionStyle: .presentFullScreen)
                 case 406, 202:
                     let vc = NicknameViewController()
