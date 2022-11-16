@@ -8,10 +8,12 @@ import UIKit
 import SnapKit
 
 class DetailProfileView: BaseView {
-
+        
     lazy var bannerImg: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleToFill
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
         view.image = UIImage(named: "cardview_bg")
         return view
     }()
@@ -19,30 +21,10 @@ class DetailProfileView: BaseView {
     lazy var tableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .singleLine
-        view.register(NameTableViewCell.self, forCellReuseIdentifier: "NameTableViewCell")
-        return view
-      }()
-    
-    lazy var genderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "내 성별"
-        label.textColor = Constants.BaseColor.green
-        label.font = UIFont.font(.Title4_R14)
-        return label
-    }()
-    
-    lazy var maleBtn: UIButton = {
-        let view = UIButton()
-        view.setImage(UIImage(named: "femaleButton"), for: .normal)
+        view.register(ExpandableTableViewCell.self, forCellReuseIdentifier: "ExpandableTableViewCell")
         return view
     }()
-    
-    lazy var femaleBtn: UIButton = {
-        let view = UIButton()
-        view.setImage(UIImage(named: "femaleButton"), for: .normal)
-        return view
-    }()
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -52,16 +34,21 @@ class DetailProfileView: BaseView {
     }
     
     override func configureUI() {
-        [bannerImg].forEach {
+        [bannerImg, tableView].forEach {
             self.addSubview($0)
         }
     }
     
     override func setConstraints() {
         bannerImg.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.centerX.equalTo(self.safeAreaLayoutGuide)
-            make.width.equalTo(228)
+            make.top.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.height.equalToSuperview().multipliedBy(0.3)
+        }
+        
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(bannerImg.snp.bottom)
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }
