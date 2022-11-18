@@ -10,7 +10,7 @@ import KeychainSwift
 import Alamofire
 
 class UserAPI {
-    static let BASEURL: String = "http://api.sesac.co.kr:1207"
+    static let BASEURL: String = "http://api.sesac.co.kr:1210"
     
     static func userCheck(idToken: String, completion: @escaping (User?, Int?, Error?) -> Void) {
         let url = "\(BASEURL)/v1/user"

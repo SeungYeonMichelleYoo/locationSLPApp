@@ -13,6 +13,8 @@ class TitleCollectionViewCell: UICollectionViewCell {
         let view = UIButton()
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
+        view.tintColor = .white
+        view.backgroundColor = Constants.BaseColor.green
         view.layer.borderColor = Constants.BaseColor.gray4.cgColor
         return view
     }()

@@ -9,15 +9,10 @@ import UIKit
 import SnapKit
 
 class FixedTableViewCell: UITableViewCell {
-        
-    lazy var bigView: UIView = {
-        let view = UIView()
-        return view
-    }()
     
     lazy var fixedStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [genderView, studyView, searchableView, ageView, slider, withdrawLabel])
-        view.axis = .horizontal
+        view.axis = .vertical
         view.distribution = .fill
         view.alignment = .fill
         return view
@@ -39,17 +34,23 @@ class FixedTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var maleBtn: OKButton = {
-        let view = OKButton(frame: .zero)
-        view.setImage(UIImage(named: "남자"), for: .normal)
-        view.backgroundColor = .white
+    lazy var maleBtn: UIButton = {
+        let view = UIButton()
+        view.setTitle("남자", for: .normal)
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        view.tintColor = Constants.BaseColor.black
+        view.backgroundColor = Constants.BaseColor.green
         return view
     }()
     
-    lazy var femaleBtn: OKButton = {
-        let view = OKButton(frame: .zero)
-        view.setImage(UIImage(named: "여자"), for: .normal)
-        view.backgroundColor = .white
+    lazy var femaleBtn: UIButton = {
+        let view = UIButton()
+        view.setTitle("여자", for: .normal)
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        view.tintColor = Constants.BaseColor.black
+        view.backgroundColor = Constants.BaseColor.green
         return view
     }()
     
@@ -105,7 +106,7 @@ class FixedTableViewCell: UITableViewCell {
     lazy var ageView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [ageInfoLabel, ageLabel])
         view.axis = .horizontal
-        view.distribution = .fill
+        view.distribution = .fillEqually
         view.alignment = .fill
         return view
     }()
@@ -113,13 +114,17 @@ class FixedTableViewCell: UITableViewCell {
     lazy var ageInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "상대방 연령대"
+        label.textAlignment = .left
         label.font = UIFont.font(.Title4_R14)
+        label.backgroundColor = .red
         return label
     }()
     
     lazy var ageLabel: UILabel = {
         let label = UILabel()
         label.text = "18 - 35"
+        label.backgroundColor = .blue
+        label.textAlignment = .right
         label.font = UIFont.font(.Title3_M14)
         return label
     }()
@@ -136,7 +141,6 @@ class FixedTableViewCell: UITableViewCell {
         return label
     }()
     
-    //코드로 tableview짤 때(스토리보드 없이), 초기화 해야하는 이유: 인터페이스 빌더에서는 자동으로 초기화를 해주지만, 코드에서는 인터페이스 빌더를 사용하는게 아니기 때문
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
@@ -148,19 +152,100 @@ class FixedTableViewCell: UITableViewCell {
     
     private func layout() {
         
-        self.contentView.addSubview(bigView)
-        bigView.addSubview(fixedStackView)
+        self.contentView.addSubview(fixedStackView)
         
-        [genderView, studyView, searchableView, ageView, slider, withdrawLabel].forEach {
-            fixedStackView.addSubview($0)
+        fixedStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
         }
         
-//        nickLabel.snp.makeConstraints { make in
-//           
-//        }
-//        
-//        downBtn.snp.makeConstraints { make in
-//        
-//        }
+        genderView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(48)
+        }
+        
+        genderLabel.snp.makeConstraints { make in
+//            make.centerY.equalTo(genderView)
+            make.top.equalTo(genderView).inset(4)
+            make.leading.equalTo(genderView.snp.leading)
+        }
+                
+        femaleBtn.snp.makeConstraints { make in
+            make.top.equalTo(genderView.snp.top)
+            make.trailing.equalTo(genderView.snp.trailing).inset(4)
+            make.width.equalTo(56)
+            make.height.equalTo(48)
+        }
+        
+        maleBtn.snp.makeConstraints { make in
+            make.top.equalTo(genderView.snp.top)
+            make.trailing.equalTo(femaleBtn.snp.leading).offset(-4)
+            make.width.equalTo(56)
+            make.height.equalTo(48)
+        }
+        
+        //MARK: - studyview
+        studyView.snp.makeConstraints { make in
+            make.top.equalTo(genderView.snp.bottom)
+            make.leading.trailing.equalTo(fixedStackView)
+            make.height.equalTo(48)
+        }
+
+        studyLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(studyView)
+            make.leading.equalTo(studyView.snp.leading)
+        }
+
+        textField.snp.makeConstraints { make in
+            make.centerY.equalTo(studyLabel)
+            make.trailing.equalTo(studyView.snp.trailing).inset(4)
+        }
+
+        //MARK: - searchableView
+        searchableView.snp.makeConstraints { make in
+            make.top.equalTo(studyView.snp.bottom)
+            make.leading.trailing.equalTo(fixedStackView)
+            make.height.equalTo(48)
+        }
+
+        toggleLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(searchableView)
+            make.leading.equalTo(searchableView.snp.leading)
+        }
+
+        controlSwitch.snp.makeConstraints { make in
+            make.centerY.equalTo(searchableView)
+            make.trailing.equalTo(searchableView.snp.trailing).inset(4)
+        }
+
+        //MARK: - ageView
+        ageView.snp.makeConstraints { make in
+            make.top.equalTo(searchableView.snp.bottom)
+            make.leading.trailing.equalTo(fixedStackView)
+            make.height.equalTo(48)
+        }
+
+        ageInfoLabel.snp.makeConstraints { make in
+            make.top.equalTo(ageView.snp.top)
+//            make.centerY.equalTo(ageView)
+            make.leading.equalToSuperview()
+            make.width.equalTo(100)
+        }
+
+        ageLabel.snp.makeConstraints { make in
+            make.top.equalTo(ageView.snp.top)
+            make.trailing.equalToSuperview().inset(4)
+            make.width.equalTo(70)
+        }
+
+        slider.snp.makeConstraints { make in
+            make.top.equalTo(ageInfoLabel.snp.bottom).offset(4)
+            make.leading.equalTo(ageLabel.snp.leading)
+            make.width.equalTo(100)
+        }
+
+        withdrawLabel.snp.makeConstraints { make in
+            make.top.equalTo(slider.snp.bottom).offset(40)
+            make.leading.equalTo(ageLabel.snp.leading)
+        }
     }
 }

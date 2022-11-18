@@ -10,7 +10,7 @@ import SnapKit
 
 //크게 2행으로 구성
 //expandabletableviewcell, fixedtableviewcell
-//expandabletableviewcell: 버튼 클릭시 UIView 펼쳐지게 (UIView show, hide)
+//expandabletableviewcell: 셀 클릭시 UIView 펼쳐지게 (UIView show, hide)
 
 // var is_hidden = true
 // ~~~ .isHidden = is_hidden
@@ -34,7 +34,7 @@ class DetailProfileViewController: BaseViewController {
         navigationItem.title = "정보 관리"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveBtnClicked))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-                
+        
         setupTableview()
     }
     @objc func backBtnClicked() {
@@ -52,43 +52,58 @@ class DetailProfileViewController: BaseViewController {
 extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("tableviewrow")
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
-        cell.expandableView.isHidden = is_hidden
-        return cell
+        switch indexPath.row {
+        case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
+            cell.collectionView.delegate = self
+            cell.collectionView.dataSource = self
+            cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
+            cell.expandableView.isHidden = is_hidden
+            
+            cell.downBtn.setImage(UIImage(systemName: is_hidden ? "chevron.down" : "chevron.up"), for: .normal)
+            return cell
+            
+        case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
+            return cell
+        default: return UITableViewCell()
+        }
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         is_hidden = !is_hidden
         mainView.tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (is_hidden) {
-            return 60
-        } else {
+        switch indexPath.row {
+        case 0:
+            if (is_hidden) {
+                return 60
+            } else {
+                return 400
+            }
+        case 1:
             return 300
+        default: return 100
         }
     }
 }
 
 extension DetailProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return buttonTitle.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TitleCollectionViewCell", for: indexPath) as? TitleCollectionViewCell else {
             return UICollectionViewCell()
         }
-
+        
         cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
-
+        
         return cell
     }
-
-
 }

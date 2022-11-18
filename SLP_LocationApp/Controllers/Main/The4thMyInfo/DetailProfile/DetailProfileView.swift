@@ -22,6 +22,7 @@ class DetailProfileView: BaseView {
         let view = UITableView()
         view.separatorStyle = .singleLine
         view.register(ExpandableTableViewCell.self, forCellReuseIdentifier: "ExpandableTableViewCell")
+        view.register(FixedTableViewCell.self, forCellReuseIdentifier: "FixedTableViewCell")
         return view
     }()
         

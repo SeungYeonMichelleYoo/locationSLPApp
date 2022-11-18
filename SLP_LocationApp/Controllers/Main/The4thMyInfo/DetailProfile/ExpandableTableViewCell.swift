@@ -64,11 +64,11 @@ class ExpandableTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "새싹 타이틀"
         label.textColor = Constants.BaseColor.black
-        label.font = UIFont.font(.Title1_M16)
+        label.font = UIFont.font(.Title4_R14)
         return label
     }()
     
-    //MARK: - 새싹 타이틀 늘어날 수 있으므로 스택뷰로 구성
+    //MARK: - 새싹 타이틀 스택뷰로 구성
     lazy var titleStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [collectionView])
         view.axis = .vertical
@@ -77,17 +77,9 @@ class ExpandableTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 4
-        layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 4
-        layout.minimumInteritemSpacing = spacing
-        
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    let collectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: imageCollectionViewLayout())
         view.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
-        view.showsHorizontalScrollIndicator = false
-        
         return view
     }()
     
@@ -95,7 +87,7 @@ class ExpandableTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "새싹 리뷰"
         label.textColor = Constants.BaseColor.black
-        label.font = UIFont.font(.Title1_M16)
+        label.font = UIFont.font(.Title4_R14)
         return label
     }()
     
@@ -103,7 +95,7 @@ class ExpandableTableViewCell: UITableViewCell {
         let textView = UITextView()
         textView.font = .systemFont(ofSize: 15)
         textView.text = "첫 리뷰를 기다리는 중이에요!"
-        textView.textColor = Constants.BaseColor.black
+        textView.textColor = Constants.BaseColor.gray6
         return textView
     }()
     
@@ -118,76 +110,95 @@ class ExpandableTableViewCell: UITableViewCell {
     
     private func layout() {
         self.contentView.addSubview(totalStackView)
-        [grayView].forEach {
-            totalStackView.addSubview($0)
-        }
+//        totalStackView.addSubview(grayView)
+        
         [nickStackView, expandableView].forEach {
             grayView.addSubview($0)
         }
-        [titleLabel, titleStackView, reviewLabel, textView].forEach {
-            expandableView.addSubview($0)
-        }
-        [collectionView].forEach {
-            titleStackView.addSubview($0)
-        }
-    
+        
+//        [nickLabel, downBtn].forEach {
+//            nickStackView.addSubview($0)
+//        }
+        
+//        [titleLabel, titleStackView, reviewLabel, textView].forEach {
+//            expandableView.addSubview($0)
+//        }
+        titleStackView.addSubview(collectionView)
+      
         totalStackView.snp.makeConstraints { make in
-            make.top.bottom.leading.trailing.equalTo(contentView)
+            make.edges.equalToSuperview()
         }
         
         grayView.snp.makeConstraints { make in
-            make.edges.equalTo(totalStackView)
+            make.edges.equalToSuperview()
         }
        
         nickStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(grayView)
-            //높이? (58 아니면 show할 경우 더 늘어남
-            make.height.equalTo(60)
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(58)
         }
     
         expandableView.snp.makeConstraints { make in
             make.top.equalTo(nickStackView.snp.bottom)
-            make.leading.trailing.equalTo(contentView)
-            //높이?
-            make.height.equalTo(240)
+            make.leading.trailing.equalTo(grayView)
+            make.bottom.equalToSuperview()
         }
         
         nickLabel.snp.makeConstraints { make in
-            make.top.leading.equalTo(grayView).inset(16)
-            make.width.equalTo(280)
+            make.centerY.equalTo(nickStackView)
+            make.leading.equalTo(nickStackView.snp.leading)//.offset(8)
+            make.width.equalTo(200)
         }
         
         downBtn.snp.makeConstraints { make in
             make.centerY.equalTo(nickLabel)
+            make.trailing.equalTo(nickStackView.snp.trailing)
             make.width.equalTo(12)
             make.height.equalTo(12)
         }
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(expandableView.snp.top)
-            make.leading.equalTo(grayView).inset(16)
+            make.leading.equalTo(expandableView).inset(16)
         }
                 
         titleStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.leading.equalTo(grayView.snp.leading).offset(16)
-            make.trailing.equalTo(grayView.snp.leading).inset(16)
-            make.height.equalTo(100) //??????
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.leading.equalTo(expandableView.snp.leading)
+            make.trailing.equalTo(expandableView.snp.trailing)
+            make.height.equalTo(104)
         }
         
         collectionView.snp.makeConstraints { make in
-            make.edges.equalTo(titleStackView)
+            make.edges.equalToSuperview()
         }
         
         reviewLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleStackView.snp.bottom).offset(24)
-            make.leading.equalTo(grayView.snp.leading).inset(16)
+            make.top.equalTo(titleStackView.snp.bottom)
+            make.leading.equalTo(expandableView.snp.leading).inset(16)
         }
         
         textView.snp.makeConstraints { make in
-            make.top.equalTo(reviewLabel.snp.bottom).offset(16)
-            make.leading.equalTo(grayView.snp.leading).inset(16)
+            make.top.equalTo(reviewLabel.snp.bottom)
+            make.leading.equalTo(expandableView.snp.leading).inset(16)
+            make.height.equalTo(40)
         }
         
+    }
+    
+    static func imageCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 4
+        layout.minimumInteritemSpacing = 4
+        
+        let itemSpacing : CGFloat = 4
+        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.4
+        let myHeight : CGFloat = 32
+        
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets.zero
+        
+        layout.itemSize = CGSize(width: myWidth, height: myHeight)
+        return layout
     }
 }
