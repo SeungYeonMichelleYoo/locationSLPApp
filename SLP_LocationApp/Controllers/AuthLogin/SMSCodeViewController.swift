@@ -5,7 +5,6 @@
 //  Created by SeungYeon Yoo on 2022/11/08.
 //
 import UIKit
-import SnapKit
 
 class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
     

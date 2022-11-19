@@ -5,7 +5,6 @@
 //  Created by SeungYeon Yoo on 2022/11/10.
 //
 
-import Foundation
 import Toast
 import UIKit
 
@@ -28,3 +27,4 @@ extension UIViewController {
         })
     }
 }
+

@@ -17,7 +17,7 @@ class OKButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError()
     }
-    
+    //disable 속성
     func setupView() {
         layer.cornerRadius = 8
         clipsToBounds = true

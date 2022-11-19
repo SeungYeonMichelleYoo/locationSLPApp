@@ -20,7 +20,7 @@ class DetailProfileView: BaseView {
     
     lazy var tableView: UITableView = {
         let view = UITableView()
-        view.separatorStyle = .singleLine
+        view.separatorStyle = .none
         view.register(ExpandableTableViewCell.self, forCellReuseIdentifier: "ExpandableTableViewCell")
         view.register(FixedTableViewCell.self, forCellReuseIdentifier: "FixedTableViewCell")
         return view

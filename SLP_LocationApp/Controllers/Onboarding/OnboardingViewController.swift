@@ -5,7 +5,6 @@
 //  Created by SeungYeon Yoo on 2022/11/07.
 //
 import UIKit
-import SnapKit
 import FirebaseAuth
 
 class OnboardingViewController: BaseViewController {

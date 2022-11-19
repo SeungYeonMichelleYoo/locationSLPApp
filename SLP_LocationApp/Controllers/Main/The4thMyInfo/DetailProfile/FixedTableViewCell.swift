@@ -172,15 +172,15 @@ class FixedTableViewCell: UITableViewCell {
         femaleBtn.snp.makeConstraints { make in
             make.top.equalTo(genderView.snp.top)
             make.trailing.equalTo(genderView.snp.trailing).inset(4)
-            make.width.equalTo(56)
-            make.height.equalTo(48)
+            make.width.equalTo(52)
+            make.height.equalTo(44)
         }
         
         maleBtn.snp.makeConstraints { make in
             make.top.equalTo(genderView.snp.top)
             make.trailing.equalTo(femaleBtn.snp.leading).offset(-4)
-            make.width.equalTo(56)
-            make.height.equalTo(48)
+            make.width.equalTo(52)
+            make.height.equalTo(44)
         }
         
         //MARK: - studyview
@@ -228,7 +228,6 @@ class FixedTableViewCell: UITableViewCell {
             make.top.equalTo(ageView.snp.top)
 //            make.centerY.equalTo(ageView)
             make.leading.equalToSuperview()
-            make.width.equalTo(100)
         }
 
         ageLabel.snp.makeConstraints { make in
@@ -240,7 +239,7 @@ class FixedTableViewCell: UITableViewCell {
         slider.snp.makeConstraints { make in
             make.top.equalTo(ageInfoLabel.snp.bottom).offset(4)
             make.leading.equalTo(ageLabel.snp.leading)
-            make.width.equalTo(100)
+            make.width.equalTo(50)
         }
 
         withdrawLabel.snp.makeConstraints { make in

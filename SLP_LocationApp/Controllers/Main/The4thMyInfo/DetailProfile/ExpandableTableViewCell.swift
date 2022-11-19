@@ -31,8 +31,8 @@ class ExpandableTableViewCell: UITableViewCell {
     lazy var nickStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [nickLabel, downBtn])
         view.axis = .horizontal
-        view.distribution = .fill
-        view.alignment = .fill
+//        view.distribution = .fill
+//        view.alignment = .fill
         return view
     }()
     
@@ -110,20 +110,10 @@ class ExpandableTableViewCell: UITableViewCell {
     
     private func layout() {
         self.contentView.addSubview(totalStackView)
-//        totalStackView.addSubview(grayView)
         
         [nickStackView, expandableView].forEach {
             grayView.addSubview($0)
         }
-        
-//        [nickLabel, downBtn].forEach {
-//            nickStackView.addSubview($0)
-//        }
-        
-//        [titleLabel, titleStackView, reviewLabel, textView].forEach {
-//            expandableView.addSubview($0)
-//        }
-        titleStackView.addSubview(collectionView)
       
         totalStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -135,23 +125,21 @@ class ExpandableTableViewCell: UITableViewCell {
        
         nickStackView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(58)
+            make.height.equalTo(60)
         }
     
         expandableView.snp.makeConstraints { make in
             make.top.equalTo(nickStackView.snp.bottom)
             make.leading.trailing.equalTo(grayView)
-            make.bottom.equalToSuperview()
         }
         
         nickLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(nickStackView)
-            make.leading.equalTo(nickStackView.snp.leading)//.offset(8)
-            make.width.equalTo(200)
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
         }
         
         downBtn.snp.makeConstraints { make in
-            make.centerY.equalTo(nickLabel)
+            make.centerY.equalToSuperview()
             make.trailing.equalTo(nickStackView.snp.trailing)
             make.width.equalTo(12)
             make.height.equalTo(12)

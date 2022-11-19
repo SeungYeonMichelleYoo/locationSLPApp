@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 //크게 2행으로 구성
 //expandabletableviewcell, fixedtableviewcell
@@ -62,19 +61,23 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
             cell.collectionView.dataSource = self
             cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
             cell.expandableView.isHidden = is_hidden
+            cell.selectionStyle = .none
             
             cell.downBtn.setImage(UIImage(systemName: is_hidden ? "chevron.down" : "chevron.up"), for: .normal)
             return cell
             
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
+            cell.selectionStyle = .none //클릭시 배경색상 없애기
             return cell
         default: return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        is_hidden = !is_hidden
-        mainView.tableView.reloadData()
+        if indexPath.row == 0 {
+            is_hidden = !is_hidden
+            mainView.tableView.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

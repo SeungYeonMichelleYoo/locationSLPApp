@@ -37,6 +37,7 @@ class TabBarViewController: UITabBarController {
         
         //TabBar 설정
         let tabBar: UITabBar = self.tabBar
+        tabBar.backgroundColor = .white
         tabBar.unselectedItemTintColor = Constants.BaseColor.gray6
         tabBar.tintColor = Constants.BaseColor.green
     }

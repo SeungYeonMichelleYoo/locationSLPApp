@@ -4,7 +4,6 @@
 //
 //  Created by SeungYeon Yoo on 2022/11/09.
 //
-import Foundation
 import UIKit
 //사용:
 //UIFont.Font.font(.Title5_M12)
