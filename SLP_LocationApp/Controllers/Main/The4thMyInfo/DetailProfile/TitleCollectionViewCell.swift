@@ -13,9 +13,9 @@ class TitleCollectionViewCell: UICollectionViewCell {
         let view = UIButton()
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
-        view.tintColor = .white
-        view.backgroundColor = Constants.BaseColor.green
-        view.layer.borderColor = Constants.BaseColor.gray4.cgColor
+        view.setTitleColor(.black, for: .normal)
+        view.titleLabel?.font = UIFont.font(.Title4_R14)
+        view.inactive()
         return view
     }()
         
@@ -36,7 +36,7 @@ class TitleCollectionViewCell: UICollectionViewCell {
             make.top.equalTo(contentView.snp.top)
             make.leading.equalTo(contentView.snp.leading)
             make.height.equalTo(32)
-            make.width.equalTo(150)
+            make.width.equalTo(100)
         }
     }
 }

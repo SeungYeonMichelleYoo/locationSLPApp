@@ -51,12 +51,15 @@ class DetailProfileViewController: BaseViewController {
 extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("tableviewrow")
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
-        case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
+        case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as! ImageTableViewCell
+            return cell
+            
+        case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
             cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
@@ -66,7 +69,7 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
             cell.downBtn.setImage(UIImage(systemName: is_hidden ? "chevron.down" : "chevron.up"), for: .normal)
             return cell
             
-        case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
+        case 2: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
             cell.selectionStyle = .none //클릭시 배경색상 없애기
             return cell
         default: return UITableViewCell()
@@ -74,7 +77,7 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 1 {
             is_hidden = !is_hidden
             mainView.tableView.reloadData()
         }
@@ -83,13 +86,15 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0:
+            return 200
+        case 1:
             if (is_hidden) {
                 return 60
             } else {
                 return 400
             }
-        case 1:
-            return 300
+        case 2:
+            return 400
         default: return 100
         }
     }

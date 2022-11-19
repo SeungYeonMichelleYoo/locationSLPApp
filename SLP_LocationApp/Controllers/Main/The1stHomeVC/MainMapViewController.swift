@@ -17,10 +17,9 @@ class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
     var phoneNumber = ""
     var FCMtoken = ""
     
-    let defaultCoordinate = CLLocationCoordinate2D(latitude: 37.517829, longitude: 126.886270)
-    
     //2. 위치에 대한 대부분을 담당
     let locationManager = CLLocationManager()
+    let defaultCoordinate = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734)
     
     override func loadView() {
         self.view = mainView
@@ -55,37 +54,29 @@ class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
         showRequestLocationServiceAlert()
     }
     
-    //재사용 할 수 있는 어노테이션 만들기! 마치 테이블뷰의 재사용 Cell을 넣어주는 것과 같아요!
+    //재사용 할 수 있는 커스텀어노테이션
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard !annotation.isKind(of: MKUserLocation.self) else {
-            // 유저 위치를 나타낼때는 기본 파란 그 점 아시죠? 그거 쓰고싶으니까~ 요렇게 해주시고 만약에 쓰고싶은 어노테이션이 있다면 그녀석을 리턴해 주시면 되긋죠? 하하!
             return nil
         }
-        //우리가 만들고 싶은 커스텀 어노테이션을 만들어 줍시다. 그냥 뿅 생길 수 없겠죠? 보여주고 싶은 모양을 뷰로 짜준다고 생각하시면 됩니다.
-        //즉시 인스턴스로 만들어 줘 보겠습니다요. 어떻게 생겼을지는 아직 안정했지만 일단 커스텀이라는 식별자?를 가진 뷰로 만들어 줬습니다.
-        //마커 어노테이션뷰 라는 어노테이션뷰를 상속받는 뷰가 따로있습니다. 풍선모양이라고 하는데 한번 만들어 보시는것도 좋겠네요! 테두리가 있고 안에 내용물을 바꾸는 식으로 설정이 되는듯 해요.
+       
         var annotationView = self.mainView.mapView.dequeueReusableAnnotationView(withIdentifier: "Custom")
         
         if annotationView == nil {
-            //없으면 하나 만들어 주시고
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Custom")
             annotationView?.canShowCallout = true
             
-            
-            //callOutView를 통해서 추가적인 액션을 더해줄수도 있겠죠! 와 무지 간편합니다!
             let miniButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
             miniButton.setImage(UIImage(systemName: "person"), for: .normal)
             miniButton.tintColor = .blue
             annotationView?.rightCalloutAccessoryView = miniButton
-            
+        
         } else {
-            //있으면 등록된 걸 쓰시면 됩니다.
+        
             annotationView?.annotation = annotation
         }
-        
+
         annotationView?.image = UIImage(named: "centerpin")
-        
-        //상황에 따라 다른 annotationView를 리턴하게 하면 여러가지 모양을 쓸 수도 있겠죠?
         
         return annotationView
     }

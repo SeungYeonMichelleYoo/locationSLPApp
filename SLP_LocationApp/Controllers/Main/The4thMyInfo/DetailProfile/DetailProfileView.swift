@@ -8,19 +8,11 @@ import UIKit
 import SnapKit
 
 class DetailProfileView: BaseView {
-        
-    lazy var bannerImg: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleToFill
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
-        view.image = UIImage(named: "cardview_bg")
-        return view
-    }()
-    
+            
     lazy var tableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .none
+        view.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageTableViewCell")
         view.register(ExpandableTableViewCell.self, forCellReuseIdentifier: "ExpandableTableViewCell")
         view.register(FixedTableViewCell.self, forCellReuseIdentifier: "FixedTableViewCell")
         return view
@@ -35,20 +27,12 @@ class DetailProfileView: BaseView {
     }
     
     override func configureUI() {
-        [bannerImg, tableView].forEach {
-            self.addSubview($0)
-        }
+        self.addSubview(tableView)
     }
     
     override func setConstraints() {
-        bannerImg.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.height.equalToSuperview().multipliedBy(0.3)
-        }
-        
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(bannerImg.snp.bottom)
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.top.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }

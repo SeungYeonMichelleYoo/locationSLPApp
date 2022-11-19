@@ -28,11 +28,8 @@ class ExpandableTableViewCell: UITableViewCell {
         return view
     }()
     
-    lazy var nickStackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [nickLabel, downBtn])
-        view.axis = .horizontal
-//        view.distribution = .fill
-//        view.alignment = .fill
+    lazy var nickView: UIView = {
+        let view = UIView()
         return view
     }()
     
@@ -52,11 +49,8 @@ class ExpandableTableViewCell: UITableViewCell {
     }()
     
     //MARK: - show/hidden expandableView
-    lazy var expandableView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [titleLabel, titleStackView, reviewLabel, textView])
-        view.axis = .vertical
-        view.distribution = .fill
-        view.alignment = .fill
+    lazy var expandableView: UIView = {
+        let view = UIView()
         return view
     }()
         
@@ -93,9 +87,10 @@ class ExpandableTableViewCell: UITableViewCell {
     
     lazy var textView: UITextView = {
         let textView = UITextView()
-        textView.font = .systemFont(ofSize: 15)
+        textView.font = UIFont.font(.Body3_R14)
         textView.text = "첫 리뷰를 기다리는 중이에요!"
         textView.textColor = Constants.BaseColor.gray6
+        textView.backgroundColor = .red
         return textView
     }()
     
@@ -111,10 +106,18 @@ class ExpandableTableViewCell: UITableViewCell {
     private func layout() {
         self.contentView.addSubview(totalStackView)
         
-        [nickStackView, expandableView].forEach {
+        [nickView, expandableView].forEach {
             grayView.addSubview($0)
         }
-      
+        
+        [nickLabel, downBtn].forEach {
+            nickView.addSubview($0)
+        }
+        
+        [titleLabel, titleStackView, reviewLabel, textView].forEach {
+            expandableView.addSubview($0)
+        }
+           
         totalStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -123,13 +126,13 @@ class ExpandableTableViewCell: UITableViewCell {
             make.edges.equalToSuperview()
         }
        
-        nickStackView.snp.makeConstraints { make in
+        nickView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(60)
         }
     
         expandableView.snp.makeConstraints { make in
-            make.top.equalTo(nickStackView.snp.bottom)
+            make.top.equalTo(nickView.snp.bottom)
             make.leading.trailing.equalTo(grayView)
         }
         
@@ -140,9 +143,8 @@ class ExpandableTableViewCell: UITableViewCell {
         
         downBtn.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.trailing.equalTo(nickStackView.snp.trailing)
-            make.width.equalTo(12)
-            make.height.equalTo(12)
+            make.trailing.equalTo(nickView.snp.trailing).inset(16)
+            make.size.equalTo(12)
         }
         
         titleLabel.snp.makeConstraints { make in
@@ -151,9 +153,8 @@ class ExpandableTableViewCell: UITableViewCell {
         }
                 
         titleStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.leading.equalTo(expandableView.snp.leading)
-            make.trailing.equalTo(expandableView.snp.trailing)
+            make.top.equalTo(titleLabel.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(32)
             make.height.equalTo(104)
         }
         
@@ -162,14 +163,14 @@ class ExpandableTableViewCell: UITableViewCell {
         }
         
         reviewLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleStackView.snp.bottom)
+            make.top.equalTo(titleStackView.snp.bottom).offset(24)
             make.leading.equalTo(expandableView.snp.leading).inset(16)
         }
         
         textView.snp.makeConstraints { make in
-            make.top.equalTo(reviewLabel.snp.bottom)
-            make.leading.equalTo(expandableView.snp.leading).inset(16)
-            make.height.equalTo(40)
+            make.top.equalTo(reviewLabel.snp.bottom).offset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.height.equalTo(30)
         }
         
     }
@@ -180,7 +181,7 @@ class ExpandableTableViewCell: UITableViewCell {
         layout.minimumInteritemSpacing = 4
         
         let itemSpacing : CGFloat = 4
-        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.4
+        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.33
         let myHeight : CGFloat = 32
         
         layout.scrollDirection = .vertical

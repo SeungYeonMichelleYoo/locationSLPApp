@@ -18,6 +18,7 @@ extension UIButton {
     
     func inactive() {
         backgroundColor = UIColor.white
-        layer.borderColor = Constants.BaseColor.gray3.cgColor
+        layer.borderColor = Constants.BaseColor.gray4.cgColor
+        layer.borderWidth = 1.0
     }
 }
