@@ -48,6 +48,23 @@ class UserAPI {
         }
     }
     
+    static func withdraw(idToken: String, completion: @escaping (User?, Int?, Error?) -> Void) {
+        let url = "\(BASEURL)/v1/user/withdraw"
+        KeychainSwift().set(idToken, forKey: "idToken")
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        
+        AF.request(url, method: .post, headers: headers).responseDecodable(of: User.self) { response in
+            
+            let statusCode = response.response?.statusCode
+            print(response)
+            print("statusCode: \(statusCode)")
+            switch response.result {
+            case .success(let value): completion(response.value!, statusCode, nil)
+            case .failure(let error): completion(nil, statusCode, error)
+            }
+        }
+    }
+    
     private init() {
         
     }

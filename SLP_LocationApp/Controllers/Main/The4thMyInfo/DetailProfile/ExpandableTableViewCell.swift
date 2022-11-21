@@ -85,12 +85,11 @@ class ExpandableTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var textView: UITextView = {
-        let textView = UITextView()
+    lazy var textView: UILabel = {
+        let textView = UILabel()
         textView.font = UIFont.font(.Body3_R14)
         textView.text = "첫 리뷰를 기다리는 중이에요!"
         textView.textColor = Constants.BaseColor.gray6
-        textView.backgroundColor = .red
         return textView
     }()
     

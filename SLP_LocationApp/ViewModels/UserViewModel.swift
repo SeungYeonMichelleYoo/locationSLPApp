@@ -65,4 +65,18 @@ class UserViewModel {
             }
         }
     }
+    
+    //탈퇴
+    func withdrawVM(completion: @escaping (User?, Int?) -> Void) {
+        refreshIDToken { idToken in
+            switch idToken {
+            case nil:
+                completion(nil, nil)
+            default:
+                UserAPI.userCheck(idToken: UserDefaults.standard.string(forKey: "idToken")!) { user, statusCode, error in
+                    completion(user, statusCode)
+                }
+            }
+        }
+    }
 }

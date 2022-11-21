@@ -20,6 +20,7 @@ class DetailProfileViewController: BaseViewController {
     var mainView = DetailProfileView()
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
     var is_hidden = true
+    var gender = 0
     
     override func loadView() {
         self.view = mainView
@@ -70,6 +71,7 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
             
         case 2: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
+            cell.cellDelegate = self
             cell.selectionStyle = .none //클릭시 배경색상 없애기
             return cell
         default: return UITableViewCell()
@@ -113,5 +115,37 @@ extension DetailProfileViewController: UICollectionViewDelegate, UICollectionVie
         cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
         
         return cell
+    }
+}
+
+//MARK: - FixedTableViewCell 안에 남,여 버튼 클릭시 기능 구현
+extension DetailProfileViewController: FixedTableDelegate {
+    func maleButtonTapped() {
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).femaleBtn.inactive()
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).maleBtn.fill()
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).maleBtn.layer.borderWidth = 0
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).maleBtn.setTitleColor(.white, for: .normal)
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).femaleBtn.setTitleColor(.black, for: .normal)
+        gender = 1
+    }
+    
+    func femaleButtonTapped() {
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).maleBtn.inactive()
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).femaleBtn.fill()
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).femaleBtn.layer.borderWidth = 0
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).femaleBtn.setTitleColor(.white, for: .normal)
+        (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).maleBtn.setTitleColor(.black, for: .normal)
+        gender = 0
+    }
+    
+    func withdrawBtnTapped() {
+        let vc = WithdrawViewController()
+        self.transition(vc, transitionStyle: .presentFullScreen)
+    }
+    
+    func sliderTapped() {
+        let min = Int((mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).slider.value[0])
+        let max = Int((mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).slider.value[1])
+        print("min : \(min),  max : \(max)")
     }
 }

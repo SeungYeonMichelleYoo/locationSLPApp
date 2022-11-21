@@ -30,6 +30,9 @@
 		5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B62923820D00728EC3 /* NameTableViewCell.swift */; };
 		5444C0BB292393A600728EC3 /* DetailProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */; };
 		5444C0BD292393B600728EC3 /* DetailProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BC292393B600728EC3 /* DetailProfileView.swift */; };
+		54523736292B372D002B8255 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 54523735292B372D002B8255 /* MultiSlider */; };
+		54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523737292B6680002B8255 /* WithdrawViewController.swift */; };
+		5452373A292B6918002B8255 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523739292B6918002B8255 /* WithdrawView.swift */; };
 		54569A3E2924D3A1008F3FC6 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */; };
 		54569A402924DCDE008F3FC6 /* FixedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54569A3F2924DCDE008F3FC6 /* FixedTableViewCell.swift */; };
 		545AE797291E5FBA000F73C3 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE796291E5FBA000F73C3 /* UserAPI.swift */; };
@@ -99,6 +102,8 @@
 		5444C0B62923820D00728EC3 /* NameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
 		5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
 		5444C0BC292393B600728EC3 /* DetailProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileView.swift; sourceTree = "<group>"; };
+		54523737292B6680002B8255 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
+		54523739292B6918002B8255 /* WithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
 		54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		54569A3F2924DCDE008F3FC6 /* FixedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTableViewCell.swift; sourceTree = "<group>"; };
 		545AE796291E5FBA000F73C3 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
@@ -150,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				54360A3A292259AD004B2CBA /* FirebaseMessaging in Frameworks */,
+				54523736292B372D002B8255 /* MultiSlider in Frameworks */,
 				5461B4E02918CBF70000D726 /* SnapKit in Frameworks */,
 				5471A1E4291D1A2B002C80D8 /* IQKeyboardManagerSwift in Frameworks */,
 				542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */,
@@ -378,6 +384,8 @@
 				547264B32923D1E00010953B /* ExpandableTableViewCell.swift */,
 				54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */,
 				54569A3F2924DCDE008F3FC6 /* FixedTableViewCell.swift */,
+				54523737292B6680002B8255 /* WithdrawViewController.swift */,
+				54523739292B6918002B8255 /* WithdrawView.swift */,
 			);
 			path = DetailProfile;
 			sourceTree = "<group>";
@@ -433,6 +441,7 @@
 				545AE79E291E66B0000F73C3 /* KeychainSwift */,
 				54360A37292259AD004B2CBA /* FirebaseAuth */,
 				54360A39292259AD004B2CBA /* FirebaseMessaging */,
+				54523735292B372D002B8255 /* MultiSlider */,
 			);
 			productName = SLP_LocationApp;
 			productReference = 5461B4A52918B6440000D726 /* SLP_LocationApp.app */;
@@ -470,6 +479,7 @@
 				545AE798291E6015000F73C3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				545AE79D291E66B0000F73C3 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				54360A36292259AD004B2CBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				54523734292B372D002B8255 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 			);
 			productRefGroup = 5461B4A62918B6440000D726 /* Products */;
 			projectDirPath = "";
@@ -536,6 +546,7 @@
 				543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */,
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,
 				5461B4C62918C5430000D726 /* NickNameView.swift in Sources */,
+				5452373A292B6918002B8255 /* WithdrawView.swift in Sources */,
 				545AE7A1291E77DC000F73C3 /* NoNetworkViewController.swift in Sources */,
 				5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */,
 				5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */,
@@ -551,6 +562,7 @@
 				54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */,
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
+				54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */,
 				5461B4DD2918CBB50000D726 /* BaseView.swift in Sources */,
 				5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */,
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
@@ -791,6 +803,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		54523734292B372D002B8255 /* XCRemoteSwiftPackageReference "MultiSlider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yonat/MultiSlider.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.13.2;
+			};
+		};
 		545AE798291E6015000F73C3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -848,6 +868,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54360A36292259AD004B2CBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		54523735292B372D002B8255 /* MultiSlider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 54523734292B372D002B8255 /* XCRemoteSwiftPackageReference "MultiSlider" */;
+			productName = MultiSlider;
 		};
 		545AE799291E6015000F73C3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

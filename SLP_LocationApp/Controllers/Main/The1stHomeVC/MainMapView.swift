@@ -38,6 +38,7 @@ class MainMapView: BaseView {
         view.setTitleColor(.black, for: .normal)
         view.titleLabel?.font = UIFont.font(.Title4_R14)
         view.inactive()
+        view.layer.borderWidth = 0
         return view
     }()
     
@@ -47,6 +48,7 @@ class MainMapView: BaseView {
         view.setTitleColor(.black, for: .normal)
         view.titleLabel?.font = UIFont.font(.Title4_R14)
         view.inactive()
+        view.layer.borderWidth = 0
         return view
     }()
     

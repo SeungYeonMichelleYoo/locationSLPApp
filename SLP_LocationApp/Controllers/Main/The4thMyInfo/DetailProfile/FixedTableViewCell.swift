@@ -7,9 +7,19 @@
 
 import UIKit
 import SnapKit
+import MultiSlider
+
+protocol FixedTableDelegate: AnyObject {
+    func maleButtonTapped()
+    func femaleButtonTapped()
+    func withdrawBtnTapped()
+    func sliderTapped()
+}
 
 class FixedTableViewCell: UITableViewCell {
     
+    var cellDelegate: FixedTableDelegate?
+        
     lazy var fixedView: UIView = {
         let view = UIView()
         return view
@@ -87,8 +97,9 @@ class FixedTableViewCell: UITableViewCell {
     }()
     
     lazy var controlSwitch: UISwitch = {
-        let swicth: UISwitch = UISwitch()
-        return swicth
+        let controlSwitch: UISwitch = UISwitch()
+        controlSwitch.onTintColor = Constants.BaseColor.green
+        return controlSwitch
     }()
     
     //MARK: - age
@@ -114,8 +125,19 @@ class FixedTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var slider: UISlider = {
-        let slider = UISlider()
+    lazy var slider: MultiSlider = {
+        let slider = MultiSlider()
+        slider.minimumValue = 18
+        slider.maximumValue = 65
+        slider.orientation = .horizontal
+        slider.outerTrackColor = Constants.BaseColor.gray2
+        slider.tintColor = Constants.BaseColor.green
+        slider.trackWidth = 10
+        slider.hasRoundTrackEnds = true
+        slider.showsThumbImageShadow = true
+        slider.thumbCount = 2
+        slider.thumbImage = UIImage(named: "sliderimage")
+        slider.value = [18, 35]
         return slider
     }()
     
@@ -129,7 +151,24 @@ class FixedTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.maleBtn.addTarget(self, action: #selector(maleBtnClicked), for:.touchUpInside)
+        self.femaleBtn.addTarget(self, action: #selector(femaleBtnClicked), for:.touchUpInside)
+        self.withdrawBtn.addTarget(self, action: #selector(withdrawBtnClicked), for:.touchUpInside)
+        self.slider.addTarget(self, action: #selector(sliderClicked), for: .valueChanged)
+        self.slider.addTarget(self, action: #selector(sliderClicked), for: .touchUpInside)
         layout()
+    }
+    @objc func maleBtnClicked() {
+        cellDelegate?.maleButtonTapped()
+    }
+    @objc func femaleBtnClicked() {
+        cellDelegate?.femaleButtonTapped()
+    }
+    @objc func withdrawBtnClicked() {
+        cellDelegate?.withdrawBtnTapped()
+    }
+    @objc func sliderClicked() {
+        cellDelegate?.sliderTapped()
     }
     
     required init?(coder: NSCoder) {
@@ -242,12 +281,12 @@ class FixedTableViewCell: UITableViewCell {
         }
 
         slider.snp.makeConstraints { make in
-            make.top.equalTo(ageInfoLabel.snp.bottom).offset(14)
+            make.top.equalTo(ageInfoLabel.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview().inset(16)
         }
 
         withdrawBtn.snp.makeConstraints { make in
-            make.top.equalTo(slider.snp.bottom).offset(38)
+            make.top.equalTo(slider.snp.bottom).offset(30)
             make.leading.equalToSuperview()
         }
     }

@@ -21,4 +21,8 @@ extension UIButton {
         layer.borderColor = Constants.BaseColor.gray4.cgColor
         layer.borderWidth = 1.0
     }
+    
+    func cancel() {
+        backgroundColor = Constants.BaseColor.gray2
+    }
 }
