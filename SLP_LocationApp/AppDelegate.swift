@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // FCM 다시 사용 설정
         Messaging.messaging().isAutoInitEnabled = true
         
+        
         // device token 요청
         UIApplication.shared.registerForRemoteNotifications()
         
@@ -49,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: MessagingDelegate {
     /// 현재 등록 토큰 가져오기.
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        
+        print("FCMToken refreshed")
         UserDefaults.standard.set(fcmToken, forKey: "FCMtoken")
     }
 }

@@ -76,6 +76,10 @@
 		54ACF64E291D361A0002A121 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 54ACF64D291D361A0002A121 /* Toast */; };
 		54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACF650291D39220002A121 /* Toast+Extension.swift */; };
 		54C225B0291F3109003596BB /* Dongle-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54C225AF291F3109003596BB /* Dongle-Regular.ttf */; };
+		54CEEC19292C53E800C0D8CA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC18292C53E800C0D8CA /* SearchViewController.swift */; };
+		54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1A292C53F200C0D8CA /* SearchView.swift */; };
+		54CEEC1D292C543100C0D8CA /* NearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1C292C543100C0D8CA /* NearViewController.swift */; };
+		54CEEC1F292C543C00C0D8CA /* NearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1E292C543C00C0D8CA /* NearView.swift */; };
 		54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */; };
 		54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19EC291A32CD0033BCE4 /* OKButton.swift */; };
 		54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19F3291A3BA70033BCE4 /* AuthManager.swift */; };
@@ -144,6 +148,10 @@
 		54ACF64A291D2B320002A121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54ACF650291D39220002A121 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		54C225AF291F3109003596BB /* Dongle-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dongle-Regular.ttf"; sourceTree = "<group>"; };
+		54CEEC18292C53E800C0D8CA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		54CEEC1A292C53F200C0D8CA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		54CEEC1C292C543100C0D8CA /* NearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearViewController.swift; sourceTree = "<group>"; };
+		54CEEC1E292C543C00C0D8CA /* NearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearView.swift; sourceTree = "<group>"; };
 		54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		54FE19EC291A32CD0033BCE4 /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
 		54FE19F3291A3BA70033BCE4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -211,6 +219,10 @@
 			children = (
 				545BEAFC291A484900CF861F /* MainMapViewController.swift */,
 				545BEAFE291A485500CF861F /* MainMapView.swift */,
+				54CEEC18292C53E800C0D8CA /* SearchViewController.swift */,
+				54CEEC1A292C53F200C0D8CA /* SearchView.swift */,
+				54CEEC1C292C543100C0D8CA /* NearViewController.swift */,
+				54CEEC1E292C543C00C0D8CA /* NearView.swift */,
 			);
 			path = The1stHomeVC;
 			sourceTree = "<group>";
@@ -538,12 +550,14 @@
 				545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */,
 				5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */,
 				543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */,
+				54CEEC1F292C543C00C0D8CA /* NearView.swift in Sources */,
 				5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */,
 				545AE79C291E608D000F73C3 /* User.swift in Sources */,
 				5444C0A929236C3900728EC3 /* FriendViewController.swift in Sources */,
 				5444C0BB292393A600728EC3 /* DetailProfileViewController.swift in Sources */,
 				5461B4C82918C5660000D726 /* BirthViewController.swift in Sources */,
 				543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */,
+				54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */,
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,
 				5461B4C62918C5430000D726 /* NickNameView.swift in Sources */,
 				5452373A292B6918002B8255 /* WithdrawView.swift in Sources */,
@@ -551,9 +565,11 @@
 				5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */,
 				5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */,
 				5461B4C42918C5360000D726 /* NicknameViewController.swift in Sources */,
+				54CEEC1D292C543100C0D8CA /* NearViewController.swift in Sources */,
 				5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */,
 				5461B4AB2918B6440000D726 /* SceneDelegate.swift in Sources */,
 				5461B4E82918CD570000D726 /* Color.swift in Sources */,
+				54CEEC19292C53E800C0D8CA /* SearchViewController.swift in Sources */,
 				545AE797291E5FBA000F73C3 /* UserAPI.swift in Sources */,
 				5461B4D02918C5B70000D726 /* GenderViewController.swift in Sources */,
 				5461B4D42918C5F90000D726 /* OnboardingViewController.swift in Sources */,

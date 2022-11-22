@@ -11,6 +11,8 @@ class WithdrawViewController: BaseViewController {
     
     var mainView = WithdrawView()
     
+    var viewModel = UserViewModel()
+    
     override func loadView() {
         self.view = mainView
     }

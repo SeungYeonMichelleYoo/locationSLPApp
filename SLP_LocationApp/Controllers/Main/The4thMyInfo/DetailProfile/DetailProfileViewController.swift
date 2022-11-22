@@ -16,11 +16,15 @@ import UIKit
 // is_hidden = !is_hidden
 
 class DetailProfileViewController: BaseViewController {
-    
+    var viewModel = UserViewModel()
     var mainView = DetailProfileView()
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
     var is_hidden = true
     var gender = 0
+    var ageMin = 18
+    var ageMax = 65
+    var searchable = 0
+    var study = ""
     
     override func loadView() {
         self.view = mainView
@@ -41,7 +45,28 @@ class DetailProfileViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func saveBtnClicked() {
+//        viewModel.mypageUpdateVM(idToken: UserDefaults.standard.string(forKey: "idToken")!, searchable: searchable, ageMin: ageMin, ageMax: ageMax, gender: gender, study: <#T##String#>) { statusCode in
+        var dict: Dictionary<String, String> = ["searchable": String(searchable), "ageMin": String(ageMin), "ageMax": String(ageMax), "gender": String(gender)]
+        if (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).textField.text != "" {
+            dict["study"] = (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).textField.text
+        }
         
+        viewModel.mypageUpdateVM(dict: dict) { statusCode in
+            switch statusCode {
+            case 200:
+                self.showToast(message: "업데이트 성공")
+            case 406:
+                self.showToast(message: "새싹 스터디 서버에 최종가입을 완료해주세요.")
+            case 500: //서버 에러
+                self.showToast(message: "서버 점검중입니다.")
+            case 501:
+                print("클라이언트 에러 - API요청시 header와 requestbody에 값을 빠뜨리지 않고 전송했는지 확인")
+            case nil:
+                self.showToast(message: "네트워크 연결을 확인해주세요.")
+            default:
+                break
+            }
+        }
     }
     func setupTableview() {
         mainView.tableView.delegate = self
@@ -58,6 +83,7 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as! ImageTableViewCell
+            cell.selectionStyle = .none
             return cell
             
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
@@ -66,8 +92,10 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
             cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
             cell.expandableView.isHidden = is_hidden
             cell.selectionStyle = .none
-            
             cell.downBtn.setImage(UIImage(systemName: is_hidden ? "chevron.down" : "chevron.up"), for: .normal)
+            
+            cell.nickView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(nickViewTapped)))
+            cell.nickView.isUserInteractionEnabled = true
             return cell
             
         case 2: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
@@ -78,11 +106,9 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 1 {
-            is_hidden = !is_hidden
-            mainView.tableView.reloadData()
-        }
+    @objc func nickViewTapped() {
+        is_hidden = !is_hidden
+        mainView.tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -144,8 +170,40 @@ extension DetailProfileViewController: FixedTableDelegate {
     }
     
     func sliderTapped() {
-        let min = Int((mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).slider.value[0])
-        let max = Int((mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).slider.value[1])
-        print("min : \(min),  max : \(max)")
+        ageMin = Int((mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).slider.value[0])
+        ageMax = Int((mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).slider.value[1])
+        print("min : \(ageMin),  max : \(ageMax)")
+    }
+    
+    func switchTapped() {
+        searchable = 1
+    }
+}
+
+extension DetailProfileViewController {
+    func withdraw() {
+        viewModel.withdrawVM { statusCode in
+            switch statusCode {
+            case 200:
+                UserDefaults.standard.removeObject(forKey: "idToken")
+                self.showToast(message: "회원 탈퇴가 완료되었습니다.")
+                let vc = OnboardingViewController()
+                self.transition(vc, transitionStyle: .presentFullScreen)
+            case 401:
+                self.showToast(message: "휴대폰 인증을 다시 해주세요.")
+            case 406: //이미 탈퇴 처리된 회원, 미가입 회원
+                self.showToast(message: "이미 탈퇴한 회원이거나 미가입 회원이십니다. 첫 화면으로 돌아갑니다.")
+                let vc = OnboardingViewController()
+                self.transition(vc, transitionStyle: .presentFullScreen)
+            case 500:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+            case 501:
+                print("Client Error. API요청시 header, requestbody 값 빠뜨리지 않고 전송했는지 확인")
+            case nil:
+                self.showToast(message: "네트워크 연결을 확인해주세요.")
+            default:
+                break
+            }
+        }
     }
 }

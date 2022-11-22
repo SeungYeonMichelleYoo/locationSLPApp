@@ -14,6 +14,7 @@ protocol FixedTableDelegate: AnyObject {
     func femaleButtonTapped()
     func withdrawBtnTapped()
     func sliderTapped()
+    func switchTapped()
 }
 
 class FixedTableViewCell: UITableViewCell {
@@ -156,6 +157,7 @@ class FixedTableViewCell: UITableViewCell {
         self.withdrawBtn.addTarget(self, action: #selector(withdrawBtnClicked), for:.touchUpInside)
         self.slider.addTarget(self, action: #selector(sliderClicked), for: .valueChanged)
         self.slider.addTarget(self, action: #selector(sliderClicked), for: .touchUpInside)
+        self.controlSwitch.addTarget(self, action: #selector(switchTapped), for: .touchUpInside)
         layout()
     }
     @objc func maleBtnClicked() {
@@ -169,6 +171,9 @@ class FixedTableViewCell: UITableViewCell {
     }
     @objc func sliderClicked() {
         cellDelegate?.sliderTapped()
+    }
+    @objc func switchTapped() {
+        cellDelegate?.switchTapped()
     }
     
     required init?(coder: NSCoder) {

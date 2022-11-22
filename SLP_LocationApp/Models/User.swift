@@ -8,6 +8,10 @@
 import Foundation
 
 struct User: Codable {
-    let idToken: String
+//    let idToken: String
     let FCMtoken: String
+    
+//    enum CodingKeys: String, CodingKey {
+//        case idToken =
+//    }
 }

@@ -171,8 +171,8 @@ class ExpandableTableViewCell: UITableViewCell {
             make.leading.equalToSuperview().inset(16)
             make.height.equalTo(30)
         }
-        
     }
+    
     
     static func imageCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()

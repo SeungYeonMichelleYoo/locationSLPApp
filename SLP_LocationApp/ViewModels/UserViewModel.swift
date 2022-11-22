@@ -33,6 +33,7 @@ class UserViewModel {
             }
             print("idToken: \(idToken)")
             UserDefaults.standard.set(idToken, forKey: "idToken")
+            KeychainSwift().set(UserDefaults.standard.string(forKey: "idToken")!, forKey: "idToken")
             // Send token to your backend via HTTPS
             completion(idToken)
         }
@@ -45,7 +46,7 @@ class UserViewModel {
             case nil:
                 completion(nil, nil)
             default:
-                UserAPI.userCheck(idToken: UserDefaults.standard.string(forKey: "idToken")!) { user, statusCode, error in
+                UserAPI.userCheck() { user, statusCode, error in
                     completion(user, statusCode)
                 }
             }
@@ -59,7 +60,7 @@ class UserViewModel {
             case nil:
                 completion(nil)
             default:
-                UserAPI.signUp(idToken: UserDefaults.standard.string(forKey: "idToken")!, phoneNumber: phoneNumber, FCMtoken: FCMtoken, nick: nick, birth: birth, email: email, gender: gender) { statusCode, error in
+                UserAPI.signUp(phoneNumber: phoneNumber, FCMtoken: FCMtoken, nick: nick, birth: birth, email: email, gender: gender) { statusCode, error in
                     completion(statusCode)
                 }
             }
@@ -67,14 +68,30 @@ class UserViewModel {
     }
     
     //탈퇴
-    func withdrawVM(completion: @escaping (User?, Int?) -> Void) {
+    func withdrawVM(completion: @escaping (Int?) -> Void) {
         refreshIDToken { idToken in
             switch idToken {
             case nil:
-                completion(nil, nil)
+                completion(nil)
             default:
-                UserAPI.userCheck(idToken: UserDefaults.standard.string(forKey: "idToken")!) { user, statusCode, error in
-                    completion(user, statusCode)
+                UserAPI.withdraw() { statusCode, error in
+                    completion(statusCode)
+                }
+            }
+        }
+    }
+    
+    //내 정보 업데이트
+//    func mypageUpdateVM(idToken: String, searchable: Int, ageMin: Int, ageMax: Int, gender: Int, completion: @escaping (Int?) -> Void) {
+    func mypageUpdateVM(dict: Dictionary<String, String>, completion: @escaping (Int?) -> Void) {
+        refreshIDToken { idToken in
+            switch idToken {
+            case nil:
+                completion(nil)
+            default:
+//                UserAPI.mypageUpdate(idToken: UserDefaults.standard.string(forKey: "idToken")!, searchable: searchable, ageMin: ageMin, ageMax: ageMax, gender: gender) { statusCode, error in
+                UserAPI.mypageUpdate(dict: dict) { statusCode, error in
+                    completion(statusCode)
                 }
             }
         }
