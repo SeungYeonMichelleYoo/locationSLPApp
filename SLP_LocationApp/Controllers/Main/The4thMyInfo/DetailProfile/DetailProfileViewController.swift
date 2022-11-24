@@ -45,7 +45,6 @@ class DetailProfileViewController: BaseViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func saveBtnClicked() {
-//        viewModel.mypageUpdateVM(idToken: UserDefaults.standard.string(forKey: "idToken")!, searchable: searchable, ageMin: ageMin, ageMax: ageMax, gender: gender, study: <#T##String#>) { statusCode in
         var dict: Dictionary<String, String> = ["searchable": String(searchable), "ageMin": String(ageMin), "ageMax": String(ageMax), "gender": String(gender)]
         if (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).textField.text != "" {
             dict["study"] = (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).textField.text
