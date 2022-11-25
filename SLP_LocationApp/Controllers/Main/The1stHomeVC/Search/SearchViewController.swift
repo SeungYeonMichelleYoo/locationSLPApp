@@ -7,10 +7,14 @@
 
 import UIKit
 
-class SearchViewController: BaseViewController {
+class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     var mainView = SearchView()
     var headerLabel = ["지금 주변에는","내가 하고 싶은"]
+    var nearStudy: [String] = []
+    var myStudy: [String] = []
+    var newStudy: [String] = []
+    let txtfield = UITextField(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.8, height: 35))
     
     override func loadView() {
         self.view = mainView
@@ -21,14 +25,47 @@ class SearchViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
         navigationItem.leftBarButtonItem?.tintColor = Constants.BaseColor.black
         
-        let searchBar = UISearchBar()
-        searchBar.placeholder = "띄어쓰기로 복수 입력이 가능해요"
-        self.navigationItem.titleView = searchBar
-        
+        configureTextField()
         configureCollectionView()
     }
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func configureTextField() {
+        txtfield.layer.cornerRadius = 8
+        txtfield.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.foregroundColor: Constants.BaseColor.gray6])
+        txtfield.backgroundColor = Constants.BaseColor.gray1
+        txtfield.font = UIFont.font(.Title4_R14)
+        txtfield.leftViewMode = UITextField.ViewMode.always
+        let txtfieldLeftView = UIView(frame: CGRect(x: 5, y: 0, width: 35, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 5, y: 0, width: 20, height: 20))
+        let image = UIImage(named: "magnifyingglass")
+        imageView.image = image
+        txtfieldLeftView.addSubview(imageView)
+        txtfield.leftView = txtfieldLeftView
+        txtfield.returnKeyType = UIReturnKeyType.done
+            
+        self.navigationItem.titleView = txtfield
+        
+        txtfield.delegate = self
+        
+        txtfield.addTarget(self, action: #selector(txtfieldEditingChanged), for: .editingChanged)
+    }
+    @objc func txtfieldEditingChanged() {
+        myStudy = txtfield.text?.components(separatedBy: " ").filter({
+            $0.count > 0
+        }) ?? []
+        
+        if myStudy.count >= 8 {
+            showToast(message: "스터디를 더 이상 추가할 수 없습니다.")
+        }
+        
+        for new in myStudy {
+            if new.count == 0 || new.count > 8 {
+                showToast(message: "최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
+            }
+        }
     }
     
     func configureCollectionView() {
@@ -95,3 +132,4 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         return CGSize(width: self.view.frame.width, height: 50)
     }
 }
+
