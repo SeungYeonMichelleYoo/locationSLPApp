@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BirthViewController: BaseViewController {
+final class BirthViewController: BaseViewController {
     
     var mainView = BirthView()
     

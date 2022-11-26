@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 import CoreLocation //위치 권한 설정
 
-class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
     var mainView = MainMapView()
     var gender = 0
@@ -19,7 +19,7 @@ class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
     
     //2. 위치에 대한 대부분을 담당
     let locationManager = CLLocationManager()
-    let defaultCoordinate = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734)
+    let defaultCoordinate = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734) //새싹 영등포캠퍼스(디폴트)
     
     override func loadView() {
         self.view = mainView
@@ -48,10 +48,9 @@ class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLocationMa
         mainView.mapView.addAnnotation(annotation)
     }
     
-    //MARK: - 위치 권한 허용 팝업
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        showRequestLocationServiceAlert()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
     
     //재사용 할 수 있는 커스텀어노테이션
@@ -125,12 +124,7 @@ extension MainMapViewController {
             let region = MKCoordinateRegion(center: defaultCoordinate, latitudinalMeters: 700, longitudinalMeters: 700)
             mainView.mapView.setRegion(region, animated: true)
             
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = defaultCoordinate
-            annotation.title = "이곳은 청년취업사관학교입니다."
-            
-            //지도에 핀 추가
-            mainView.mapView.addAnnotation(annotation)
+            showRequestLocationServiceAlert()
             
         case .authorizedWhenInUse:
             print("WHEN IN USE")
@@ -143,7 +137,7 @@ extension MainMapViewController {
     
     //MARK: - 위치 권한 허용 팝업
     func showRequestLocationServiceAlert() {
-        let requestLocationServiceAlert = UIAlertController(title: "위치정보 이용", message: "위치 서비스를 사용할 수 없습니다. 기기의 '설정>개인정보 보호'에서 위치 서비스를 켜주세요.", preferredStyle: .alert)
+        let requestLocationServiceAlert = UIAlertController(title: "안내", message: "위치 서비스 사용 불가", preferredStyle: .alert)
         let goSetting = UIAlertAction(title: "설정으로 이동", style: .destructive) { _ in
             //설정까지 이동하거나 설정 세부화면까지 이동하거나
             //한번도 설정앱에 들어가지 않았거나, 막 다운 받은 앱이거나

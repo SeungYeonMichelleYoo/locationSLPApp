@@ -7,7 +7,7 @@
 import UIKit
 import FirebaseAuth
 
-class OnboardingViewController: BaseViewController {
+final class OnboardingViewController: BaseViewController {
     
     var slides: [OnboardingSlide] = []
     

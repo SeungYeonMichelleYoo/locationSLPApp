@@ -7,12 +7,13 @@
 
 import UIKit
 
-class SearchViewController: BaseViewController, UITextFieldDelegate {
+final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     var mainView = SearchView()
     var headerLabel = ["지금 주변에는","내가 하고 싶은"]
     var nearStudy: [String] = []
     var myStudy: [String] = []
+//    var myStudyBtns = self.mainView.collectionView.MyStudyCollectionViewCell.myBtn
     var newStudy: [String] = []
     let txtfield = UITextField(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.8, height: 35))
     
@@ -45,7 +46,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         txtfieldLeftView.addSubview(imageView)
         txtfield.leftView = txtfieldLeftView
         txtfield.returnKeyType = UIReturnKeyType.done
-            
+        
         self.navigationItem.titleView = txtfield
         
         txtfield.delegate = self
@@ -76,7 +77,7 @@ class SearchViewController: BaseViewController, UITextFieldDelegate {
         mainView.collectionView.register(MyStudyCollectionViewCell.self, forCellWithReuseIdentifier: "MyStudyCollectionViewCell")
         mainView.collectionView.register(HeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderReusableView")
     }
- }
+}
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -133,3 +134,21 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
 }
 
+extension SearchViewController {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if txtfield.text?.count == 0 || (txtfield.text!.count) > 8 {
+            showToast(message: "최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
+        } else {
+            
+            myStudy.append(contentsOf: newStudy.filter({
+                !myStudy.contains($0)
+            }))
+            
+            txtfield.resignFirstResponder()
+            
+            mainView.collectionView.reloadData()
+        }
+        return true
+    }
+}

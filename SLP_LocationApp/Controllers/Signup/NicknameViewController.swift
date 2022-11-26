@@ -9,7 +9,7 @@ import UIKit
 import Toast
 import IQKeyboardManagerSwift
 
-class NicknameViewController: BaseViewController, UITextFieldDelegate {
+final class NicknameViewController: BaseViewController, UITextFieldDelegate {
         
     var mainView = NicknameView()
     

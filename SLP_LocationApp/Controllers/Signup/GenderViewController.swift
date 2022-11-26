@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class GenderViewController: BaseViewController {
+final class GenderViewController: BaseViewController {
     
     var mainView = GenderView()
     
@@ -61,28 +61,37 @@ class GenderViewController: BaseViewController {
     func signUp() {
         viewModel.signUpVM(phoneNumber: UserDefaults.standard.string(forKey: "phoneNumber")!.replacingOccurrences(of: "+820", with: "+82").replacingOccurrences(of: "-", with: ""), FCMtoken: UserDefaults.standard.string(forKey: "FCMtoken")!, nick: nickname, birth: birth, email: emailAddress, gender: gender) { statusCode in
             switch statusCode {
-            case 401:
-                self.showToast(message: "휴대폰 인증을 다시 해주세요.")
-            case 500:
+            case APIStatusCode.firebaseTokenError.rawValue:
+                self.viewModel.refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.signUp()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIStatusCode.serverError.rawValue:
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
-            case 501:
+                return
+            case APIStatusCode.clientError.rawValue:
                 print("서버 String으로 받아야 함")
+                return
             case nil:
                 self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
             default:
                 break
             }
             
             switch statusCode {
-            case 200:
+            case APIStatusCode.success.rawValue:
                 let vc = MainMapViewController()
                 self.transition(vc, transitionStyle: .presentFullScreen)
-            case 406, 202:
+                return
+            case APIStatusCode.forbiddenNickname.rawValue, APIStatusCode.unAuthorized.rawValue:
                 let vc = NicknameViewController()
                 self.transition(vc, transitionStyle: .presentFullScreen)
-            case -1, 401, nil:
-                let vc = OnboardingViewController()
-                self.transition(vc, transitionStyle: .presentFullScreen)
+                return
             default:
                 break
             }

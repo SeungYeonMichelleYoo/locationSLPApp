@@ -7,7 +7,7 @@
 import UIKit
 import AnyFormatKit
 
-class AuthViewController: BaseViewController, UITextFieldDelegate {
+final class AuthViewController: BaseViewController, UITextFieldDelegate {
         
     var mainView = AuthView()
 

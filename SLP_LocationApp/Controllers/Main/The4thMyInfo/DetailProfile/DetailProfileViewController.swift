@@ -15,7 +15,7 @@ import UIKit
 // ~~~ .isHidden = is_hidden
 // is_hidden = !is_hidden
 
-class DetailProfileViewController: BaseViewController {
+final class DetailProfileViewController: BaseViewController {
     var viewModel = UserViewModel()
     var mainView = DetailProfileView()
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
@@ -82,15 +82,13 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as! ImageTableViewCell
-            cell.selectionStyle = .none
             return cell
             
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
-            cell.collectionView.delegate = self
+            cell.collectionView.delegate = self //리팩토링하고 싶은데 에러. 밑에도 마찬가지
             cell.collectionView.dataSource = self
-            cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
+//            cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
             cell.expandableView.isHidden = is_hidden
-            cell.selectionStyle = .none
             cell.downBtn.setImage(UIImage(systemName: is_hidden ? "chevron.down" : "chevron.up"), for: .normal)
             
             cell.nickView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(nickViewTapped)))
@@ -99,7 +97,6 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
             
         case 2: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
             cell.cellDelegate = self
-            cell.selectionStyle = .none //클릭시 배경색상 없애기
             return cell
         default: return UITableViewCell()
         }

@@ -21,7 +21,9 @@ class UserAPI {
             
             switch response.result {
             case .success(let value): completion(response.value!, statusCode, nil)
+                return
             case .failure(let error): completion(nil, statusCode, error)
+                return
             }
         }
     }
@@ -34,10 +36,11 @@ class UserAPI {
         print(params)
         AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: User.self) { response in
             let statusCode = response.response?.statusCode
-           
             switch response.result {
             case .success(let value): completion(statusCode, nil)
+                return
             case .failure(let error): completion(statusCode, error)
+                return
             }
         }
     }
@@ -51,7 +54,9 @@ class UserAPI {
 
             switch response.result {
             case .success(let value): completion(statusCode, nil)
+                return
             case .failure(let error): completion(statusCode, error)
+                return
             }
         }
     }
@@ -68,7 +73,9 @@ class UserAPI {
            
             switch response.result {
             case .success(let value): completion(statusCode, nil)
+                return
             case .failure(let error): completion(statusCode, error)
+                return
             }
         }
     }

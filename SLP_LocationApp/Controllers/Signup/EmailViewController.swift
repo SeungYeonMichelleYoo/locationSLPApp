@@ -6,7 +6,7 @@
 //
 import UIKit
 
-class EmailViewController: BaseViewController, UITextFieldDelegate {
+final class EmailViewController: BaseViewController, UITextFieldDelegate {
     
     var mainView = EmailView()
     

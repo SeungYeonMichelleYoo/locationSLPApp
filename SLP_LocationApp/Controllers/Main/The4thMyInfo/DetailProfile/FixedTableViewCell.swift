@@ -158,6 +158,7 @@ class FixedTableViewCell: UITableViewCell {
         self.slider.addTarget(self, action: #selector(sliderClicked), for: .valueChanged)
         self.slider.addTarget(self, action: #selector(sliderClicked), for: .touchUpInside)
         self.controlSwitch.addTarget(self, action: #selector(switchTapped), for: .touchUpInside)
+        selectionStyle = .none //클릭시 배경색상 없애기
         layout()
     }
     @objc func maleBtnClicked() {
