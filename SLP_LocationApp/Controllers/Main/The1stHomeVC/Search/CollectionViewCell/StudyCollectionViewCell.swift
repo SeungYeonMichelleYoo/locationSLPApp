@@ -20,6 +20,7 @@ class StudyCollectionViewCell: UICollectionViewCell {
         config.contentInsets = NSDirectionalEdgeInsets.init(top: 8, leading: 32, bottom: 8, trailing: 32)
         view.configuration = config
         view.titleLabel?.font =  UIFont.font(.Title4_R14)
+        view.sizeToFit()
         return view
     }()
         

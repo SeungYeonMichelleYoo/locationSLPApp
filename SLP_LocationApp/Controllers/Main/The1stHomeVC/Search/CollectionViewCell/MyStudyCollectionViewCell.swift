@@ -23,6 +23,7 @@ class MyStudyCollectionViewCell: UICollectionViewCell {
         view.configuration = config
         view.imageView?.contentMode = .scaleToFill
         view.titleLabel?.font =  UIFont.font(.Title4_R14)
+        view.sizeToFit()
         return view
     }()
         

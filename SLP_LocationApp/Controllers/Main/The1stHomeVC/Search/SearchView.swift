@@ -14,7 +14,7 @@ class SearchView: BaseView {
         layout.minimumLineSpacing = 4
         layout.minimumInteritemSpacing = 4
         layout.sectionInset = .zero
-        layout.itemSize = CGSize(width: 80, height: 40) //height 값???
+//        layout.itemSize = CGSize(width: 80, height: 40) //height 값???
         layout.scrollDirection = .vertical
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)

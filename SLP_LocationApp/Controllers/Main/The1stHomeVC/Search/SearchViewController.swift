@@ -11,6 +11,7 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     var mainView = SearchView()
     var headerLabel = ["지금 주변에는","내가 하고 싶은"]
+    var recommendStudy: [String] = []
     var nearStudy: [String] = []
     var myStudy: [String] = []
 //    var myStudyBtns = self.mainView.collectionView.MyStudyCollectionViewCell.myBtn
@@ -50,23 +51,6 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         self.navigationItem.titleView = txtfield
         
         txtfield.delegate = self
-        
-        txtfield.addTarget(self, action: #selector(txtfieldEditingChanged), for: .editingChanged)
-    }
-    @objc func txtfieldEditingChanged() {
-        myStudy = txtfield.text?.components(separatedBy: " ").filter({
-            $0.count > 0
-        }) ?? []
-        
-        if myStudy.count >= 8 {
-            showToast(message: "스터디를 더 이상 추가할 수 없습니다.")
-        }
-        
-        for new in myStudy {
-            if new.count == 0 || new.count > 8 {
-                showToast(message: "최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
-            }
-        }
     }
     
     func configureCollectionView() {
@@ -86,7 +70,11 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        if section == 0 {
+            return nearStudy.count + recommendStudy.count
+        } else {
+            return myStudy.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -96,30 +84,22 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
             
         case 1: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyStudyCollectionViewCell", for: indexPath) as! MyStudyCollectionViewCell
-            cell.myBtn.setTitle("test", for: .normal)
+            cell.myBtn.setTitle(myStudy[indexPath.item], for: .normal)
+            cell.myBtn.sizeToFit()
+            cell.myBtn.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width, height: cell.myBtn.intrinsicContentSize.height)
+            print("hi first")
+            cell.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width + 20, height: cell.myBtn.intrinsicContentSize.height)
+            print("indexpath \(indexPath.item) : \(cell.frame.width)")
+            print("indexpath \(indexPath.item) : \(cell.frame.minX)")
             return cell
-            
+            // button label mother father baba mama zhu
+            // n 번째 버튼의 x: 직전 값의 x + 직전 값의 너비 + 여백
+            //              현재 x + 현재 너비가 기기 사이즈보다 클 경우, 0으로 수정 후, y값을 직전 버튼의 y값 + 높이 + 줄간 여백
         default:
             return UICollectionViewCell()
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch indexPath.section {
-        case 0: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StudyCollectionViewCell", for: indexPath) as! StudyCollectionViewCell
-            cell.nearBtn.sizeToFit()
-            let cellWidth = cell.nearBtn.frame.width + 20
-            return CGSize(width: cellWidth, height: 40)
-            
-        case 1: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyStudyCollectionViewCell", for: indexPath) as! MyStudyCollectionViewCell
-            cell.myBtn.sizeToFit()
-            let cellWidth = cell.myBtn.frame.width + 20
-            return CGSize(width: cellWidth, height: 40)
-            
-        default:
-            return CGSize(width: 80, height: 40)
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderReusableView", for: indexPath) as? HeaderReusableView {
@@ -136,19 +116,30 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension SearchViewController {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        var words = txtfield.text?.components(separatedBy: " ").filter({
+            $0.count > 0
+        }) ?? []
         
-        if txtfield.text?.count == 0 || (txtfield.text!.count) > 8 {
-            showToast(message: "최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
-        } else {
-            
-            myStudy.append(contentsOf: newStudy.filter({
-                !myStudy.contains($0)
-            }))
-            
-            txtfield.resignFirstResponder()
-            
-            mainView.collectionView.reloadData()
+        if myStudy.count + words.count >= 8 {
+            showToast(message: "스터디를 더 이상 추가할 수 없습니다.")
         }
+
+        for word in words {
+            if word.count == 0 || (word.count) > 8 {
+                showToast(message: "최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
+                continue
+            } else {
+                if !myStudy.contains(word) {
+                    myStudy.append(word)
+                }
+                words.removeAll { $0 == word }
+            }
+        }
+        txtfield.text = words.joined(separator: " ")
+        
+        txtfield.resignFirstResponder()
+        
+        mainView.collectionView.reloadData()
         return true
     }
 }
