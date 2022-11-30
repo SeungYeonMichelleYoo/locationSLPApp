@@ -11,6 +11,7 @@ import CoreLocation //위치 권한 설정
 
 final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    var viewModel = HomeViewModel()
     var mainView = MainMapView()
     var gender = 0
     var emailAddress = ""
@@ -34,10 +35,78 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         
         navigationItem.title = ""
         
-        //지도 중심 잡기: 애플맵 활용해 좌표 복사
+        //지도 중심 잡기
         let center = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734)
         setRegionAndAnnotation(center: center)
+        
+        //플로팅버튼 상태
+        checkCurrentStatus()
+        
+        mainView.floatingBtn.addTarget(self, action: #selector(floatingBtnClicked), for: .touchUpInside)
     }
+    
+    @objc func floatingBtnClicked() {
+        if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_waiting") {
+            //새싹찾기 화면으로 이동
+        } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_matched") {
+            //채팅화면으로 이동
+            let vc = ChattingViewController()
+            self.transition(vc, transitionStyle: .push)
+        } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_search") {
+            let authorizationStatus: CLAuthorizationStatus
+            if #available(iOS 14.0, *) {
+                authorizationStatus = locationManager.authorizationStatus
+            } else {
+                authorizationStatus = CLLocationManager.authorizationStatus()
+            }
+            switch authorizationStatus {
+            case .authorizedAlways, .authorizedWhenInUse:
+                let vc = SearchViewController()
+                var center = mainView.mapView.centerCoordinate
+                vc.lat = center.latitude
+                vc.long = center.longitude
+                self.transition(vc, transitionStyle: .push)
+                return
+            default:
+                return
+            }
+        }
+    }
+    
+    func checkCurrentStatus() {
+        viewModel.checkMatchStateVM { myQueueState, statusCode in
+            switch statusCode {
+            case APIStatusCode.success.rawValue:
+                if myQueueState?.matched == 0 {
+                    self.mainView.floatingBtn.setImage(UIImage(named: "floatingBtn_waiting"), for: .normal)
+                } else {
+                    self.mainView.floatingBtn.setImage(UIImage(named: "floatingBtn_matched"), for: .normal)
+                }
+                return
+            case APIStatusCode.option.rawValue:
+                print("일반상태")
+                self.mainView.floatingBtn.setImage(UIImage(named: "floatingBtn_search"), for: .normal)
+                return
+            case APIStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                if isSuccess! {
+                    self.checkCurrentStatus()
+                } else {
+                    self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                }
+            }
+                return
+            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
+    
+    
     func setRegionAndAnnotation(center: CLLocationCoordinate2D) {
         //지도 중심 기반으로 보여질 범위
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 700, longitudinalMeters: 700)
@@ -146,12 +215,43 @@ extension MainMapViewController {
             }
         }
         let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
-            print("취소")
+            //새싹캠퍼스를 중심으로 서버통신
+            self.nearbySearch(lat: 37.517819364682694, long: 126.88647317074734)
         })
+            
         requestLocationServiceAlert.addAction(cancel)
         requestLocationServiceAlert.addAction(goSetting)
-        
-        present(requestLocationServiceAlert, animated: true, completion: nil)
+            
+        self.present(requestLocationServiceAlert, animated: true, completion: nil)
+    }
+ 
+    func nearbySearch(lat: Double, long: Double) {
+        self.viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
+            switch statusCode {
+            case APIStatusCode.success.rawValue:
+                print("스터디 함께할 새싹 검색 성공")
+                return
+            case APIStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.nearbySearch(lat: lat, long: long)
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+                
+            case APIStatusCode.unAuthorized.rawValue:
+                print("미가입회원")
+                return
+            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
     }
     
     //MARK: - 현재위치
@@ -161,7 +261,7 @@ extension MainMapViewController {
             let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 700, longitudinalMeters: 700)
             mainView.mapView.setRegion(region, animated: true)
         }
-        locationManager.stopUpdatingLocation()
+        self.locationManager.stopUpdatingLocation()
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {

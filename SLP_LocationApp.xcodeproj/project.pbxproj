@@ -89,6 +89,8 @@
 		54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54ACF64A291D2B320002A121 /* GoogleService-Info.plist */; };
 		54ACF64E291D361A0002A121 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 54ACF64D291D361A0002A121 /* Toast */; };
 		54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACF650291D39220002A121 /* Toast+Extension.swift */; };
+		54B95E0329377F97005389A6 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B95E0229377F97005389A6 /* SearchModel.swift */; };
+		54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B95E0429378D0B005389A6 /* Sequence+Extension.swift */; };
 		54C225B0291F3109003596BB /* Dongle-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54C225AF291F3109003596BB /* Dongle-Regular.ttf */; };
 		54CEEC19292C53E800C0D8CA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC18292C53E800C0D8CA /* SearchViewController.swift */; };
 		54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1A292C53F200C0D8CA /* SearchView.swift */; };
@@ -174,6 +176,8 @@
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		54ACF64A291D2B320002A121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54ACF650291D39220002A121 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
+		54B95E0229377F97005389A6 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
+		54B95E0429378D0B005389A6 /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
 		54C225AF291F3109003596BB /* Dongle-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dongle-Regular.ttf"; sourceTree = "<group>"; };
 		54CEEC18292C53E800C0D8CA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		54CEEC1A292C53F200C0D8CA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 				54ACF650291D39220002A121 /* Toast+Extension.swift */,
 				543D579B291E354F00481019 /* OKButton+Extension.swift */,
 				543F1FDF2921193900C31F8E /* Date+Extension.swift */,
+				54B95E0429378D0B005389A6 /* Sequence+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 				549868312918DFA9005DBF6E /* OnboardingSlide.swift */,
 				545AE79B291E608D000F73C3 /* User.swift */,
 				547DDFAC2931EF8000FD7818 /* MyQueueState.swift */,
+				54B95E0229377F97005389A6 /* SearchModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -610,7 +616,9 @@
 				5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */,
 				5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
+				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
+				54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */,
 				5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */,
 				5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */,
 				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,

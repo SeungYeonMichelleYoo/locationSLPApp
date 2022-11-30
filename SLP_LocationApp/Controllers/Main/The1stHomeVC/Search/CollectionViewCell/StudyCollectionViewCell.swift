@@ -37,7 +37,7 @@ class StudyCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(nearBtn)
                    
         nearBtn.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.equalToSuperview().inset(16)
             make.top.bottom.equalToSuperview().inset(8)
         }
     }

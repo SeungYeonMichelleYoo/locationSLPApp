@@ -9,6 +9,9 @@ import UIKit
 
 final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
+    var viewModel = HomeViewModel()
+    var lat: Double = 0.0
+    var long: Double = 0.0
     var mainView = SearchView()
     var headerLabel = ["지금 주변에는","내가 하고 싶은"]
     var recommendStudy: [String] = []
@@ -29,7 +32,55 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         
         configureTextField()
         configureCollectionView()
+        getstudyList()
     }
+    
+    func getstudyList() {
+        viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
+            print(statusCode)
+            switch statusCode {
+            case APIStatusCode.success.rawValue:
+                self.nearStudy = []
+                for opponent in searchModel!.fromQueueDB {
+//                    var opponentStudyList = opponent.studylist.split(separator: ", ")
+//                    opponentStudyList = opponentStudyList
+//                    for study in opponentStudyList {
+//                        print(study)
+//                        self.nearStudy.append(study)
+//                    }
+                }
+                for opponent in searchModel!.fromQueueDBRequested {
+                    print(opponent.studylist)
+                    self.nearStudy = self.nearStudy + opponent.studylist
+                }
+                for recomStudy in searchModel!.fromRecommend {
+                    self.nearStudy.append(recomStudy)
+                }
+                self.nearStudy = self.nearStudy.uniqued()
+                print(self.nearStudy)
+                self.mainView.collectionView.reloadData()
+                return
+            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            case APIStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.getstudyList()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case nil:
+                self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            default:
+                break
+            }
+        }
+    }
+    
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -80,19 +131,19 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StudyCollectionViewCell", for: indexPath) as! StudyCollectionViewCell
-            cell.nearBtn.setTitle("test", for: .normal)
+            cell.nearBtn.setTitle(nearStudy[indexPath.item], for: .normal)
+            cell.nearBtn.sizeToFit()
+            cell.nearBtn.frame.size = CGSize(width: cell.nearBtn.intrinsicContentSize.width, height: cell.nearBtn.intrinsicContentSize.height)
+            cell.frame.size = CGSize(width: cell.nearBtn.intrinsicContentSize.width + 20, height: cell.nearBtn.intrinsicContentSize.height)
             return cell
             
         case 1: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyStudyCollectionViewCell", for: indexPath) as! MyStudyCollectionViewCell
             cell.myBtn.setTitle(myStudy[indexPath.item], for: .normal)
             cell.myBtn.sizeToFit()
             cell.myBtn.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width, height: cell.myBtn.intrinsicContentSize.height)
-            print("hi first")
             cell.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width + 20, height: cell.myBtn.intrinsicContentSize.height)
-            print("indexpath \(indexPath.item) : \(cell.frame.width)")
-            print("indexpath \(indexPath.item) : \(cell.frame.minX)")
             return cell
-            // button label mother father baba mama zhu
+            // button label mother father cousin uncle
             // n 번째 버튼의 x: 직전 값의 x + 직전 값의 너비 + 여백
             //              현재 x + 현재 너비가 기기 사이즈보다 클 경우, 0으로 수정 후, y값을 직전 버튼의 y값 + 높이 + 줄간 여백
         default:
