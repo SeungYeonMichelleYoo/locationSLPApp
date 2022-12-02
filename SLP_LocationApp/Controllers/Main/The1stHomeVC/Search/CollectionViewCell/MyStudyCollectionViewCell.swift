@@ -24,6 +24,7 @@ class MyStudyCollectionViewCell: UICollectionViewCell {
         view.imageView?.contentMode = .scaleToFill
         view.titleLabel?.font =  UIFont.font(.Title4_R14)
         view.sizeToFit()
+        view.isUserInteractionEnabled = false
         return view
     }()
         
@@ -36,12 +37,17 @@ class MyStudyCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        myBtn.titleLabel?.font = nil
+    }
+    
     func cellSetting() {
         contentView.addSubview(myBtn)
        
         myBtn.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(8)
+            make.leading.equalToSuperview()
+            make.top.bottom.equalToSuperview()
         }
         
     }

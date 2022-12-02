@@ -12,8 +12,6 @@ class ReceivedRequestView: BaseView {
     lazy var mainTableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .singleLine
-        view.register(NameTableViewCell.self, forCellReuseIdentifier: "NameTableViewCell")
-        view.register(MyInfoTableViewCell.self, forCellReuseIdentifier: "MyInfoTableViewCell")
         return view
       }()
           

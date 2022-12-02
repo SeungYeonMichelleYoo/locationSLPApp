@@ -17,7 +17,7 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     var recommendStudy: [String] = []
     var nearStudy: [String] = []
     var myStudy: [String] = []
-//    var myStudyBtns = self.mainView.collectionView.MyStudyCollectionViewCell.myBtn
+    //    var myStudyBtns = self.mainView.collectionView.MyStudyCollectionViewCell.myBtn
     var newStudy: [String] = []
     let txtfield = UITextField(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.8, height: 35))
     
@@ -40,25 +40,25 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
             print(statusCode)
             switch statusCode {
             case APIStatusCode.success.rawValue:
-                self.nearStudy = []
                 for opponent in searchModel!.fromQueueDB {
-//                    var opponentStudyList = opponent.studylist.split(separator: ", ")
-//                    opponentStudyList = opponentStudyList
-//                    for study in opponentStudyList {
-//                        print(study)
-//                        self.nearStudy.append(study)
-//                    }
+                    //                    var opponentStudyList = opponent.studylist.split(separator: ", ")
+                    //                    opponentStudyList = opponentStudyList
+                    //                    for study in opponentStudyList {
+                    //                        print(study)
+                    //                        self.nearStudy.append(study)
+                    //                    }
                 }
                 for opponent in searchModel!.fromQueueDBRequested {
                     print(opponent.studylist)
                     self.nearStudy = self.nearStudy + opponent.studylist
                 }
                 for recomStudy in searchModel!.fromRecommend {
-                    self.nearStudy.append(recomStudy)
+                    self.recommendStudy.append(recomStudy)
                 }
+                self.nearStudy = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8"]
                 self.nearStudy = self.nearStudy.uniqued()
                 print(self.nearStudy)
-                self.mainView.collectionView.reloadData()
+                self.mainView.nearCollectionView.reloadData()
                 return
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
@@ -105,65 +105,105 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func configureCollectionView() {
-        mainView.collectionView.delegate = self
-        mainView.collectionView.dataSource = self
+        mainView.nearCollectionView.delegate = self
+        mainView.myCollectionView.delegate = self
+        mainView.nearCollectionView.dataSource = self
+        mainView.myCollectionView.dataSource = self
         
-        mainView.collectionView.register(StudyCollectionViewCell.self, forCellWithReuseIdentifier: "StudyCollectionViewCell")
-        mainView.collectionView.register(MyStudyCollectionViewCell.self, forCellWithReuseIdentifier: "MyStudyCollectionViewCell")
-        mainView.collectionView.register(HeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderReusableView")
+        mainView.nearCollectionView.register(StudyCollectionViewCell.self, forCellWithReuseIdentifier: "StudyCollectionViewCell")
+        mainView.myCollectionView.register(MyStudyCollectionViewCell.self, forCellWithReuseIdentifier: "MyStudyCollectionViewCell")
+        
+        
+        mainView.nearCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        mainView.myCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        if let flowLayout = mainView.nearCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
+        if let flowLayout = mainView.myCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
     }
 }
 
-extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 {
-            return nearStudy.count + recommendStudy.count
+        if collectionView == mainView.nearCollectionView {
+            return recommendStudy.count + nearStudy.count
         } else {
+            print("mine === \(section): \(myStudy.count)")
             return myStudy.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch indexPath.section {
-        case 0: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StudyCollectionViewCell", for: indexPath) as! StudyCollectionViewCell
-            cell.nearBtn.setTitle(nearStudy[indexPath.item], for: .normal)
-            cell.nearBtn.sizeToFit()
-            cell.nearBtn.frame.size = CGSize(width: cell.nearBtn.intrinsicContentSize.width, height: cell.nearBtn.intrinsicContentSize.height)
-            cell.frame.size = CGSize(width: cell.nearBtn.intrinsicContentSize.width + 20, height: cell.nearBtn.intrinsicContentSize.height)
-            return cell
+        
+        if collectionView == mainView.nearCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StudyCollectionViewCell", for: indexPath) as! StudyCollectionViewCell
             
-        case 1: let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyStudyCollectionViewCell", for: indexPath) as! MyStudyCollectionViewCell
-            cell.myBtn.setTitle(myStudy[indexPath.item], for: .normal)
-            cell.myBtn.sizeToFit()
-            cell.myBtn.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width, height: cell.myBtn.intrinsicContentSize.height)
-            cell.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width + 20, height: cell.myBtn.intrinsicContentSize.height)
+            if indexPath.item < recommendStudy.count {
+                cell.nearBtn.setTitle(recommendStudy[indexPath.item], for: .normal)
+                cell.nearBtn.sizeToFit()
+                cell.nearBtn.layer.borderWidth = 1.0
+                cell.nearBtn.layer.cornerRadius = 8
+                cell.nearBtn.layer.borderColor = Constants.BaseColor.error.cgColor
+                cell.nearBtn.configuration?.baseForegroundColor = Constants.BaseColor.error
+                
+            } else {
+                cell.nearBtn.setTitle(nearStudy[indexPath.item - recommendStudy.count], for: .normal)
+                cell.nearBtn.sizeToFit()
+                cell.nearBtn.layer.borderWidth = 0.0
+                cell.nearBtn.layer.cornerRadius = 8
+                cell.nearBtn.layer.borderColor = Constants.BaseColor.gray4.cgColor
+                cell.nearBtn.configuration?.baseForegroundColor = Constants.BaseColor.black
+                //            cell.myBtn.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width, height: cell.myBtn.intrinsicContentSize.height)
+                //            cell.frame.size = CGSize(width: cell.myBtn.intrinsicContentSize.width + 20, height: cell.myBtn.intrinsicContentSize.height)
+                // button label mother father cousin uncle
+                // n 번째 버튼의 x: 직전 값의 x + 직전 값의 너비 + 여백
+                //              현재 x + 현재 너비가 기기 사이즈보다 클 경우, 0으로 수정 후, y값을 직전 버튼의 y값 + 높이 + 줄간 여백
+            }
             return cell
-            // button label mother father cousin uncle
-            // n 번째 버튼의 x: 직전 값의 x + 직전 값의 너비 + 여백
-            //              현재 x + 현재 너비가 기기 사이즈보다 클 경우, 0으로 수정 후, y값을 직전 버튼의 y값 + 높이 + 줄간 여백
-        default:
-            return UICollectionViewCell()
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyStudyCollectionViewCell", for: indexPath) as! MyStudyCollectionViewCell
+            cell.myBtn.setTitle(myStudy[indexPath.item], for: .normal)
+            return cell
         }
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderReusableView", for: indexPath) as? HeaderReusableView {
-            sectionHeader.headerLabel.text = headerLabel[indexPath.section]
-            return sectionHeader
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if collectionView == mainView.nearCollectionView {
+            return CGSize(width: (indexPath.item < recommendStudy.count ? recommendStudy[indexPath.item] : nearStudy[indexPath.item - recommendStudy.count]).size(withAttributes: [NSAttributedString.Key.font : UIFont.font(.Title4_R14)]).width + 32 + 14, height: 32)
+        } else {
+            return CGSize(width: myStudy[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.font(.Title4_R14)]).width + 32 + 22, height: 32)
         }
-        return UICollectionReusableView()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: 50)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == mainView.nearCollectionView {
+            if myStudy.count < 8 {
+                if indexPath.item < recommendStudy.count {
+                    myStudy.append(recommendStudy[indexPath.item])
+                    recommendStudy.remove(at: indexPath.item)
+                } else {
+                    myStudy.append(nearStudy[indexPath.item - recommendStudy.count])
+                    nearStudy.remove(at: indexPath.item - recommendStudy.count)
+                }
+                
+                mainView.myCollectionView.reloadData()
+                mainView.nearCollectionView.reloadData()
+            } else {
+                showToast(message: "스터디를 더 이상 추가할 수 없습니다.")
+            }
+        } else {
+            print("myStudy count: \(myStudy.count), index: \(indexPath.item)")
+            myStudy.remove(at: indexPath.item)
+            mainView.myCollectionView.reloadData()
+        }
     }
 }
+
 
 extension SearchViewController {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -174,7 +214,7 @@ extension SearchViewController {
         if myStudy.count + words.count >= 8 {
             showToast(message: "스터디를 더 이상 추가할 수 없습니다.")
         }
-
+        
         for word in words {
             if word.count == 0 || (word.count) > 8 {
                 showToast(message: "최소 한 자 이상, 최대 8글자까지 작성 가능합니다")
@@ -190,7 +230,30 @@ extension SearchViewController {
         
         txtfield.resignFirstResponder()
         
-        mainView.collectionView.reloadData()
+        mainView.myCollectionView.reloadData()
         return true
+    }
+}
+
+
+class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
+    let cellSpacing: CGFloat = 10
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        self.minimumLineSpacing = 10.0
+        self.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        let attributes = super.layoutAttributesForElements(in: rect)
+        
+        var leftMargin = sectionInset.left
+        var maxY: CGFloat = -1.0
+        attributes?.forEach { layoutAttribute in
+            if layoutAttribute.frame.origin.y >= maxY {
+                leftMargin = sectionInset.left
+            }
+            layoutAttribute.frame.origin.x = leftMargin
+            leftMargin += layoutAttribute.frame.width + cellSpacing
+            maxY = max(layoutAttribute.frame.maxY, maxY)
+        }
+        return attributes
     }
 }

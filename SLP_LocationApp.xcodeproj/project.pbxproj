@@ -25,6 +25,7 @@
 		5442B7BC29320F93008F8623 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5442B7BB29320F93008F8623 /* Tabman */; };
 		5442B7BE29323111008F8623 /* APIStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B7BD29323111008F8623 /* APIStatusCode.swift */; };
 		5442C419292915F800A8A925 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442C418292915F800A8A925 /* ImageTableViewCell.swift */; };
+		544453CF293A0E3700D8E994 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544453CE293A0E3700D8E994 /* DynamicHeightCollectionView.swift */; };
 		5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A0292366C400728EC3 /* MyInfoViewController.swift */; };
 		5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A2292366CD00728EC3 /* MyInfoView.swift */; };
 		5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A429236B7C00728EC3 /* TabBarViewController.swift */; };
@@ -116,6 +117,7 @@
 		5442B7B829320EF8008F8623 /* FindTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTotalView.swift; sourceTree = "<group>"; };
 		5442B7BD29323111008F8623 /* APIStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusCode.swift; sourceTree = "<group>"; };
 		5442C418292915F800A8A925 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		544453CE293A0E3700D8E994 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
 		5444C0A0292366C400728EC3 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		5444C0A2292366CD00728EC3 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		5444C0A429236B7C00728EC3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 				54CEEC18292C53E800C0D8CA /* SearchViewController.swift */,
 				54CEEC1A292C53F200C0D8CA /* SearchView.swift */,
 				5456F6DE292F2AF90004A98E /* CollectionViewCell */,
+				544453CE293A0E3700D8E994 /* DynamicHeightCollectionView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				547DDFAB2931EDE300FD7818 /* HomeViewModel.swift in Sources */,
 				545AE7A3291E7811000F73C3 /* NoNetworkView.swift in Sources */,
 				545BEAFF291A485500CF861F /* MainMapView.swift in Sources */,
+				544453CF293A0E3700D8E994 /* DynamicHeightCollectionView.swift in Sources */,
 				5461B4CE2918C5A60000D726 /* EmailView.swift in Sources */,
 				5442B7B729320EE5008F8623 /* FindTotalViewController.swift in Sources */,
 				547DDFAD2931EF8000FD7818 /* MyQueueState.swift in Sources */,

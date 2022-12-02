@@ -21,12 +21,19 @@ class FindTotalViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         self.dataSource = self
         
         // Create bar
         let bar = TMBar.ButtonBar()
         bar.layout.transitionStyle = .snap // Customize
+        bar.layout.contentMode = .fit
+        
+        bar.buttons.customize { (button) in
+            button.tintColor = Constants.BaseColor.gray6
+            button.selectedTintColor = Constants.BaseColor.green
+        }
+        bar.indicator.tintColor = Constants.BaseColor.green
         
         // Add to view
         addBar(bar, dataSource: self, at: .top)

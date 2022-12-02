@@ -17,8 +17,9 @@ class StudyCollectionViewCell: UICollectionViewCell {
         config.background.cornerRadius = 8
         config.background.strokeColor = Constants.BaseColor.gray4
         config.background.strokeWidth = 1
-        config.contentInsets = NSDirectionalEdgeInsets.init(top: 8, leading: 32, bottom: 8, trailing: 32)
+        config.contentInsets = NSDirectionalEdgeInsets.init(top: 5, leading: 16, bottom: 5, trailing: 16)
         view.configuration = config
+        view.isUserInteractionEnabled = false
         view.titleLabel?.font =  UIFont.font(.Title4_R14)
         view.sizeToFit()
         return view
@@ -33,12 +34,17 @@ class StudyCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nearBtn.titleLabel?.font = nil
+    }
+    
     func cellSetting() {
         contentView.addSubview(nearBtn)
                    
         nearBtn.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(8)
+            make.leading.equalToSuperview()
+            make.top.bottom.equalToSuperview()
         }
     }
 }
