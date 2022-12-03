@@ -33,6 +33,51 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         configureTextField()
         configureCollectionView()
         getstudyList()
+        
+        mainView.searchBtn.addTarget(self, action: #selector(searchBtnClicked), for: .touchUpInside)
+    }
+    
+    @objc func searchBtnClicked() {
+        getNearPeople()
+    }
+    
+    func getNearPeople() {
+        viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
+            print(statusCode)
+            switch statusCode {
+            case APIStatusCode.success.rawValue:
+                for opponent in searchModel!.fromQueueDB {
+                    print(opponent)
+                    if opponent.nick.count == 0 {
+                        let vc = NearViewController()
+                        vc.mainView.mainTableView.backgroundView = EmptyBigView()
+                        self.transition(vc,transitionStyle: .push)
+                    } else {
+                        let vc = FindTotalViewController()
+                        self.transition(vc,transitionStyle: .push)
+                    }
+                }
+                self.mainView.nearCollectionView.reloadData()
+                return
+            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            case APIStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.getNearPeople()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case nil:
+                self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            default:
+                break
+            }
+        }
     }
     
     func getstudyList() {
@@ -41,14 +86,6 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
             switch statusCode {
             case APIStatusCode.success.rawValue:
                 for opponent in searchModel!.fromQueueDB {
-                    //                    var opponentStudyList = opponent.studylist.split(separator: ", ")
-                    //                    opponentStudyList = opponentStudyList
-                    //                    for study in opponentStudyList {
-                    //                        print(study)
-                    //                        self.nearStudy.append(study)
-                    //                    }
-                }
-                for opponent in searchModel!.fromQueueDBRequested {
                     print(opponent.studylist)
                     self.nearStudy = self.nearStudy + opponent.studylist
                 }

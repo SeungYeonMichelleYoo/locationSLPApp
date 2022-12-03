@@ -8,8 +8,6 @@ import UIKit
 import SnapKit
 
 class FindTotalView: BaseView {
-
-   
           
     override init(frame: CGRect) {
         super.init(frame: frame)

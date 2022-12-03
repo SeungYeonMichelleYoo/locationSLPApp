@@ -87,6 +87,7 @@
 		547DDFAD2931EF8000FD7818 /* MyQueueState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFAC2931EF8000FD7818 /* MyQueueState.swift */; };
 		5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */; };
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
+		54ACA0A4293B1635001E4252 /* EmptyBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACA0A3293B1635001E4252 /* EmptyBigView.swift */; };
 		54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54ACF64A291D2B320002A121 /* GoogleService-Info.plist */; };
 		54ACF64E291D361A0002A121 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 54ACF64D291D361A0002A121 /* Toast */; };
 		54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACF650291D39220002A121 /* Toast+Extension.swift */; };
@@ -176,6 +177,7 @@
 		547DDFAC2931EF8000FD7818 /* MyQueueState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQueueState.swift; sourceTree = "<group>"; };
 		5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
+		54ACA0A3293B1635001E4252 /* EmptyBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBigView.swift; sourceTree = "<group>"; };
 		54ACF64A291D2B320002A121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54ACF650291D39220002A121 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
 		54B95E0229377F97005389A6 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 				54CEEC1E292C543C00C0D8CA /* NearView.swift */,
 				5442B7B229320DE2008F8623 /* ReceivedRequestViewController.swift */,
 				5442B7B429320DF1008F8623 /* ReceivedRequestView.swift */,
+				54ACA0A3293B1635001E4252 /* EmptyBigView.swift */,
 			);
 			path = Near;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				5444C0BB292393A600728EC3 /* DetailProfileViewController.swift in Sources */,
 				5461B4C82918C5660000D726 /* BirthViewController.swift in Sources */,
 				543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */,
+				54ACA0A4293B1635001E4252 /* EmptyBigView.swift in Sources */,
 				54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */,
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,
 				5461B4C62918C5430000D726 /* NickNameView.swift in Sources */,

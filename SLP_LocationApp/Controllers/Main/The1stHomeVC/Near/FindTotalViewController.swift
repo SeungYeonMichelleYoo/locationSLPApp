@@ -32,6 +32,7 @@ class FindTotalViewController: TabmanViewController {
         bar.buttons.customize { (button) in
             button.tintColor = Constants.BaseColor.gray6
             button.selectedTintColor = Constants.BaseColor.green
+            button.font = UIFont.font(.Title3_M14)
         }
         bar.indicator.tintColor = Constants.BaseColor.green
         
@@ -43,7 +44,11 @@ class FindTotalViewController: TabmanViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopSearchBtnClicked))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)] //적용 안됨????
+        
+        navigationItem.title = "새싹 찾기"
     }
+    
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
