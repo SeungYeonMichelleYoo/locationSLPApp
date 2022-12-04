@@ -11,7 +11,7 @@ class NearView: BaseView {
 
     lazy var mainTableView: UITableView = {
         let view = UITableView()
-        view.separatorStyle = .singleLine
+        view.separatorStyle = .none
         return view
       }()
               

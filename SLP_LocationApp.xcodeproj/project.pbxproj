@@ -12,6 +12,7 @@
 		5418D548291BB54900BCEF30 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */; };
 		5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418D54B291BCAE700BCEF30 /* String+Extension.swift */; };
 		542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 542FAEF4291BFBA800E71C87 /* AnyFormatKit */; };
+		5434ACDD293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434ACDC293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift */; };
 		54360A38292259AD004B2CBA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A37292259AD004B2CBA /* FirebaseAuth */; };
 		54360A3A292259AD004B2CBA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A39292259AD004B2CBA /* FirebaseMessaging */; };
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
@@ -37,6 +38,7 @@
 		5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B62923820D00728EC3 /* NameTableViewCell.swift */; };
 		5444C0BB292393A600728EC3 /* DetailProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */; };
 		5444C0BD292393B600728EC3 /* DetailProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BC292393B600728EC3 /* DetailProfileView.swift */; };
+		544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */; };
 		54523736292B372D002B8255 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 54523735292B372D002B8255 /* MultiSlider */; };
 		54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523737292B6680002B8255 /* WithdrawViewController.swift */; };
 		5452373A292B6918002B8255 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523739292B6918002B8255 /* WithdrawView.swift */; };
@@ -108,6 +110,7 @@
 		5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		5418D54B291BCAE700BCEF30 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		5434ACDC293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandStudyCollectionViewCell.swift; sourceTree = "<group>"; };
 		543CBF09291947D300563856 /* Transition+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+Extension.swift"; sourceTree = "<group>"; };
 		543D579B291E354F00481019 /* OKButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OKButton+Extension.swift"; sourceTree = "<group>"; };
 		543F042C291FBE5C0029F088 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		5444C0B62923820D00728EC3 /* NameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
 		5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
 		5444C0BC292393B600728EC3 /* DetailProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileView.swift; sourceTree = "<group>"; };
+		544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPeopleTableViewCell.swift; sourceTree = "<group>"; };
 		54523737292B6680002B8255 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
 		54523739292B6918002B8255 /* WithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
 		54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -472,6 +476,8 @@
 				5442B7B229320DE2008F8623 /* ReceivedRequestViewController.swift */,
 				5442B7B429320DF1008F8623 /* ReceivedRequestView.swift */,
 				54ACA0A3293B1635001E4252 /* EmptyBigView.swift */,
+				544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */,
+				5434ACDC293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift */,
 			);
 			path = Near;
 			sourceTree = "<group>";
@@ -621,6 +627,7 @@
 				5442B7B529320DF1008F8623 /* ReceivedRequestView.swift in Sources */,
 				5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */,
 				5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */,
+				544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
@@ -686,6 +693,7 @@
 				5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */,
 				5442B7BE29323111008F8623 /* APIStatusCode.swift in Sources */,
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
+				5434ACDD293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
 				54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */,
 			);

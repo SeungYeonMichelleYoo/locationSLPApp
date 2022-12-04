@@ -10,8 +10,8 @@ import UIKit
 final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     var viewModel = HomeViewModel()
-    var lat: Double = 0.0
-    var long: Double = 0.0
+    var lat: Double = 37.517819364682694
+    var long: Double = 126.88647317074734
     var mainView = SearchView()
     var headerLabel = ["지금 주변에는","내가 하고 싶은"]
     var recommendStudy: [String] = []
@@ -35,6 +35,8 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         getstudyList()
         
         mainView.searchBtn.addTarget(self, action: #selector(searchBtnClicked), for: .touchUpInside)
+        print("lat: \(lat)")
+        print(long)
     }
     
     @objc func searchBtnClicked() {
@@ -43,21 +45,16 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     func getNearPeople() {
         viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
-            print(statusCode)
+//            print(statusCode)
             switch statusCode {
             case APIStatusCode.success.rawValue:
-                for opponent in searchModel!.fromQueueDB {
-                    print(opponent)
-                    if opponent.nick.count == 0 {
-                        let vc = NearViewController()
-                        vc.mainView.mainTableView.backgroundView = EmptyBigView()
-                        self.transition(vc,transitionStyle: .push)
-                    } else {
-                        let vc = FindTotalViewController()
-                        self.transition(vc,transitionStyle: .push)
-                    }
-                }
-                self.mainView.nearCollectionView.reloadData()
+//                for opponent in searchModel!.fromQueueDB {
+//                    print(opponent)
+//                }
+                let vc = FindTotalViewController()
+                vc.opponentList = searchModel!.fromQueueDB
+                print("searchview - opponentList count: \(searchModel!.fromQueueDB.count)")
+                self.transition(vc, transitionStyle: .push)
                 return
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")

@@ -13,6 +13,9 @@ class FindTotalViewController: TabmanViewController {
     private var viewControllers = [NearViewController(), ReceivedRequestViewController()]
     private var titleList = ["새싹 찾기", "받은 요청"]
     
+    var nearCount: Int = 0
+    var opponentList: [OpponentModel] = []
+    
     var mainView = FindTotalView()
     
     override func loadView() {
@@ -47,6 +50,14 @@ class FindTotalViewController: TabmanViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)] //적용 안됨????
         
         navigationItem.title = "새싹 찾기"
+        
+        scrollToPage(.at(index: 0), animated: false)
+        if opponentList.count == 0 {
+            (viewControllers[0] as! NearViewController).mainView.mainTableView.backgroundView = EmptyBigView()
+        } else {
+            (viewControllers[0] as! NearViewController).opponentList = opponentList
+            (viewControllers[0] as! NearViewController).toggleBtns(hidden: true)
+        }
     }
     
     @objc func backBtnClicked() {
