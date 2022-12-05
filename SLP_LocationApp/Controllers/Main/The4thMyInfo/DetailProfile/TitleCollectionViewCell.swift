@@ -33,10 +33,7 @@ class TitleCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleBtn)
         
         titleBtn.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top)
-            make.leading.equalTo(contentView.snp.leading)
-            make.height.equalTo(32)
-            make.width.equalTo(100)
+            make.edges.equalToSuperview()
         }
     }
 }

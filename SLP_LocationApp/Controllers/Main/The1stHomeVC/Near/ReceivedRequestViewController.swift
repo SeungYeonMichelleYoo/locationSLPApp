@@ -10,6 +10,7 @@ import UIKit
 class ReceivedRequestViewController: BaseViewController {
     
     var mainView = ReceivedRequestView()
+    var receivedList: [OpponentModel] = []
  
     override func loadView() {
         self.view = mainView
@@ -19,4 +20,8 @@ class ReceivedRequestViewController: BaseViewController {
         super.viewDidLoad()
     }
   
+    func toggleBtns(hidden: Bool) {
+        mainView.refreshBtn.isHidden = hidden
+        mainView.changeBtn.isHidden = hidden
+    }
 }

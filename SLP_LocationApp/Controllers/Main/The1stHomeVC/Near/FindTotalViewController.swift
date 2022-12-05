@@ -15,6 +15,7 @@ class FindTotalViewController: TabmanViewController {
     
     var nearCount: Int = 0
     var opponentList: [OpponentModel] = []
+    var receivedList: [OpponentModel] = []
     
     var mainView = FindTotalView()
     
@@ -51,12 +52,23 @@ class FindTotalViewController: TabmanViewController {
         
         navigationItem.title = "새싹 찾기"
         
+        //1번째 탭
         scrollToPage(.at(index: 0), animated: false)
         if opponentList.count == 0 {
             (viewControllers[0] as! NearViewController).mainView.mainTableView.backgroundView = EmptyBigView()
         } else {
             (viewControllers[0] as! NearViewController).opponentList = opponentList
             (viewControllers[0] as! NearViewController).toggleBtns(hidden: true)
+        }
+        
+        //2번째 탭 (받은요청)
+        scrollToPage(.at(index: 1), animated: false)
+        if receivedList.count == 0 {
+            (viewControllers[1] as! ReceivedRequestViewController).mainView.mainTableView.backgroundView = EmptyReceivedBigView()
+            // 이걸 EmptyBigView로 쓰고 mainLabel만 바꾸면 새파일을 만들필요가 없어지는데..... ??
+        } else {
+            (viewControllers[1] as! ReceivedRequestViewController).receivedList = receivedList
+            (viewControllers[1] as! ReceivedRequestViewController).toggleBtns(hidden: true)
         }
     }
     

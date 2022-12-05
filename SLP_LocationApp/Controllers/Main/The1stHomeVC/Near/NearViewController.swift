@@ -54,6 +54,18 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
         cell.studyCollectionView.register(DemandStudyCollectionViewCell.self, forCellWithReuseIdentifier: "DemandStudyCollectionViewCell")
         print("index: \(indexPath.row) - \(opponentList[indexPath.row].nick) - \(opponentList[indexPath.row].studylist.count)")
+        
+        cell.studyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
+        
+        if let flowLayout = cell.studyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            do {
+                //            print(UICollectionViewFlowLayout.automaticSize)
+                //            print(flowLayout.estimatedItemSize)
+                //                try flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            } catch  {
+            }
+        }
+        
         return cell
     }
     
@@ -97,22 +109,20 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if index < 0 {
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TitleCollectionViewCell", for: indexPath) as? TitleCollectionViewCell else {
-                           return UICollectionViewCell()
-                       }
-                       print("popo")
-                       cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
-                       
-                       return cell
+                return UICollectionViewCell()
+            }
+            
+            cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
+            
+            return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DemandStudyCollectionViewCell", for: indexPath) as? DemandStudyCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
-            print("goog")
             cell.titleBtn.setTitle("\(opponentList[collectionView.tag].studylist[indexPath.item])", for: .normal)
             return cell
             
         }
     }
 }
-

@@ -45,15 +45,13 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     func getNearPeople() {
         viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
-//            print(statusCode)
             switch statusCode {
             case APIStatusCode.success.rawValue:
-//                for opponent in searchModel!.fromQueueDB {
-//                    print(opponent)
-//                }
                 let vc = FindTotalViewController()
                 vc.opponentList = searchModel!.fromQueueDB
+                vc.receivedList = searchModel!.fromQueueDBRequested
                 print("searchview - opponentList count: \(searchModel!.fromQueueDB.count)")
+                print("searchview - receivedList count: \(searchModel!.fromQueueDBRequested.count)")
                 self.transition(vc, transitionStyle: .push)
                 return
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
@@ -266,28 +264,5 @@ extension SearchViewController {
         
         mainView.myCollectionView.reloadData()
         return true
-    }
-}
-
-
-class CollectionViewLeftAlignFlowLayout: UICollectionViewFlowLayout {
-    let cellSpacing: CGFloat = 10
-    
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        self.minimumLineSpacing = 10.0
-        self.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-        let attributes = super.layoutAttributesForElements(in: rect)
-        
-        var leftMargin = sectionInset.left
-        var maxY: CGFloat = -1.0
-        attributes?.forEach { layoutAttribute in
-            if layoutAttribute.frame.origin.y >= maxY {
-                leftMargin = sectionInset.left
-            }
-            layoutAttribute.frame.origin.x = leftMargin
-            leftMargin += layoutAttribute.frame.width + cellSpacing
-            maxY = max(layoutAttribute.frame.maxY, maxY)
-        }
-        return attributes
     }
 }

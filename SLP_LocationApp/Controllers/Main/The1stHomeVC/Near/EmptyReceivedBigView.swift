@@ -1,13 +1,13 @@
 //
-//  EmptyBigView.swift
+//  EmptyReceivedBigView.swift
 //  SLP_LocationApp
 //
-//  Created by SeungYeon Yoo on 2022/12/03.
+//  Created by SeungYeon Yoo on 2022/12/05.
 //
 import UIKit
 import SnapKit
 
-class EmptyBigView: BaseView {
+class EmptyReceivedBigView: BaseView {
     
     lazy var graySesac: UIImageView = {
         let view = UIImageView()
@@ -19,7 +19,7 @@ class EmptyBigView: BaseView {
     lazy var mainLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.Display1_R20)
-        label.text = "아쉽게도 주변에 새싹이 없어요ㅠ"
+        label.text = "아직 받은 요청이 없어요ㅠ"
         return label
     }()
     

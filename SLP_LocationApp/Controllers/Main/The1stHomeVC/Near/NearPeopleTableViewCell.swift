@@ -18,6 +18,17 @@ class NearPeopleTableViewCell: UITableViewCell {
         return view
     }()
     
+    lazy var requestBtn: UIButton = {
+        let view = UIButton()
+        view.backgroundColor = Constants.BaseColor.error
+        view.tintColor = .white
+        view.layer.cornerRadius = 8
+        view.titleLabel?.font =  UIFont.font(.Title3_M14)
+        view.setTitle("요청하기", for: .normal)
+        view.sizeToFit()
+        return view
+    }()
+    
     //MARK: - totalStackView
     lazy var totalStackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [grayView])
@@ -93,10 +104,17 @@ class NearPeopleTableViewCell: UITableViewCell {
         return label
     }()
     
-    let studyCollectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: imageCollectionViewLayout())
-        view.register(DemandStudyCollectionViewCell.self, forCellWithReuseIdentifier: "DemandStudyCollectionViewCell")
-        return view
+    let studyCollectionView: DynamicHeightCollectionView = {
+        var layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        layout.sectionInset = .zero
+        layout.scrollDirection = .horizontal
+    
+        let cv = DynamicHeightCollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(DemandStudyCollectionViewCell.self, forCellWithReuseIdentifier: "DemandStudyCollectionViewCell")
+        cv.isScrollEnabled = false
+        return cv
     }()
     
     lazy var reviewLabel: UILabel = {
@@ -130,6 +148,8 @@ class NearPeopleTableViewCell: UITableViewCell {
         [image, totalStackView].forEach {
             contentView.addSubview($0)
         }
+        
+        image.addSubview(requestBtn)
                 
         [nickView, expandableView].forEach {
             grayView.addSubview($0)
@@ -146,6 +166,12 @@ class NearPeopleTableViewCell: UITableViewCell {
         image.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(200)
+        }
+        
+        requestBtn.snp.makeConstraints { make in
+            make.top.trailing.equalToSuperview().inset(12)
+            make.width.equalTo(80)
+            make.height.equalTo(40)
         }
         
         totalStackView.snp.makeConstraints { make in
@@ -186,8 +212,8 @@ class NearPeopleTableViewCell: UITableViewCell {
                 
         titleStackView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview().inset(32)
-            make.height.equalTo(104)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(112)
         }
         
         collectionView.snp.makeConstraints { make in
@@ -203,7 +229,6 @@ class NearPeopleTableViewCell: UITableViewCell {
             make.top.equalTo(studyLabel.snp.bottom).offset(16)
             make.leading.equalTo(expandableView.snp.leading).inset(16)
             make.trailing.equalTo(expandableView.snp.trailing).inset(16)
-            make.height.equalTo(150)
         }
         
         reviewLabel.snp.makeConstraints { make in
@@ -220,11 +245,11 @@ class NearPeopleTableViewCell: UITableViewCell {
     
     static func imageCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 4
-        layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
         
-        let itemSpacing : CGFloat = 4
-        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.33
+        let itemSpacing : CGFloat = 8
+        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.43
         let myHeight : CGFloat = 32
         
         layout.scrollDirection = .vertical
@@ -233,4 +258,20 @@ class NearPeopleTableViewCell: UITableViewCell {
         layout.itemSize = CGSize(width: myWidth, height: myHeight)
         return layout
     }
+    
+//    static func horizontalCollectionViewLayout() -> UICollectionViewFlowLayout {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.minimumLineSpacing = 4
+//        layout.minimumInteritemSpacing = 4
+//
+//        let itemSpacing : CGFloat = 4
+//        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.3
+//        let myHeight : CGFloat = 32
+//
+//        layout.scrollDirection = .horizontal
+//        layout.sectionInset = UIEdgeInsets.zero
+//
+//        layout.itemSize = CGSize(width: myWidth, height: myHeight)
+//        return layout
+//    }
 }
