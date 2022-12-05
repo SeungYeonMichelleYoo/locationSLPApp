@@ -85,6 +85,8 @@
 		547264B42923D1E00010953B /* ExpandableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547264B32923D1E00010953B /* ExpandableTableViewCell.swift */; };
 		5473C2C8293DD40800EBF11B /* NearPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5473C2C7293DD40800EBF11B /* NearPopUpView.swift */; };
 		5473C2CA293DD5E000EBF11B /* NearPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5473C2C9293DD5E000EBF11B /* NearPopUpViewController.swift */; };
+		5473C2CC293E04F500EBF11B /* YourChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5473C2CB293E04F500EBF11B /* YourChatTableViewCell.swift */; };
+		5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5473C2CD293E29E100EBF11B /* MyChatTableViewCell.swift */; };
 		547DDFA52931E88700FD7818 /* ChattingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFA42931E88700FD7818 /* ChattingViewController.swift */; };
 		547DDFA72931E8A600FD7818 /* ChattingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFA62931E8A600FD7818 /* ChattingView.swift */; };
 		547DDFA92931ECF700FD7818 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFA82931ECF700FD7818 /* HomeAPI.swift */; };
@@ -180,6 +182,8 @@
 		547264B32923D1E00010953B /* ExpandableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableTableViewCell.swift; sourceTree = "<group>"; };
 		5473C2C7293DD40800EBF11B /* NearPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPopUpView.swift; sourceTree = "<group>"; };
 		5473C2C9293DD5E000EBF11B /* NearPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPopUpViewController.swift; sourceTree = "<group>"; };
+		5473C2CB293E04F500EBF11B /* YourChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourChatTableViewCell.swift; sourceTree = "<group>"; };
+		5473C2CD293E29E100EBF11B /* MyChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChatTableViewCell.swift; sourceTree = "<group>"; };
 		547DDFA42931E88700FD7818 /* ChattingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingViewController.swift; sourceTree = "<group>"; };
 		547DDFA62931E8A600FD7818 /* ChattingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingView.swift; sourceTree = "<group>"; };
 		547DDFA82931ECF700FD7818 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
@@ -496,6 +500,8 @@
 			children = (
 				547DDFA42931E88700FD7818 /* ChattingViewController.swift */,
 				547DDFA62931E8A600FD7818 /* ChattingView.swift */,
+				5473C2CB293E04F500EBF11B /* YourChatTableViewCell.swift */,
+				5473C2CD293E29E100EBF11B /* MyChatTableViewCell.swift */,
 			);
 			path = Chatting;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
+				5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
 				54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */,
 				5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */,
@@ -681,6 +688,7 @@
 				5442B7B329320DE2008F8623 /* ReceivedRequestViewController.swift in Sources */,
 				545AE7A1291E77DC000F73C3 /* NoNetworkViewController.swift in Sources */,
 				5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */,
+				5473C2CC293E04F500EBF11B /* YourChatTableViewCell.swift in Sources */,
 				5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */,
 				5461B4C42918C5360000D726 /* NicknameViewController.swift in Sources */,
 				54CEEC1D292C543100C0D8CA /* NearViewController.swift in Sources */,

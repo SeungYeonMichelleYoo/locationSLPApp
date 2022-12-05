@@ -7,7 +7,13 @@
 import UIKit
 import SnapKit
 
+protocol NearPeopleTableDelegate: AnyObject {
+    func requestBtnTapped()
+}
+
 class NearPeopleTableViewCell: UITableViewCell {
+    
+    var cellDelegate: NearPeopleTableDelegate?
     
     lazy var image: UIImageView = {
         let view = UIImageView()
@@ -21,6 +27,7 @@ class NearPeopleTableViewCell: UITableViewCell {
     lazy var requestBtn: UIButton = {
         let view = UIButton()
         view.backgroundColor = Constants.BaseColor.error
+        view.isUserInteractionEnabled = true
         view.tintColor = .white
         view.layer.cornerRadius = 8
         view.titleLabel?.font =  UIFont.font(.Title3_M14)
@@ -137,7 +144,11 @@ class NearPeopleTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
         layout()
+        self.requestBtn.addTarget(self, action: #selector(requestBtnClicked), for: .touchUpInside)
     }
+    @objc func requestBtnClicked() {
+            cellDelegate?.requestBtnTapped()
+        }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -145,11 +156,10 @@ class NearPeopleTableViewCell: UITableViewCell {
     
     private func layout() {
         
-        [image, totalStackView].forEach {
+        [image, requestBtn, totalStackView].forEach {
             contentView.addSubview($0)
         }
-        
-        image.addSubview(requestBtn)
+
                 
         [nickView, expandableView].forEach {
             grayView.addSubview($0)
@@ -169,7 +179,8 @@ class NearPeopleTableViewCell: UITableViewCell {
         }
         
         requestBtn.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview().inset(12)
+            make.top.equalTo(image.snp.top).inset(12)
+            make.trailing.equalTo(image.snp.trailing).inset(12)
             make.width.equalTo(80)
             make.height.equalTo(40)
         }

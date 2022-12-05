@@ -38,6 +38,7 @@ class NearPopUpView: BaseView {
     lazy var detailLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
+        label.textAlignment = .center
         label.text = "상대방이 요청을 수락하면\n 채팅방에서 대화를 나눌 수 있어요"
         label.font = UIFont.font(.Title4_R14)
         label.textColor = Constants.BaseColor.gray7

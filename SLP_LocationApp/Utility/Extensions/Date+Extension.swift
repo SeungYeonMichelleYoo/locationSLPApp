@@ -31,4 +31,16 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return formatter.string(from: self)
     }
+    
+    func getMonthDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M월 dd일 E요일"
+        return formatter.string(from: self)
+    }
+    
+    func getTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: self)
+    }
 }

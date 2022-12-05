@@ -61,8 +61,8 @@ class FindTotalViewController: TabmanViewController {
             (viewControllers[0] as! NearViewController).toggleBtns(hidden: true)
         }
         
-        //2번째 탭 (받은요청)
-        scrollToPage(.at(index: 1), animated: false)
+        print("receivedList-------\(receivedList.count)")
+        
         if receivedList.count == 0 {
             var vc = EmptyBigView()
             vc.mainLabel.text = "아직 받은 요청이 없어요ㅠ"

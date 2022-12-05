@@ -40,6 +40,7 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearPeopleTableViewCell", for: indexPath) as! NearPeopleTableViewCell
+        cell.cellDelegate = self
         
         cell.nickLabel.text = opponentList[indexPath.row].nick
         cell.nickView.addGestureRecognizer(getPressGesture())
@@ -60,13 +61,10 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         cell.studyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         
         if let flowLayout = cell.studyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            do {
 //                            print(UICollectionViewFlowLayout.automaticSize)
 //                            print(flowLayout.estimatedItemSize)
-//                                try
+
 //            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-//            } catch  {
-//            }
         }
         cell.studyCollectionView.reloadData()
         return cell
@@ -127,5 +125,12 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return cell
             
         }
+    }
+}
+extension NearViewController: NearPeopleTableDelegate {
+    func requestBtnTapped() {
+        print("빨강색 요청하기 버튼 클릭됨")
+        let vc = NearPopUpViewController()
+        self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }

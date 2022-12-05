@@ -10,8 +10,6 @@ final class NearPopUpViewController: BaseViewController {
     
     var mainView = NearPopUpView()
     
-    var viewModel = UserViewModel()
-    
     override func loadView() {
         self.view = mainView
     }
