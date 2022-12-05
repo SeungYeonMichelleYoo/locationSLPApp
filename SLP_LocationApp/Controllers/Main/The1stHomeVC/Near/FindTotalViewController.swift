@@ -64,8 +64,9 @@ class FindTotalViewController: TabmanViewController {
         //2번째 탭 (받은요청)
         scrollToPage(.at(index: 1), animated: false)
         if receivedList.count == 0 {
-            (viewControllers[1] as! ReceivedRequestViewController).mainView.mainTableView.backgroundView = EmptyReceivedBigView()
-            // 이걸 EmptyBigView로 쓰고 mainLabel만 바꾸면 새파일을 만들필요가 없어지는데..... ??
+            var vc = EmptyBigView()
+            vc.mainLabel.text = "아직 받은 요청이 없어요ㅠ"
+            (viewControllers[1] as! ReceivedRequestViewController).mainView.mainTableView.backgroundView = vc
         } else {
             (viewControllers[1] as! ReceivedRequestViewController).receivedList = receivedList
             (viewControllers[1] as! ReceivedRequestViewController).toggleBtns(hidden: true)

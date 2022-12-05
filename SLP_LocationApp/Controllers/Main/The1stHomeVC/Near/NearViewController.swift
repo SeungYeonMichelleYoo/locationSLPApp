@@ -45,9 +45,11 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         cell.nickView.addGestureRecognizer(getPressGesture())
         cell.nickView.tag = indexPath.row
         cell.nickView.isUserInteractionEnabled = true
+        
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         cell.collectionView.tag = -1 - indexPath.row
+        
         cell.studyCollectionView.delegate = self
         cell.studyCollectionView.dataSource = self
         cell.studyCollectionView.tag = indexPath.row
@@ -58,14 +60,15 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         cell.studyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         
         if let flowLayout = cell.studyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            do {
-                //            print(UICollectionViewFlowLayout.automaticSize)
-                //            print(flowLayout.estimatedItemSize)
-                //                try flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-            } catch  {
-            }
+//            do {
+//                            print(UICollectionViewFlowLayout.automaticSize)
+//                            print(flowLayout.estimatedItemSize)
+//                                try
+//            flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+//            } catch  {
+//            }
         }
-        
+        cell.studyCollectionView.reloadData()
         return cell
     }
     
