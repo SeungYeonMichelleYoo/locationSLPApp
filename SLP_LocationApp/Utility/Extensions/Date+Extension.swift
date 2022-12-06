@@ -38,9 +38,34 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    func getTime() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        return formatter.string(from: self)
+    //MARK: - 채팅 날짜
+    //MARK: - 오늘/ 과거날짜
+    func getChatDateFormat(memodate: Date) -> String {
+        if memodate.isInSameDay(as: Date()) {
+            return getTodayDate()
+        } else {
+            return otherDate(memodate: memodate)
+        }
     }
+    
+    //MARK: - 오늘
+    func getTodayDate() -> String {
+        return getFormatter(format: "HH:mm").string(from: Date())
+    }
+    
+    //MARK: - 과거
+    func otherDate(memodate: Date) -> String {
+        return getFormatter(format: "MM/dd a HH:mm").string(from: memodate)
+    }
+    
+    func getFormatter(format: String) -> DateFormatter {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = format
+        return formatter
+    }
+}
+
+extension Date {
+    func isInSameDay(as date: Date) -> Bool { Calendar.current.isDate(self, inSameDayAs: date) }
 }

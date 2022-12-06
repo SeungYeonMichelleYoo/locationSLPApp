@@ -5,6 +5,7 @@
 //  Created by SeungYeon Yoo on 2022/11/26.
 //
 import UIKit
+import SocketIO
 
 class ChattingViewController: BaseViewController {
     
@@ -19,18 +20,26 @@ class ChattingViewController: BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(moreBtnClicked))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
-        setupTableview()
+        configureTableView()
+        
+        //on sesac으로 받은 이벤트를 처리하기 위한 Notification Observer (SocketIOManager의 이벤트 수신에서 달은 NSnotificationcenter 받아오기)
+        NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
+        
+        mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
+    }
+    @objc func sendBtnClicked() {
+        if mainView.textField.text!.count >= 1 {
+            postChat(text: mainView.textField.text ?? "")
+        }
     }
     
-    func setupTableview() {
-        mainView.mainTableView.delegate = self
-        mainView.mainTableView.dataSource = self
+    @objc func getMessage(notification: NSNotification) {
+        
     }
-    
+        
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -38,8 +47,22 @@ class ChattingViewController: BaseViewController {
     @objc func moreBtnClicked() {
         
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        SocketIOManager.shared.closeConnection()
+    }
 }
+
 extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func configureTableView() {
+        mainView.mainTableView.delegate = self
+        mainView.mainTableView.dataSource = self
+        mainView.mainTableView.allowsSelection = false
+        mainView.mainTableView.separatorStyle = .none
+        mainView.mainTableView.rowHeight = UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -56,4 +79,15 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+}
+
+
+extension ChattingViewController {
+    //채팅 가져오기
+    private func fetchChats() {
+    }
+    
+    //채팅 보내기
+    private func postChat(text: String) {
+    }
 }

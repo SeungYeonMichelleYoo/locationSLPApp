@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5408F2E1293ED37B0035E108 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 5408F2E0293ED37B0035E108 /* SocketIO */; };
+		5408F2E3293ED6110035E108 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5408F2E2293ED6110035E108 /* SocketIOManager.swift */; };
+		5408F2E5293EEE2A0035E108 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5408F2E4293EEE2A0035E108 /* Chat.swift */; };
 		5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5418D542291BAF3E00BCEF30 /* Font+Extension.swift */; };
 		5418D547291BB54900BCEF30 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */; };
 		5418D548291BB54900BCEF30 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */; };
@@ -111,6 +114,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5408F2E2293ED6110035E108 /* SocketIOManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
+		5408F2E4293EEE2A0035E108 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		5418D542291BAF3E00BCEF30 /* Font+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extension.swift"; sourceTree = "<group>"; };
 		5418D545291BB54900BCEF30 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		5418D546291BB54900BCEF30 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
@@ -216,6 +221,7 @@
 				5461B4E02918CBF70000D726 /* SnapKit in Frameworks */,
 				5471A1E4291D1A2B002C80D8 /* IQKeyboardManagerSwift in Frameworks */,
 				542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */,
+				5408F2E1293ED37B0035E108 /* SocketIO in Frameworks */,
 				5442B7BC29320F93008F8623 /* Tabman in Frameworks */,
 				545AE79F291E66B0000F73C3 /* KeychainSwift in Frameworks */,
 				545AE79A291E6015000F73C3 /* Alamofire in Frameworks */,
@@ -325,6 +331,7 @@
 				5442B7BD29323111008F8623 /* APIStatusCode.swift */,
 				545AE7A0291E77DC000F73C3 /* NoNetworkViewController.swift */,
 				545AE7A2291E7811000F73C3 /* NoNetworkView.swift */,
+				5408F2E2293ED6110035E108 /* SocketIOManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -513,6 +520,7 @@
 				545AE79B291E608D000F73C3 /* User.swift */,
 				547DDFAC2931EF8000FD7818 /* MyQueueState.swift */,
 				54B95E0229377F97005389A6 /* SearchModel.swift */,
+				5408F2E4293EEE2A0035E108 /* Chat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -561,6 +569,7 @@
 				54360A39292259AD004B2CBA /* FirebaseMessaging */,
 				54523735292B372D002B8255 /* MultiSlider */,
 				5442B7BB29320F93008F8623 /* Tabman */,
+				5408F2E0293ED37B0035E108 /* SocketIO */,
 			);
 			productName = SLP_LocationApp;
 			productReference = 5461B4A52918B6440000D726 /* SLP_LocationApp.app */;
@@ -600,6 +609,7 @@
 				54360A36292259AD004B2CBA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				54523734292B372D002B8255 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				5442B7BA29320F92008F8623 /* XCRemoteSwiftPackageReference "Tabman" */,
+				5408F2DF293ED37B0035E108 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 5461B4A62918B6440000D726 /* Products */;
 			projectDirPath = "";
@@ -703,11 +713,13 @@
 				5461B4D42918C5F90000D726 /* OnboardingViewController.swift in Sources */,
 				5461B4CA2918C56C0000D726 /* BirthView.swift in Sources */,
 				5461B4E32918CD090000D726 /* Color+Extension.swift in Sources */,
+				5408F2E5293EEE2A0035E108 /* Chat.swift in Sources */,
 				54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */,
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
 				5457B18B293CC9B100C600C6 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
 				54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */,
+				5408F2E3293ED6110035E108 /* SocketIOManager.swift in Sources */,
 				5461B4DD2918CBB50000D726 /* BaseView.swift in Sources */,
 				547DDFA92931ECF700FD7818 /* HomeAPI.swift in Sources */,
 				5418D543291BAF3E00BCEF30 /* Font+Extension.swift in Sources */,
@@ -935,6 +947,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5408F2DF293ED37B0035E108 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 16.0.1;
+			};
+		};
 		542FAEF3291BFBA800E71C87 /* XCRemoteSwiftPackageReference "AnyFormatKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/luximetr/AnyFormatKit.git";
@@ -1010,6 +1030,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5408F2E0293ED37B0035E108 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5408F2DF293ED37B0035E108 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
 		542FAEF4291BFBA800E71C87 /* AnyFormatKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 542FAEF3291BFBA800E71C87 /* XCRemoteSwiftPackageReference "AnyFormatKit" */;
