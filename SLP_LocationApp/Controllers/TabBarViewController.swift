@@ -9,14 +9,14 @@ import SnapKit
 
 final class TabBarViewController: UITabBarController {
     
+    let homeVC = MainMapViewController()
+    let shopVC = ShopViewController()
+    let friendVC = FriendViewController()
+    let myinfoVC = MyInfoViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let homeVC = MainMapViewController()
-        let shopVC = ShopViewController()
-        let friendVC = FriendViewController()
-        let myinfoVC = MyInfoViewController()
-        
+                
         homeVC.title = "홈"
         shopVC.title = "새싹샵"
         friendVC.title = "새싹친구"
@@ -40,6 +40,16 @@ final class TabBarViewController: UITabBarController {
         tabBar.backgroundColor = .white
         tabBar.unselectedItemTintColor = Constants.BaseColor.gray6
         tabBar.tintColor = Constants.BaseColor.green
+    }
+    
+    public func setNick(nick: String) {
+        myinfoVC.nick = nick
+        print(nick)
+    }
+    
+    public func setSesac(sesac: Int) {
+        myinfoVC.sesac = sesac
+        print(sesac)
     }
 }
 

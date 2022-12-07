@@ -15,6 +15,14 @@ class ReceivedRequestView: BaseView {
         return view
     }()
     
+    lazy var btnsStackView: UIStackView = {
+        let view = UIStackView(arrangedSubviews: [changeBtn, refreshBtn])
+        view.distribution = .fillProportionally
+        view.spacing = 8
+        view.axis = .horizontal
+        return view
+    }()
+    
     lazy var changeBtn: OKButton = {
         let view = OKButton(frame: .zero)
         view.backgroundColor = Constants.BaseColor.green
@@ -38,7 +46,7 @@ class ReceivedRequestView: BaseView {
     }
     
     override func configureUI() {
-        [mainTableView, changeBtn, refreshBtn].forEach {
+        [mainTableView, btnsStackView].forEach {
             self.addSubview($0)
         }
     }
@@ -46,18 +54,17 @@ class ReceivedRequestView: BaseView {
     override func setConstraints() {
         mainTableView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(changeBtn.snp.top)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
+            make.height.equalTo(500)
         }
         
-        changeBtn.snp.makeConstraints { make in
-            make.leading.bottom.equalToSuperview().inset(16)
+        btnsStackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.height.equalTo(48)
         }
         
         refreshBtn.snp.makeConstraints { make in
-            make.top.equalTo(mainTableView.snp.bottom)
-            make.leading.equalTo(changeBtn.snp.trailing).offset(8)
-            make.trailing.equalToSuperview().inset(16)
             make.size.equalTo(48)
         }
     }

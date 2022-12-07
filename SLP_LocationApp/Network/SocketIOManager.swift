@@ -21,7 +21,9 @@ class SocketIOManager {
             .forceWebsockets(true)
         ])
         
-        //이벤트 3개(connect, disconnect, on SeSAC event)
+        socket = manager.defaultSocket
+        
+        //이벤트 3개(connect, disconnect, chat)
         //연결
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket is connected", data, ack)
@@ -33,7 +35,18 @@ class SocketIOManager {
             print("SOCKET IS DISCONNECTED", data, ack)}
         
         //이벤트 수신
-        
+        socket.on("chat") { dataArray, ack in
+            print("CHAT RECEIVED", dataArray, ack)
+            
+            let data = dataArray[0] as! NSDictionary
+            let chat = data["text"] as! String
+            let id = data["id"] as! String
+            let createdAt = data["createdAt"] as! String
+            
+            print("CHECK >>>", chat, createdAt)
+            
+            NotificationCenter.default.post(name: NSNotification.Name("getMessage"), object: self, userInfo: ["chat": chat, "id": id, "createdAt": createdAt])
+        }
     }
     
     func establishConnection() {

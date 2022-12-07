@@ -12,13 +12,14 @@ import Alamofire
 class UserAPI {
     static let BASEURL: String = "http://api.sesac.co.kr:1210"
     
+    //로그인
     static func userCheck(completion: @escaping (User?, Int?, Error?) -> Void) {
         let url = "\(BASEURL)/v1/user"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         
         AF.request(url, method: .get, headers: headers).responseDecodable(of: User.self) { response in
             let statusCode = response.response?.statusCode
-            
+            print(response)
             switch response.result {
             case .success(let value): completion(response.value!, statusCode, nil)
                 return
@@ -28,6 +29,7 @@ class UserAPI {
         }
     }
     
+    //회원가입
     static func signUp(phoneNumber: String, FCMtoken: String, nick: String, birth: Date, email: String, gender: Int, completion: @escaping (Int?, Error?) -> Void) {
         let url = "\(BASEURL)/v1/user"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
@@ -45,6 +47,7 @@ class UserAPI {
         }
     }
     
+    //회원탈퇴
     static func withdraw(completion: @escaping (Int?, Error?) -> Void) {
         let url = "\(BASEURL)/v1/user/withdraw"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]

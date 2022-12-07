@@ -36,6 +36,7 @@ final class NoNetworkViewController: BaseViewController {
     func userCheckRecursion() {
         viewModel.userCheckVM { user, statusCode in
             print(statusCode)
+            print(UserDefaults.standard.string(forKey: "idToken"))
             switch statusCode {
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
@@ -57,8 +58,12 @@ final class NoNetworkViewController: BaseViewController {
             }
 
             switch statusCode {
-            case APIStatusCode.success.rawValue:
+            case APIStatusCode.success.rawValue: //로그인 성공시
                 let vc = TabBarViewController()
+                print(user!.nick)
+                print("sesac image: \(user!.sesac)")
+                vc.setNick(nick: user!.nick)
+                vc.setSesac(sesac: user!.sesac)
                 self.transition(vc, transitionStyle: .presentFullScreen)
                 return
             case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:

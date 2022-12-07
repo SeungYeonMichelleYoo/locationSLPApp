@@ -28,8 +28,7 @@ class NearViewController: BaseViewController {
     }
     
     func toggleBtns(hidden: Bool) {
-        mainView.refreshBtn.isHidden = hidden
-        mainView.changeBtn.isHidden = hidden
+        mainView.btnsStackView.isHidden = hidden
     }
 }
 

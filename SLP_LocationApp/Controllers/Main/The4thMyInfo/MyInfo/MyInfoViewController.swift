@@ -9,10 +9,15 @@ import UIKit
 
 final class MyInfoViewController: BaseViewController {
     
+    var viewModel = UserViewModel()
+    
     var mainView = MyInfoView()
         
     let titleName = ["공지사항", "자주 묻는 질문", "1:1 문의", "알림 설정", "이용약관"]
     let iconName = ["notice", "faq", "qna", "setting_alarm", "permit"]
+    
+    var nick: String = ""
+    var sesac: Int = 0
     
     override func loadView() {
         self.view = mainView
@@ -38,7 +43,8 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "NameTableViewCell", for: indexPath) as! NameTableViewCell
-            cell.titleLabel.text = "김새싹"
+            cell.titleLabel.text = "\(nick)"
+            cell.image.image = Image.SesacFace.sesacFace1.image
             return cell
         case 1...5: let cell = tableView.dequeueReusableCell(withIdentifier: "MyInfoTableViewCell", for: indexPath) as! MyInfoTableViewCell
             cell.titleLabel.text = titleName[indexPath.row - 1]

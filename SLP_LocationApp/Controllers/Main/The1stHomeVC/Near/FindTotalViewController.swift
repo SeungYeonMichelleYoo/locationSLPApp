@@ -71,12 +71,19 @@ class FindTotalViewController: TabmanViewController {
             (viewControllers[1] as! ReceivedRequestViewController).receivedList = receivedList
             (viewControllers[1] as! ReceivedRequestViewController).toggleBtns(hidden: true)
         }
+        
     }
     
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func stopSearchBtnClicked() {
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("------------------presented-------------")
+        tabBarController?.tabBar.isHidden = true
+        self.hidesBottomBarWhenPushed = true
     }
 }
 

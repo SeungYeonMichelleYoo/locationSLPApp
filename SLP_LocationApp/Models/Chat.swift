@@ -20,4 +20,21 @@ struct Chat: Codable {
         case from
         case to
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        chat = try container.decode(String.self, forKey: .chat)
+        createdAt = try container.decode(String.self, forKey: .createdAt)
+        from = try container.decode(String.self, forKey: .from)
+        to = try container.decode(String.self, forKey: .to)
+    }
+    
+    init(id: String, chat: String, createdAt: String, from: String, to: String) {
+        self.id = id
+        self.chat = chat
+        self.createdAt = createdAt
+        self.from = from
+        self.to = to
+    }
 }

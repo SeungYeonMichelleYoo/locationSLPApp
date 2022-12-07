@@ -11,8 +11,7 @@ class MyChatTableViewCell: UITableViewCell {
     
     lazy var timeLabel: UILabel = {
         let label = UILabel()
-        let now = Date()
-        label.text = "\(now.getTime())"
+        label.text = "00:00"
         label.textColor = Constants.BaseColor.gray6
         label.font = UIFont.font(.Title6_R12)
         return label

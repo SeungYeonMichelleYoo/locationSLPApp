@@ -37,7 +37,10 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         mainView.searchBtn.addTarget(self, action: #selector(searchBtnClicked), for: .touchUpInside)
         print("lat: \(lat)")
         print(long)
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
+    
     
     @objc func searchBtnClicked() {
         getNearPeople()
@@ -52,6 +55,8 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
                 vc.receivedList = searchModel!.fromQueueDBRequested
                 print("searchview - opponentList count: \(searchModel!.fromQueueDB.count)")
                 print("searchview - receivedList count: \(searchModel!.fromQueueDBRequested.count)")
+                vc.tabBarController?.tabBar.isHidden = true
+                vc.hidesBottomBarWhenPushed = true // 안 먹힘 왜???
                 self.transition(vc, transitionStyle: .push)
                 return
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
@@ -127,6 +132,7 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         let imageView = UIImageView(frame: CGRect(x: 5, y: 0, width: 20, height: 20))
         let image = UIImage(named: "magnifyingglass")
         imageView.image = image
+        imageView.image = image
         txtfieldLeftView.addSubview(imageView)
         txtfield.leftView = txtfieldLeftView
         txtfield.returnKeyType = UIReturnKeyType.done
@@ -158,7 +164,6 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.nearCollectionView {
