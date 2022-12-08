@@ -17,14 +17,26 @@ class UserAPI {
         let url = "\(BASEURL)/v1/user"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         
-        AF.request(url, method: .get, headers: headers).responseDecodable(of: User.self) { response in
-            let statusCode = response.response?.statusCode
-            print(response)
-            switch response.result {
-            case .success(let value): completion(response.value!, statusCode, nil)
-                return
-            case .failure(let error): completion(nil, statusCode, error)
-                return
+        
+        AF.request(url, method: .get, headers: headers).responseJSON { response in
+            //Gets HTTP status code
+            let statusCode = (response.response?.statusCode)
+            print(response.result)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            do {
+                let user = try decoder.decode(User.self, from: response.data!)
+                
+                switch response.result {
+                case .success(_): completion(user, statusCode, nil)
+                    return
+                case .failure(let error): completion(nil, statusCode, error)
+                    return
+                }
+            } catch let error as NSError {
+                completion(nil, statusCode, error)
             }
         }
     }
@@ -54,7 +66,7 @@ class UserAPI {
         
         AF.request(url, method: .post, headers: headers).response { response in
             let statusCode = response.response?.statusCode
-
+            
             switch response.result {
             case .success(let value): completion(statusCode, nil)
                 return
@@ -63,7 +75,7 @@ class UserAPI {
             }
         }
     }
-
+    
     //내 정보 관리 수정
     static func mypageUpdate(dict: Dictionary<String, String>, completion: @escaping (Int?, Error?) -> Void) {
         let url = "\(BASEURL)/v1/user/mypage"
@@ -73,7 +85,7 @@ class UserAPI {
         
         AF.request(url, method: .put, parameters: params, headers: headers).responseString { response in
             let statusCode = response.response?.statusCode
-           
+            
             switch response.result {
             case .success(let value): completion(statusCode, nil)
                 return

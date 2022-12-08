@@ -24,7 +24,7 @@ final class NoNetworkViewController: BaseViewController {
         //파이어베이스 인증 o/x : 닉네임,홈화면 / 온보딩
         //서버 등록 o/x : 홈화면 / 닉네임
         print(Date().toString())
-        
+        print(UserDefaults.standard.string(forKey: "idToken") )
         if UserDefaults.standard.string(forKey: "idToken") == nil {
             let vc = OnboardingViewController()
             self.transition(vc, transitionStyle: .presentFullScreen)

@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Decodable {
     let uid: String //회원 id
     let phoneNumber: String
     let email: String
     let FCMtoken: String
     let nick: String
-    let birth: String
+    let birth: Date?
     let gender: Int
     let study: String
     let comment: [String] //리뷰하기에서 받은 후기 배열
@@ -62,33 +62,48 @@ struct User: Codable {
         case createdAt
     }
     
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        uid = try container.decode(String.self, forKey: .uid)
-//        phoneNumber = try container.decode(String.self, forKey: .phoneNumber)
-//        email = try container.decode(String.self, forKey: .email)
-//        FCMtoken = try container.decode(String.self, forKey: .FCMtoken)
-//        nick = try container.decode(String.self, forKey: .nick)
-//        birth = try container.decode(String.self, forKey: .birth)
-//        gender = try container.decode(Int.self, forKey: .gender)
-//        study = try container.decode(String.self, forKey: .study)
-//        comment = try container.decode([String].self, forKey: .comment)
-//        reputation = try container.decode([Int].self, forKey: .reputation)
-//        sesac = try container.decode(Int.self, forKey: .sesac)
-//        sesacCollection = try container.decode([Int].self, forKey: .sesac)
-//        background = try container.decode(Int.self, forKey: .background)
-//        backgroundCollection = try container.decode([Int].self, forKey: .backgroundCollection)
-//        purchaseToken = try container.decode([String].self, forKey: .purchaseToken)
-//        transactionId = try container.decode([String].self, forKey: .transactionId)
-//        reviewedBefore = try container.decode([String].self, forKey: .reviewedBefore)
-//        reportedNum = try container.decode(Int.self, forKey: .reportedNum)
-//        reportedUser = try container.decode([String].self, forKey: .reportedUser)
-//        dodgepenalty = try container.decode(Int.self, forKey: .dodgepenalty)
-//        dodgeNum = try container.decode(Int.self, forKey: .dodgeNum)
-//        ageMin = try container.decode(Int.self, forKey: .ageMin)
-//        ageMax = try container.decode(Int.self, forKey: .ageMax)
-//        searchable = try container.decode(Int.self, forKey: .searchable)
-//        createdAt = try container.decode(String.self, forKey: .createdAt)
-//    }
-    
+    init(from decoder: Decoder) throws {
+        let decoder2 = JSONDecoder()
+        decoder2.dateDecodingStrategy = .custom({ decoder2 in
+            let container = try decoder.singleValueContainer()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyyMMddHHmmss"
+            formatter.calendar = Calendar(identifier: .iso8601)
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            let dateAsInteger = try container.decode(Int.self)
+            let dateAsString = "\(dateAsInteger)"
+            guard let date = formatter.date(from: dateAsString) else {
+                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Could not form Date from value: \(dateAsString)")
+            }
+
+            return date
+        })
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        uid = try container.decode(String.self, forKey: .uid)
+        phoneNumber = try container.decode(String.self, forKey: .phoneNumber)
+        email = try container.decode(String.self, forKey: .email)
+        FCMtoken = try container.decode(String.self, forKey: .FCMtoken)
+        nick = try container.decode(String.self, forKey: .nick)
+        birth = try container.decode(Date.self, forKey: .birth)
+        gender = try container.decode(Int.self, forKey: .gender)
+        study = try container.decode(String.self, forKey: .study)
+        comment = try container.decode([String].self, forKey: .comment)
+        reputation = try container.decode([Int].self, forKey: .reputation)
+        sesac = try container.decode(Int.self, forKey: .sesac)
+        sesacCollection = try container.decode([Int].self, forKey: .sesacCollection)
+        background = try container.decode(Int.self, forKey: .background)
+        backgroundCollection = try container.decode([Int].self, forKey: .backgroundCollection)
+        purchaseToken = try container.decode([String].self, forKey: .purchaseToken)
+        transactionId = try container.decode([String].self, forKey: .transactionId)
+        reviewedBefore = try container.decode([String].self, forKey: .reviewedBefore)
+        reportedNum = try container.decode(Int.self, forKey: .reportedNum)
+        reportedUser = try container.decode([String].self, forKey: .reportedUser)
+        dodgepenalty = try container.decode(Int.self, forKey: .dodgepenalty)
+        dodgeNum = try container.decode(Int.self, forKey: .dodgeNum)
+        ageMin = try container.decode(Int.self, forKey: .ageMin)
+        ageMax = try container.decode(Int.self, forKey: .ageMax)
+        searchable = try container.decode(Int.self, forKey: .searchable)
+        createdAt = try container.decode(String.self, forKey: .createdAt)
+    }
+       
 }

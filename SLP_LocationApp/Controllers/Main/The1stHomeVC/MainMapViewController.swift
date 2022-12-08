@@ -45,6 +45,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         mainView.floatingBtn.addTarget(self, action: #selector(floatingBtnClicked), for: .touchUpInside)
     }
     
+   
     @objc func floatingBtnClicked() {
         if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_waiting") {
             //새싹찾기 화면으로 이동
@@ -119,7 +120,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     //재사용 할 수 있는 커스텀어노테이션

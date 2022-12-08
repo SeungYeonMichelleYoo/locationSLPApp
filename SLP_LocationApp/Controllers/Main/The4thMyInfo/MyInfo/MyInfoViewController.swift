@@ -44,7 +44,10 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "NameTableViewCell", for: indexPath) as! NameTableViewCell
             cell.titleLabel.text = "\(nick)"
-            cell.image.image = Image.SesacFace.sesacFace1.image
+            cell.image.image = SesacFace.image(level: sesac)
+            DispatchQueue.main.async(execute:{
+                cell.image.makeRounded()
+            })
             return cell
         case 1...5: let cell = tableView.dequeueReusableCell(withIdentifier: "MyInfoTableViewCell", for: indexPath) as! MyInfoTableViewCell
             cell.titleLabel.text = titleName[indexPath.row - 1]
