@@ -93,6 +93,13 @@ class ExpandableTableViewCell: UITableViewCell {
         return textView
     }()
     
+    lazy var moreBtn: UIButton = {
+        let btn = UIButton()
+        btn.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        btn.tintColor = Constants.BaseColor.gray7
+        return btn
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -114,7 +121,7 @@ class ExpandableTableViewCell: UITableViewCell {
             nickView.addSubview($0)
         }
         
-        [titleLabel, titleStackView, reviewLabel, textView].forEach {
+        [titleLabel, titleStackView, reviewLabel, textView, moreBtn].forEach {
             expandableView.addSubview($0)
         }
            
@@ -171,6 +178,13 @@ class ExpandableTableViewCell: UITableViewCell {
             make.top.equalTo(reviewLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().inset(16)
             make.height.equalTo(30)
+        }
+        
+        moreBtn.snp.makeConstraints { make in
+            make.top.equalTo(textView.snp.top)
+            make.leading.equalTo(textView.snp.trailing).offset(4)
+            make.trailing.equalToSuperview().inset(16)
+            make.size.equalTo(24)
         }
     }
     

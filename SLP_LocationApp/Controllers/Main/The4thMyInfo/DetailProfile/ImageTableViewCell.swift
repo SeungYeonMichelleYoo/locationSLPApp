@@ -10,14 +10,24 @@ import SnapKit
 
 class ImageTableViewCell: UITableViewCell {
     
-    lazy var image: UIImageView = {
+    lazy var backimage: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleToFill
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
-        view.image = UIImage(named: "cardview_bg")
+        view.image = UIImage(named: "sesac_background_1")
         return view
     }()
+    
+    lazy var sesacImg: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleToFill
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        view.image = UIImage(named: "sesac_face_1")
+        return view
+    }()
+
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -30,12 +40,19 @@ class ImageTableViewCell: UITableViewCell {
     }
     
     private func layout() {
+        [backimage, sesacImg].forEach {
+            contentView.addSubview($0)
+        }
         
-        contentView.addSubview(image)
-        
-        image.snp.makeConstraints { make in
+        backimage.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(200)
+        }
+        
+        sesacImg.snp.makeConstraints { make in
+            make.centerX.equalTo(backimage)
+            make.top.equalTo(backimage.snp.top).offset(32)
+            make.bottom.equalTo(backimage.snp.bottom).offset(8)
         }
     }
 }

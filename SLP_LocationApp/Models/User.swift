@@ -63,21 +63,6 @@ struct User: Decodable {
     }
     
     init(from decoder: Decoder) throws {
-        let decoder2 = JSONDecoder()
-        decoder2.dateDecodingStrategy = .custom({ decoder2 in
-            let container = try decoder.singleValueContainer()
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyyMMddHHmmss"
-            formatter.calendar = Calendar(identifier: .iso8601)
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
-            let dateAsInteger = try container.decode(Int.self)
-            let dateAsString = "\(dateAsInteger)"
-            guard let date = formatter.date(from: dateAsString) else {
-                throw DecodingError.dataCorruptedError(in: container, debugDescription: "Could not form Date from value: \(dateAsString)")
-            }
-
-            return date
-        })
         let container = try decoder.container(keyedBy: CodingKeys.self)
         uid = try container.decode(String.self, forKey: .uid)
         phoneNumber = try container.decode(String.self, forKey: .phoneNumber)

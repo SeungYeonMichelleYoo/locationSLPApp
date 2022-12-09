@@ -20,11 +20,18 @@ final class DetailProfileViewController: BaseViewController {
     var mainView = DetailProfileView()
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
     var is_hidden = true
+//    var is_on = false
     var gender = 0
     var ageMin = 18
     var ageMax = 65
     var searchable = 0
     var study = ""
+    var nick = ""
+    var background = 0
+    var sesac = 0
+    var reputation:[Int] = []
+    var comment:[String] = []
+    
     
     override func loadView() {
         self.view = mainView
@@ -40,25 +47,27 @@ final class DetailProfileViewController: BaseViewController {
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
         setupTableview()
+        userCheckRecursion() //내정보 불러오는 통신
     }
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func saveBtnClicked() {
         var dict: Dictionary<String, String> = ["searchable": String(searchable), "ageMin": String(ageMin), "ageMax": String(ageMax), "gender": String(gender)]
+        
         if (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).textField.text != "" {
             dict["study"] = (mainView.tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as! FixedTableViewCell).textField.text
         }
-        
+    
         viewModel.mypageUpdateVM(dict: dict) { statusCode in
             switch statusCode {
-            case 200:
+            case APIStatusCode.success.rawValue:
                 self.showToast(message: "업데이트 성공")
-            case 406:
+            case APIStatusCode.unAuthorized.rawValue:
                 self.showToast(message: "새싹 스터디 서버에 최종가입을 완료해주세요.")
-            case 500: //서버 에러
+            case APIStatusCode.serverError.rawValue: //서버 에러
                 self.showToast(message: "서버 점검중입니다.")
-            case 501:
+            case APIStatusCode.clientError.rawValue:
                 print("클라이언트 에러 - API요청시 header와 requestbody에 값을 빠뜨리지 않고 전송했는지 확인")
             case nil:
                 self.showToast(message: "네트워크 연결을 확인해주세요.")
@@ -71,32 +80,104 @@ final class DetailProfileViewController: BaseViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
     }
+    
+    func userCheckRecursion() {
+        viewModel.userCheckVM { user, statusCode in
+            print(statusCode)
+            print(UserDefaults.standard.string(forKey: "idToken"))
+            switch statusCode {
+            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            case APIStatusCode.firebaseTokenError.rawValue:
+                self.viewModel.refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.userCheckRecursion()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case nil:
+                self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            default:
+                break
+            }
+
+            switch statusCode {
+            case APIStatusCode.success.rawValue: //로그인 성공시
+                self.background = user!.background
+                self.nick = user!.nick
+                print("여기 확인해야됨----nick: \(self.nick)") //들어오는거 성공
+                self.background = user!.background
+                self.sesac = user!.sesac
+                self.reputation = user!.reputation
+                self.comment = user!.comment
+                self.gender = user!.gender
+                self.study = user!.study
+                self.searchable = user!.searchable
+                self.ageMin = user!.ageMin
+                self.ageMax = user!.ageMax
+                self.mainView.tableView.reloadData()
+                return
+            case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:
+                let vc = NicknameViewController()
+                self.transition(vc, transitionStyle: .push)
+                return
+            case -1, nil:
+                let vc = OnboardingViewController()
+                self.transition(vc, transitionStyle: .presentFullScreen)
+                return
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("tableviewrow")
         return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as! ImageTableViewCell
+            cell.backimage.image = BackgroundImage.image(level: background)
             return cell
             
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
             cell.collectionView.delegate = self //리팩토링하고 싶은데 에러. 밑에도 마찬가지
             cell.collectionView.dataSource = self
-//            cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
+            cell.nickLabel.text = "\(nick)" //expandableView가 hidden이더라도 보여야 함.
+            if comment.count == 0 {
+                cell.moreBtn.isHidden = true
+            } else {
+                cell.moreBtn.isHidden = false
+                cell.textView.text = "\(comment[0])"
+            }
+            
             cell.expandableView.isHidden = is_hidden
             cell.downBtn.setImage(UIImage(systemName: is_hidden ? "chevron.down" : "chevron.up"), for: .normal)
             
             cell.nickView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(nickViewTapped)))
             cell.nickView.isUserInteractionEnabled = true
+
             return cell
             
         case 2: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
             cell.cellDelegate = self
+            gender == 0 ? cell.femaleBtn.fill() : cell.maleBtn.fill()
+            if study.count != 0 {
+                cell.textField.text = "\(study)"
+            }
+            cell.controlSwitch.isOn = searchable == 1
+//            is_on = searchable == 0
+//            is_on = (searchable == 0 ? true : false)
+//            searchable == 0 ? is_on = true : is_on = false
+            cell.slider.minimumValue = CGFloat(ageMin)
+            cell.slider.maximumValue = CGFloat(ageMax)
             return cell
         default: return UITableViewCell()
         }
@@ -172,7 +253,7 @@ extension DetailProfileViewController: FixedTableDelegate {
     }
     
     func switchTapped() {
-        searchable = 1
+        searchable = ((mainView.tableView.cellForRow(at: IndexPath(row: 0, section: 2))) as! FixedTableViewCell).controlSwitch.isOn ? 1 : 0
     }
 }
 
