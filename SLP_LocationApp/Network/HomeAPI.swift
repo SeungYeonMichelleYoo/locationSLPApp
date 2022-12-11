@@ -37,6 +37,7 @@ class HomeAPI {
         let params: Parameters = ["lat": lat, "long": long]
         AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: SearchModel.self) { response in
             let statusCode = response.response?.statusCode
+            print("nearbysearch api called")
             print(response.value)
             print(response)
             switch response.result {

@@ -47,6 +47,7 @@
 		54523736292B372D002B8255 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 54523735292B372D002B8255 /* MultiSlider */; };
 		54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523737292B6680002B8255 /* WithdrawViewController.swift */; };
 		5452373A292B6918002B8255 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523739292B6918002B8255 /* WithdrawView.swift */; };
+		5456122F2945CEAC00AC6C9F /* Annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456122E2945CEAC00AC6C9F /* Annotations.swift */; };
 		54569A3E2924D3A1008F3FC6 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */; };
 		54569A402924DCDE008F3FC6 /* FixedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54569A3F2924DCDE008F3FC6 /* FixedTableViewCell.swift */; };
 		5456F6E0292F2B3A0004A98E /* MyStudyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456F6DF292F2B3A0004A98E /* MyStudyCollectionViewCell.swift */; };
@@ -151,6 +152,7 @@
 		544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPeopleTableViewCell.swift; sourceTree = "<group>"; };
 		54523737292B6680002B8255 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
 		54523739292B6918002B8255 /* WithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
+		5456122E2945CEAC00AC6C9F /* Annotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotations.swift; sourceTree = "<group>"; };
 		54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		54569A3F2924DCDE008F3FC6 /* FixedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTableViewCell.swift; sourceTree = "<group>"; };
 		5456F6DF292F2B3A0004A98E /* MyStudyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				549E57D42919D1EF00CACF54 /* BaseViews */,
 				5461B4E42918CD360000D726 /* Constants */,
 				5461B4E12918CCF50000D726 /* Extensions */,
+				5456122E2945CEAC00AC6C9F /* Annotations.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				54CEEC1D292C543100C0D8CA /* NearViewController.swift in Sources */,
 				5418D54C291BCAE700BCEF30 /* String+Extension.swift in Sources */,
 				5461B4AB2918B6440000D726 /* SceneDelegate.swift in Sources */,
+				5456122F2945CEAC00AC6C9F /* Annotations.swift in Sources */,
 				5442B7B929320EF8008F8623 /* FindTotalView.swift in Sources */,
 				5461B4E82918CD570000D726 /* Color.swift in Sources */,
 				54CEEC19292C53E800C0D8CA /* SearchViewController.swift in Sources */,

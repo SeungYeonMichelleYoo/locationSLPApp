@@ -148,9 +148,16 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
             
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
-            cell.collectionView.delegate = self //리팩토링하고 싶은데 에러. 밑에도 마찬가지
+            cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
-            cell.nickLabel.text = "\(nick)" //expandableView가 hidden이더라도 보여야 함.
+            
+            cell.collectionView.tag = indexPath.item
+            cell.collectionView.tag = reputation[indexPath.item]
+            if cell.collectionView.tag != 0 {
+//                cell.collectionView.titleBtn.fill() //?????
+            }
+            
+            cell.nickLabel.text = "\(nick)"
             if comment.count == 0 {
                 cell.moreBtn.isHidden = true
             } else {
@@ -163,7 +170,7 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
             
             cell.nickView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(nickViewTapped)))
             cell.nickView.isUserInteractionEnabled = true
-
+            
             return cell
             
         case 2: let cell = tableView.dequeueReusableCell(withIdentifier: "FixedTableViewCell", for: indexPath) as! FixedTableViewCell
@@ -173,9 +180,6 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.textField.text = "\(study)"
             }
             cell.controlSwitch.isOn = searchable == 1
-//            is_on = searchable == 0
-//            is_on = (searchable == 0 ? true : false)
-//            searchable == 0 ? is_on = true : is_on = false
             cell.slider.minimumValue = CGFloat(ageMin)
             cell.slider.maximumValue = CGFloat(ageMax)
             return cell

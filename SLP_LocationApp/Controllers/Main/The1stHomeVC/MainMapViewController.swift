@@ -17,9 +17,19 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     var emailAddress = ""
     var phoneNumber = ""
     var FCMtoken = ""
+    var latArr:[String] = [] //var latArr = [String]() 과의 차이??
+    var longArr:[String] = []
+    var opponentList:[OpponentModel] = []
+    var lat = 0.0
+    var long = 0.0
     
-    //2. 위치에 대한 대부분을 담당
-    let locationManager = CLLocationManager()
+    lazy var locationManager : CLLocationManager = {
+        let manager = CLLocationManager()
+        manager.desiredAccuracy = kCLLocationAccuracyBest
+        //        manager.startUpdatingLocation() // startUpdate를 해야 didUpdateLocation 메서드가 호출됨.
+        manager.delegate = self
+        return manager
+    }()
     let defaultCoordinate = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734) //새싹 영등포캠퍼스(디폴트)
     
     override func loadView() {
@@ -29,26 +39,29 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //3. 프로토콜 연결
         locationManager.delegate = self
         mainView.mapView.delegate = self
         
         navigationItem.title = ""
         
-        //지도 중심 잡기
-        let center = CLLocationCoordinate2D(latitude: 37.517819364682694, longitude: 126.88647317074734)
-        setRegionAndAnnotation(center: center)
-        
         //플로팅버튼 상태
         checkCurrentStatus()
         
         mainView.floatingBtn.addTarget(self, action: #selector(floatingBtnClicked), for: .touchUpInside)
+        
+        mainView.currentlocationBtn.addTarget(self, action: #selector(currentBtnClicked), for: .touchUpInside)
     }
     
-   
+    @objc func currentBtnClicked() {
+        mainView.mapView.showsUserLocation = false //파란점
+        mainView.mapView.setUserTrackingMode(.follow, animated: true)
+    }
+    
     @objc func floatingBtnClicked() {
         if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_waiting") {
             //새싹찾기 화면으로 이동
+            let vc = SearchViewController()
+            self.transition(vc, transitionStyle: .push)
         } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_matched") {
             //채팅화면으로 이동
             let vc = ChattingViewController()
@@ -74,6 +87,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         }
     }
     
+    //현재 상태에 따른 플로팅버튼
     func checkCurrentStatus() {
         viewModel.checkMatchStateVM { myQueueState, statusCode in
             switch statusCode {
@@ -90,12 +104,12 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
                 return
             case APIStatusCode.firebaseTokenError.rawValue:
                 UserViewModel().refreshIDToken { isSuccess in
-                if isSuccess! {
-                    self.checkCurrentStatus()
-                } else {
-                    self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    if isSuccess! {
+                        self.checkCurrentStatus()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
                 }
-            }
                 return
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
                 print("서버 점검중입니다. 관리자에게 문의해주세요.")
@@ -107,54 +121,67 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         }
     }
     
-    
-    func setRegionAndAnnotation(center: CLLocationCoordinate2D) {
-        //지도 중심 기반으로 보여질 범위
-        let region = MKCoordinateRegion(center: center, latitudinalMeters: 700, longitudinalMeters: 700)
+    func centerMap(center: CLLocationCoordinate2D) {
+        //지도 중심 기반으로 보여질 범위 (annotation기준으로 반경 약 700m)
+        //중요!!!!!!!!!!!!!!!! 나중에 center 다시 center로 바꿔놓기
+        let region = MKCoordinateRegion(center: defaultCoordinate, latitudinalMeters: 700, longitudinalMeters: 700)
         mainView.mapView.setRegion(region, animated: true)
-        //annotation 핀 고정
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = center
-        mainView.mapView.addAnnotation(annotation)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        
+        
     }
     
-    //재사용 할 수 있는 커스텀어노테이션
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard !annotation.isKind(of: MKUserLocation.self) else {
+        
+        guard let annotation = annotation as? CustomAnnotation else {
             return nil
         }
-       
-        var annotationView = self.mainView.mapView.dequeueReusableAnnotationView(withIdentifier: "Custom")
+        
+        var annotationView = self.mainView.mapView.dequeueReusableAnnotationView(withIdentifier: CustomAnnotationView.identifier)
         
         if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Custom")
-            annotationView?.canShowCallout = true
+            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: CustomAnnotationView.identifier)
+            annotationView?.canShowCallout = false
+            annotationView?.contentMode = .scaleAspectFit
             
-            let miniButton = UIButton(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-            miniButton.setImage(UIImage(systemName: "person"), for: .normal)
-            miniButton.tintColor = .blue
-            annotationView?.rightCalloutAccessoryView = miniButton
-        
         } else {
-        
             annotationView?.annotation = annotation
         }
-
-        annotationView?.image = UIImage(named: "centerpin")
+        
+        let sesacImage: UIImage!
+        let size = CGSize(width: 85, height: 85)
+        UIGraphicsBeginImageContext(size)
+        
+        sesacImage = SesacFace.image(level: (annotation.sesac_image! + 1))
+        
+        sesacImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        annotationView?.image = resizedImage
         
         return annotationView
     }
-    
+        
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        mainView.mapView.isUserInteractionEnabled = false
+        mapView.annotations.forEach {
+          if !($0 is MKUserLocation) {
+            mapView.removeAnnotation($0)
+          }
+        }
+        nearbySearch(lat: mapView.region.center.latitude, long: mapView.region.center.longitude)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800), execute: {
+            self.mainView.mapView.isUserInteractionEnabled =  true
+        })
+    }
 }
 
 //MARK: - 위치 관련된 User Defined 메서드
 extension MainMapViewController {
-    //7. iOS버전에 따른 분기 처리 및 iOS 위치 서비스 활성화 여부 확인
+    //iOS버전에 따른 분기 처리 및 iOS 위치 서비스 활성화 여부 확인
     //위치 서비스가 켜져 있다면 권한을 요청하고, 꺼져있다면 커스텀 얼럿으로 상황 알려주기
     func checkUserDeviceLocationsServiceAuthorization() {
         //위치에 대한 권한 종류
@@ -170,7 +197,7 @@ extension MainMapViewController {
             authorizationStatus = CLLocationManager.authorizationStatus()
         }
         
-        //iOS 위치 서비스 활성화 여부 체크: locationServiceEnabled()
+        //iOS 위치 서비스 활성화 여부 체크
         if CLLocationManager.locationServicesEnabled() {
             //위치 서비스가 활성화 되어있으므로, 위치 권한 요청 가능해서 위치 권한을 요청함.
             checkUserCurrentLocationAuthorization(authorizationStatus)
@@ -179,9 +206,10 @@ extension MainMapViewController {
         }
     }
     
-    //8. 사용자의 위치권한 상태 확인
+    //사용자의 위치권한 상태 확인 (위치 가져오기)
     //사용자가 위치를 허용했는지, 거부했는지, 아직 선택하지 않았는지 등을 확인(단, 사전에 iOS위치 서비스 활성화 꼭 확인)
     func checkUserCurrentLocationAuthorization(_ authorizationStatus: CLAuthorizationStatus) {
+        print("checkUserCurrentLocationAuthorization called")
         switch authorizationStatus {
         case .notDetermined:
             print("NOT DETERMINED")
@@ -191,15 +219,15 @@ extension MainMapViewController {
         case .restricted, .denied:
             print("DENIED, 아이폰 설정으로 유도")
             
-            let region = MKCoordinateRegion(center: defaultCoordinate, latitudinalMeters: 700, longitudinalMeters: 700)
-            mainView.mapView.setRegion(region, animated: true)
-            
+            self.centerMap(center: defaultCoordinate)
+            //여기서 영등포중심으로 서버통신 진행(post, v1/queue/search)
             showRequestLocationServiceAlert()
             
         case .authorizedWhenInUse:
             print("WHEN IN USE")
             //사용자가 위치를 허용해둔 상태라면, startUpdatingLocation을 통해 didUpdateLocations 메서드가 실행
             locationManager.startUpdatingLocation()
+            
             
         default: print("DEFAULT")
         }
@@ -219,18 +247,25 @@ extension MainMapViewController {
             //새싹캠퍼스를 중심으로 서버통신
             self.nearbySearch(lat: 37.517819364682694, long: 126.88647317074734)
         })
-            
+        
         requestLocationServiceAlert.addAction(cancel)
         requestLocationServiceAlert.addAction(goSetting)
-            
+        
         self.present(requestLocationServiceAlert, animated: true, completion: nil)
     }
- 
+    
     func nearbySearch(lat: Double, long: Double) {
+        print("lat: \(lat), long: \(long)")
         self.viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
             switch statusCode {
             case APIStatusCode.success.rawValue:
                 print("스터디 함께할 새싹 검색 성공")
+                self.opponentList = searchModel!.fromQueueDB
+                for opponent in self.opponentList {
+                    print("opponent.lat: \(opponent.lat)")
+                    let pin = CustomAnnotation(sesac_image: opponent.sesac, coordinate: CLLocationCoordinate2D(latitude: opponent.lat, longitude: opponent.long))
+                    self.mainView.mapView.addAnnotation(pin)
+                }
                 return
             case APIStatusCode.firebaseTokenError.rawValue:
                 UserViewModel().refreshIDToken { isSuccess in
@@ -257,15 +292,20 @@ extension MainMapViewController {
     
     //MARK: - 현재위치
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        print("locationManager called")
         if let coordinate = locations.last?.coordinate {
-            let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 700, longitudinalMeters: 700)
-            mainView.mapView.setRegion(region, animated: true)
+            print("did call")
+            centerMap(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
+            //            nearbySearch(lat: coordinate.latitude, long: coordinate.longitude)
+            //나중에 꼭 위에껄로 해두기!!!!!!!!!!!
+            nearbySearch(lat: defaultCoordinate.latitude, long: defaultCoordinate.longitude)
         }
         self.locationManager.stopUpdatingLocation()
     }
     
+    //MARK: - 상태받기(GPS권한 설정 여부에 따라 로직 나누기)
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        print("locationManagerDidChangeAuthorization called")
         checkUserDeviceLocationsServiceAuthorization()
     }
     
@@ -273,3 +313,4 @@ extension MainMapViewController {
         print("Error")
     }
 }
+
