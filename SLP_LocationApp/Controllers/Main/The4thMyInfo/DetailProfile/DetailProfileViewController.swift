@@ -150,13 +150,7 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "ExpandableTableViewCell", for: indexPath) as! ExpandableTableViewCell
             cell.collectionView.delegate = self
             cell.collectionView.dataSource = self
-            
-            cell.collectionView.tag = indexPath.item
-            cell.collectionView.tag = reputation[indexPath.item]
-            if cell.collectionView.tag != 0 {
-//                cell.collectionView.titleBtn.fill() //?????
-            }
-            
+                        
             cell.nickLabel.text = "\(nick)"
             if comment.count == 0 {
                 cell.moreBtn.isHidden = true
@@ -218,9 +212,12 @@ extension DetailProfileViewController: UICollectionViewDelegate, UICollectionVie
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TitleCollectionViewCell", for: indexPath) as? TitleCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
         cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
         
+        if reputation[indexPath.item] != 0 {
+            cell.titleBtn.fill()
+        }
+            
         return cell
     }
 }

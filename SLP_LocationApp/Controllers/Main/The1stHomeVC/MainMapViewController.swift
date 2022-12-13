@@ -127,15 +127,15 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         //중요!!!!!!!!!!!!!!!! 나중에 center 다시 defaultCoordinate -> center로 바꿔놓기
         let region = MKCoordinateRegion(center: defaultCoordinate, latitudinalMeters: 700, longitudinalMeters: 700)
         mainView.mapView.setRegion(region, animated: true)
+        
+        nearbySearch(lat: defaultCoordinate.latitude, long: defaultCoordinate.longitude) //center.latitude,~로 나중에 바꾸기!!!!!!!!!!
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
         
-        //            nearbySearch(lat: coordinate.latitude, long: coordinate.longitude)
-        //나중에 꼭 위에껄로 해두기!!!!!!!!!!!
-        nearbySearch(lat: defaultCoordinate.latitude, long: defaultCoordinate.longitude)
+        checkUserDeviceLocationsServiceAuthorization()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -230,8 +230,7 @@ extension MainMapViewController {
             print("WHEN IN USE")
             //사용자가 위치를 허용해둔 상태라면, startUpdatingLocation을 통해 didUpdateLocations 메서드가 실행
             locationManager.startUpdatingLocation()
-            nearbySearch(lat: defaultCoordinate.latitude, long: defaultCoordinate.latitude) //나중에 바꾸기!!!!!!!!! (lat: coordinate.latitude, long: coordinate.longitude)
-            
+
         default: print("DEFAULT")
         }
     }
@@ -248,7 +247,7 @@ extension MainMapViewController {
         }
         let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
             //새싹캠퍼스를 중심으로 서버통신
-            self.nearbySearch(lat: 37.517819364682694, long: 126.88647317074734)
+            self.centerMap(center: self.defaultCoordinate)
         })
         
         requestLocationServiceAlert.addAction(cancel)
@@ -303,9 +302,6 @@ extension MainMapViewController {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
             centerMap(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
-            //            nearbySearch(lat: coordinate.latitude, long: coordinate.longitude)
-            //나중에 꼭 위에껄로 해두기!!!!!!!!!!!
-            nearbySearch(lat: defaultCoordinate.latitude, long: defaultCoordinate.longitude)
         }
         self.locationManager.stopUpdatingLocation()
     }
