@@ -17,7 +17,6 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     var recommendStudy: [String] = []
     var nearStudy: [String] = []
     var myStudy: [String] = []
-    //    var myStudyBtns = self.mainView.collectionView.MyStudyCollectionViewCell.myBtn
     var newStudy: [String] = []
     let txtfield = UITextField(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 0.8, height: 35))
     
@@ -39,8 +38,28 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         print(long)
         
         self.tabBarController?.tabBar.isHidden = true
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: self.view.window)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: self.view.window)
     }
     
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            mainView.searchBtn.snp.remakeConstraints { make in
+                make.bottom.equalToSuperview().inset(keyboardSize.height)
+                make.leading.trailing.equalToSuperview()
+                make.height.equalTo(48)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        mainView.searchBtn.snp.remakeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+        }
+    }
     
     @objc func searchBtnClicked() {
         getNearPeople()
