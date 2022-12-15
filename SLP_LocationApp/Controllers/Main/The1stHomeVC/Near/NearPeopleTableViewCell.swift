@@ -20,7 +20,7 @@ class NearPeopleTableViewCell: UITableViewCell {
         view.contentMode = .scaleToFill
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
-        view.image = UIImage(named: "cardview_bg")
+        view.image = UIImage(named: "sesac_background_1")
         return view
     }()
     

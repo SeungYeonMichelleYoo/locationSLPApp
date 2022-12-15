@@ -1,16 +1,14 @@
 //
-//  ShopViewController.swift
+//  BackgroundViewController.swift
 //  SLP_LocationApp
 //
-//  Created by SeungYeon Yoo on 2022/11/15.
+//  Created by SeungYeon Yoo on 2022/12/15.
 //
 import UIKit
-import Tabman
-import Pageboy
 
-class ShopViewController: BaseViewController {
-    
-    var mainView = ShopView()
+class BackgroundViewController: BaseViewController {
+        
+    var mainView = BackgroundView()
 
     override func loadView() {
         self.view = mainView
@@ -19,4 +17,5 @@ class ShopViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+   
 }

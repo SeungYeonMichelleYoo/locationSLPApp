@@ -99,6 +99,12 @@
 		547DDFA92931ECF700FD7818 /* HomeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFA82931ECF700FD7818 /* HomeAPI.swift */; };
 		547DDFAB2931EDE300FD7818 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFAA2931EDE300FD7818 /* HomeViewModel.swift */; };
 		547DDFAD2931EF8000FD7818 /* MyQueueState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFAC2931EF8000FD7818 /* MyQueueState.swift */; };
+		5487CEF1294B491C003F15D9 /* SesacCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF0294B491C003F15D9 /* SesacCharacterViewController.swift */; };
+		5487CEF3294B4926003F15D9 /* SesacCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF2294B4926003F15D9 /* SesacCharacterView.swift */; };
+		5487CEF5294B4931003F15D9 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF4294B4931003F15D9 /* BackgroundViewController.swift */; };
+		5487CEF7294B4938003F15D9 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF6294B4938003F15D9 /* BackgroundView.swift */; };
+		5487CEF9294B522C003F15D9 /* ShopTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF8294B522C003F15D9 /* ShopTabViewController.swift */; };
+		5487CEFB294B5236003F15D9 /* ShopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEFA294B5236003F15D9 /* ShopTabView.swift */; };
 		5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */; };
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
 		54ACA0A4293B1635001E4252 /* EmptyBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACA0A3293B1635001E4252 /* EmptyBigView.swift */; };
@@ -202,6 +208,12 @@
 		547DDFA82931ECF700FD7818 /* HomeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAPI.swift; sourceTree = "<group>"; };
 		547DDFAA2931EDE300FD7818 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		547DDFAC2931EF8000FD7818 /* MyQueueState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQueueState.swift; sourceTree = "<group>"; };
+		5487CEF0294B491C003F15D9 /* SesacCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacCharacterViewController.swift; sourceTree = "<group>"; };
+		5487CEF2294B4926003F15D9 /* SesacCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacCharacterView.swift; sourceTree = "<group>"; };
+		5487CEF4294B4931003F15D9 /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
+		5487CEF6294B4938003F15D9 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		5487CEF8294B522C003F15D9 /* ShopTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTabViewController.swift; sourceTree = "<group>"; };
+		5487CEFA294B5236003F15D9 /* ShopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTabView.swift; sourceTree = "<group>"; };
 		5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		54ACA0A3293B1635001E4252 /* EmptyBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBigView.swift; sourceTree = "<group>"; };
@@ -296,6 +308,12 @@
 			children = (
 				5444C0A629236C1F00728EC3 /* ShopViewController.swift */,
 				5444C0AA29236C4D00728EC3 /* ShopView.swift */,
+				5487CEF8294B522C003F15D9 /* ShopTabViewController.swift */,
+				5487CEFA294B5236003F15D9 /* ShopTabView.swift */,
+				5487CEF0294B491C003F15D9 /* SesacCharacterViewController.swift */,
+				5487CEF2294B4926003F15D9 /* SesacCharacterView.swift */,
+				5487CEF4294B4931003F15D9 /* BackgroundViewController.swift */,
+				5487CEF6294B4938003F15D9 /* BackgroundView.swift */,
 			);
 			path = The2ndShopVC;
 			sourceTree = "<group>";
@@ -673,10 +691,12 @@
 				5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */,
 				5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */,
 				544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */,
+				5487CEF9294B522C003F15D9 /* ShopTabViewController.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
+				5487CEF1294B491C003F15D9 /* SesacCharacterViewController.swift in Sources */,
 				54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */,
 				5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */,
 				5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */,
@@ -700,6 +720,7 @@
 				545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */,
 				5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */,
 				543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */,
+				5487CEF5294B4931003F15D9 /* BackgroundViewController.swift in Sources */,
 				54CEEC1F292C543C00C0D8CA /* NearView.swift in Sources */,
 				5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */,
 				545AE79C291E608D000F73C3 /* User.swift in Sources */,
@@ -715,6 +736,7 @@
 				5461B4C62918C5430000D726 /* NickNameView.swift in Sources */,
 				5452373A292B6918002B8255 /* WithdrawView.swift in Sources */,
 				547DDFA52931E88700FD7818 /* ChattingViewController.swift in Sources */,
+				5487CEFB294B5236003F15D9 /* ShopTabView.swift in Sources */,
 				5442B7B329320DE2008F8623 /* ReceivedRequestViewController.swift in Sources */,
 				545AE7A1291E77DC000F73C3 /* NoNetworkViewController.swift in Sources */,
 				5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */,
@@ -738,6 +760,7 @@
 				54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */,
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
 				5457B18B293CC9B100C600C6 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
+				5487CEF7294B4938003F15D9 /* BackgroundView.swift in Sources */,
 				542C3D53294216BC00E4DC93 /* UIImage+Extension.swift in Sources */,
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
 				54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */,
@@ -751,6 +774,7 @@
 				546479722940C12B00C3F112 /* SesacFace.swift in Sources */,
 				5434ACDD293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
+				5487CEF3294B4926003F15D9 /* SesacCharacterView.swift in Sources */,
 				54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
