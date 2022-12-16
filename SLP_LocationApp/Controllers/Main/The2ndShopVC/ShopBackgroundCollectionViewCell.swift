@@ -1,5 +1,5 @@
 //
-//  ShopBackgroundTableViewCell.swift
+//  ShopBackgroundCollectionViewCell.swift
 //  SLP_LocationApp
 //
 //  Created by SeungYeon Yoo on 2022/12/16.
@@ -7,12 +7,14 @@
 import UIKit
 import SnapKit
 
-class ShopBackgroundTableViewCell: UITableViewCell {
+class ShopBackgroundCollectionViewCell: UICollectionViewCell {
     
     lazy var backgroundImg: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleToFill
         view.image = UIImage(named: "sesac_background_1")
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
         return view
     }()
     
@@ -41,17 +43,16 @@ class ShopBackgroundTableViewCell: UITableViewCell {
         return view
     }()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        layout()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.cellSetting()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func layout() {
+    func cellSetting() {
         
         [backgroundImg, titleLabel, contentLabel, priceBtn].forEach {
             contentView.addSubview($0)
@@ -59,23 +60,24 @@ class ShopBackgroundTableViewCell: UITableViewCell {
         
         backgroundImg.snp.makeConstraints { make in
             make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.size.equalTo(165)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(backgroundImg.snp.top).offset(30)
+            make.top.equalTo(backgroundImg.snp.top).offset(40)
             make.leading.equalTo(backgroundImg.snp.trailing).offset(12)
         }
         
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.leading.equalTo(backgroundImg.snp.trailing).offset(12)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
         }
         
         priceBtn.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
-            make.trailing.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(20)
             make.width.equalTo(52)
         }

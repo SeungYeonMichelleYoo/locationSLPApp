@@ -19,11 +19,12 @@ class SesacCharacterView: BaseView {
         layout.minimumLineSpacing = 8
         layout.minimumInteritemSpacing = 8
         layout.scrollDirection = .vertical
-        layout.sectionInset = UIEdgeInsets(top: itemSpacing, left: itemSpacing, bottom: itemSpacing, right: itemSpacing)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: itemSpacing, bottom: itemSpacing, right: itemSpacing)
         layout.itemSize = CGSize(width: myWidth , height: 280)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(SesacFaceCollectionViewCell.self, forCellWithReuseIdentifier: "SesacFaceCollectionViewCell")
+        cv.showsVerticalScrollIndicator = false
         return cv
     }()
    
@@ -42,7 +43,7 @@ class SesacCharacterView: BaseView {
     
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(230)
+            make.top.equalTo(self.safeAreaLayoutGuide).inset(250)
             make.leading.equalToSuperview().inset(8)
             make.trailing.equalToSuperview().inset(8)
             make.bottom.equalToSuperview().inset(16)

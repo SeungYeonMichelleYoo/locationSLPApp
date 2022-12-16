@@ -15,6 +15,7 @@ class DetailProfileView: BaseView {
         view.register(ImageTableViewCell.self, forCellReuseIdentifier: "ImageTableViewCell")
         view.register(ExpandableTableViewCell.self, forCellReuseIdentifier: "ExpandableTableViewCell")
         view.register(FixedTableViewCell.self, forCellReuseIdentifier: "FixedTableViewCell")
+        view.showsVerticalScrollIndicator = false
         return view
     }()
         

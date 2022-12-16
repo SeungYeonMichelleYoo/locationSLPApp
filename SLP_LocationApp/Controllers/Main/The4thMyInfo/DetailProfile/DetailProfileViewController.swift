@@ -47,6 +47,7 @@ final class DetailProfileViewController: BaseViewController {
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
         setupTableview()
+        print("userCheckRecursion")
         userCheckRecursion() //내정보 불러오는 통신
     }
     @objc func backBtnClicked() {
@@ -83,7 +84,7 @@ final class DetailProfileViewController: BaseViewController {
     
     func userCheckRecursion() {
         viewModel.userCheckVM { user, statusCode in
-            print(statusCode)
+            print("statusCode: \(statusCode)")
             print(UserDefaults.standard.string(forKey: "idToken"))
             switch statusCode {
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
@@ -119,6 +120,8 @@ final class DetailProfileViewController: BaseViewController {
                 self.searchable = user!.searchable
                 self.ageMin = user!.ageMin
                 self.ageMax = user!.ageMax
+                print("reputation=====")
+                print(self.reputation)
                 self.mainView.tableView.reloadData()
                 return
             case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:
@@ -214,7 +217,8 @@ extension DetailProfileViewController: UICollectionViewDelegate, UICollectionVie
         }
         cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
         
-        if reputation[indexPath.item] != 0 {
+        //뷰가 그려지는 것보다 통신이 느려지는 경우가 있을 수 있으므로, 앞의 조건을 써줌
+        if reputation.count == 6 && reputation[indexPath.item] != 0 {
             cell.titleBtn.fill()
         }
             

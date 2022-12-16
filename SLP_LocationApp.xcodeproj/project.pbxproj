@@ -117,7 +117,7 @@
 		54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1A292C53F200C0D8CA /* SearchView.swift */; };
 		54CEEC1D292C543100C0D8CA /* NearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1C292C543100C0D8CA /* NearViewController.swift */; };
 		54CEEC1F292C543C00C0D8CA /* NearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1E292C543C00C0D8CA /* NearView.swift */; };
-		54CF0EC3294C59380018E4E2 /* ShopBackgroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF0EC2294C59380018E4E2 /* ShopBackgroundTableViewCell.swift */; };
+		54CF0EC3294C59380018E4E2 /* ShopBackgroundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF0EC2294C59380018E4E2 /* ShopBackgroundCollectionViewCell.swift */; };
 		54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */; };
 		54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19EC291A32CD0033BCE4 /* OKButton.swift */; };
 		54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19F3291A3BA70033BCE4 /* AuthManager.swift */; };
@@ -225,7 +225,7 @@
 		54CEEC1A292C53F200C0D8CA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		54CEEC1C292C543100C0D8CA /* NearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearViewController.swift; sourceTree = "<group>"; };
 		54CEEC1E292C543C00C0D8CA /* NearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearView.swift; sourceTree = "<group>"; };
-		54CF0EC2294C59380018E4E2 /* ShopBackgroundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBackgroundTableViewCell.swift; sourceTree = "<group>"; };
+		54CF0EC2294C59380018E4E2 /* ShopBackgroundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBackgroundCollectionViewCell.swift; sourceTree = "<group>"; };
 		54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		54FE19EC291A32CD0033BCE4 /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
 		54FE19F3291A3BA70033BCE4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -313,7 +313,7 @@
 				548EEB56294C1207006F871D /* SesacFaceCollectionViewCell.swift */,
 				5487CEF4294B4931003F15D9 /* ShopBackgroundViewController.swift */,
 				5487CEF6294B4938003F15D9 /* ShopBackgroundView.swift */,
-				54CF0EC2294C59380018E4E2 /* ShopBackgroundTableViewCell.swift */,
+				54CF0EC2294C59380018E4E2 /* ShopBackgroundCollectionViewCell.swift */,
 			);
 			path = The2ndShopVC;
 			sourceTree = "<group>";
@@ -691,7 +691,7 @@
 				544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */,
 				5487CEF9294B522C003F15D9 /* ShopTabViewController.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
-				54CF0EC3294C59380018E4E2 /* ShopBackgroundTableViewCell.swift in Sources */,
+				54CF0EC3294C59380018E4E2 /* ShopBackgroundCollectionViewCell.swift in Sources */,
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,

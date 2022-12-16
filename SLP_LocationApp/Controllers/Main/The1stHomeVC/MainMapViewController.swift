@@ -159,7 +159,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         let size = CGSize(width: 85, height: 85)
         UIGraphicsBeginImageContext(size)
         
-        sesacImage = SesacFace.image(level: (annotation.sesac_image! + 1))
+        sesacImage = SesacFace.image(level: annotation.sesac_image!)
         
         sesacImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let resizedImage = UIGraphicsGetImageFromCurrentImageContext()

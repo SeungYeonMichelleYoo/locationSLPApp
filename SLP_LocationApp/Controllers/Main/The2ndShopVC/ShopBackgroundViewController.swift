@@ -22,27 +22,27 @@ class ShopBackgroundViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableview()
+        setCollectionView()
     }
     
-    func setupTableview() {
-        mainView.tableView.delegate = self
-        mainView.tableView.dataSource = self
-        mainView.tableView.register(ShopBackgroundTableViewCell.self, forCellReuseIdentifier: "ShopBackgroundTableViewCell")
+    func setCollectionView() {
+        mainView.collectionView.delegate = self
+        mainView.collectionView.dataSource = self
     }
 }
 
-extension ShopBackgroundViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ShopBackgroundViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return backgroundName.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ShopBackgroundTableViewCell", for: indexPath) as! ShopBackgroundTableViewCell
-        
-        cell.titleLabel.text = backgroundName[indexPath.row]
-        cell.contentLabel.text = backgroundDescription[indexPath.row]
-        cell.backgroundImg.image = BackgroundImage.image(level: indexPath.row)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ShopBackgroundCollectionViewCell", for: indexPath) as? ShopBackgroundCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+        cell.titleLabel.text = backgroundName[indexPath.item]
+        cell.contentLabel.text = backgroundDescription[indexPath.item]
+        cell.backgroundImg.image = BackgroundImage.image(level: indexPath.item)
         return cell
     }
 }
