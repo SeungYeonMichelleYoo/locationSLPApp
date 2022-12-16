@@ -34,9 +34,7 @@
 		5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A0292366C400728EC3 /* MyInfoViewController.swift */; };
 		5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A2292366CD00728EC3 /* MyInfoView.swift */; };
 		5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A429236B7C00728EC3 /* TabBarViewController.swift */; };
-		5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A629236C1F00728EC3 /* ShopViewController.swift */; };
 		5444C0A929236C3900728EC3 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A829236C3900728EC3 /* FriendViewController.swift */; };
-		5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0AA29236C4D00728EC3 /* ShopView.swift */; };
 		5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0AC29236C7100728EC3 /* FriendView.swift */; };
 		5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */; };
 		5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B62923820D00728EC3 /* NameTableViewCell.swift */; };
@@ -101,10 +99,11 @@
 		547DDFAD2931EF8000FD7818 /* MyQueueState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547DDFAC2931EF8000FD7818 /* MyQueueState.swift */; };
 		5487CEF1294B491C003F15D9 /* SesacCharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF0294B491C003F15D9 /* SesacCharacterViewController.swift */; };
 		5487CEF3294B4926003F15D9 /* SesacCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF2294B4926003F15D9 /* SesacCharacterView.swift */; };
-		5487CEF5294B4931003F15D9 /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF4294B4931003F15D9 /* BackgroundViewController.swift */; };
-		5487CEF7294B4938003F15D9 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF6294B4938003F15D9 /* BackgroundView.swift */; };
+		5487CEF5294B4931003F15D9 /* ShopBackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF4294B4931003F15D9 /* ShopBackgroundViewController.swift */; };
+		5487CEF7294B4938003F15D9 /* ShopBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF6294B4938003F15D9 /* ShopBackgroundView.swift */; };
 		5487CEF9294B522C003F15D9 /* ShopTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEF8294B522C003F15D9 /* ShopTabViewController.swift */; };
 		5487CEFB294B5236003F15D9 /* ShopTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5487CEFA294B5236003F15D9 /* ShopTabView.swift */; };
+		548EEB57294C1207006F871D /* SesacFaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548EEB56294C1207006F871D /* SesacFaceCollectionViewCell.swift */; };
 		5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */; };
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
 		54ACA0A4293B1635001E4252 /* EmptyBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACA0A3293B1635001E4252 /* EmptyBigView.swift */; };
@@ -118,6 +117,7 @@
 		54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1A292C53F200C0D8CA /* SearchView.swift */; };
 		54CEEC1D292C543100C0D8CA /* NearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1C292C543100C0D8CA /* NearViewController.swift */; };
 		54CEEC1F292C543C00C0D8CA /* NearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1E292C543C00C0D8CA /* NearView.swift */; };
+		54CF0EC3294C59380018E4E2 /* ShopBackgroundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CF0EC2294C59380018E4E2 /* ShopBackgroundTableViewCell.swift */; };
 		54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */; };
 		54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19EC291A32CD0033BCE4 /* OKButton.swift */; };
 		54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FE19F3291A3BA70033BCE4 /* AuthManager.swift */; };
@@ -146,9 +146,7 @@
 		5444C0A0292366C400728EC3 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		5444C0A2292366CD00728EC3 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
 		5444C0A429236B7C00728EC3 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		5444C0A629236C1F00728EC3 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		5444C0A829236C3900728EC3 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
-		5444C0AA29236C4D00728EC3 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		5444C0AC29236C7100728EC3 /* FriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendView.swift; sourceTree = "<group>"; };
 		5444C0B42923772E00728EC3 /* MyInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoTableViewCell.swift; sourceTree = "<group>"; };
 		5444C0B62923820D00728EC3 /* NameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
@@ -210,10 +208,11 @@
 		547DDFAC2931EF8000FD7818 /* MyQueueState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQueueState.swift; sourceTree = "<group>"; };
 		5487CEF0294B491C003F15D9 /* SesacCharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacCharacterViewController.swift; sourceTree = "<group>"; };
 		5487CEF2294B4926003F15D9 /* SesacCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacCharacterView.swift; sourceTree = "<group>"; };
-		5487CEF4294B4931003F15D9 /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
-		5487CEF6294B4938003F15D9 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		5487CEF4294B4931003F15D9 /* ShopBackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBackgroundViewController.swift; sourceTree = "<group>"; };
+		5487CEF6294B4938003F15D9 /* ShopBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBackgroundView.swift; sourceTree = "<group>"; };
 		5487CEF8294B522C003F15D9 /* ShopTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTabViewController.swift; sourceTree = "<group>"; };
 		5487CEFA294B5236003F15D9 /* ShopTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopTabView.swift; sourceTree = "<group>"; };
+		548EEB56294C1207006F871D /* SesacFaceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacFaceCollectionViewCell.swift; sourceTree = "<group>"; };
 		5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		549868312918DFA9005DBF6E /* OnboardingSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSlide.swift; sourceTree = "<group>"; };
 		54ACA0A3293B1635001E4252 /* EmptyBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBigView.swift; sourceTree = "<group>"; };
@@ -226,6 +225,7 @@
 		54CEEC1A292C53F200C0D8CA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		54CEEC1C292C543100C0D8CA /* NearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearViewController.swift; sourceTree = "<group>"; };
 		54CEEC1E292C543C00C0D8CA /* NearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearView.swift; sourceTree = "<group>"; };
+		54CF0EC2294C59380018E4E2 /* ShopBackgroundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopBackgroundTableViewCell.swift; sourceTree = "<group>"; };
 		54FE19E9291A2D930033BCE4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		54FE19EC291A32CD0033BCE4 /* OKButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKButton.swift; sourceTree = "<group>"; };
 		54FE19F3291A3BA70033BCE4 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -306,14 +306,14 @@
 		5444C0AF2923768900728EC3 /* The2ndShopVC */ = {
 			isa = PBXGroup;
 			children = (
-				5444C0A629236C1F00728EC3 /* ShopViewController.swift */,
-				5444C0AA29236C4D00728EC3 /* ShopView.swift */,
 				5487CEF8294B522C003F15D9 /* ShopTabViewController.swift */,
 				5487CEFA294B5236003F15D9 /* ShopTabView.swift */,
 				5487CEF0294B491C003F15D9 /* SesacCharacterViewController.swift */,
 				5487CEF2294B4926003F15D9 /* SesacCharacterView.swift */,
-				5487CEF4294B4931003F15D9 /* BackgroundViewController.swift */,
-				5487CEF6294B4938003F15D9 /* BackgroundView.swift */,
+				548EEB56294C1207006F871D /* SesacFaceCollectionViewCell.swift */,
+				5487CEF4294B4931003F15D9 /* ShopBackgroundViewController.swift */,
+				5487CEF6294B4938003F15D9 /* ShopBackgroundView.swift */,
+				54CF0EC2294C59380018E4E2 /* ShopBackgroundTableViewCell.swift */,
 			);
 			path = The2ndShopVC;
 			sourceTree = "<group>";
@@ -688,11 +688,10 @@
 				543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */,
 				547DDFA72931E8A600FD7818 /* ChattingView.swift in Sources */,
 				5442B7B529320DF1008F8623 /* ReceivedRequestView.swift in Sources */,
-				5444C0AB29236C4D00728EC3 /* ShopView.swift in Sources */,
-				5444C0A729236C1F00728EC3 /* ShopViewController.swift in Sources */,
 				544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */,
 				5487CEF9294B522C003F15D9 /* ShopTabViewController.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
+				54CF0EC3294C59380018E4E2 /* ShopBackgroundTableViewCell.swift in Sources */,
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
@@ -716,11 +715,12 @@
 				54682FC5292EBAB300ABD97A /* StudyCollectionViewCell.swift in Sources */,
 				543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */,
 				5442C419292915F800A8A925 /* ImageTableViewCell.swift in Sources */,
+				548EEB57294C1207006F871D /* SesacFaceCollectionViewCell.swift in Sources */,
 				5461B4C22918C5170000D726 /* AuthView.swift in Sources */,
 				545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */,
 				5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */,
 				543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */,
-				5487CEF5294B4931003F15D9 /* BackgroundViewController.swift in Sources */,
+				5487CEF5294B4931003F15D9 /* ShopBackgroundViewController.swift in Sources */,
 				54CEEC1F292C543C00C0D8CA /* NearView.swift in Sources */,
 				5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */,
 				545AE79C291E608D000F73C3 /* User.swift in Sources */,
@@ -760,7 +760,7 @@
 				54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */,
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
 				5457B18B293CC9B100C600C6 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
-				5487CEF7294B4938003F15D9 /* BackgroundView.swift in Sources */,
+				5487CEF7294B4938003F15D9 /* ShopBackgroundView.swift in Sources */,
 				542C3D53294216BC00E4DC93 /* UIImage+Extension.swift in Sources */,
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
 				54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */,

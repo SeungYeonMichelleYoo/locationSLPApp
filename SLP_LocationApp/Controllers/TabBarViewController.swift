@@ -10,7 +10,7 @@ import SnapKit
 final class TabBarViewController: UITabBarController {
     
     let homeVC = MainMapViewController()
-    let shopVC = ShopViewController()
+    let shopVC = ShopTabViewController()
     let friendVC = FriendViewController()
     let myinfoVC = MyInfoViewController()
     

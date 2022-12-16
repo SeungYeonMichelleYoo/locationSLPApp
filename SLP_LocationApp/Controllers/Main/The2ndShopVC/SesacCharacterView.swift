@@ -9,13 +9,22 @@ import SnapKit
 
 class SesacCharacterView: BaseView {
     
-    lazy var backimage: UIImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleToFill
-        view.layer.cornerRadius = 8
-        view.clipsToBounds = true
-        view.image = UIImage(named: "sesac_background_1")
-        return view
+    //MARK: - collectionview (사진 목록 2열로)
+    lazy var collectionView: UICollectionView = {
+        var layout = UICollectionViewFlowLayout()
+        let itemSpacing : CGFloat = 8
+        
+        let myWidth = (UIScreen.main.bounds.width - itemSpacing * 6) / 2
+        
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
+        layout.scrollDirection = .vertical
+        layout.sectionInset = UIEdgeInsets(top: itemSpacing, left: itemSpacing, bottom: itemSpacing, right: itemSpacing)
+        layout.itemSize = CGSize(width: myWidth , height: 280)
+        
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.register(SesacFaceCollectionViewCell.self, forCellWithReuseIdentifier: "SesacFaceCollectionViewCell")
+        return cv
     }()
    
     
@@ -28,17 +37,15 @@ class SesacCharacterView: BaseView {
     }
     
     override func configureUI() {
-        [backimage].forEach {
-            self.addSubview($0)
-        }
+        self.addSubview(collectionView)
     }
     
     override func setConstraints() {
-        backimage.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(14)
-            make.leading.equalToSuperview().inset(14)
-            make.trailing.equalToSuperview().inset(14)
-            make.height.equalTo(170)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).inset(230)
+            make.leading.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(8)
+            make.bottom.equalToSuperview().inset(16)
         }
     }
 }

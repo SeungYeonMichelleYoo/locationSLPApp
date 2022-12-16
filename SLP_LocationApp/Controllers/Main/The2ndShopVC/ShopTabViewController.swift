@@ -10,11 +10,11 @@ import Pageboy
 
 class ShopTabViewController: TabmanViewController {
     
-    private var viewControllers = [SesacCharacterViewController(), BackgroundViewController()]
+    private var viewControllers = [SesacCharacterViewController(), ShopBackgroundViewController()]
     private var titleList = ["새싹", "배경"]
     
     var mainView = ShopTabView()
-
+    
     override func loadView() {
         self.view = mainView
     }
@@ -23,7 +23,11 @@ class ShopTabViewController: TabmanViewController {
         super.viewDidLoad()
         
         self.dataSource = self
+        configureBar()
         
+    }
+    
+    func configureBar() {
         // Create bar
         let bar = TMBar.ButtonBar()
         bar.layout.transitionStyle = .snap // Customize
@@ -37,9 +41,9 @@ class ShopTabViewController: TabmanViewController {
         bar.indicator.tintColor = Constants.BaseColor.green
         
         // Add to view
-        addBar(bar, dataSource: self, at: .top)
-        
+        addBar(bar, dataSource: self, at: .custom(view: mainView.tabView, layout: nil))
     }
+    
    
 }
 extension ShopTabViewController: PageboyViewControllerDataSource, TMBarDataSource {
