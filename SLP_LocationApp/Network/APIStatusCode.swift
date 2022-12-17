@@ -16,3 +16,16 @@ enum APIStatusCode: Int {
     case serverError = 500
     case clientError = 501
 }
+
+//SearchVC
+enum APIQueueStatusCode: Int {
+    case success = 200
+    case forbiddenUse = 201
+    case cancelPanlty1 = 203
+    case cancelPanlty2 = 204
+    case cancelPanlty3 = 205
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}

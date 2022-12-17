@@ -33,13 +33,51 @@ class HomeAPI {
     static func nearbySearch(lat: Double, long: Double, completion: @escaping (SearchModel?, Int?, Error?) -> Void) {
         let url = "\(BASEURL)/v1/queue/search"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
-        
         let params: Parameters = ["lat": lat, "long": long]
         AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: SearchModel.self) { response in
             let statusCode = response.response?.statusCode
             print("nearbysearch api called")
             print(response.value)
             print(response)
+            switch response.result {
+            case .success(let value): completion(response.value!, statusCode, nil)
+                return
+            case .failure(let error): completion(nil, statusCode, error)
+                return
+            }
+        }
+    }
+    
+    //SearchVC - 스터디 입력화면 - 새싹찾기 버튼 클릭시 호출
+    static func searchForStudy(lat: Double, long: Double, studylist: [String], completion: @escaping (MyQueue?, Int?, Error?) -> Void) {
+        let url = "\(BASEURL)/v1/queue"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        var params: Parameters
+        if studylist.count == 0 {
+            params = ["lat": lat, "long": long, "studylist": "anything"]
+        } else {
+            params = ["lat": lat, "long": long, "studylist": studylist.joined(separator: ",")]
+        }
+        print("doodododo studylist: \(studylist.joined(separator: ","))")
+        AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: MyQueue.self) { response in
+            let statusCode = response.response?.statusCode
+            
+            switch response.result {
+            case .success(let value): completion(response.value!, statusCode, nil)
+                return
+            case .failure(let error): completion(nil, statusCode, error)
+                return
+            }
+        }
+    }
+    
+    //스터디 찾기 중단
+    static func stopStudy(completion: @escaping (MyQueue?, Int?, Error?) -> Void) {
+        let url = "\(BASEURL)/v1/queue"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        AF.request(url, method: .delete, headers: headers).responseDecodable(of: MyQueue.self) { response in
+            let statusCode = response.response?.statusCode
+            
             switch response.result {
             case .success(let value): completion(response.value!, statusCode, nil)
                 return

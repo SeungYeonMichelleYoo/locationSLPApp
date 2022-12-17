@@ -19,6 +19,7 @@ class FriendViewController: BaseViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "friends_plus"), style: .plain, target: self, action: #selector(plusBtnClicked))
+        navigationItem.rightBarButtonItem?.tintColor = Constants.BaseColor.black
     }
     @objc func plusBtnClicked() {
         

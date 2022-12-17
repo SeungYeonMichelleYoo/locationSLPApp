@@ -10,12 +10,15 @@ import Pageboy
 
 class FindTotalViewController: TabmanViewController {
     
-    private var viewControllers = [NearViewController(), ReceivedRequestViewController()]
-    private var titleList = ["새싹 찾기", "받은 요청"]
-    
+//    private var viewControllers = [NearViewController(), ReceivedRequestViewController()]
+    private var viewControllers: [UIViewController] = []
+    private var titleList = ["주변 새싹", "받은 요청"]
+    var viewModel = HomeViewModel()
     var nearCount: Int = 0
     var opponentList: [OpponentModel] = []
     var receivedList: [OpponentModel] = []
+    var lat = 0.0
+    var long = 0.0
     
     var mainView = FindTotalView()
     
@@ -25,8 +28,17 @@ class FindTotalViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         self.dataSource = self
+        
+//        (viewControllers[0] as! NearViewController).setCoordinate(lat: lat, long: long)
+//        (viewControllers[1] as! ReceivedRequestViewController).setCoordinate(lat: lat, long: long)
+        var vc1 = NearViewController()
+        vc1.setCoordinate(lat: lat, long: long)
+        var vc2 = ReceivedRequestViewController()
+        vc2.setCoordinate(lat: lat, long: long)
+        viewControllers = [vc1, vc2]
+        reloadData()
         
         // Create bar
         let bar = TMBar.ButtonBar()
@@ -51,39 +63,45 @@ class FindTotalViewController: TabmanViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)] //적용 안됨????
         
         navigationItem.title = "새싹 찾기"
-        
         //1번째 탭
         scrollToPage(.at(index: 0), animated: false)
-        if opponentList.count == 0 {
-            (viewControllers[0] as! NearViewController).mainView.mainTableView.backgroundView = EmptyBigView()
-        } else {
-            (viewControllers[0] as! NearViewController).opponentList = opponentList
-            (viewControllers[0] as! NearViewController).toggleBtns(hidden: true)
-        }
+//        if opponentList.count == 0 {
+//            (viewControllers[0] as! NearViewController).mainView.mainTableView.backgroundView = EmptyBigView()
+//        } else {
+//            (viewControllers[0] as! NearViewController).opponentList = opponentList
+//            (viewControllers[0] as! NearViewController).toggleBtns(hidden: true)
+//        }
         
         print("receivedList-------\(receivedList.count)")
         
-        if receivedList.count == 0 {
-            var vc = EmptyBigView()
-            vc.mainLabel.text = "아직 받은 요청이 없어요ㅠ"
-            (viewControllers[1] as! ReceivedRequestViewController).mainView.mainTableView.backgroundView = vc
-        } else {
-            (viewControllers[1] as! ReceivedRequestViewController).receivedList = receivedList
-            (viewControllers[1] as! ReceivedRequestViewController).toggleBtns(hidden: true)
-        }
-        
-    }
-    
+//        if receivedList.count == 0 {
+//            var vc = EmptyBigView()
+//            vc.mainLabel.text = "아직 받은 요청이 없어요ㅠ"
+//            (viewControllers[1] as! ReceivedRequestViewController).mainView.mainTableView.backgroundView = vc
+//        } else {
+//            (viewControllers[1] as! ReceivedRequestViewController).receivedList = receivedList
+//            (viewControllers[1] as! ReceivedRequestViewController).toggleBtns(hidden: true)
+//        }
+}
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
     @objc func stopSearchBtnClicked() {
+        
     }
     
+//    private func stopStudy() {
+//        viewModel.stopStudyVM { myQueue, statusCode in
+//            <#code#>
+//        }
+//    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        print("------------------presented-------------")
         tabBarController?.tabBar.isHidden = true
         self.hidesBottomBarWhenPushed = true
+//        (viewControllers[0] as! NearViewController).setCoordinate(lat: lat, long: long)
+//        (viewControllers[1] as! ReceivedRequestViewController).setCoordinate(lat: lat, long: long)
+//        reloadData()
     }
 }
 

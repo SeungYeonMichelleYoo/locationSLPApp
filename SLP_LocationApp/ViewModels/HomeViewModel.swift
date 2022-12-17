@@ -25,4 +25,20 @@ class HomeViewModel {
             completion(searchModel, statusCode)
         }
     }
+    
+    //스터디 입력화면 - 새싹찾기 버튼 클릭시 호출
+    func searchForStudyVM(lat: Double, long: Double, studylist: [String], completion: @escaping (MyQueue?, Int?) -> Void) {
+        
+        HomeAPI.searchForStudy(lat: lat, long: long, studylist: studylist) { myQueue, statusCode, error in
+            completion(myQueue, statusCode)
+        }
+    }
+    
+    //스터디 찾기 중단
+    func stopStudyVM(completion: @escaping (MyQueue?, Int?) -> Void) {
+        
+        HomeAPI.stopStudy(completion: { myQueue, statusCode, error in
+            completion(myQueue, statusCode)
+        })
+    }
 }

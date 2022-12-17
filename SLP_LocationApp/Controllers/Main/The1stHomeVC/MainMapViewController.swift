@@ -61,7 +61,10 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     @objc func floatingBtnClicked() {
         if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_waiting") {
             //새싹찾기 화면으로 이동
-            let vc = SearchViewController()
+            let vc = FindTotalViewController()
+            var center = mainView.mapView.centerCoordinate
+            vc.lat = center.latitude
+            vc.long = center.longitude
             self.transition(vc, transitionStyle: .push)
         } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_matched") {
             //채팅화면으로 이동
@@ -76,6 +79,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
             }
             switch authorizationStatus {
             case .authorizedAlways, .authorizedWhenInUse:
+                //스터디 입력 화면으로 이동
                 let vc = SearchViewController()
                 var center = mainView.mapView.centerCoordinate
                 vc.lat = center.latitude
@@ -136,6 +140,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         self.tabBarController?.tabBar.isHidden = false
         
         checkUserDeviceLocationsServiceAuthorization()
+        checkCurrentStatus()
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -257,7 +262,7 @@ extension MainMapViewController {
     }
     
     //주변 새싹 annotations
-    func nearbySearch(lat: Double, long: Double) {
+    private func nearbySearch(lat: Double, long: Double) {
         print("lat: \(lat), long: \(long)")
         self.viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
             switch statusCode {

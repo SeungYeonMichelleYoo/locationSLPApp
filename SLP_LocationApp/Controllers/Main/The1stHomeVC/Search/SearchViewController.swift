@@ -10,8 +10,8 @@ import UIKit
 final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     var viewModel = HomeViewModel()
-    var lat: Double = 37.517819364682694
-    var long: Double = 126.88647317074734
+    var lat: Double = 0.0 //lat, long의 경우 MainMapVC로부터 값전달 받아옴 (center.latitude)
+    var long: Double = 0.0
     var mainView = SearchView()
     var headerLabel = ["지금 주변에는","내가 하고 싶은"]
     var recommendStudy: [String] = []
@@ -31,7 +31,6 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         
         configureTextField()
         configureCollectionView()
-        getstudyList()
         
         mainView.searchBtn.addTarget(self, action: #selector(searchBtnClicked), for: .touchUpInside)
         print("lat: \(lat)")
@@ -62,29 +61,39 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc func searchBtnClicked() {
-        getNearPeople()
+        expectingStudy()
     }
     
-    func getNearPeople() {
-        viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
+    func expectingStudy() {
+        viewModel.searchForStudyVM(lat: lat, long: long, studylist: myStudy) { myQueue, statusCode in
+            print(self.myStudy)
             switch statusCode {
-            case APIStatusCode.success.rawValue:
+            case APIQueueStatusCode.success.rawValue:
+                print(self.lat, self.long)
                 let vc = FindTotalViewController()
-                vc.opponentList = searchModel!.fromQueueDB
-                vc.receivedList = searchModel!.fromQueueDBRequested
-                print("searchview - opponentList count: \(searchModel!.fromQueueDB.count)")
-                print("searchview - receivedList count: \(searchModel!.fromQueueDBRequested.count)")
-                vc.tabBarController?.tabBar.isHidden = true
-                vc.hidesBottomBarWhenPushed = true // 안 먹힘 왜???
+                vc.lat = self.lat
+                vc.long = self.long
                 self.transition(vc, transitionStyle: .push)
                 return
-            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+            case APIQueueStatusCode.forbiddenUse.rawValue:
+                self.showToast(message: "신고가 누적되어 이용하실 수 없습니다")
+                return
+            case APIQueueStatusCode.cancelPanlty1.rawValue:
+                self.showToast(message: "스터디 취소 패널티로, 1분동안 이용하실 수 없습니다")
+                return
+            case APIQueueStatusCode.cancelPanlty2.rawValue:
+                self.showToast(message: "스터디 취소 패널티로, 2분동안 이용하실 수 없습니다")
+                return
+            case APIQueueStatusCode.cancelPanlty3.rawValue:
+                self.showToast(message: "스터디 취소 패널티로, 3분동안 이용하실 수 없습니다")
+                return
+            case APIQueueStatusCode.serverError.rawValue, APIQueueStatusCode.clientError.rawValue:
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
                 return
-            case APIStatusCode.firebaseTokenError.rawValue:
+            case APIQueueStatusCode.firebaseTokenError.rawValue:
                 UserViewModel().refreshIDToken { isSuccess in
                     if isSuccess! {
-                        self.getNearPeople()
+                        self.expectingStudy()
                     } else {
                         self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
                     }
@@ -99,21 +108,56 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         }
     }
     
+//    func getNearPeople() {
+//        viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
+//            switch statusCode {
+//            case APIStatusCode.success.rawValue:
+//                let vc = FindTotalViewController()
+//                vc.opponentList = searchModel!.fromQueueDB
+//                vc.receivedList = searchModel!.fromQueueDBRequested
+//                print("searchview - opponentList count: \(searchModel!.fromQueueDB.count)")
+//                print("searchview - receivedList count: \(searchModel!.fromQueueDBRequested.count)")
+//                vc.tabBarController?.tabBar.isHidden = true
+//                vc.hidesBottomBarWhenPushed = true // 안 먹힘 왜???
+//                self.transition(vc, transitionStyle: .push)
+//                return
+//            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+//                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+//                return
+//            case APIStatusCode.firebaseTokenError.rawValue:
+//                UserViewModel().refreshIDToken { isSuccess in
+//                    if isSuccess! {
+//                        self.getNearPeople()
+//                    } else {
+//                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+//                    }
+//                }
+//                return
+//            case nil:
+//                self.showToast(message: "네트워크 연결을 확인해주세요.")
+//                return
+//            default:
+//                break
+//            }
+//        }
+//    }
+    
     func getstudyList() {
         viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
             print(statusCode)
             switch statusCode {
             case APIStatusCode.success.rawValue:
                 for opponent in searchModel!.fromQueueDB {
-                    print(opponent.studylist)
                     self.nearStudy = self.nearStudy + opponent.studylist
+                }
+                for received in searchModel!.fromQueueDBRequested {
+                    self.nearStudy = self.nearStudy + received.studylist
                 }
                 for recomStudy in searchModel!.fromRecommend {
                     self.recommendStudy.append(recomStudy)
                 }
-                self.nearStudy = ["test1", "test2", "test3", "test4", "test5", "test6", "test7", "test8"]
+                self.recommendStudy = self.recommendStudy.uniqued()
                 self.nearStudy = self.nearStudy.uniqued()
-                print(self.nearStudy)
                 self.mainView.nearCollectionView.reloadData()
                 return
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
@@ -179,6 +223,10 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         if let flowLayout = mainView.myCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getstudyList()
     }
 }
 

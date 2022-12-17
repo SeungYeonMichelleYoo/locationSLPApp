@@ -7,10 +7,12 @@
 import UIKit
 
 class NearViewController: BaseViewController {
-    
+    var viewModel = HomeViewModel()
     var mainView = NearView()
     var opponentList: [OpponentModel] = []
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
+    var lat = 0.0
+    var long = 0.0
     
     override func loadView() {
         self.view = mainView
@@ -26,9 +28,59 @@ class NearViewController: BaseViewController {
         mainView.mainTableView.dataSource = self
         mainView.mainTableView.register(NearPeopleTableViewCell.self, forCellReuseIdentifier: "NearPeopleTableViewCell")
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        print("여기는. nearviewcontroller \(lat), \(long)")
+        nearbySearch(lat: lat, long: long)
+    }
     
     func toggleBtns(hidden: Bool) {
         mainView.btnsStackView.isHidden = hidden
+    }
+    
+    //서버통신 갱신 위함
+    private func nearbySearch(lat: Double, long: Double) {
+        print("lat: \(lat), long: \(long)")
+        self.viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
+            switch statusCode {
+            case APIStatusCode.success.rawValue:
+                print("스터디 함께할 새싹 검색 성공")
+                self.opponentList = searchModel!.fromQueueDB
+                self.mainView.mainTableView.reloadData()
+                if self.opponentList.count == 0 {
+                    self.mainView.mainTableView.backgroundView = EmptyBigView()
+                } else {
+                    self.toggleBtns(hidden: true)
+                }
+                return
+            case APIStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.nearbySearch(lat: lat, long: long)
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+                
+            case APIStatusCode.unAuthorized.rawValue:
+                print("미가입회원")
+                return
+            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
+    
+    func setCoordinate(lat: Double, long: Double) {
+        self.lat = lat
+        self.long = long
+        print("setCoordinate \(lat), \(long)")
+        print("after: \(self.lat), \(self.long)")
     }
 }
 
@@ -59,6 +111,7 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.studyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         
+        //하고싶은 스터디: 문제 생김
         if let flowLayout = cell.studyCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 //                            print(UICollectionViewFlowLayout.automaticSize)
 //                            print(flowLayout.estimatedItemSize)
