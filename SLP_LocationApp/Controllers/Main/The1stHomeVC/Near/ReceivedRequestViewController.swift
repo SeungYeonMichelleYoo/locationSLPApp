@@ -47,7 +47,7 @@ class ReceivedRequestViewController: BaseViewController {
             switch statusCode {
             case APIStatusCode.success.rawValue:
                 print("스터디 함께할 새싹 검색 성공")
-                self.receivedList = searchModel!.fromQueueDBRequested
+                self.receivedList = searchModel!.fromQueueDB
                 self.mainView.mainTableView.reloadData()
                 if self.receivedList.count == 0 {
                     var vc = EmptyBigView()
@@ -92,6 +92,7 @@ extension ReceivedRequestViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearPeopleTableViewCell", for: indexPath) as! NearPeopleTableViewCell
+        cell.cellDelegate = self
         
         cell.nickLabel.text = receivedList[indexPath.row].nick
         cell.nickView.addGestureRecognizer(getPressGesture())
@@ -172,5 +173,12 @@ extension ReceivedRequestViewController: UICollectionViewDelegate, UICollectionV
             return cell
             
         }
+    }
+}
+extension ReceivedRequestViewController: NearPeopleTableDelegate {
+    func requestBtnTapped() {
+        print("파랑색 요청하기 버튼 클릭됨")
+        let vc = ReceivedPopUpViewController()
+        self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }

@@ -33,9 +33,7 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         configureCollectionView()
         
         mainView.searchBtn.addTarget(self, action: #selector(searchBtnClicked), for: .touchUpInside)
-        print("lat: \(lat)")
-        print(long)
-        
+             
         self.tabBarController?.tabBar.isHidden = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: self.view.window)
@@ -107,44 +105,9 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
             }
         }
     }
-    
-//    func getNearPeople() {
-//        viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
-//            switch statusCode {
-//            case APIStatusCode.success.rawValue:
-//                let vc = FindTotalViewController()
-//                vc.opponentList = searchModel!.fromQueueDB
-//                vc.receivedList = searchModel!.fromQueueDBRequested
-//                print("searchview - opponentList count: \(searchModel!.fromQueueDB.count)")
-//                print("searchview - receivedList count: \(searchModel!.fromQueueDBRequested.count)")
-//                vc.tabBarController?.tabBar.isHidden = true
-//                vc.hidesBottomBarWhenPushed = true // 안 먹힘 왜???
-//                self.transition(vc, transitionStyle: .push)
-//                return
-//            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
-//                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
-//                return
-//            case APIStatusCode.firebaseTokenError.rawValue:
-//                UserViewModel().refreshIDToken { isSuccess in
-//                    if isSuccess! {
-//                        self.getNearPeople()
-//                    } else {
-//                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
-//                    }
-//                }
-//                return
-//            case nil:
-//                self.showToast(message: "네트워크 연결을 확인해주세요.")
-//                return
-//            default:
-//                break
-//            }
-//        }
-//    }
-    
+        
     func getstudyList() {
         viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
-            print(statusCode)
             switch statusCode {
             case APIStatusCode.success.rawValue:
                 for opponent in searchModel!.fromQueueDB {

@@ -41,6 +41,8 @@
 		5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0B62923820D00728EC3 /* NameTableViewCell.swift */; };
 		5444C0BB292393A600728EC3 /* DetailProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */; };
 		5444C0BD292393B600728EC3 /* DetailProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0BC292393B600728EC3 /* DetailProfileView.swift */; };
+		544BF530294EDA3500FC27C0 /* ReceivedPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BF52F294EDA3500FC27C0 /* ReceivedPopUpViewController.swift */; };
+		544BF532294EDA7B00FC27C0 /* ReceivedPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BF531294EDA7B00FC27C0 /* ReceivedPopUpView.swift */; };
 		544CEB96294322F000E5DEC8 /* BackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CEB95294322F000E5DEC8 /* BackgroundImage.swift */; };
 		544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */; };
 		54523736292B372D002B8255 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 54523735292B372D002B8255 /* MultiSlider */; };
@@ -154,6 +156,8 @@
 		5444C0B62923820D00728EC3 /* NameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameTableViewCell.swift; sourceTree = "<group>"; };
 		5444C0BA292393A600728EC3 /* DetailProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileViewController.swift; sourceTree = "<group>"; };
 		5444C0BC292393B600728EC3 /* DetailProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileView.swift; sourceTree = "<group>"; };
+		544BF52F294EDA3500FC27C0 /* ReceivedPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedPopUpViewController.swift; sourceTree = "<group>"; };
+		544BF531294EDA7B00FC27C0 /* ReceivedPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedPopUpView.swift; sourceTree = "<group>"; };
 		544CEB95294322F000E5DEC8 /* BackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImage.swift; sourceTree = "<group>"; };
 		544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPeopleTableViewCell.swift; sourceTree = "<group>"; };
 		54523737292B6680002B8255 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
@@ -535,6 +539,8 @@
 				5473C2C7293DD40800EBF11B /* NearPopUpView.swift */,
 				5442B7B229320DE2008F8623 /* ReceivedRequestViewController.swift */,
 				5442B7B429320DF1008F8623 /* ReceivedRequestView.swift */,
+				544BF52F294EDA3500FC27C0 /* ReceivedPopUpViewController.swift */,
+				544BF531294EDA7B00FC27C0 /* ReceivedPopUpView.swift */,
 				54ACA0A3293B1635001E4252 /* EmptyBigView.swift */,
 				544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */,
 				5434ACDC293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift */,
@@ -711,6 +717,7 @@
 				545AE7A3291E7811000F73C3 /* NoNetworkView.swift in Sources */,
 				545BEAFF291A485500CF861F /* MainMapView.swift in Sources */,
 				544453CF293A0E3700D8E994 /* DynamicHeightCollectionView.swift in Sources */,
+				544BF530294EDA3500FC27C0 /* ReceivedPopUpViewController.swift in Sources */,
 				5461B4CE2918C5A60000D726 /* EmailView.swift in Sources */,
 				5442B7B729320EE5008F8623 /* FindTotalViewController.swift in Sources */,
 				547DDFAD2931EF8000FD7818 /* MyQueueState.swift in Sources */,
@@ -764,6 +771,7 @@
 				54FE19EA291A2D930033BCE4 /* UITextField+Extension.swift in Sources */,
 				5461B4CC2918C59A0000D726 /* EmailViewController.swift in Sources */,
 				5457B18B293CC9B100C600C6 /* CollectionViewLeftAlignFlowLayout.swift in Sources */,
+				544BF532294EDA7B00FC27C0 /* ReceivedPopUpView.swift in Sources */,
 				5487CEF7294B4938003F15D9 /* ShopBackgroundView.swift in Sources */,
 				542C3D53294216BC00E4DC93 /* UIImage+Extension.swift in Sources */,
 				545BEB01291A48B900CF861F /* SMSCodeViewController.swift in Sources */,
