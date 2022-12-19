@@ -24,7 +24,35 @@ class NearViewController: BaseViewController {
         mainView.changeBtn.addTarget(self, action: #selector(changeBtnClicked), for: .touchUpInside)
     }
     @objc func changeBtnClicked() {
-        self.navigationController?.popViewController(animated: true)
+        changeStudy()
+    }
+    
+    private func changeStudy() {
+        viewModel.stopStudyVM { myQueue, statusCode in
+            switch statusCode {
+            case APIStopStudyStatusCode.success.rawValue:
+                let vc = SearchViewController()
+                self.transition(vc, transitionStyle: .push)
+                return
+            case APIStopStudyStatusCode.matched.rawValue:
+                return
+            case APIStopStudyStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.changeStudy()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIStopStudyStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
     }
     
     func setupTableview() {
@@ -34,7 +62,6 @@ class NearViewController: BaseViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        print("여기는. nearviewcontroller \(lat), \(long)")
         nearbySearch(lat: lat, long: long)
     }
     

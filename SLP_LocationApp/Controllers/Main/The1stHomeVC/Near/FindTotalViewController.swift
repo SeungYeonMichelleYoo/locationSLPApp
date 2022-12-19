@@ -73,11 +73,8 @@ class FindTotalViewController: TabmanViewController {
     func checkCurrentStatus() {
         viewModel.checkMatchStateVM { myQueueState, statusCode in
             switch statusCode {
-            case APIStatusCode.success.rawValue:  //매칭대기중 floatingBtn을 눌러서 해당 VC로 온 경우 : pop 1번만해야함.
-                if myQueueState?.matched == 0 {
-                    self.navigationController?.popViewController(animated: true)
-                }
-                //그런데 MainMapVC -> study 입력 -> 으로 온 경우는 pop 2번해야함. viewDidAppear에서 처리함 (remove SearchVC)
+            case APIStatusCode.success.rawValue:
+                self.navigationController?.popViewController(animated: true)
                 return
             case APIStatusCode.option.rawValue: //일반상태가 해당 VC에 올 일이 없음.
                 return
@@ -108,9 +105,22 @@ class FindTotalViewController: TabmanViewController {
         viewModel.stopStudyVM { myQueue, statusCode in
             switch statusCode {
             case APIStopStudyStatusCode.success.rawValue:
-                for controller in self.navigationController!.viewControllers as Array {
-                    if controller.isKind(of: MainMapViewController.self) {
-                        (controller as! MainMapViewController).moveToUserLocation()
+//                var vcList = self.navigationController!.viewControllers
+//                var index = 0
+//                for vc in vcList {//NoNetwork, TabBar, MainMap, Search, FindTotal
+//                    if vc.isKind(of: SearchViewController.self) {
+//                        vcList.remove(at: index)
+//                        continue
+//                    } else if vc.isKind(of: MainMapViewController.self) {
+//                        (vc as! MainMapViewController).moveToUserLocation()
+//                    }
+//                    index = index + 1
+//                }
+//                self.navigationController!.viewControllers = vcList
+                var vcList = self.navigationController!.viewControllers
+                for i in 0 ..< vcList.count {//NoNetwork, TabBar, Search, FindTotal
+                    if vcList[i].isKind(of: MainMapViewController.self) {
+                        (vcList[i] as! MainMapViewController).moveToUserLocation()
                         break
                     }
                 }
@@ -143,14 +153,14 @@ class FindTotalViewController: TabmanViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        for controller in self.navigationController!.viewControllers as Array {
-            if controller.isKind(of: SearchViewController.self) { //navigation 안에 searchVC가 들어있다.
-                var vcList = self.navigationController!.viewControllers
-                vcList.remove(at: vcList.count - 2) //[0,1,2] -> 1 삭제
-                self.navigationController!.viewControllers = vcList
+        var vcList = self.navigationController!.viewControllers
+        for i in 0 ..< vcList.count {//NoNetwork, TabBar, Search, FindTotal
+            if vcList[i].isKind(of: SearchViewController.self) {
+                vcList.remove(at: i)
                 break
             }
         }
+        self.navigationController!.viewControllers = vcList
     }
 }
 

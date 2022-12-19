@@ -60,9 +60,8 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_waiting") {
             //새싹찾기 화면으로 이동
             let vc = FindTotalViewController()
-            var center = mainView.mapView.centerCoordinate
-            vc.lat = center.latitude
-            vc.long = center.longitude
+            vc.lat = self.lat
+            vc.long = self.long
             self.transition(vc, transitionStyle: .push)
         } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_matched") {
             //채팅화면으로 이동
@@ -82,6 +81,8 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
                 var center = mainView.mapView.centerCoordinate
                 vc.lat = center.latitude
                 vc.long = center.longitude
+                self.long = center.longitude
+                self.lat = center.latitude
                 self.transition(vc, transitionStyle: .push)
                 return
             default:
@@ -132,10 +133,10 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     func centerMap(center: CLLocationCoordinate2D) {
         //지도 중심 기반으로 보여질 범위 (annotation기준으로 반경 약 700m)
         //중요!!!!!!!!!!!!!!!! 나중에 center 다시 defaultCoordinate -> center로 바꿔놓기
-        let region = MKCoordinateRegion(center: defaultCoordinate, latitudinalMeters: 700, longitudinalMeters: 700)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 700, longitudinalMeters: 700)
         mainView.mapView.setRegion(region, animated: true)
         
-        nearbySearch(lat: defaultCoordinate.latitude, long: defaultCoordinate.longitude) //center.latitude,~로 나중에 바꾸기!!!!!!!!!!
+        nearbySearch(lat: center.latitude, long: center.longitude) //center.latitude,~로 나중에 바꾸기!!!!!!!!!!
     }
     
     override func viewWillAppear(_ animated: Bool) {
