@@ -7,6 +7,8 @@
 import UIKit
 import Tabman
 import Pageboy
+import MapKit
+import CoreLocation
 
 class FindTotalViewController: TabmanViewController {
     
@@ -18,7 +20,7 @@ class FindTotalViewController: TabmanViewController {
     var receivedList: [OpponentModel] = []
     var lat = 0.0
     var long = 0.0
-    
+  
     var mainView = FindTotalView()
     
     override func loadView() {
@@ -56,28 +58,99 @@ class FindTotalViewController: TabmanViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopSearchBtnClicked))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)] //적용 안됨????
+        
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([ NSAttributedString.Key.font: UIFont.font(.Title3_M14) ], for: .normal)
+       
         
         navigationItem.title = "새싹 찾기"
         //1번째 탭
         scrollToPage(.at(index: 0), animated: false)
 }
     @objc func backBtnClicked() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    @objc func stopSearchBtnClicked() {
-        
+        checkCurrentStatus()
     }
     
-//    private func stopStudy() {
-//        viewModel.stopStudyVM { myQueue, statusCode in
-//            <#code#>
-//        }
-//    }
+    func checkCurrentStatus() {
+        viewModel.checkMatchStateVM { myQueueState, statusCode in
+            switch statusCode {
+            case APIStatusCode.success.rawValue:  //매칭대기중 floatingBtn을 눌러서 해당 VC로 온 경우 : pop 1번만해야함.
+                if myQueueState?.matched == 0 {
+                    self.navigationController?.popViewController(animated: true)
+                }
+                //그런데 MainMapVC -> study 입력 -> 으로 온 경우는 pop 2번해야함. viewDidAppear에서 처리함 (remove SearchVC)
+                return
+            case APIStatusCode.option.rawValue: //일반상태가 해당 VC에 올 일이 없음.
+                return
+            case APIStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.checkCurrentStatus()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
+    
+    @objc func stopSearchBtnClicked() {
+        stopStudy()
+    }
+
+    private func stopStudy() {
+        viewModel.stopStudyVM { myQueue, statusCode in
+            switch statusCode {
+            case APIStopStudyStatusCode.success.rawValue:
+                for controller in self.navigationController!.viewControllers as Array {
+                    if controller.isKind(of: MainMapViewController.self) {
+                        (controller as! MainMapViewController).moveToUserLocation()
+                        break
+                    }
+                }
+                self.navigationController?.popViewController(animated: true)
+                return
+            case APIStopStudyStatusCode.matched.rawValue:
+                return
+            case APIStopStudyStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.stopStudy()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIStopStudyStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         self.hidesBottomBarWhenPushed = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        for controller in self.navigationController!.viewControllers as Array {
+            if controller.isKind(of: SearchViewController.self) { //navigation 안에 searchVC가 들어있다.
+                var vcList = self.navigationController!.viewControllers
+                vcList.remove(at: vcList.count - 2) //[0,1,2] -> 1 삭제
+                self.navigationController!.viewControllers = vcList
+                break
+            }
+        }
     }
 }
 

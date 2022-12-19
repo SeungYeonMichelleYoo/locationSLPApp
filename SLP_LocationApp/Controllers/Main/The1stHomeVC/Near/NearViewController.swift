@@ -21,6 +21,10 @@ class NearViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableview()
+        mainView.changeBtn.addTarget(self, action: #selector(changeBtnClicked), for: .touchUpInside)
+    }
+    @objc func changeBtnClicked() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     func setupTableview() {

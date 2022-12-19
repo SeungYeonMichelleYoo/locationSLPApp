@@ -71,7 +71,13 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
                 let vc = FindTotalViewController()
                 vc.lat = self.lat
                 vc.long = self.long
-                self.transition(vc, transitionStyle: .push)
+//                self.view.window?.rootViewController = TabBarViewController()
+//                self.view.window?.rootViewController?.dismiss(animated: false, completion: nil)
+//                self.dismiss(animated: false) {
+                    //                self.view.window?.rootViewController?.dismiss(animated: false, completion: nil)
+                    self.transition(vc, transitionStyle: .push)
+//                    self.present(vc, animated: false)
+//                }
                 return
             case APIQueueStatusCode.forbiddenUse.rawValue:
                 self.showToast(message: "신고가 누적되어 이용하실 수 없습니다")

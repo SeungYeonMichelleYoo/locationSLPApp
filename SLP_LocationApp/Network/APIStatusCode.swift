@@ -29,3 +29,13 @@ enum APIQueueStatusCode: Int {
     case serverError = 500
     case clientError = 501
 }
+
+//FindTotalVC - stop study
+enum APIStopStudyStatusCode: Int {
+    case success = 200
+    case matched = 201
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}

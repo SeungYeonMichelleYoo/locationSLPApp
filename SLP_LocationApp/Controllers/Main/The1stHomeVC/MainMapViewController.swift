@@ -23,6 +23,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     var receivedList:[OpponentModel] = []
     var lat = 0.0
     var long = 0.0
+    var isCoordinateSet = false
     
     lazy var locationManager : CLLocationManager = {
         let manager = CLLocationManager()
@@ -43,10 +44,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         mainView.mapView.delegate = self
         
         navigationItem.title = ""
-        
-        //플로팅버튼 상태
-        checkCurrentStatus()
-        
+                
         mainView.floatingBtn.addTarget(self, action: #selector(floatingBtnClicked), for: .touchUpInside)
         
         mainView.currentlocationBtn.addTarget(self, action: #selector(currentBtnClicked), for: .touchUpInside)
@@ -124,6 +122,11 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
                 return
             }
         }
+    }
+    
+    public func moveToUserLocation() {
+        mainView.mapView.setCenter(defaultCoordinate, animated: false)
+        //mainView.mapView.userLocation.coordinate로 바꾸기 나중에
     }
     
     func centerMap(center: CLLocationCoordinate2D) {
@@ -226,7 +229,7 @@ extension MainMapViewController {
             locationManager.requestWhenInUseAuthorization() // 앱을 사용하는 동안에 대한 위치 권한 요청
         case .restricted, .denied:
             print("DENIED, 아이폰 설정으로 유도")
-            
+            self.isCoordinateSet = true
             self.centerMap(center: defaultCoordinate)
             //여기서 영등포중심으로 서버통신 진행(post, v1/queue/search)
             showRequestLocationServiceAlert()
@@ -252,6 +255,7 @@ extension MainMapViewController {
         }
         let cancel = UIAlertAction(title: "취소", style: .default, handler: { _ in
             //새싹캠퍼스를 중심으로 서버통신
+            self.isCoordinateSet = true
             self.centerMap(center: self.defaultCoordinate)
         })
         
@@ -305,8 +309,11 @@ extension MainMapViewController {
     
     //MARK: - 현재위치
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let coordinate = locations.last?.coordinate {
-            centerMap(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
+        if !isCoordinateSet {
+            if let coordinate = locations.last?.coordinate {
+                isCoordinateSet = true
+                centerMap(center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude))
+            }
         }
         self.locationManager.stopUpdatingLocation()
     }

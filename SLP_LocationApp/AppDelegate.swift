@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // device token 요청
         UIApplication.shared.registerForRemoteNotifications()
-        
+                
         return true
     }
     
