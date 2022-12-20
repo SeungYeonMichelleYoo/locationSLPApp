@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 
 protocol NearPeopleTableDelegate: AnyObject {
-    func requestBtnTapped()
+    func requestBtnTapped(sender: UIButton!)
 }
 
 class NearPeopleTableViewCell: UITableViewCell {
@@ -147,8 +147,8 @@ class NearPeopleTableViewCell: UITableViewCell {
         self.requestBtn.addTarget(self, action: #selector(requestBtnClicked), for: .touchUpInside)
     }
     @objc func requestBtnClicked() {
-            cellDelegate?.requestBtnTapped()
-        }
+        cellDelegate?.requestBtnTapped(sender: requestBtn.self)
+    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

@@ -45,9 +45,9 @@ final class DetailProfileViewController: BaseViewController {
         navigationItem.title = "정보 관리"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveBtnClicked))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([ NSAttributedString.Key.font: UIFont.font(.Title3_M14) ], for: .normal)
         
         setupTableview()
-        print("userCheckRecursion")
         userCheckRecursion() //내정보 불러오는 통신
     }
     @objc func backBtnClicked() {

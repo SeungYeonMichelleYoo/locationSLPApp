@@ -49,3 +49,24 @@ enum APIMyQueueStatusCode: Int {
     case serverError = 500
     case clientError = 501
 }
+
+enum APIStudyRequestStatusCode: Int {
+    case success = 200
+    case alreadyRecievedRequest = 201
+    case opponentCancelledMatcting = 202
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}
+
+enum APIStudyAcceptStatusCode: Int {
+    case success = 200
+    case alreadyOpponentMatched = 201
+    case opponentCancelledMatcting = 202
+    case alreadyIMatched = 203
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}

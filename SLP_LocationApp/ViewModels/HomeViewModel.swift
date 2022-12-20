@@ -41,4 +41,20 @@ class HomeViewModel {
             completion(myQueue, statusCode)
         })
     }
+    
+    //스터디 요청
+    func studyrequestVM(otheruid: String, completion: @escaping (Int?) -> Void) {
+        
+        HomeAPI.requestStudy(otheruid: otheruid) { statusCode, error in
+            completion(statusCode)
+        }
+    }
+    
+    //스터디 수락
+    func studyacceptVM(otheruid: String, completion: @escaping (Int?) -> Void) {
+        
+        HomeAPI.studyAccept(otheruid: otheruid) { statusCode, error in
+            completion(statusCode)
+        }
+    }
 }

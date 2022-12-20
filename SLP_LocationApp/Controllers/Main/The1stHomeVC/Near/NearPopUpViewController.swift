@@ -8,7 +8,10 @@ import UIKit
 
 final class NearPopUpViewController: BaseViewController {
     
+    var requestedUid = ""
+    
     var mainView = NearPopUpView()
+    var viewModel = HomeViewModel()
     
     override func loadView() {
         self.view = mainView
@@ -36,8 +39,35 @@ final class NearPopUpViewController: BaseViewController {
     }
     
     @objc func okBtnClicked() {
-        
+        studyRequest()
     }
     
+    func studyRequest() {
+        viewModel.studyrequestVM(otheruid: requestedUid) { statusCode in
+            switch statusCode {
+            case APIStudyRequestStatusCode.success.rawValue:
+                return
+            case APIStudyRequestStatusCode.alreadyRecievedRequest.rawValue:
+                return
+            case APIStudyRequestStatusCode.opponentCancelledMatcting.rawValue:
+                return
+            case APIStudyRequestStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.studyRequest()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIStudyRequestStatusCode.unAuthorized.rawValue:
+                return
+            case APIStudyRequestStatusCode.serverError.rawValue, APIStudyRequestStatusCode.clientError.rawValue:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
 }
-

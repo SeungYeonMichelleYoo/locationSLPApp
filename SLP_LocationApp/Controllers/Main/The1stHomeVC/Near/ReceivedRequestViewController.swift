@@ -176,7 +176,7 @@ extension ReceivedRequestViewController: UICollectionViewDelegate, UICollectionV
     }
 }
 extension ReceivedRequestViewController: NearPeopleTableDelegate {
-    func requestBtnTapped() {
+    func requestBtnTapped(sender: UIButton!) {
         print("파랑색 요청하기 버튼 클릭됨")
         let vc = ReceivedPopUpViewController()
         self.transition(vc, transitionStyle: .presentFullScreen)

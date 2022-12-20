@@ -60,8 +60,10 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_waiting") {
             //새싹찾기 화면으로 이동
             let vc = FindTotalViewController()
-            vc.lat = self.lat
-            vc.long = self.long
+//            vc.lat = self.lat
+//            vc.long = self.long
+            vc.lat = UserDefaults.standard.double(forKey: "lat")
+            vc.long = UserDefaults.standard.double(forKey: "long")
             self.transition(vc, transitionStyle: .push)
         } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_matched") {
             //채팅화면으로 이동
@@ -81,8 +83,10 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
                 var center = mainView.mapView.centerCoordinate
                 vc.lat = center.latitude
                 vc.long = center.longitude
-                self.long = center.longitude
-                self.lat = center.latitude
+//                self.long = center.longitude
+//                self.lat = center.latitude
+                UserDefaults.standard.set(center.latitude, forKey: "lat")
+                UserDefaults.standard.set(center.longitude, forKey: "long")
                 self.transition(vc, transitionStyle: .push)
                 return
             default:
@@ -116,7 +120,6 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
                 }
                 return
             case APIMyQueueStatusCode.serverError.rawValue, APIMyQueueStatusCode.clientError.rawValue:
-                print("서버 점검중입니다. 관리자에게 문의해주세요.")
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
                 return
             default: self.showToast(message: "네트워크 연결을 확인해주세요.")

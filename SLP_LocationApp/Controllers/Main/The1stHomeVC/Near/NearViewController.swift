@@ -13,6 +13,7 @@ class NearViewController: BaseViewController {
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
     var lat = 0.0
     var long = 0.0
+    var requestedUid = ""
     
     override func loadView() {
         self.view = mainView
@@ -124,6 +125,8 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearPeopleTableViewCell", for: indexPath) as! NearPeopleTableViewCell
         cell.cellDelegate = self
         
+        cell.requestBtn.tag = indexPath.row
+    
         cell.nickLabel.text = opponentList[indexPath.row].nick
         cell.nickView.addGestureRecognizer(getPressGesture())
         cell.nickView.tag = indexPath.row
@@ -211,9 +214,9 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 extension NearViewController: NearPeopleTableDelegate {
-    func requestBtnTapped() {
-        print("빨강색 요청하기 버튼 클릭됨")
+    func requestBtnTapped(sender: UIButton!) {
         let vc = NearPopUpViewController()
+        vc.requestedUid = opponentList[sender.tag].uid
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }

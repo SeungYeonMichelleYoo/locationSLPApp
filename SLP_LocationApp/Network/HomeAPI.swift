@@ -58,7 +58,6 @@ class HomeAPI {
         } else {
             params = ["lat": lat, "long": long, "studylist": studylist.joined(separator: ",")]
         }
-        print("doodododo studylist: \(studylist.joined(separator: ","))")
         AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: MyQueue.self) { response in
             let statusCode = response.response?.statusCode
             
@@ -82,6 +81,42 @@ class HomeAPI {
             case .success(let value): completion(response.value!, statusCode, nil)
                 return
             case .failure(let error): completion(nil, statusCode, error)
+                return
+            }
+        }
+    }
+    
+    //스터디 요청
+    static func requestStudy(otheruid: String, completion: @escaping (Int?, Error?) -> Void) {
+        let url = "\(BASEURL)/v1/queue/studyrequest"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        let params: Parameters = ["otheruid": otheruid]
+        
+        AF.request(url, method: .post, headers: headers).response { response in
+            let statusCode = response.response?.statusCode
+            
+            switch response.result {
+            case .success(let value): completion(statusCode, nil)
+                return
+            case .failure(let error): completion(statusCode, error)
+                return
+            }
+        }
+    }
+    
+    //스터디 수락
+    static func studyAccept(otheruid: String, completion: @escaping (Int?, Error?) -> Void) {
+        let url = "\(BASEURL)/v1/queue/studyaccept"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        let params: Parameters = ["otheruid": otheruid]
+        
+        AF.request(url, method: .post, headers: headers).response { response in
+            let statusCode = response.response?.statusCode
+            
+            switch response.result {
+            case .success(let value): completion(statusCode, nil)
+                return
+            case .failure(let error): completion(statusCode, error)
                 return
             }
         }

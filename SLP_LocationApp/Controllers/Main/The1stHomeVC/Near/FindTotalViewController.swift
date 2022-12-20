@@ -20,7 +20,7 @@ class FindTotalViewController: TabmanViewController {
     var receivedList: [OpponentModel] = []
     var lat = 0.0
     var long = 0.0
-  
+ 
     var mainView = FindTotalView()
     
     override func loadView() {
@@ -60,8 +60,6 @@ class FindTotalViewController: TabmanViewController {
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([ NSAttributedString.Key.font: UIFont.font(.Title3_M14) ], for: .normal)
-       
-        
         navigationItem.title = "새싹 찾기"
         //1번째 탭
         scrollToPage(.at(index: 0), animated: false)
