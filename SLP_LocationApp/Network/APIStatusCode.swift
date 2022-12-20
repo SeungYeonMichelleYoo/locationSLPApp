@@ -39,3 +39,13 @@ enum APIStopStudyStatusCode: Int {
     case serverError = 500
     case clientError = 501
 }
+
+//checkMatchStatusVM - v1/queue/myQueueState
+enum APIMyQueueStatusCode: Int {
+    case success = 200
+    case noSearch = 201
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}

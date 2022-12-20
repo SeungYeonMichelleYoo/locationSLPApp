@@ -73,12 +73,12 @@ class FindTotalViewController: TabmanViewController {
     func checkCurrentStatus() {
         viewModel.checkMatchStateVM { myQueueState, statusCode in
             switch statusCode {
-            case APIStatusCode.success.rawValue:
+            case APIMyQueueStatusCode.success.rawValue:
                 self.navigationController?.popViewController(animated: true)
                 return
-            case APIStatusCode.option.rawValue: //일반상태가 해당 VC에 올 일이 없음.
+            case APIMyQueueStatusCode.noSearch.rawValue: //일반상태가 해당 VC에 올 일이 없음.
                 return
-            case APIStatusCode.firebaseTokenError.rawValue:
+            case APIMyQueueStatusCode.firebaseTokenError.rawValue:
                 UserViewModel().refreshIDToken { isSuccess in
                     if isSuccess! {
                         self.checkCurrentStatus()
@@ -87,7 +87,7 @@ class FindTotalViewController: TabmanViewController {
                     }
                 }
                 return
-            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+            case APIMyQueueStatusCode.serverError.rawValue, APIMyQueueStatusCode.clientError.rawValue:
                 print("서버 점검중입니다. 관리자에게 문의해주세요.")
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
                 return
@@ -105,18 +105,6 @@ class FindTotalViewController: TabmanViewController {
         viewModel.stopStudyVM { myQueue, statusCode in
             switch statusCode {
             case APIStopStudyStatusCode.success.rawValue:
-//                var vcList = self.navigationController!.viewControllers
-//                var index = 0
-//                for vc in vcList {//NoNetwork, TabBar, MainMap, Search, FindTotal
-//                    if vc.isKind(of: SearchViewController.self) {
-//                        vcList.remove(at: index)
-//                        continue
-//                    } else if vc.isKind(of: MainMapViewController.self) {
-//                        (vc as! MainMapViewController).moveToUserLocation()
-//                    }
-//                    index = index + 1
-//                }
-//                self.navigationController!.viewControllers = vcList
                 var vcList = self.navigationController!.viewControllers
                 for i in 0 ..< vcList.count {//NoNetwork, TabBar, Search, FindTotal
                     if vcList[i].isKind(of: MainMapViewController.self) {
@@ -126,7 +114,11 @@ class FindTotalViewController: TabmanViewController {
                 }
                 self.navigationController?.popViewController(animated: true)
                 return
-            case APIStopStudyStatusCode.matched.rawValue:
+            case APIStopStudyStatusCode.matched.rawValue: //매칭 상태로 새싹 찾기는 이미 중단된 상태
+                self.showToast(message: "누군가와 스터디를 함께하기로 약속하셨어요!")
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                    self.checkMatchStatusby5Sec()
+                })
                 return
             case APIStopStudyStatusCode.firebaseTokenError.rawValue:
                 UserViewModel().refreshIDToken { isSuccess in
@@ -138,6 +130,40 @@ class FindTotalViewController: TabmanViewController {
                 }
                 return
             case APIStopStudyStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
+    
+    func checkMatchStatusby5Sec() {
+        viewModel.checkMatchStateVM { myQueueState, statusCode in
+            switch statusCode {
+            case APIMyQueueStatusCode.success.rawValue:
+                if myQueueState?.matched == 0 { //매칭대기중
+                } else {
+                    self.showToast(message: "000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                        let vc = ChattingViewController()
+                        self.transition(vc, transitionStyle: .push)
+                    })
+                }
+                return
+            case APIMyQueueStatusCode.noSearch.rawValue: //일반상태
+                return
+            case APIMyQueueStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.checkMatchStatusby5Sec()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIMyQueueStatusCode.serverError.rawValue, APIMyQueueStatusCode.clientError.rawValue:
                 print("서버 점검중입니다. 관리자에게 문의해주세요.")
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
                 return

@@ -95,18 +95,18 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     func checkCurrentStatus() {
         viewModel.checkMatchStateVM { myQueueState, statusCode in
             switch statusCode {
-            case APIStatusCode.success.rawValue:
+            case APIMyQueueStatusCode.success.rawValue:
                 if myQueueState?.matched == 0 {
                     self.mainView.floatingBtn.setImage(UIImage(named: "floatingBtn_waiting"), for: .normal)
                 } else {
                     self.mainView.floatingBtn.setImage(UIImage(named: "floatingBtn_matched"), for: .normal)
                 }
                 return
-            case APIStatusCode.option.rawValue:
+            case APIMyQueueStatusCode.noSearch.rawValue:
                 print("일반상태")
                 self.mainView.floatingBtn.setImage(UIImage(named: "floatingBtn_search"), for: .normal)
                 return
-            case APIStatusCode.firebaseTokenError.rawValue:
+            case APIMyQueueStatusCode.firebaseTokenError.rawValue:
                 UserViewModel().refreshIDToken { isSuccess in
                     if isSuccess! {
                         self.checkCurrentStatus()
@@ -115,7 +115,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
                     }
                 }
                 return
-            case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+            case APIMyQueueStatusCode.serverError.rawValue, APIMyQueueStatusCode.clientError.rawValue:
                 print("서버 점검중입니다. 관리자에게 문의해주세요.")
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
                 return
