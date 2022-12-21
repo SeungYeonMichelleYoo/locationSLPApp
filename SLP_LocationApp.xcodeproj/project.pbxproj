@@ -24,6 +24,13 @@
 		543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543D579B291E354F00481019 /* OKButton+Extension.swift */; };
 		543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F042C291FBE5C0029F088 /* UserViewModel.swift */; };
 		543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F1FDF2921193900C31F8E /* Date+Extension.swift */; };
+		5440A3882952E1970067FCC4 /* ChattingReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440A3872952E1970067FCC4 /* ChattingReportViewController.swift */; };
+		5440A38A2952E1A40067FCC4 /* ChattingReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440A3892952E1A40067FCC4 /* ChattingReportView.swift */; };
+		5440A38C2952E1B30067FCC4 /* ChattingCancelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440A38B2952E1B30067FCC4 /* ChattingCancelViewController.swift */; };
+		5440A38E2952E1BD0067FCC4 /* ChattingCancelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440A38D2952E1BD0067FCC4 /* ChattingCancelView.swift */; };
+		5440A3902952E1C80067FCC4 /* ChattingReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440A38F2952E1C80067FCC4 /* ChattingReviewController.swift */; };
+		5440A3922952E1D10067FCC4 /* ChattingReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440A3912952E1D10067FCC4 /* ChattingReviewView.swift */; };
+		5440A3942952F0360067FCC4 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5440A3932952F0360067FCC4 /* MenuView.swift */; };
 		5442B7B329320DE2008F8623 /* ReceivedRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B7B229320DE2008F8623 /* ReceivedRequestViewController.swift */; };
 		5442B7B529320DF1008F8623 /* ReceivedRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B7B429320DF1008F8623 /* ReceivedRequestView.swift */; };
 		5442B7B729320EE5008F8623 /* FindTotalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B7B629320EE5008F8623 /* FindTotalViewController.swift */; };
@@ -140,6 +147,13 @@
 		543D579B291E354F00481019 /* OKButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OKButton+Extension.swift"; sourceTree = "<group>"; };
 		543F042C291FBE5C0029F088 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		543F1FDF2921193900C31F8E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		5440A3872952E1970067FCC4 /* ChattingReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReportViewController.swift; sourceTree = "<group>"; };
+		5440A3892952E1A40067FCC4 /* ChattingReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReportView.swift; sourceTree = "<group>"; };
+		5440A38B2952E1B30067FCC4 /* ChattingCancelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCancelViewController.swift; sourceTree = "<group>"; };
+		5440A38D2952E1BD0067FCC4 /* ChattingCancelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingCancelView.swift; sourceTree = "<group>"; };
+		5440A38F2952E1C80067FCC4 /* ChattingReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReviewController.swift; sourceTree = "<group>"; };
+		5440A3912952E1D10067FCC4 /* ChattingReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingReviewView.swift; sourceTree = "<group>"; };
+		5440A3932952F0360067FCC4 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		5442B7B229320DE2008F8623 /* ReceivedRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedRequestViewController.swift; sourceTree = "<group>"; };
 		5442B7B429320DF1008F8623 /* ReceivedRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedRequestView.swift; sourceTree = "<group>"; };
 		5442B7B629320EE5008F8623 /* FindTotalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTotalViewController.swift; sourceTree = "<group>"; };
@@ -553,8 +567,15 @@
 			children = (
 				547DDFA42931E88700FD7818 /* ChattingViewController.swift */,
 				547DDFA62931E8A600FD7818 /* ChattingView.swift */,
+				5440A3932952F0360067FCC4 /* MenuView.swift */,
 				5473C2CB293E04F500EBF11B /* YourChatTableViewCell.swift */,
 				5473C2CD293E29E100EBF11B /* MyChatTableViewCell.swift */,
+				5440A3872952E1970067FCC4 /* ChattingReportViewController.swift */,
+				5440A3892952E1A40067FCC4 /* ChattingReportView.swift */,
+				5440A38B2952E1B30067FCC4 /* ChattingCancelViewController.swift */,
+				5440A38D2952E1BD0067FCC4 /* ChattingCancelView.swift */,
+				5440A38F2952E1C80067FCC4 /* ChattingReviewController.swift */,
+				5440A3912952E1D10067FCC4 /* ChattingReviewView.swift */,
 			);
 			path = Chatting;
 			sourceTree = "<group>";
@@ -697,11 +718,14 @@
 				543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */,
 				547DDFA72931E8A600FD7818 /* ChattingView.swift in Sources */,
 				5442B7B529320DF1008F8623 /* ReceivedRequestView.swift in Sources */,
+				5440A3922952E1D10067FCC4 /* ChattingReviewView.swift in Sources */,
 				544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */,
+				5440A3902952E1C80067FCC4 /* ChattingReviewController.swift in Sources */,
 				54207837294DCBEB006D0D23 /* MyQueue.swift in Sources */,
 				5487CEF9294B522C003F15D9 /* ShopTabViewController.swift in Sources */,
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
 				54CF0EC3294C59380018E4E2 /* ShopBackgroundCollectionViewCell.swift in Sources */,
+				5440A38E2952E1BD0067FCC4 /* ChattingCancelView.swift in Sources */,
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
@@ -711,6 +735,7 @@
 				5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */,
 				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,
 				54569A402924DCDE008F3FC6 /* FixedTableViewCell.swift in Sources */,
+				5440A38C2952E1B30067FCC4 /* ChattingCancelViewController.swift in Sources */,
 				547264B42923D1E00010953B /* ExpandableTableViewCell.swift in Sources */,
 				545BEB03291A48C000CF861F /* SMSCodeView.swift in Sources */,
 				547DDFAB2931EDE300FD7818 /* HomeViewModel.swift in Sources */,
@@ -730,6 +755,7 @@
 				5461B4C22918C5170000D726 /* AuthView.swift in Sources */,
 				545BEAFD291A484900CF861F /* MainMapViewController.swift in Sources */,
 				5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */,
+				5440A38A2952E1A40067FCC4 /* ChattingReportView.swift in Sources */,
 				543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */,
 				5487CEF5294B4931003F15D9 /* ShopBackgroundViewController.swift in Sources */,
 				54CEEC1F292C543C00C0D8CA /* NearView.swift in Sources */,
@@ -743,7 +769,9 @@
 				54ACA0A4293B1635001E4252 /* EmptyBigView.swift in Sources */,
 				54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */,
 				5473C2CA293DD5E000EBF11B /* NearPopUpViewController.swift in Sources */,
+				5440A3882952E1970067FCC4 /* ChattingReportViewController.swift in Sources */,
 				549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */,
+				5440A3942952F0360067FCC4 /* MenuView.swift in Sources */,
 				5461B4C62918C5430000D726 /* NickNameView.swift in Sources */,
 				5452373A292B6918002B8255 /* WithdrawView.swift in Sources */,
 				547DDFA52931E88700FD7818 /* ChattingViewController.swift in Sources */,

@@ -32,7 +32,7 @@ class ChattingViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
         
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
-        
+            
         fetchChats()
     }
     @objc func sendBtnClicked() {
@@ -58,7 +58,7 @@ class ChattingViewController: BaseViewController {
     }
     
     @objc func moreBtnClicked() {
-        
+        mainView.plusbigView.isHidden.toggle()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -121,3 +121,4 @@ extension ChattingViewController {
         }
     }
 }
+

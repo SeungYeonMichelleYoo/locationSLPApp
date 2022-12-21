@@ -67,6 +67,25 @@ class ChattingView: BaseView {
         return view
     }()
     
+    lazy var plusbigView: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
+    
+    lazy var menuView: MenuView = {
+        let view = MenuView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
+    lazy var darkView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.alpha = 0.3
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -76,8 +95,11 @@ class ChattingView: BaseView {
     }
     
     override func configureUI() {
-        [dateBtn, bellImg, infoLabel, detailLabel, mainTableView, textField, sendBtn].forEach {
+        [dateBtn, bellImg, infoLabel, detailLabel, mainTableView, textField, sendBtn, plusbigView].forEach {
             self.addSubview($0)
+        }
+        [menuView, darkView].forEach {
+            plusbigView.addSubview($0)
         }
     }
     
@@ -120,6 +142,20 @@ class ChattingView: BaseView {
             make.trailing.equalTo(textField.snp.trailing).inset(14)
             make.size.equalTo(20)
             make.centerY.equalTo(textField)
+        }
+        
+        plusbigView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        menuView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.height.equalTo(72)
+        }
+        
+        darkView.snp.makeConstraints { make in
+            make.top.equalTo(menuView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

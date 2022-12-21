@@ -48,7 +48,7 @@ class ReceivedRequestViewController: BaseViewController {
             switch statusCode {
             case APIStatusCode.success.rawValue:
                 print("스터디 함께할 새싹 검색 성공")
-                self.receivedList = searchModel!.fromQueueDB
+                self.receivedList = searchModel!.fromQueueDBRequested
                 self.mainView.mainTableView.reloadData()
                 if self.receivedList.count == 0 {
                     var vc = EmptyBigView()
