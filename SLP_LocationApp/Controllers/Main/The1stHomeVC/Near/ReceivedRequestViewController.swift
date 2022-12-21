@@ -14,6 +14,7 @@ class ReceivedRequestViewController: BaseViewController {
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
     var lat = 0.0
     var long = 0.0
+    var receivedUid = ""
  
     override func loadView() {
         self.view = mainView
@@ -93,6 +94,8 @@ extension ReceivedRequestViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NearPeopleTableViewCell", for: indexPath) as! NearPeopleTableViewCell
         cell.cellDelegate = self
+        
+        cell.requestBtn.tag = indexPath.row
         
         cell.nickLabel.text = receivedList[indexPath.row].nick
         cell.nickView.addGestureRecognizer(getPressGesture())
@@ -177,8 +180,8 @@ extension ReceivedRequestViewController: UICollectionViewDelegate, UICollectionV
 }
 extension ReceivedRequestViewController: NearPeopleTableDelegate {
     func requestBtnTapped(sender: UIButton!) {
-        print("파랑색 요청하기 버튼 클릭됨")
         let vc = ReceivedPopUpViewController()
+        vc.receivedUid = receivedList[sender.tag].uid
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }

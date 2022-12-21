@@ -10,10 +10,12 @@ class NearViewController: BaseViewController {
     var viewModel = HomeViewModel()
     var mainView = NearView()
     var opponentList: [OpponentModel] = []
+    var receivedList: [OpponentModel] = []
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
     var lat = 0.0
     var long = 0.0
     var requestedUid = ""
+    var receivedUid = ""
     
     override func loadView() {
         self.view = mainView
@@ -78,6 +80,7 @@ class NearViewController: BaseViewController {
             case APIStatusCode.success.rawValue:
                 print("스터디 함께할 새싹 검색 성공")
                 self.opponentList = searchModel!.fromQueueDB
+                self.receivedList = searchModel!.fromQueueDBRequested
                 self.mainView.mainTableView.reloadData()
                 if self.opponentList.count == 0 {
                     self.mainView.mainTableView.backgroundView = EmptyBigView()
@@ -217,6 +220,7 @@ extension NearViewController: NearPeopleTableDelegate {
     func requestBtnTapped(sender: UIButton!) {
         let vc = NearPopUpViewController()
         vc.requestedUid = opponentList[sender.tag].uid
+        vc.receivedUid = receivedList[sender.tag].uid
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }
