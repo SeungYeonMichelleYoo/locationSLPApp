@@ -53,14 +53,17 @@ class ChattingReportView: BaseView {
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: imageCollectionViewLayout())
         view.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
+        view.isScrollEnabled = false
         return view
     }()
     
     lazy var textView: UITextView = {
         let view = UITextView()
         view.backgroundColor = Constants.BaseColor.gray1
-        view.textColor = Constants.BaseColor.black
+        view.font = UIFont.font(.Body3_R14)
+        view.textColor = Constants.BaseColor.gray7
         view.layer.cornerRadius = 8
+        view.text = "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다"
         return view
     }()
     
@@ -119,6 +122,8 @@ class ChattingReportView: BaseView {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(detailLabel.snp.bottom).offset(24)
             make.centerX.equalToSuperview()
+            make.leading.equalTo(infoView.snp.leading).offset(16)
+            make.trailing.equalTo(infoView.snp.trailing).inset(16)
         }
         
         textView.snp.makeConstraints { make in
@@ -129,20 +134,21 @@ class ChattingReportView: BaseView {
         }
         
         reportBtn.snp.makeConstraints { make in
+            make.top.equalTo(textView.snp.bottom).offset(24)
             make.leading.equalTo(infoView.snp.leading).offset(16)
             make.trailing.equalTo(infoView.snp.trailing).inset(16)
-            make.trailing.equalTo(infoView.snp.bottom).inset(16)
+            make.bottom.equalTo(infoView.snp.bottom).inset(16)
             make.height.equalTo(48)
         }
     }
     
     static func imageCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 4
-        layout.minimumInteritemSpacing = 4
+        layout.minimumLineSpacing = 8
+        layout.minimumInteritemSpacing = 8
         
-        let itemSpacing : CGFloat = 4
-        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.33
+        let itemSpacing : CGFloat = 8
+        let myWidth : CGFloat = (UIScreen.main.bounds.width - 16*2 - itemSpacing*6)/3
         let myHeight : CGFloat = 32
         
         layout.scrollDirection = .vertical

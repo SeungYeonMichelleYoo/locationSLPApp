@@ -34,6 +34,10 @@ class ChattingViewController: BaseViewController {
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
             
         fetchChats()
+        
+        mainView.menuView.reportStackView.addGestureRecognizer(getPressGesture())
+        mainView.menuView.cancelStackView.addGestureRecognizer(getPressGesture2())
+        mainView.menuView.reviewStackView.addGestureRecognizer(getPressGesture3())
     }
     @objc func sendBtnClicked() {
         if mainView.textField.text!.count >= 1 {
@@ -122,3 +126,36 @@ extension ChattingViewController {
     }
 }
 
+extension ChattingViewController: UIGestureRecognizerDelegate {
+    
+    fileprivate func getPressGesture() -> UITapGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(reportPress(gestureRecognizer:)))
+        return tap
+    }
+    
+    @objc func reportPress(gestureRecognizer: UITapGestureRecognizer) {
+//        let nickview: UIView = gestureRecognizer.view!
+       let vc = ChattingReportViewController()
+        self.transition(vc, transitionStyle: .presentFullScreen)
+    }
+    
+    fileprivate func getPressGesture2() -> UITapGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(cancelPress(gestureRecognizer:)))
+        return tap
+    }
+    
+    @objc func cancelPress(gestureRecognizer: UITapGestureRecognizer) {
+        let vc = ChattingCancelViewController()
+        self.transition(vc, transitionStyle: .presentFullScreen)
+    }
+    
+    fileprivate func getPressGesture3() -> UITapGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(reviewPress(gestureRecognizer:)))
+        return tap
+    }
+    
+    @objc func reviewPress(gestureRecognizer: UITapGestureRecognizer) {
+        let vc = ChattingReviewViewController()
+        self.transition(vc, transitionStyle: .presentFullScreen)
+    }
+}

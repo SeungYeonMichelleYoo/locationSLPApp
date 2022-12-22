@@ -221,7 +221,6 @@ extension DetailProfileViewController: UICollectionViewDelegate, UICollectionVie
         if reputation.count == 6 && reputation[indexPath.item] != 0 {
             cell.titleBtn.fill()
         }
-            
         return cell
     }
 }

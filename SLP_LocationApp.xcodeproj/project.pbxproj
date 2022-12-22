@@ -123,6 +123,8 @@
 		54B95E0329377F97005389A6 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B95E0229377F97005389A6 /* SearchModel.swift */; };
 		54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B95E0429378D0B005389A6 /* Sequence+Extension.swift */; };
 		54C225B0291F3109003596BB /* Dongle-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54C225AF291F3109003596BB /* Dongle-Regular.ttf */; };
+		54CE7B8429542E7C00C2E00C /* ChattingFriendAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7B8329542E7C00C2E00C /* ChattingFriendAddViewController.swift */; };
+		54CE7B8629542E8700C2E00C /* ChattingFriendAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CE7B8529542E8700C2E00C /* ChattingFriendAddView.swift */; };
 		54CEEC19292C53E800C0D8CA /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC18292C53E800C0D8CA /* SearchViewController.swift */; };
 		54CEEC1B292C53F200C0D8CA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1A292C53F200C0D8CA /* SearchView.swift */; };
 		54CEEC1D292C543100C0D8CA /* NearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CEEC1C292C543100C0D8CA /* NearViewController.swift */; };
@@ -241,6 +243,8 @@
 		54B95E0229377F97005389A6 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		54B95E0429378D0B005389A6 /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
 		54C225AF291F3109003596BB /* Dongle-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dongle-Regular.ttf"; sourceTree = "<group>"; };
+		54CE7B8329542E7C00C2E00C /* ChattingFriendAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFriendAddViewController.swift; sourceTree = "<group>"; };
+		54CE7B8529542E8700C2E00C /* ChattingFriendAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattingFriendAddView.swift; sourceTree = "<group>"; };
 		54CEEC18292C53E800C0D8CA /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		54CEEC1A292C53F200C0D8CA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		54CEEC1C292C543100C0D8CA /* NearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearViewController.swift; sourceTree = "<group>"; };
@@ -576,6 +580,8 @@
 				5440A38D2952E1BD0067FCC4 /* ChattingCancelView.swift */,
 				5440A38F2952E1C80067FCC4 /* ChattingReviewController.swift */,
 				5440A3912952E1D10067FCC4 /* ChattingReviewView.swift */,
+				54CE7B8329542E7C00C2E00C /* ChattingFriendAddViewController.swift */,
+				54CE7B8529542E8700C2E00C /* ChattingFriendAddView.swift */,
 			);
 			path = Chatting;
 			sourceTree = "<group>";
@@ -714,6 +720,7 @@
 				54682FC7292EBAC600ABD97A /* HeaderReusableView.swift in Sources */,
 				54569A3E2924D3A1008F3FC6 /* TitleCollectionViewCell.swift in Sources */,
 				5461B4A92918B6440000D726 /* AppDelegate.swift in Sources */,
+				54CE7B8629542E8700C2E00C /* ChattingFriendAddView.swift in Sources */,
 				5444C0BD292393B600728EC3 /* DetailProfileView.swift in Sources */,
 				543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */,
 				547DDFA72931E8A600FD7818 /* ChattingView.swift in Sources */,
@@ -746,6 +753,7 @@
 				5461B4CE2918C5A60000D726 /* EmailView.swift in Sources */,
 				5442B7B729320EE5008F8623 /* FindTotalViewController.swift in Sources */,
 				547DDFAD2931EF8000FD7818 /* MyQueueState.swift in Sources */,
+				54CE7B8429542E7C00C2E00C /* ChattingFriendAddViewController.swift in Sources */,
 				5461B4D22918C5BF0000D726 /* GenderView.swift in Sources */,
 				5461B4DB2918CBAD0000D726 /* BaseViewController.swift in Sources */,
 				54682FC5292EBAB300ABD97A /* StudyCollectionViewCell.swift in Sources */,
