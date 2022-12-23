@@ -66,7 +66,7 @@ class ChattingReviewView: BaseView {
         return view
     }()
     
-    lazy var reportBtn: OKButton = {
+    lazy var okBtn: OKButton = {
         let view = OKButton(frame: .zero)
         view.setTitle("리뷰 등록하기", for: .normal)
         view.titleLabel?.font = UIFont.font(.Body3_R14)
@@ -85,7 +85,7 @@ class ChattingReviewView: BaseView {
     override func configureUI() {
         self.addSubview(containerView)
         containerView.addSubview(infoView)
-        [titleLabel, closeBtn, detailLabel, collectionView, textView, reportBtn].forEach {
+        [titleLabel, closeBtn, detailLabel, collectionView, textView, okBtn].forEach {
             infoView.addSubview($0)
         }
     }
@@ -132,7 +132,7 @@ class ChattingReviewView: BaseView {
             make.height.equalTo(124)
         }
         
-        reportBtn.snp.makeConstraints { make in
+        okBtn.snp.makeConstraints { make in
             make.top.equalTo(textView.snp.bottom).offset(24)
             make.leading.equalTo(infoView.snp.leading).offset(16)
             make.trailing.equalTo(infoView.snp.trailing).inset(16)
@@ -147,7 +147,7 @@ class ChattingReviewView: BaseView {
         layout.minimumInteritemSpacing = 8
         
         let itemSpacing : CGFloat = 8
-        let myWidth : CGFloat = (UIScreen.main.bounds.width - 16*2 - itemSpacing*6)/3
+        let myWidth : CGFloat = (UIScreen.main.bounds.width - 16*2 - itemSpacing*6)/2
         let myHeight : CGFloat = 32
         
         layout.scrollDirection = .vertical

@@ -219,8 +219,8 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension NearViewController: NearPeopleTableDelegate {
     func requestBtnTapped(sender: UIButton!) {
         let vc = NearPopUpViewController()
+        print(sender.tag)
         vc.requestedUid = opponentList[sender.tag].uid
-        vc.receivedUid = receivedList[sender.tag].uid
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }

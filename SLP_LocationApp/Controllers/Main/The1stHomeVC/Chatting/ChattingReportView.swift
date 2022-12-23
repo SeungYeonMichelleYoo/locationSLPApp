@@ -13,10 +13,10 @@ class ChattingReportView: BaseView {
         containerView.backgroundColor = .white
         containerView.layer.cornerRadius = 8
         containerView.clipsToBounds = true
-        containerView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        containerView.layer.shadowOffset = CGSize(width: 1, height: 4)
-        containerView.layer.shadowRadius = 8
-        containerView.layer.shadowOpacity = 1
+//        containerView.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+//        containerView.layer.shadowOffset = CGSize(width: 1, height: 4)
+//        containerView.layer.shadowRadius = 8
+//        containerView.layer.shadowOpacity = 1
         return containerView
     }()
     

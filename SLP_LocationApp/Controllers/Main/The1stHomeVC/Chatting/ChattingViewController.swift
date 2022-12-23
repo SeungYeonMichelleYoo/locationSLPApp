@@ -13,7 +13,7 @@ class ChattingViewController: BaseViewController {
     var mainView = ChattingView()
     
     var chat: [Chat] = []
- 
+    
     override func loadView() {
         self.view = mainView
     }
@@ -32,7 +32,7 @@ class ChattingViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
         
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
-            
+        
         fetchChats()
         
         mainView.menuView.reportStackView.addGestureRecognizer(getPressGesture())
@@ -56,7 +56,7 @@ class ChattingViewController: BaseViewController {
         mainView.mainTableView.reloadData()
         mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chat.count - 1, section: 0), at: .bottom, animated: false)
     }
-        
+    
     @objc func backBtnClicked() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -105,7 +105,7 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChattingViewController {
     //채팅 가져오기
     private func fetchChats() {
-            AF.request(UserAPI.BASEURL, method: .get).responseDecodable(of: [Chat].self) { [weak self] response in
+        AF.request(UserAPI.BASEURL, method: .get).responseDecodable(of: [Chat].self) { [weak self] response in
             switch response.result {
             case .success(let value):
                 self?.chat = value
@@ -134,8 +134,8 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     }
     
     @objc func reportPress(gestureRecognizer: UITapGestureRecognizer) {
-//        let nickview: UIView = gestureRecognizer.view!
-       let vc = ChattingReportViewController()
+        mainView.plusbigView.isHidden = true
+        let vc = ChattingReportViewController()
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
     
@@ -145,6 +145,7 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     }
     
     @objc func cancelPress(gestureRecognizer: UITapGestureRecognizer) {
+        mainView.plusbigView.isHidden = true
         let vc = ChattingCancelViewController()
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
@@ -155,6 +156,7 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     }
     
     @objc func reviewPress(gestureRecognizer: UITapGestureRecognizer) {
+        mainView.plusbigView.isHidden = true
         let vc = ChattingReviewViewController()
         self.transition(vc, transitionStyle: .presentFullScreen)
     }

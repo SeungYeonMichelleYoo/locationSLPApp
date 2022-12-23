@@ -14,6 +14,7 @@ extension UIButton {
     
     func disable() {
         backgroundColor = Constants.BaseColor.gray6
+        isUserInteractionEnabled = false
     }
     
     func inactive() {

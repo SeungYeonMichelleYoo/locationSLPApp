@@ -122,4 +122,21 @@ class HomeAPI {
         }
     }
     
+    //스터디 취소
+    static func dodgeStudy(otheruid: String, completion: @escaping (Int?, Error?) -> Void) {
+        let url = "\(BASEURL)/v1/queue/dodge"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        let params: Parameters = ["otheruid": otheruid]
+        
+        AF.request(url, method: .post, headers: headers).response { response in
+            let statusCode = response.response?.statusCode
+            
+            switch response.result {
+            case .success(let value): completion(statusCode, nil)
+                return
+            case .failure(let error): completion(statusCode, error)
+                return
+            }
+        }
+    }
 }

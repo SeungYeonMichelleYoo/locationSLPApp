@@ -57,4 +57,12 @@ class HomeViewModel {
             completion(statusCode)
         }
     }
+    
+    //스터디 취소
+    func studydodgeVM(otheruid: String, completion: @escaping (Int?) -> Void) {
+        
+        HomeAPI.studyAccept(otheruid: otheruid) { statusCode, error in
+            completion(statusCode)
+        }
+    }
 }
