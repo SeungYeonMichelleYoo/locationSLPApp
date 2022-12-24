@@ -167,8 +167,8 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     @objc func reviewPress(gestureRecognizer: UITapGestureRecognizer) {
         mainView.plusbigView.isHidden = true
         let vc = ChattingReviewViewController()
-        vc.nick = nick
-        
+        vc.setReceivedNick(nick: nick)
+        vc.setReceivedUid(otheruid: uid)
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }

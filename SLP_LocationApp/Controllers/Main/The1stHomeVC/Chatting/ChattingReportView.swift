@@ -71,6 +71,7 @@ class ChattingReportView: BaseView {
         let view = OKButton(frame: .zero)
         view.setTitle("신고하기", for: .normal)
         view.titleLabel?.font = UIFont.font(.Body3_R14)
+        view.isUserInteractionEnabled = false
         return view
     }()
     

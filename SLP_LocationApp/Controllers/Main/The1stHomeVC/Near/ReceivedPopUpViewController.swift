@@ -11,6 +11,7 @@ final class ReceivedPopUpViewController: BaseViewController {
     var mainView = ReceivedPopUpView()
     var receivedUid = ""
     var viewModel = HomeViewModel()
+    var nick = ""
     
     override func loadView() {
         self.view = mainView
@@ -89,6 +90,7 @@ final class ReceivedPopUpViewController: BaseViewController {
                     DispatchQueue.main.async {
                         let vc = ChattingViewController()
                         vc.uid = myQueueState?.matchedUid ?? ""
+                        vc.setNick(nick: self.nick)
                         self.transition(vc, transitionStyle: .push)
                     }
                 }

@@ -14,6 +14,7 @@ final class ChattingReviewViewController: BaseViewController {
     var viewModel = HomeViewModel()
     var nick = ""
     var comment = ""
+    var otheruid = ""
     
     override func loadView() {
         self.view = mainView
@@ -34,6 +35,8 @@ final class ChattingReviewViewController: BaseViewController {
         
         comment = mainView.textView.text ?? ""
         
+        mainView.detailLabel.text = "\(nick)님과의 스터디는 어떠셨나요?"
+        
         placeholderSetting()
     }
     
@@ -46,7 +49,7 @@ final class ChattingReviewViewController: BaseViewController {
     }
     
     private func sendReview() {
-        viewModel.sendReviewVM(otheruid: <#T##String#>, comment: comment, reputation: <#T##[Int]#>, completion: { statusCode in
+        viewModel.sendReviewVM(otheruid: otheruid, comment: comment, reputation: reputation) { statusCode in
             switch statusCode {
             case APIStopStudyStatusCode.success.rawValue:
                 let vc = SearchViewController()
@@ -67,7 +70,6 @@ final class ChattingReviewViewController: BaseViewController {
                 print("서버 점검중입니다. 관리자에게 문의해주세요.")
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
                 return
-                return
             default: self.showToast(message: "네트워크 연결을 확인해주세요.")
                 return
             }
@@ -84,6 +86,10 @@ final class ChattingReviewViewController: BaseViewController {
                                
     func setReceivedNick(nick: String) {
         self.nick = nick
+    }
+    
+    func setReceivedUid(otheruid: String) {
+        self.otheruid = otheruid
     }
 }
 extension ChattingReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -142,8 +148,10 @@ extension ChattingReviewViewController: UIGestureRecognizerDelegate {
     @objc func btnPress(gestureRecognizer: UITapGestureRecognizer) {
         if (mainView.collectionView.cellForItem(at: IndexPath(item: (gestureRecognizer.view as! UIButton).tag, section: 0)) as! TitleCollectionViewCell).titleBtn.backgroundColor != Constants.BaseColor.green {
             (mainView.collectionView.cellForItem(at: IndexPath(item: (gestureRecognizer.view as! UIButton).tag, section: 0)) as! TitleCollectionViewCell).titleBtn.fill()
+            self.reputation[(gestureRecognizer.view as! UIButton).tag] = 1
         } else {
             (mainView.collectionView.cellForItem(at: IndexPath(item: (gestureRecognizer.view as! UIButton).tag, section: 0)) as! TitleCollectionViewCell).titleBtn.inactive()
+            self.reputation[(gestureRecognizer.view as! UIButton).tag] = 0
         }
     }
 }

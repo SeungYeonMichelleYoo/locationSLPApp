@@ -92,7 +92,7 @@ class HomeAPI {
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         let params: Parameters = ["otheruid": otheruid]
         
-        AF.request(url, method: .post, headers: headers).response { response in
+        AF.request(url, method: .post, parameters: params, headers: headers).response { response in
             let statusCode = response.response?.statusCode
             
             switch response.result {
@@ -110,7 +110,7 @@ class HomeAPI {
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         let params: Parameters = ["otheruid": otheruid]
         
-        AF.request(url, method: .post, headers: headers).response { response in
+        AF.request(url, method: .post, parameters: params, headers: headers).response { response in
             let statusCode = response.response?.statusCode
             
             switch response.result {
@@ -128,7 +128,7 @@ class HomeAPI {
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         let params: Parameters = ["otheruid": otheruid]
         
-        AF.request(url, method: .post, headers: headers).response { response in
+        AF.request(url, method: .post, parameters: params, headers: headers).response { response in
             let statusCode = response.response?.statusCode
             
             switch response.result {
@@ -141,7 +141,7 @@ class HomeAPI {
     }
     
     //리뷰 보내기
-    static func sendReview(otheruid: String, comment: String, reputation: [Int], completion: (Int?, Error?) -> Void) {
+    static func sendReview(otheruid: String, comment: String, reputation: [Int], completion: @escaping (Int?, Error?) -> Void) {
         let url = "\(BASEURL)/v1/queue/rate/\(otheruid)"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         let params: Parameters = ["otheruid": otheruid, "comment": comment, "reputation": reputation]

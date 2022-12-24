@@ -182,6 +182,7 @@ extension ReceivedRequestViewController: NearPeopleTableDelegate {
     func requestBtnTapped(sender: UIButton!) {
         let vc = ReceivedPopUpViewController()
         vc.receivedUid = receivedList[sender.tag].uid
+        vc.nick = receivedList[sender.tag].nick
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }
