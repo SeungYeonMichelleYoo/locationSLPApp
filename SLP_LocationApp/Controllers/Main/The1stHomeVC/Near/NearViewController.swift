@@ -78,9 +78,7 @@ class NearViewController: BaseViewController {
         self.viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
             switch statusCode {
             case APIStatusCode.success.rawValue:
-                print("스터디 함께할 새싹 검색 성공")
                 self.opponentList = searchModel!.fromQueueDB
-                self.receivedList = searchModel!.fromQueueDBRequested
                 self.mainView.mainTableView.reloadData()
                 if self.opponentList.count == 0 {
                     self.mainView.mainTableView.backgroundView = EmptyBigView()
@@ -219,8 +217,8 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension NearViewController: NearPeopleTableDelegate {
     func requestBtnTapped(sender: UIButton!) {
         let vc = NearPopUpViewController()
-        print(sender.tag)
         vc.requestedUid = opponentList[sender.tag].uid
+        vc.nick = opponentList[sender.tag].nick
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }

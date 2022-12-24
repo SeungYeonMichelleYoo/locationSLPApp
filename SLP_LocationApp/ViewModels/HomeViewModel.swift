@@ -61,8 +61,18 @@ class HomeViewModel {
     //스터디 취소
     func studydodgeVM(otheruid: String, completion: @escaping (Int?) -> Void) {
         
-        HomeAPI.studyAccept(otheruid: otheruid) { statusCode, error in
+        HomeAPI.dodgeStudy(otheruid: otheruid) { statusCode, error in
+            completion(statusCode)
+        }
+    }
+    
+    //리뷰 남기기
+    func sendReviewVM(otheruid: String, comment: String, reputation: [Int], completion: @escaping (Int?) -> Void) {
+        
+        HomeAPI.sendReview(otheruid: otheruid, comment: comment, reputation: reputation) { statusCode, error in
             completion(statusCode)
         }
     }
 }
+                           
+                           

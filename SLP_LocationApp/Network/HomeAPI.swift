@@ -139,4 +139,23 @@ class HomeAPI {
             }
         }
     }
+    
+    //리뷰 보내기
+    static func sendReview(otheruid: String, comment: String, reputation: [Int], completion: (Int?, Error?) -> Void) {
+        let url = "\(BASEURL)/v1/queue/rate/\(otheruid)"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        let params: Parameters = ["otheruid": otheruid, "comment": comment, "reputation": reputation]
+        AF.request(url, method: .post, parameters: params, headers: headers).response { response in
+            let statusCode = response.response?.statusCode
+            print("sendReview api called")
+            print(response.value)
+            print(response)
+            switch response.result {
+            case .success(let value): completion(statusCode, nil)
+                return
+            case .failure(let error): completion(statusCode, error)
+                return
+            }
+        }
+    }
 }

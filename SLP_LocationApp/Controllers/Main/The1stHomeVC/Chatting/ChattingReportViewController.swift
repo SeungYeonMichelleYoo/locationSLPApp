@@ -10,6 +10,7 @@ final class ChattingReportViewController: BaseViewController {
     
     var mainView = ChattingReportView()
     var buttonTitle = ["불법/사기", "불편한언행", "노쇼", "선정성", "인신공격", "기타"]
+    var viewModel = HomeViewModel()
     
     override func loadView() {
         self.view = mainView
@@ -25,7 +26,8 @@ final class ChattingReportViewController: BaseViewController {
         mainView.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
         
         mainView.closeBtn.addTarget(self, action: #selector(closeBtnClicked), for: .touchUpInside)
-                
+        mainView.reportBtn.addTarget(self, action: #selector(okBtnClicked), for: .touchUpInside)
+        
         placeholderSetting()
     }
     
@@ -33,10 +35,10 @@ final class ChattingReportViewController: BaseViewController {
         self.dismiss(animated: true)
     }
     
-    func placeholderSetting() {
-        mainView.textView.delegate = self
+    @objc func okBtnClicked() {
+        
     }
-    
+        
     //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
@@ -63,6 +65,10 @@ extension ChattingReportViewController: UICollectionViewDelegate, UICollectionVi
 }
 
 extension ChattingReportViewController: UITextViewDelegate {
+    func placeholderSetting() {
+        mainView.textView.delegate = self
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "신고 사유를 적어주세요\n허위 신고 시 제재를 받을 수 있습니다"

@@ -10,6 +10,10 @@ final class ChattingReviewViewController: BaseViewController {
     
     var mainView = ChattingReviewView()
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
+    var reputation = [0,0,0,0,0,0]
+    var viewModel = HomeViewModel()
+    var nick = ""
+    var comment = ""
     
     override func loadView() {
         self.view = mainView
@@ -28,6 +32,8 @@ final class ChattingReviewViewController: BaseViewController {
         mainView.closeBtn.addTarget(self, action: #selector(closeBtnClicked), for: .touchUpInside)
         mainView.okBtn.addTarget(self, action: #selector(okBtnClicked), for: .touchUpInside)
         
+        comment = mainView.textView.text ?? ""
+        
         placeholderSetting()
     }
     
@@ -36,15 +42,48 @@ final class ChattingReviewViewController: BaseViewController {
     }
     
     @objc func okBtnClicked() {
-       print("okokok")
+        sendReview()
     }
     
+    private func sendReview() {
+        viewModel.sendReviewVM(otheruid: <#T##String#>, comment: comment, reputation: <#T##[Int]#>, completion: { statusCode in
+            switch statusCode {
+            case APIStopStudyStatusCode.success.rawValue:
+                let vc = SearchViewController()
+                self.transition(vc, transitionStyle: .push)
+                return
+            case APIStopStudyStatusCode.matched.rawValue:
+                return
+            case APIStopStudyStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.sendReview()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIStopStudyStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
+                               
     //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         if touch?.view != mainView.infoView {
             self.dismiss(animated: true)
         }
+    }
+                               
+    func setReceivedNick(nick: String) {
+        self.nick = nick
     }
 }
 extension ChattingReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

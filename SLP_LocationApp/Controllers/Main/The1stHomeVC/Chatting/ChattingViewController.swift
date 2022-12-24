@@ -13,6 +13,8 @@ class ChattingViewController: BaseViewController {
     var mainView = ChattingView()
     
     var chat: [Chat] = []
+    var nick = ""
+    var uid = ""
     
     override func loadView() {
         self.view = mainView
@@ -38,6 +40,8 @@ class ChattingViewController: BaseViewController {
         mainView.menuView.reportStackView.addGestureRecognizer(getPressGesture())
         mainView.menuView.cancelStackView.addGestureRecognizer(getPressGesture2())
         mainView.menuView.reviewStackView.addGestureRecognizer(getPressGesture3())
+        
+        mainView.infoLabel.text = "\(nick)님과 매칭되었습니다"
     }
     @objc func sendBtnClicked() {
         if mainView.textField.text!.count >= 1 {
@@ -67,6 +71,10 @@ class ChattingViewController: BaseViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         SocketIOManager.shared.closeConnection()
+    }
+    
+    func setNick(nick: String) {
+        self.nick = nick
     }
 }
 
@@ -147,6 +155,7 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     @objc func cancelPress(gestureRecognizer: UITapGestureRecognizer) {
         mainView.plusbigView.isHidden = true
         let vc = ChattingCancelViewController()
+        vc.setUid(otheruid: uid)
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
     
@@ -158,6 +167,8 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     @objc func reviewPress(gestureRecognizer: UITapGestureRecognizer) {
         mainView.plusbigView.isHidden = true
         let vc = ChattingReviewViewController()
+        vc.nick = nick
+        
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }
