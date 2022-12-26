@@ -20,6 +20,7 @@ class FindTotalViewController: TabmanViewController {
     var receivedList: [OpponentModel] = []
     var lat = 0.0
     var long = 0.0
+    var timer = Timer()
  
     var mainView = FindTotalView()
     
@@ -29,6 +30,9 @@ class FindTotalViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureNavItems()
+        
         self.dataSource = self
         
         var vc1 = NearViewController()
@@ -53,6 +57,13 @@ class FindTotalViewController: TabmanViewController {
         // Add to view
         addBar(bar, dataSource: self, at: .top)
         
+        //1번째 탭
+        scrollToPage(.at(index: 0), animated: false)
+        
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updateBy5Sec), userInfo: nil, repeats: true)
+}
+    
+    func configureNavItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
@@ -61,9 +72,16 @@ class FindTotalViewController: TabmanViewController {
         
         navigationItem.rightBarButtonItem?.setTitleTextAttributes([ NSAttributedString.Key.font: UIFont.font(.Title3_M14) ], for: .normal)
         navigationItem.title = "새싹 찾기"
-        //1번째 탭
-        scrollToPage(.at(index: 0), animated: false)
-}
+    }
+    
+    @objc func updateBy5Sec() {
+        checkMatchStatusby5Sec()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        timer.invalidate()
+    }
+    
     @objc func backBtnClicked() {
         checkCurrentStatus()
     }
@@ -141,9 +159,8 @@ class FindTotalViewController: TabmanViewController {
         viewModel.checkMatchStateVM { myQueueState, statusCode in
             switch statusCode {
             case APIMyQueueStatusCode.success.rawValue:
-                if myQueueState?.matched == 0 { //매칭대기중
-                } else {
-                    self.showToast(message: "000님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                if myQueueState?.matched == 1 {
+                    self.showToast(message: "\(myQueueState?.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         let vc = ChattingViewController()
                         self.transition(vc, transitionStyle: .push)

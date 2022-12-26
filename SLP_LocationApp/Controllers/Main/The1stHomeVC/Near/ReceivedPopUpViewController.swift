@@ -25,7 +25,7 @@ final class ReceivedPopUpViewController: BaseViewController {
         mainView.cancelBtn.addTarget(self, action: #selector(cancelBtnClicked), for: .touchUpInside)
         mainView.okBtn.addTarget(self, action: #selector(okBtnClicked), for: .touchUpInside)
     }
-    
+
     //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
