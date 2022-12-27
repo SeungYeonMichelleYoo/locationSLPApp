@@ -12,14 +12,14 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
     lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textColor = .black
         label.numberOfLines = 2
-        label.textAlignment = .center
         return label
     }()
     
     lazy var image: UIImageView = {
         let img = UIImageView()
-        img.contentMode = .scaleAspectFill
+        img.contentMode = .scaleAspectFit
         img.layer.cornerRadius = 8
         img.clipsToBounds = true
         return img
@@ -44,18 +44,18 @@ class OnboardingCollectionViewCell: UICollectionViewCell {
             contentView.addSubview($0)
         }
         
-        contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(contentView.snp.top).offset(72)
-            make.centerX.equalTo(contentView)
-            make.width.equalTo(227)
-            make.height.equalTo(76)
+        image.snp.makeConstraints { make in
+            make.bottom.equalTo(contentView.snp.bottom)
+            make.leading.equalTo(contentView.snp.leading).inset(8)
+            make.trailing.equalTo(contentView.snp.trailing).inset(8)
+            make.height.equalTo(image.snp.width)
         }
         
-        image.snp.makeConstraints { make in
-            make.top.equalTo(contentLabel.snp.bottom).offset(56)
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing)
-            make.bottom.equalTo(contentView.snp.bottom)
+        contentLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(contentView)
+            make.centerY.equalToSuperview().multipliedBy(0.35)
+            make.width.equalTo(227)
+            make.height.equalTo(76)
         }
     }
 }

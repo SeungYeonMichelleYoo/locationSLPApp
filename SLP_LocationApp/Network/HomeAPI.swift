@@ -37,8 +37,8 @@ class HomeAPI {
         AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: SearchModel.self) { response in
             let statusCode = response.response?.statusCode
             print("nearbysearch api called")
-            print(response.value)
-            print(response)
+//            print(response.value)
+//            print(response)
             switch response.result {
             case .success(let value): completion(response.value!, statusCode, nil)
                 return

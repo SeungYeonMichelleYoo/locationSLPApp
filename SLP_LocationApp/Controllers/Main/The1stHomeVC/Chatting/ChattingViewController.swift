@@ -40,7 +40,7 @@ class ChattingViewController: BaseViewController {
         mainView.menuView.reportStackView.addGestureRecognizer(getPressGesture())
         mainView.menuView.cancelStackView.addGestureRecognizer(getPressGesture2())
         mainView.menuView.reviewStackView.addGestureRecognizer(getPressGesture3())
-        
+         
         mainView.infoLabel.text = "\(nick)님과 매칭되었습니다"
     }
     @objc func sendBtnClicked() {

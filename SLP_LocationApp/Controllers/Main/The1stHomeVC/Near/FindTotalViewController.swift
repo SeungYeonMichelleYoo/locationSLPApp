@@ -21,6 +21,7 @@ class FindTotalViewController: TabmanViewController {
     var lat = 0.0
     var long = 0.0
     var timer = Timer()
+    var countPassed = 0//test
  
     var mainView = FindTotalView()
     
@@ -35,9 +36,9 @@ class FindTotalViewController: TabmanViewController {
         
         self.dataSource = self
         
-        var vc1 = NearViewController()
+        let vc1 = NearViewController()
         vc1.setCoordinate(lat: lat, long: long)
-        var vc2 = ReceivedRequestViewController()
+        let vc2 = ReceivedRequestViewController()
         vc2.setCoordinate(lat: lat, long: long)
         viewControllers = [vc1, vc2]
         reloadData()
@@ -75,6 +76,9 @@ class FindTotalViewController: TabmanViewController {
     }
     
     @objc func updateBy5Sec() {
+        countPassed += 1//test
+        print(countPassed)//test
+        
         checkMatchStatusby5Sec()
     }
     

@@ -15,13 +15,14 @@ class OnboardingView: BaseView {
         
         layout.scrollDirection = .horizontal
         layout.sectionInset = .zero
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 14, height: UIScreen.main.bounds.height - 120) //height 값???
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 564)
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.isScrollEnabled = true
         cv.isPagingEnabled = true
         cv.showsHorizontalScrollIndicator = false
-        cv.backgroundColor = .white
         return cv
     }()
     
@@ -58,12 +59,12 @@ class OnboardingView: BaseView {
     override func setConstraints() {
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide)
+            make.leading.equalTo(self.safeAreaLayoutGuide)
             make.centerX.equalTo(self.safeAreaLayoutGuide)
-            make.leading.equalTo(self.safeAreaLayoutGuide).inset(7)
         }
         
         pageControl.snp.makeConstraints { make in
-            make.top.equalTo(collectionView.snp.bottom).offset(56)
+            make.top.equalTo(collectionView.snp.bottom).offset(36)
             make.width.greaterThanOrEqualTo(48)
             make.height.equalTo(8)
             make.centerX.equalTo(self.safeAreaLayoutGuide)

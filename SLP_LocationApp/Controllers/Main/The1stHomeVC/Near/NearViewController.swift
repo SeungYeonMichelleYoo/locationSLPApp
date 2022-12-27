@@ -16,6 +16,8 @@ class NearViewController: BaseViewController {
     var long = 0.0
     var requestedUid = ""
     var receivedUid = ""
+    var runTime: Date = Date() //5sec 측정하기 위함
+    var firstCallNearBySearch = false
     
     override func loadView() {
         self.view = mainView
@@ -25,9 +27,15 @@ class NearViewController: BaseViewController {
         super.viewDidLoad()
         setupTableview()
         mainView.changeBtn.addTarget(self, action: #selector(changeBtnClicked), for: .touchUpInside)
+        mainView.refreshBtn.addTarget(self, action: #selector(refreshBtnClicked), for: .touchUpInside)
     }
+     
     @objc func changeBtnClicked() {
         changeStudy()
+    }
+    
+    @objc func refreshBtnClicked() {
+       nearbySearch(lat: lat, long: long)
     }
     
     private func changeStudy() {
@@ -65,6 +73,7 @@ class NearViewController: BaseViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        print("주변 새싹 / 받은 요청 탭을 전환할 때")
         nearbySearch(lat: lat, long: long)
     }
     
@@ -75,7 +84,18 @@ class NearViewController: BaseViewController {
     //서버통신 갱신 위함
     private func nearbySearch(lat: Double, long: Double) {
         print("lat: \(lat), long: \(long)")
+        if firstCallNearBySearch {
+            let currentTime = Date()
+            let elapsedSeconds = currentTime.timeIntervalSince(runTime)
+            if elapsedSeconds < 5.0 {
+                print("5 sec not passed")
+                return
+            }
+        }
+        firstCallNearBySearch = true
+        print("5sec passed")
         self.viewModel.nearbySearchVM(lat: lat, long: long) { searchModel, statusCode in
+            self.runTime = Date()
             switch statusCode {
             case APIStatusCode.success.rawValue:
                 self.opponentList = searchModel!.fromQueueDB
@@ -112,8 +132,8 @@ class NearViewController: BaseViewController {
     func setCoordinate(lat: Double, long: Double) {
         self.lat = lat
         self.long = long
-        print("setCoordinate \(lat), \(long)")
-        print("after: \(self.lat), \(self.long)")
+//        print("setCoordinate \(lat), \(long)")
+//        print("after: \(self.lat), \(self.long)")
     }
 }
 
@@ -142,7 +162,7 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         cell.studyCollectionView.tag = indexPath.row
         cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
         cell.studyCollectionView.register(DemandStudyCollectionViewCell.self, forCellWithReuseIdentifier: "DemandStudyCollectionViewCell")
-        print("index: \(indexPath.row) - \(opponentList[indexPath.row].nick) - \(opponentList[indexPath.row].studylist.count)")
+//        print("index: \(indexPath.row) - \(opponentList[indexPath.row].nick) - \(opponentList[indexPath.row].studylist.count)")
         
         cell.studyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         
@@ -177,6 +197,10 @@ extension NearViewController: UIGestureRecognizerDelegate {
         let nickview: UIView = gestureRecognizer.view!
         opponentList[nickview.tag].expanded = !opponentList[nickview.tag].expanded
         mainView.mainTableView.reloadData()
+        
+        if !opponentList[nickview.tag].expanded {
+            nearbySearch(lat: lat, long: long)
+        }
     }
     
 }
@@ -187,7 +211,7 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if index < 0 {
             return buttonTitle.count
         } else {
-            print("tag: \(index), count: \(opponentList[collectionView.tag].studylist.count)")
+//            print("tag: \(index), count: \(opponentList[collectionView.tag].studylist.count)")
             return opponentList[collectionView.tag].studylist.count
         }
     }
