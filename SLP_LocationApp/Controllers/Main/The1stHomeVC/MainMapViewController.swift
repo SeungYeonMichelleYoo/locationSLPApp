@@ -60,8 +60,6 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_waiting") {
             //새싹찾기 화면으로 이동
             let vc = FindTotalViewController()
-//            vc.lat = self.lat
-//            vc.long = self.long
             vc.lat = UserDefaults.standard.double(forKey: "lat")
             vc.long = UserDefaults.standard.double(forKey: "long")
             self.transition(vc, transitionStyle: .push)
@@ -69,7 +67,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
             //채팅화면으로 이동
             let vc = ChattingViewController()
             self.transition(vc, transitionStyle: .push)
-        } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_search") {
+        } else if mainView.floatingBtn.imageView?.image == UIImage(named: "floatingBtn_search") { //일반상태
             let authorizationStatus: CLAuthorizationStatus
             if #available(iOS 14.0, *) {
                 authorizationStatus = locationManager.authorizationStatus
@@ -77,19 +75,17 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
                 authorizationStatus = CLLocationManager.authorizationStatus()
             }
             switch authorizationStatus {
-            case .authorizedAlways, .authorizedWhenInUse:
-                //스터디 입력 화면으로 이동
+            case .authorizedAlways, .authorizedWhenInUse: //스터디 입력 화면으로 이동
                 let vc = SearchViewController()
                 var center = mainView.mapView.centerCoordinate
                 vc.lat = center.latitude
                 vc.long = center.longitude
-//                self.long = center.longitude
-//                self.lat = center.latitude
                 UserDefaults.standard.set(center.latitude, forKey: "lat")
                 UserDefaults.standard.set(center.longitude, forKey: "long")
                 self.transition(vc, transitionStyle: .push)
                 return
             default:
+                print("denied ---default")
                 return
             }
         }

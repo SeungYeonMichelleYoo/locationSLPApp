@@ -25,6 +25,7 @@ class SesacCharacterView: BaseView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(SesacFaceCollectionViewCell.self, forCellWithReuseIdentifier: "SesacFaceCollectionViewCell")
         cv.showsVerticalScrollIndicator = false
+        cv.backgroundColor = .white
         return cv
     }()
    

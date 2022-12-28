@@ -13,31 +13,38 @@ final class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
     var viewModel = UserViewModel()
     
     var phoneNumber = ""
-
+    
     override func loadView() {
         self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         mainView.textField.delegate = self
         mainView.startBtn.addTarget(self, action: #selector(startBtnClicked), for: .touchUpInside)
         
         mainView.textField.textContentType = .oneTimeCode //SMSCode 문자 내용 자동완성 붙여넣기
-    }
         
+        mainView.textField.addTarget(self, action: #selector(SMSCodeViewController.textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if mainView.textField.text!.count == 6 {
+            mainView.startBtn.fill()
+        } else {
+            mainView.startBtn.disable()
+        }
+    }
+    
     @objc func startBtnClicked() {
         mainView.textField.resignFirstResponder()
         
         if let text = mainView.textField.text, !text.isEmpty {
             let code = text
             AuthManager.shared.verifyCode(smsCode: code) { [weak self] success in
-                print("smscode 클로저 진입")
                 guard success else { return }
                 DispatchQueue.main.async {
-                    print("idtokenGetTest하기 전")
-                    
                     self!.userCheckRecursion()
                 }
             }
@@ -50,8 +57,7 @@ final class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
             case APIStatusCode.success.rawValue:
                 UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
                 print("서버 가입된 회원 : 메인으로 이동")
-                let vc = MainMapViewController()
-                vc.FCMtoken = user!.FCMtoken
+                let vc = TabBarViewController()
                 self.transition(vc, transitionStyle: .presentFullScreen)
                 return
             case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:
@@ -63,12 +69,12 @@ final class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
                 return
             case APIStatusCode.firebaseTokenError.rawValue:
                 self.viewModel.refreshIDToken { isSuccess in
-                if isSuccess! {
-                    self.userCheckRecursion()
-                } else {
-                    self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    if isSuccess! {
+                        self.userCheckRecursion()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
                 }
-            }
                 return
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
                 print("서버 점검중입니다. 관리자에게 문의해주세요.")

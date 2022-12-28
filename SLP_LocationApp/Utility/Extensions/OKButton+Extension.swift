@@ -10,6 +10,7 @@ import UIKit
 extension UIButton {
     func fill() {
         backgroundColor = Constants.BaseColor.green
+        isUserInteractionEnabled = true
     }
     
     func disable() {

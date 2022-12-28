@@ -32,6 +32,7 @@ class ChattingCancelView: BaseView {
         let label = UILabel()
         label.text = "스터디를 취소하겠습니까?"
         label.font = UIFont.font(.Body1_M16)
+        label.textColor = .black
         return label
     }()
     

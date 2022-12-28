@@ -21,7 +21,7 @@ class UserAPI {
         AF.request(url, method: .get, headers: headers).responseJSON { response in
             //Gets HTTP status code
             let statusCode = (response.response?.statusCode)
-//            print(response.result)
+            print(response.result)
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
             let decoder = JSONDecoder()

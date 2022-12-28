@@ -11,10 +11,10 @@ import Alamofire
 class ChattingViewController: BaseViewController {
     
     var mainView = ChattingView()
-    
+    var viewModel = HomeViewModel()
     var chat: [Chat] = []
-    var nick = ""
     var uid = ""
+    var matchedNick = ""
     
     override func loadView() {
         self.view = mainView
@@ -22,13 +22,9 @@ class ChattingViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(moreBtnClicked))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        
+        configureNavItems()
         configureTableView()
+        checkCurrentStatus()
         
         //on sesac으로 받은 이벤트를 처리하기 위한 Notification Observer (SocketIOManager의 이벤트 수신에서 달은 NSnotificationcenter 받아오기)
         NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
@@ -40,12 +36,73 @@ class ChattingViewController: BaseViewController {
         mainView.menuView.reportStackView.addGestureRecognizer(getPressGesture())
         mainView.menuView.cancelStackView.addGestureRecognizer(getPressGesture2())
         mainView.menuView.reviewStackView.addGestureRecognizer(getPressGesture3())
-         
-        mainView.infoLabel.text = "\(nick)님과 매칭되었습니다"
+        mainView.infoLabel.text = "\(matchedNick)님과 매칭되었습니다"
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
+        mainView.textView.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: self.view.window)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: self.view.window)
     }
+    
+    func checkCurrentStatus() { //matchedNick 불러오기 위해서 씀
+        viewModel.checkMatchStateVM { myQueueState, statusCode in
+            switch statusCode {
+            case APIMyQueueStatusCode.success.rawValue:
+                if myQueueState?.matched == 1 {
+                    self.matchedNick = myQueueState?.matchedNick ?? ""
+                }
+                return
+            case APIMyQueueStatusCode.noSearch.rawValue:
+                return
+            case APIMyQueueStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.checkCurrentStatus()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIMyQueueStatusCode.serverError.rawValue, APIMyQueueStatusCode.clientError.rawValue:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
+    }
+    
+    func configureNavItems() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left"), style: .plain, target: self, action: #selector(backBtnClicked))
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "more"), style: .plain, target: self, action: #selector(moreBtnClicked))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            mainView.textView.snp.remakeConstraints { make in
+                make.bottom.equalToSuperview().inset(keyboardSize.height)
+                make.leading.trailing.equalToSuperview()
+                make.height.equalTo(48)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        mainView.textView.snp.remakeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.leading.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(48)
+        }
+    }
+    
     @objc func sendBtnClicked() {
-        if mainView.textField.text!.count >= 1 {
-            postChat(text: mainView.textField.text ?? "")
+        if mainView.textView.text!.count >= 1 {
+            postChat(text: mainView.textView.text ?? "")
         }
     }
     
@@ -69,12 +126,19 @@ class ChattingViewController: BaseViewController {
         mainView.plusbigView.isHidden.toggle()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        SocketIOManager.shared.closeConnection()
+    override func viewDidAppear(_ animated: Bool) {
+        var vcList = self.navigationController!.viewControllers
+        for i in 0 ..< vcList.count {//NoNetwork, TabBar, Search, FindTotal
+            if vcList[i].isKind(of: SearchViewController.self) {
+                vcList.remove(at: i)
+                break
+            }
+        }
+        self.navigationController!.viewControllers = vcList
     }
     
-    func setNick(nick: String) {
-        self.nick = nick
+    override func viewDidDisappear(_ animated: Bool) {
+        SocketIOManager.shared.closeConnection()
     }
 }
 
@@ -106,7 +170,6 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
         default: return UITableViewCell()
         }
     }
-    
 }
 
 
@@ -167,8 +230,22 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     @objc func reviewPress(gestureRecognizer: UITapGestureRecognizer) {
         mainView.plusbigView.isHidden = true
         let vc = ChattingReviewViewController()
-        vc.setReceivedNick(nick: nick)
+        vc.setReceivedNick(matchedNick: matchedNick)
         vc.setReceivedUid(otheruid: uid)
         self.transition(vc, transitionStyle: .presentFullScreen)
+    }
+}
+
+extension ChattingViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "메시지를 입력하세요"
+            textView.textColor = Constants.BaseColor.gray7
+            mainView.textView.resignFirstResponder()
+            mainView.sendBtn.setImage(UIImage(named: "chat_send_gray"), for: .normal)
+        } else {
+            textView.textColor = .black
+            mainView.sendBtn.setImage(UIImage(named: "chat_send_green"), for: .normal)
+        }
     }
 }

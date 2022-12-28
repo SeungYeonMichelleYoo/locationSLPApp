@@ -14,6 +14,7 @@ class FriendView: BaseView {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.numberOfLines = 2
         label.textAlignment = .center
+        label.textColor = .black
         label.text = "메인뷰"
         return label
     }()

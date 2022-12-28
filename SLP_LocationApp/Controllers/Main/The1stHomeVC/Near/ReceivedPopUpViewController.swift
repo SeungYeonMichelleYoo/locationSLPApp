@@ -90,7 +90,6 @@ final class ReceivedPopUpViewController: BaseViewController {
                     DispatchQueue.main.async {
                         let vc = ChattingViewController()
                         vc.uid = myQueueState?.matchedUid ?? ""
-                        vc.setNick(nick: self.nick)
                         self.transition(vc, transitionStyle: .push)
                     }
                 }

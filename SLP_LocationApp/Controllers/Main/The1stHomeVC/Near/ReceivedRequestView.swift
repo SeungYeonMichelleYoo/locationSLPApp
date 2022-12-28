@@ -12,6 +12,7 @@ class ReceivedRequestView: BaseView {
     lazy var mainTableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .singleLine
+        view.backgroundColor = .white
         return view
     }()
     

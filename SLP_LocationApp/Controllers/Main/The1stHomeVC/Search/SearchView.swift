@@ -27,6 +27,7 @@ class SearchView: BaseView {
         let cv = DynamicHeightCollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(StudyCollectionViewCell.self, forCellWithReuseIdentifier: "StudyCollectionViewCell")
         cv.isScrollEnabled = false
+        cv.backgroundColor = .white
         return cv
     }()
     

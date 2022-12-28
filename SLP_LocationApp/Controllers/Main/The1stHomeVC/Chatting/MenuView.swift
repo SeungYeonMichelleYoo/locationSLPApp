@@ -36,6 +36,7 @@ class MenuView: BaseView {
     lazy var reportLabel: UILabel = {
         let label = UILabel()
         label.text = "새싹 신고"
+        label.textColor = .black
         label.font = UIFont.font(.Title3_M14)
         label.textAlignment = .center
         return label
@@ -60,6 +61,7 @@ class MenuView: BaseView {
     lazy var cancelLabel: UILabel = {
         let label = UILabel()
         label.text = "스터디 취소"
+        label.textColor = .black
         label.font = UIFont.font(.Title3_M14)
         label.textAlignment = .center
         return label
@@ -84,6 +86,7 @@ class MenuView: BaseView {
     lazy var reviewLabel: UILabel = {
         let label = UILabel()
         label.text = "리뷰 등록"
+        label.textColor = .black
         label.font = UIFont.font(.Title3_M14)
         label.textAlignment = .center
         return label

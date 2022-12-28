@@ -54,6 +54,7 @@ class ChattingReportView: BaseView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: imageCollectionViewLayout())
         view.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
         view.isScrollEnabled = false
+        view.backgroundColor = .white
         return view
     }()
     
@@ -149,7 +150,7 @@ class ChattingReportView: BaseView {
         layout.minimumInteritemSpacing = 8
         
         let itemSpacing : CGFloat = 8
-        let myWidth : CGFloat = (UIScreen.main.bounds.width - 16*2 - itemSpacing*6)/3
+        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.25
         let myHeight : CGFloat = 32
         
         layout.scrollDirection = .vertical

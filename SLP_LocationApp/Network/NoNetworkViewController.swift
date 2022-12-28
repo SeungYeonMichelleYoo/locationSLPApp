@@ -26,8 +26,13 @@ final class NoNetworkViewController: BaseViewController {
         print(Date().toString())
         print(UserDefaults.standard.string(forKey: "idToken") )
         if UserDefaults.standard.string(forKey: "idToken") == nil {
-            let vc = OnboardingViewController()
-            self.transition(vc, transitionStyle: .presentFullScreen)
+            self.viewModel.refreshIDToken { isSuccess in
+                if isSuccess! {
+                    self.userCheckRecursion()
+                } else {
+                    self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                }
+            }
         } else {
             userCheckRecursion()
         }
@@ -60,17 +65,15 @@ final class NoNetworkViewController: BaseViewController {
             switch statusCode {
             case APIStatusCode.success.rawValue: //로그인 성공시
                 let vc = TabBarViewController()
-                print(user!.nick)
-                print("sesac image: \(user!.sesac)")
                 vc.setNick(nick: user!.nick)
                 vc.setSesac(sesac: user!.sesac)
                 self.transition(vc, transitionStyle: .presentFullScreen)
                 return
-            case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:
+            case APIStatusCode.forbiddenNickname.rawValue:
                 let vc = NicknameViewController()
                 self.transition(vc, transitionStyle: .push)
                 return
-            case -1, nil:
+            case APIStatusCode.unAuthorized.rawValue:
                 let vc = OnboardingViewController()
                 self.transition(vc, transitionStyle: .presentFullScreen)
                 return

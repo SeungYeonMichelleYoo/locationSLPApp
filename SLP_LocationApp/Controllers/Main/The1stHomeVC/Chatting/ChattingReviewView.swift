@@ -43,7 +43,6 @@ class ChattingReviewView: BaseView {
         let label = UILabel()
         label.numberOfLines = 1
         label.textAlignment = .center
-        label.text = "~~~님과의 스터디는 어떠셨나요?"
         label.font = UIFont.font(.Title4_R14)
         label.textColor = Constants.BaseColor.green
         return label
@@ -53,6 +52,7 @@ class ChattingReviewView: BaseView {
         let view = UICollectionView(frame: .zero, collectionViewLayout: imageCollectionViewLayout())
         view.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
         view.isScrollEnabled = false
+        view.backgroundColor = .white
         return view
     }()
     

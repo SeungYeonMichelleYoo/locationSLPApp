@@ -12,7 +12,7 @@ final class ChattingReviewViewController: BaseViewController {
     var buttonTitle = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 실력", "유익한 시간"]
     var reputation = [0,0,0,0,0,0]
     var viewModel = HomeViewModel()
-    var nick = ""
+    var matchedNick = ""
     var comment = ""
     var otheruid = ""
     
@@ -35,7 +35,7 @@ final class ChattingReviewViewController: BaseViewController {
         
         comment = mainView.textView.text ?? ""
         
-        mainView.detailLabel.text = "\(nick)님과의 스터디는 어떠셨나요?"
+        mainView.detailLabel.text = "\(matchedNick)님과의 스터디는 어떠셨나요?"
         
         placeholderSetting()
     }
@@ -82,10 +82,6 @@ final class ChattingReviewViewController: BaseViewController {
         if touch?.view != mainView.infoView {
             self.dismiss(animated: true)
         }
-    }
-                               
-    func setReceivedNick(nick: String) {
-        self.nick = nick
     }
     
     func setReceivedUid(otheruid: String) {

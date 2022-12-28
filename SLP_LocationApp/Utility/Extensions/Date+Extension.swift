@@ -34,6 +34,7 @@ extension Date {
     
     func getMonthDate() -> String {
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko")
         formatter.dateFormat = "M월 dd일 E요일"
         return formatter.string(from: self)
     }

@@ -48,22 +48,23 @@ class ChattingView: BaseView {
         view.separatorStyle = .none
         view.register(YourChatTableViewCell.self, forCellReuseIdentifier: "YourChatTableViewCell")
         view.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatTableViewCell")
+        view.backgroundColor = .white
         return view
       }()
     
-    lazy var textField: UITextField = {
-        let view = UITextField()
+    lazy var textView: UITextView = {
+        let view = UITextView()
         view.layer.cornerRadius = 8
-        view.addLeftPadding()
-        view.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.foregroundColor: Constants.BaseColor.gray6])
         view.backgroundColor = Constants.BaseColor.gray1
-        view.font = UIFont.font(.Title4_R14)
+        view.font = UIFont.font(.Body3_R14)
+        view.textColor = Constants.BaseColor.gray7
+        view.text = "메시지를 입력하세요"
         return view
     }()
     
     lazy var sendBtn: UIButton = {
         let view = UIButton()
-        view.setImage(UIImage(named: "chat_send"), for: .normal)
+        view.setImage(UIImage(named: "chat_send_gray"), for: .normal)
         return view
     }()
     
@@ -95,7 +96,7 @@ class ChattingView: BaseView {
     }
     
     override func configureUI() {
-        [dateBtn, bellImg, infoLabel, detailLabel, mainTableView, textField, sendBtn, plusbigView].forEach {
+        [dateBtn, bellImg, infoLabel, detailLabel, mainTableView, textView, sendBtn, plusbigView].forEach {
             self.addSubview($0)
         }
         [menuView, darkView].forEach {
@@ -107,7 +108,7 @@ class ChattingView: BaseView {
         dateBtn.snp.makeConstraints { make in
             make.top.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.centerX.equalToSuperview()
-            make.width.equalTo(100)
+            make.width.equalTo(120)
             make.height.equalTo(18)
         }
         
@@ -130,18 +131,19 @@ class ChattingView: BaseView {
         
         mainTableView.snp.makeConstraints { make in
             make.top.equalTo(detailLabel.snp.bottom).offset(24)
-            make.leading.trailing.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.bottom.equalTo(textView.snp.top)
         }
         
-        textField.snp.makeConstraints { make in
+        textView.snp.makeConstraints { make in
             make.leading.bottom.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.height.equalTo(52)
         }
         
         sendBtn.snp.makeConstraints { make in
-            make.trailing.equalTo(textField.snp.trailing).inset(14)
+            make.trailing.equalTo(textView.snp.trailing).inset(14)
             make.size.equalTo(20)
-            make.centerY.equalTo(textField)
+            make.centerY.equalTo(textView)
         }
         
         plusbigView.snp.makeConstraints { make in

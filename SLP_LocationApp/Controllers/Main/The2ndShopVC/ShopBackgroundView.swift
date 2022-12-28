@@ -22,6 +22,7 @@ class ShopBackgroundView: BaseView {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(ShopBackgroundCollectionViewCell.self, forCellWithReuseIdentifier: "ShopBackgroundCollectionViewCell")
         cv.showsVerticalScrollIndicator = false
+        cv.backgroundColor = .white
         return cv
     }()
    

@@ -23,6 +23,7 @@ class OnboardingView: BaseView {
         cv.isScrollEnabled = true
         cv.isPagingEnabled = true
         cv.showsHorizontalScrollIndicator = false
+        cv.backgroundColor = .white
         return cv
     }()
     

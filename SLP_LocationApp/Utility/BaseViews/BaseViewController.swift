@@ -16,7 +16,7 @@ class BaseViewController: UIViewController {
     }
     
     func configure() {
-        view.backgroundColor = Constants.BaseColor.background
+        view.backgroundColor = .white
     }
     
     func showAlertMessage(title: String, button: String = "확인") { //매개변수 기본값
