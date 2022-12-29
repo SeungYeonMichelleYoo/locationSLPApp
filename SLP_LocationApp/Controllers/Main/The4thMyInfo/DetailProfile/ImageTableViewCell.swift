@@ -40,6 +40,8 @@ class ImageTableViewCell: UITableViewCell {
     }
     
     private func layout() {
+        self.contentView.backgroundColor = .white
+        
         [backimage, sesacImg].forEach {
             contentView.addSubview($0)
         }

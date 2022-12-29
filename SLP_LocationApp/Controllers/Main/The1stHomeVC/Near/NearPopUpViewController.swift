@@ -58,7 +58,6 @@ final class NearPopUpViewController: BaseViewController {
                 DispatchQueue.main.async {
                     self.showToast(message: "상대방도 스터디를 요청하여 매칭되었습니다. 잠시 후 채팅방으로 이동합니다")
                     let vc = ChattingViewController()
-                    vc.setNick(nick: self.nick)
                     self.transition(vc, transitionStyle: .push)
                 }
                 return

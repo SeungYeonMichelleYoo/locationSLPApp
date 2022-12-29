@@ -21,6 +21,7 @@ class ShopBackgroundCollectionViewCell: UICollectionViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "하늘 공원"
+        label.textColor = .black
         label.font = UIFont.font(.Title3_M14)
         return label
     }()
@@ -28,6 +29,7 @@ class ShopBackgroundCollectionViewCell: UICollectionViewCell {
     lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.text = "새싹들을 많이 마주치는 매력적인 하늘 공원입니다"
+        label.textColor = .black
         label.font = UIFont.font(.Body3_R14)
         label.numberOfLines = 0
         return label

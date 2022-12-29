@@ -14,6 +14,7 @@ class MyInfoView: BaseView {
         view.separatorStyle = .singleLine
         view.register(NameTableViewCell.self, forCellReuseIdentifier: "NameTableViewCell")
         view.register(MyInfoTableViewCell.self, forCellReuseIdentifier: "MyInfoTableViewCell")
+        view.backgroundColor = .white
         return view
       }()
           

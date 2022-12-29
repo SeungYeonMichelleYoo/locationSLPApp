@@ -74,6 +74,7 @@ class ExpandableTableViewCell: UITableViewCell {
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: imageCollectionViewLayout())
         view.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
+        view.backgroundColor = .white
         return view
     }()
     
@@ -111,6 +112,8 @@ class ExpandableTableViewCell: UITableViewCell {
     }
     
     private func layout() {
+        self.contentView.backgroundColor = .white
+        
         self.contentView.addSubview(totalStackView)
         
         [nickView, expandableView].forEach {

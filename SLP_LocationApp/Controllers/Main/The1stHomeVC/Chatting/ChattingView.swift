@@ -31,7 +31,6 @@ class ChattingView: BaseView {
         let label = UILabel()
         label.font = UIFont.font(.Title3_M14)
         label.textColor = Constants.BaseColor.gray7
-        label.text = "님과 매칭되었습니다"
         return label
     }()
     
@@ -111,17 +110,16 @@ class ChattingView: BaseView {
             make.width.equalTo(120)
             make.height.equalTo(18)
         }
-        
-        bellImg.snp.makeConstraints { make in
-            make.top.equalTo(dateBtn.snp.bottom).offset(12)
-            make.size.equalTo(16)
-            make.trailing.equalTo(dateBtn.snp.leading).offset(-4)
-        }
-        
+                
         infoLabel.snp.makeConstraints { make in
             make.top.equalTo(dateBtn.snp.bottom).offset(12)
-            make.leading.equalTo(bellImg.snp.trailing).offset(4)
-            make.centerY.equalTo(bellImg)
+            make.centerX.equalToSuperview().offset(8)
+        }
+        
+        bellImg.snp.makeConstraints { make in
+            make.size.equalTo(16)
+            make.centerY.equalTo(infoLabel)
+            make.trailing.equalTo(infoLabel.snp.leading).offset(-4)
         }
         
         detailLabel.snp.makeConstraints { make in

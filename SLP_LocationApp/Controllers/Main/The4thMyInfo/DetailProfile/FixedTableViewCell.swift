@@ -23,6 +23,7 @@ class FixedTableViewCell: UITableViewCell {
         
     lazy var fixedView: UIView = {
         let view = UIView()
+        view.backgroundColor = .white
         return view
     }()
     
@@ -35,6 +36,7 @@ class FixedTableViewCell: UITableViewCell {
     lazy var genderLabel: UILabel = {
         let label = UILabel()
         label.text = "내 성별"
+        label.textColor = .black
         label.font = UIFont.font(.Title4_R14)
         return label
     }()
@@ -70,6 +72,7 @@ class FixedTableViewCell: UITableViewCell {
     lazy var studyLabel: UILabel = {
         let label = UILabel()
         label.text = "자주하는 스터디"
+        label.textColor = .black
         label.font = UIFont.font(.Title4_R14)
         return label
     }()
@@ -93,6 +96,7 @@ class FixedTableViewCell: UITableViewCell {
     lazy var toggleLabel: UILabel = {
         let label = UILabel()
         label.text = "내 번호 검색 허용"
+        label.textColor = .black
         label.font = UIFont.font(.Title4_R14)
         return label
     }()
@@ -112,6 +116,7 @@ class FixedTableViewCell: UITableViewCell {
     lazy var ageInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "상대방 연령대"
+        label.textColor = .black
         label.textAlignment = .left
         label.font = UIFont.font(.Title4_R14)
         return label

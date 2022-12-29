@@ -17,7 +17,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     var emailAddress = ""
     var phoneNumber = ""
     var FCMtoken = ""
-    var latArr:[String] = [] //var latArr = [String]() 과의 차이??
+    var latArr:[String] = []
     var longArr:[String] = []
     var opponentList:[OpponentModel] = []
     var receivedList:[OpponentModel] = []
@@ -48,6 +48,8 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         mainView.floatingBtn.addTarget(self, action: #selector(floatingBtnClicked), for: .touchUpInside)
         
         mainView.currentlocationBtn.addTarget(self, action: #selector(currentBtnClicked), for: .touchUpInside)
+        
+        navigationController?.navigationBar.isHidden = true
     }
     
     //현재 위치 버튼 클릭시
@@ -209,11 +211,13 @@ extension MainMapViewController {
         }
         
         //iOS 위치 서비스 활성화 여부 체크
-        if CLLocationManager.locationServicesEnabled() {
-            //위치 서비스가 활성화 되어있으므로, 위치 권한 요청 가능해서 위치 권한을 요청함.
-            checkUserCurrentLocationAuthorization(authorizationStatus)
-        } else {
-            print("위치 서비스가 꺼져 있어서 위치 권한 요청을 못합니다.")
+        DispatchQueue.global().async { //iPhone ver16부터 추가
+            if CLLocationManager.locationServicesEnabled() {
+                //위치 서비스가 활성화 되어있으므로, 위치 권한 요청 가능해서 위치 권한을 요청함.
+                self.checkUserCurrentLocationAuthorization(authorizationStatus)
+            } else {
+                print("위치 서비스가 꺼져 있어서 위치 권한 요청을 못합니다.")
+            }
         }
     }
     

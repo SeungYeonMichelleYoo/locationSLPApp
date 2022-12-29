@@ -42,6 +42,8 @@ class NameTableViewCell: UITableViewCell {
     
     private func layout() {
         
+        self.contentView.backgroundColor = .white
+        
         [image, titleLabel, nextBtn].forEach {
             self.contentView.addSubview($0)
         }

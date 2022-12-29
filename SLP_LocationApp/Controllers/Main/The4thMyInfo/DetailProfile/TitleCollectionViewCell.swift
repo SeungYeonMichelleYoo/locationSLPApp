@@ -29,7 +29,7 @@ class TitleCollectionViewCell: UICollectionViewCell {
     }
     
     func cellSetting() {
-        self.backgroundColor = Constants.BaseColor.background
+        self.contentView.backgroundColor = .white
         contentView.addSubview(titleBtn)
         
         titleBtn.snp.makeConstraints { make in

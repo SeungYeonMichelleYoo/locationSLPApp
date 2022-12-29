@@ -32,6 +32,7 @@ class WithdrawView: BaseView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "정말 탈퇴하시겠습니까?"
+        label.textColor = .black
         label.font = UIFont.font(.Body1_M16)
         return label
     }()
@@ -39,6 +40,7 @@ class WithdrawView: BaseView {
     lazy var detailLabel: UILabel = {
         let label = UILabel()
         label.text = "탈퇴하시면 새싹 스터디를 이용할 수 없어요ㅠ"
+        label.textColor = .black
         label.font = UIFont.font(.Title4_R14)
         return label
     }()

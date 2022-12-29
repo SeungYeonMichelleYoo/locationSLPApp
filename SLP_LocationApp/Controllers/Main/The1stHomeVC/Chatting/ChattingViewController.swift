@@ -24,7 +24,6 @@ class ChattingViewController: BaseViewController {
         super.viewDidLoad()
         configureNavItems()
         configureTableView()
-        checkCurrentStatus()
         
         //on sesac으로 받은 이벤트를 처리하기 위한 Notification Observer (SocketIOManager의 이벤트 수신에서 달은 NSnotificationcenter 받아오기)
         NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
@@ -36,7 +35,6 @@ class ChattingViewController: BaseViewController {
         mainView.menuView.reportStackView.addGestureRecognizer(getPressGesture())
         mainView.menuView.cancelStackView.addGestureRecognizer(getPressGesture2())
         mainView.menuView.reviewStackView.addGestureRecognizer(getPressGesture3())
-        mainView.infoLabel.text = "\(matchedNick)님과 매칭되었습니다"
         
         self.tabBarController?.tabBar.isHidden = true
         
@@ -52,6 +50,7 @@ class ChattingViewController: BaseViewController {
             case APIMyQueueStatusCode.success.rawValue:
                 if myQueueState?.matched == 1 {
                     self.matchedNick = myQueueState?.matchedNick ?? ""
+                    self.mainView.infoLabel.text = "\(self.matchedNick)님과 매칭되었습니다" //여기에다 두니깐 약 1-2초 뒤에 뜨게 되어 조금 부자연스럽다..
                 }
                 return
             case APIMyQueueStatusCode.noSearch.rawValue:
@@ -124,6 +123,10 @@ class ChattingViewController: BaseViewController {
     
     @objc func moreBtnClicked() {
         mainView.plusbigView.isHidden.toggle()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        checkCurrentStatus()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -230,13 +233,18 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     @objc func reviewPress(gestureRecognizer: UITapGestureRecognizer) {
         mainView.plusbigView.isHidden = true
         let vc = ChattingReviewViewController()
-        vc.setReceivedNick(matchedNick: matchedNick)
+        vc.matchedNick = matchedNick
         vc.setReceivedUid(otheruid: uid)
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }
 
 extension ChattingViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+    }
+    
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "메시지를 입력하세요"
@@ -248,4 +256,5 @@ extension ChattingViewController: UITextViewDelegate {
             mainView.sendBtn.setImage(UIImage(named: "chat_send_green"), for: .normal)
         }
     }
+    
 }

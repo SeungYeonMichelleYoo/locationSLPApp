@@ -19,6 +19,7 @@ class SesacFaceCollectionViewCell: UICollectionViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "기본 새싹"
+        label.textColor = .black
         label.font = UIFont.font(.Title2_R16)
         return label
     }()
@@ -26,6 +27,7 @@ class SesacFaceCollectionViewCell: UICollectionViewCell {
     lazy var contentLabel: UILabel = {
         let label = UILabel()
         label.text = "새싹을 대표하는 기본 식물입니다. 다른 새싹들과 함께 하는 것을 좋아합니다."
+        label.textColor = .black
         label.font = UIFont.font(.Body3_R14)
         label.numberOfLines = 0
         return label

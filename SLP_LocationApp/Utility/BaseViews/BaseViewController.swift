@@ -11,8 +11,19 @@ class BaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)]
+    
         configure()
+    }
+    
+    func setNavBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)]
+        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        appearance.shadowColor = Constants.BaseColor.gray1
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
     
     func configure() {
@@ -25,7 +36,6 @@ class BaseViewController: UIViewController {
         
         alert.addAction(ok)
         present(alert, animated: true)
-    }
-    
+    }    
 }
 

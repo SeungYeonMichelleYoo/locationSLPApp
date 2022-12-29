@@ -40,6 +40,8 @@ class MyInfoTableViewCell: UITableViewCell {
     
     private func layout() {
         
+        self.contentView.backgroundColor = .white
+        
         [image, titleLabel].forEach {
             self.contentView.addSubview($0)
         }

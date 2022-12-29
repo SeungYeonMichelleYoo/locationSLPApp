@@ -148,7 +148,8 @@ class ChattingReviewView: BaseView {
         layout.minimumInteritemSpacing = 8
         
         let itemSpacing : CGFloat = 8
-        let myWidth : CGFloat = (UIScreen.main.bounds.width - 16*2 - itemSpacing*6)/2
+        let myWidth : CGFloat = UIScreen.main.bounds.width * 0.3
+//        (UIScreen.main.bounds.width - 16*2 - itemSpacing*6)/2
         let myHeight : CGFloat = 32
         
         layout.scrollDirection = .vertical
