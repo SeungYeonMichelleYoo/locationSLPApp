@@ -48,8 +48,6 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
         mainView.floatingBtn.addTarget(self, action: #selector(floatingBtnClicked), for: .touchUpInside)
         
         mainView.currentlocationBtn.addTarget(self, action: #selector(currentBtnClicked), for: .touchUpInside)
-        
-        navigationController?.navigationBar.isHidden = true
     }
     
     //현재 위치 버튼 클릭시
@@ -133,11 +131,10 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     
     func centerMap(center: CLLocationCoordinate2D) {
         //지도 중심 기반으로 보여질 범위 (annotation기준으로 반경 약 700m)
-        //중요!!!!!!!!!!!!!!!! 나중에 center 다시 defaultCoordinate -> center로 바꿔놓기
         let region = MKCoordinateRegion(center: center, latitudinalMeters: 700, longitudinalMeters: 700)
         mainView.mapView.setRegion(region, animated: true)
         
-        nearbySearch(lat: center.latitude, long: center.longitude) //center.latitude,~로 나중에 바꾸기!!!!!!!!!!
+        nearbySearch(lat: center.latitude, long: center.longitude)
     }
     
     override func viewWillAppear(_ animated: Bool) {

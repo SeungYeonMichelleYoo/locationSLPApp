@@ -108,8 +108,4 @@ final class ChattingCancelViewController: BaseViewController {
             }
         }
     }
-    
-    func setUid(otheruid: String) {
-        self.otheruid = otheruid
-    }
 }

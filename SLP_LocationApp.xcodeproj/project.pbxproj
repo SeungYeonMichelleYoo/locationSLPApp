@@ -120,6 +120,8 @@
 		54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54ACF64A291D2B320002A121 /* GoogleService-Info.plist */; };
 		54ACF64E291D361A0002A121 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 54ACF64D291D361A0002A121 /* Toast */; };
 		54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACF650291D39220002A121 /* Toast+Extension.swift */; };
+		54B2834B295E817E00D5529B /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B2834A295E817E00D5529B /* ChatViewModel.swift */; };
+		54B2834D295E818600D5529B /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B2834C295E818600D5529B /* ChatAPI.swift */; };
 		54B5F8232956CB0800E25FFE /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B5F8222956CB0800E25FFE /* Review.swift */; };
 		54B95E0329377F97005389A6 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B95E0229377F97005389A6 /* SearchModel.swift */; };
 		54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B95E0429378D0B005389A6 /* Sequence+Extension.swift */; };
@@ -241,6 +243,8 @@
 		54ACA0A3293B1635001E4252 /* EmptyBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBigView.swift; sourceTree = "<group>"; };
 		54ACF64A291D2B320002A121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54ACF650291D39220002A121 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
+		54B2834A295E817E00D5529B /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		54B2834C295E818600D5529B /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
 		54B5F8222956CB0800E25FFE /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		54B95E0229377F97005389A6 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		54B95E0429378D0B005389A6 /* Sequence+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+Extension.swift"; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 			children = (
 				543F042C291FBE5C0029F088 /* UserViewModel.swift */,
 				547DDFAA2931EDE300FD7818 /* HomeViewModel.swift */,
+				54B2834A295E817E00D5529B /* ChatViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 			children = (
 				545AE796291E5FBA000F73C3 /* UserAPI.swift */,
 				547DDFA82931ECF700FD7818 /* HomeAPI.swift */,
+				54B2834C295E818600D5529B /* ChatAPI.swift */,
 				5442B7BD29323111008F8623 /* APIStatusCode.swift */,
 				545AE7A0291E77DC000F73C3 /* NoNetworkViewController.swift */,
 				545AE7A2291E7811000F73C3 /* NoNetworkView.swift */,
@@ -736,6 +742,7 @@
 				5461B4D62918C6050000D726 /* OnboardingView.swift in Sources */,
 				54CF0EC3294C59380018E4E2 /* ShopBackgroundCollectionViewCell.swift in Sources */,
 				5440A38E2952E1BD0067FCC4 /* ChattingCancelView.swift in Sources */,
+				54B2834D295E818600D5529B /* ChatAPI.swift in Sources */,
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
@@ -827,6 +834,7 @@
 				5434ACDD293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
 				5487CEF3294B4926003F15D9 /* SesacCharacterView.swift in Sources */,
+				54B2834B295E817E00D5529B /* ChatViewModel.swift in Sources */,
 				54FE19F4291A3BA70033BCE4 /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

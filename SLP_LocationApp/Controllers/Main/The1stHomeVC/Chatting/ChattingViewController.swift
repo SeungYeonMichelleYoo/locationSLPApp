@@ -12,8 +12,9 @@ class ChattingViewController: BaseViewController {
     
     var mainView = ChattingView()
     var viewModel = HomeViewModel()
-    var chat: [Chat] = []
-    var uid = ""
+    var chatViewModel = ChatViewModel()
+    var chatList: [Chat] = []
+    var matchedUid = ""
     var matchedNick = ""
     
     override func loadView() {
@@ -50,7 +51,8 @@ class ChattingViewController: BaseViewController {
             case APIMyQueueStatusCode.success.rawValue:
                 if myQueueState?.matched == 1 {
                     self.matchedNick = myQueueState?.matchedNick ?? ""
-                    self.mainView.infoLabel.text = "\(self.matchedNick)님과 매칭되었습니다" //여기에다 두니깐 약 1-2초 뒤에 뜨게 되어 조금 부자연스럽다..
+                    self.mainView.infoLabel.text = "\(self.matchedNick)님과 매칭되었습니다"
+                    self.matchedUid = myQueueState?.matchedUid ?? ""
                 }
                 return
             case APIMyQueueStatusCode.noSearch.rawValue:
@@ -101,20 +103,24 @@ class ChattingViewController: BaseViewController {
     
     @objc func sendBtnClicked() {
         if mainView.textView.text!.count >= 1 {
-            postChat(text: mainView.textView.text ?? "")
+            sendChat()
+            mainView.textView.text = ""
+            mainView.sendBtn.setImage(UIImage(named: "chat_send_gray"), for: .normal)
         }
     }
     
     @objc func getMessage(notification: NSNotification) {
-        let id = notification.userInfo!["id"] as! String
+        let id = notification.userInfo!["_id"] as! String
+        let to = notification.userInfo!["to"] as! String
+        let from = notification.userInfo!["from"] as! String
         let chat = notification.userInfo!["chat"] as! String
         let createdAt = notification.userInfo!["createdAt"] as! String
-        let userID = notification.userInfo!["userId"] as! String
-        let value = Chat(id: id, chat: chat, createdAt: createdAt, from: userID, to: "")
         
-        self.chat.append(value)
+        let value = Chat(id: id, to: to, from: from, chat: chat, createdAt: createdAt)
+        
+        self.chatList.append(value)
         mainView.mainTableView.reloadData()
-        mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chat.count - 1, section: 0), at: .bottom, animated: false)
+        mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)
     }
     
     @objc func backBtnClicked() {
@@ -143,6 +149,13 @@ class ChattingViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         SocketIOManager.shared.closeConnection()
     }
+    
+    //textview 외의 화면 클릭시 키보드 내리기 + textview placeholder 설정
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        view.endEditing(true)
+        mainView.textView.text = "메시지를 입력하세요"
+        mainView.textView.textColor = Constants.BaseColor.gray7
+    }
 }
 
 extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -156,11 +169,11 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chat.count
+        return chatList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = chat[indexPath.row]
+        let data = chatList[indexPath.row]
         
         switch indexPath.row {
         case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "YourChatTableViewCell", for: indexPath) as! YourChatTableViewCell
@@ -177,25 +190,57 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension ChattingViewController {
-    //채팅 가져오기
+    //채팅 받아오기
     private func fetchChats() {
-        AF.request(UserAPI.BASEURL, method: .get).responseDecodable(of: [Chat].self) { [weak self] response in
-            switch response.result {
-            case .success(let value):
-                self?.chat = value
-                self?.mainView.mainTableView.reloadData()
-                self?.mainView.mainTableView.scrollToRow(at: IndexPath(row: self!.chat.count - 1, section: 0), at: .bottom, animated: false)
+        chatViewModel.fetchChatVM(from: matchedUid, lastchatDate: "바꿔야됨") { fetchingChatModel, statusCode in
+            switch statusCode {
+            case APIChatStatusCode.success.rawValue:
+                self.chatList = fetchingChatModel!.payload
+                self.mainView.mainTableView.reloadData()
+                self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false) //chatList.count 바꿔야될듯..!!!
                 SocketIOManager.shared.establishConnection() //소켓 통신이 연결되는 시점 (스크롤 다 내린 시점에서) ->여기부터 실시간으로 데이터 받아오는 것 가능
-            case .failure(let error):
-                print("FAIL", error)
+                return
+            case APIChatStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.sendChat()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIChatStatusCode.serverError.rawValue, APIChatStatusCode.clientError.rawValue:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
             }
         }
     }
     
     //채팅 보내기
-    private func postChat(text: String) {
-        AF.request("\(UserAPI.BASEURL)/v1/chat/{to}", method: .post, parameters: ["text": text], encoder: JSONParameterEncoder.default).responseString { data in
-            print("POST CHAT SUCCEED", data)
+    private func sendChat() {
+        chatViewModel.sendChatVM(chat: mainView.textView.text, to: matchedUid) { chat, statusCode in
+            switch statusCode {
+            case APIChatStatusCode.success.rawValue:
+                return
+            case APIChatStatusCode.fail.rawValue: //일반상태
+                return
+            case APIChatStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.sendChat()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIChatStatusCode.serverError.rawValue, APIChatStatusCode.clientError.rawValue:
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
         }
     }
 }
@@ -221,7 +266,7 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
     @objc func cancelPress(gestureRecognizer: UITapGestureRecognizer) {
         mainView.plusbigView.isHidden = true
         let vc = ChattingCancelViewController()
-        vc.setUid(otheruid: uid)
+        vc.otheruid = matchedUid
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
     
@@ -234,7 +279,7 @@ extension ChattingViewController: UIGestureRecognizerDelegate {
         mainView.plusbigView.isHidden = true
         let vc = ChattingReviewViewController()
         vc.matchedNick = matchedNick
-        vc.setReceivedUid(otheruid: uid)
+        vc.otheruid = matchedUid
         self.transition(vc, transitionStyle: .presentFullScreen)
     }
 }
@@ -249,7 +294,7 @@ extension ChattingViewController: UITextViewDelegate {
         if textView.text.isEmpty {
             textView.text = "메시지를 입력하세요"
             textView.textColor = Constants.BaseColor.gray7
-            mainView.textView.resignFirstResponder()
+            textView.resignFirstResponder()
             mainView.sendBtn.setImage(UIImage(named: "chat_send_gray"), for: .normal)
         } else {
             textView.textColor = .black

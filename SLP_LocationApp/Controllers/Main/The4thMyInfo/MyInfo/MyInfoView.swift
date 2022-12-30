@@ -8,7 +8,7 @@ import UIKit
 import SnapKit
 
 class MyInfoView: BaseView {
-
+    
     lazy var mainTableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .singleLine
@@ -16,8 +16,8 @@ class MyInfoView: BaseView {
         view.register(MyInfoTableViewCell.self, forCellReuseIdentifier: "MyInfoTableViewCell")
         view.backgroundColor = .white
         return view
-      }()
-          
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

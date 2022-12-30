@@ -84,7 +84,6 @@ final class DetailProfileViewController: BaseViewController {
     
     func userCheckRecursion() {
         viewModel.userCheckVM { user, statusCode in
-            print("statusCode: \(statusCode)")
             print(UserDefaults.standard.string(forKey: "idToken"))
             switch statusCode {
             case APIStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
@@ -107,10 +106,9 @@ final class DetailProfileViewController: BaseViewController {
             }
 
             switch statusCode {
-            case APIStatusCode.success.rawValue: //로그인 성공시
+            case APIStatusCode.success.rawValue:
                 self.background = user!.background
                 self.nick = user!.nick
-                print("여기 확인해야됨----nick: \(self.nick)") //들어오는거 성공
                 self.background = user!.background
                 self.sesac = user!.sesac
                 self.reputation = user!.reputation
@@ -120,8 +118,6 @@ final class DetailProfileViewController: BaseViewController {
                 self.searchable = user!.searchable
                 self.ageMin = user!.ageMin
                 self.ageMax = user!.ageMax
-                print("reputation=====")
-                print(self.reputation)
                 self.mainView.tableView.reloadData()
                 return
             case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:

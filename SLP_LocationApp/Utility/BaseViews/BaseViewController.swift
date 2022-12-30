@@ -21,7 +21,7 @@ class BaseViewController: UIViewController {
         appearance.backgroundColor = .white
         appearance.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)]
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        appearance.shadowColor = Constants.BaseColor.gray1
+//        appearance.shadowColor = Constants.BaseColor.gray1
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }

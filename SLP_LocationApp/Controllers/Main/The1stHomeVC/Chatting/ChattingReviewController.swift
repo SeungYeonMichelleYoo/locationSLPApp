@@ -67,7 +67,6 @@ final class ChattingReviewViewController: BaseViewController {
                 }
                 return
             case APIStopStudyStatusCode.serverError.rawValue, APIStatusCode.clientError.rawValue:
-                print("서버 점검중입니다. 관리자에게 문의해주세요.")
                 self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
                 return
             default: self.showToast(message: "네트워크 연결을 확인해주세요.")
@@ -76,16 +75,13 @@ final class ChattingReviewViewController: BaseViewController {
         }
     }
                                
-    //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과)
+    //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과) + textview 외의 화면 클릭시 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         if touch?.view != mainView.infoView {
             self.dismiss(animated: true)
         }
-    }
-    
-    func setReceivedUid(otheruid: String) {
-        self.otheruid = otheruid
+        view.endEditing(true)
     }
 }
 extension ChattingReviewViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

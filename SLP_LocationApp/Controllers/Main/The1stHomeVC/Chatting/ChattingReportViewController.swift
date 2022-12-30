@@ -39,12 +39,13 @@ final class ChattingReportViewController: BaseViewController {
         
     }
         
-    //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과)
+    //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과) + textview 외의 화면 클릭시 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         if touch?.view != mainView.infoView {
             self.dismiss(animated: true)
         }
+        view.endEditing(true)
     }
 }
 

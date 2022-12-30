@@ -8,33 +8,37 @@ import Foundation
 
 struct Chat: Codable {
     let id: String
+    let to: String
+    let from: String
     let chat: String
     let createdAt: String
-    let from: String
-    let to: String
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"
+        case to
+        case from
         case chat
         case createdAt
-        case from
-        case to
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
+        to = try container.decode(String.self, forKey: .to)
+        from = try container.decode(String.self, forKey: .from)
         chat = try container.decode(String.self, forKey: .chat)
         createdAt = try container.decode(String.self, forKey: .createdAt)
-        from = try container.decode(String.self, forKey: .from)
-        to = try container.decode(String.self, forKey: .to)
     }
     
-    init(id: String, chat: String, createdAt: String, from: String, to: String) {
+    init(id: String, to: String, from: String, chat: String, createdAt: String) {
         self.id = id
+        self.to = to
+        self.from = from
         self.chat = chat
         self.createdAt = createdAt
-        self.from = from
-        self.to = to
     }
+}
+
+struct FetchingChatModel: Codable {
+    let payload: [Chat]
 }

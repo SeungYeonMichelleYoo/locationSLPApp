@@ -79,3 +79,12 @@ enum APIStudyDodgeStatusCode: Int {
     case serverError = 500
     case clientError = 501
 }
+
+enum APIChatStatusCode: Int {
+    case success = 200
+    case fail = 201 // 상대방 : 일반상태라 채팅 전송 불가
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}

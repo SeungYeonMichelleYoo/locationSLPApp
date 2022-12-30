@@ -89,7 +89,6 @@ final class ReceivedPopUpViewController: BaseViewController {
                     self.showToast(message: "\(myQueueState?.matchedUid)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
                     DispatchQueue.main.async {
                         let vc = ChattingViewController()
-                        vc.uid = myQueueState?.matchedUid ?? ""
                         self.transition(vc, transitionStyle: .push)
                     }
                 }

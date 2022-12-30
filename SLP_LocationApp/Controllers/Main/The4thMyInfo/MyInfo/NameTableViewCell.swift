@@ -40,6 +40,12 @@ class NameTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        image.image = nil
+        titleLabel.text = nil
+    }
+    
     private func layout() {
         
         self.contentView.backgroundColor = .white
