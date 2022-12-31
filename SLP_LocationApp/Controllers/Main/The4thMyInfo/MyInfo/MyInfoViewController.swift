@@ -70,6 +70,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
             let vc = DetailProfileViewController()
             self.transition(vc, transitionStyle: .push)
         }
+        mainView.mainTableView.separatorStyle = .singleLine
     }
     
 }

@@ -9,7 +9,6 @@ import UIKit
 
 class SesacFace {
     static func image(level: Int) -> UIImage {
-        print("level: \(level)")
         return UIImage(named: "sesac_face_\(level + 1)")!
     }
 }

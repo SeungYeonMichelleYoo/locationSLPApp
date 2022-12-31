@@ -45,9 +45,9 @@ class ChattingView: BaseView {
     lazy var mainTableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .none
+        view.backgroundColor = .white
         view.register(YourChatTableViewCell.self, forCellReuseIdentifier: "YourChatTableViewCell")
         view.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatTableViewCell")
-        view.backgroundColor = .white
         return view
       }()
     

@@ -18,13 +18,22 @@ class ChatAPI {
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         let params: Parameters = ["chat": chat]
         
-        AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: Chat.self) { response in
+        AF.request(url, method: .post, parameters: params, headers: headers).responseJSON { response in
             let statusCode = response.response?.statusCode
-            switch response.result {
-            case .success(let value): completion(response.value!, statusCode, nil)
-                return
-            case .failure(let error): completion(nil, statusCode, error)
-                return
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            do {
+                let chat = try decoder.decode(Chat.self, from: response.data!)
+                switch response.result {
+                case .success(_): completion(chat, statusCode, nil)
+                    return
+                case .failure(let error): completion(nil, statusCode, error)
+                    return
+                }
+            } catch  let error as NSError {
+                completion(nil, statusCode, error)
             }
         }
     }
@@ -34,13 +43,24 @@ class ChatAPI {
         let url = "\(BASEURL)/v1/chat/\(from)?lastchatDate=\(lastchatDate)"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         
-        AF.request(url, method: .get, headers: headers).responseDecodable(of: FetchingChatModel.self) { response in
+        AF.request(url, method: .get, headers: headers).responseJSON { response in
             let statusCode = response.response?.statusCode
-            switch response.result {
-            case .success(let value): completion(response.value!, statusCode, nil)
-                return
-            case .failure(let error): completion(nil, statusCode, error)
-                return
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            print(response.data!)
+            do {
+                let fetchingChatModel = try decoder.decode(FetchingChatModel.self, from: response.data!)
+                
+                switch response.result {
+                case .success(_): completion(fetchingChatModel, statusCode, nil)
+                    return
+                case .failure(let error): completion(nil, statusCode, error)
+                    return
+                }
+            } catch let error as NSError {
+                completion(nil, statusCode, error)
             }
         }
     }

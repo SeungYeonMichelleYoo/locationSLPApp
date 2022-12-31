@@ -14,7 +14,7 @@ class MyInfoTableViewCell: UITableViewCell {
         img.contentMode = .scaleToFill
         return img
     }()
-
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
@@ -22,7 +22,7 @@ class MyInfoTableViewCell: UITableViewCell {
         return label
     }()
     
-  
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
@@ -38,9 +38,13 @@ class MyInfoTableViewCell: UITableViewCell {
         titleLabel.text = nil
     }
     
-    private func layout() {
-        
+    override func awakeFromNib() {
+        super.awakeFromNib()
         self.contentView.backgroundColor = .white
+    }
+    
+    private func layout() {
+        self.selectionStyle = .none
         
         [image, titleLabel].forEach {
             self.contentView.addSubview($0)

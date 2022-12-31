@@ -55,6 +55,7 @@ class SocketIOManager {
     
     func closeConnection() {
         socket.disconnect()
+//        manager.disconnect()
     }
     
 }

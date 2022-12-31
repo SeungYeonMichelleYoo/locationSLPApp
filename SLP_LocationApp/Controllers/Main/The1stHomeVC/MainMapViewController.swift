@@ -276,7 +276,6 @@ extension MainMapViewController {
                 self.opponentList = searchModel!.fromQueueDB
                 self.receivedList = searchModel!.fromQueueDBRequested
                 for opponent in self.opponentList {
-                    print("opponent.lat: \(opponent.lat)")
                     let pin = CustomAnnotation(sesac_image: opponent.sesac, coordinate: CLLocationCoordinate2D(latitude: opponent.lat, longitude: opponent.long))
                     self.mainView.mapView.addAnnotation(pin)
                 }

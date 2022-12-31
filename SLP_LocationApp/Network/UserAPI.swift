@@ -19,9 +19,7 @@ class UserAPI {
         
         
         AF.request(url, method: .get, headers: headers).responseJSON { response in
-            //Gets HTTP status code
-            let statusCode = (response.response?.statusCode)
-            print(response.result)
+            let statusCode = response.response?.statusCode
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
             let decoder = JSONDecoder()
@@ -47,7 +45,7 @@ class UserAPI {
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
         
         let params: Parameters = ["phoneNumber": phoneNumber, "FCMtoken": FCMtoken, "nick": nick, "birth": birth.toString(), "email": email, "gender": gender]
-//        print(params)
+
         AF.request(url, method: .post, parameters: params, headers: headers).responseDecodable(of: User.self) { response in
             let statusCode = response.response?.statusCode
             switch response.result {

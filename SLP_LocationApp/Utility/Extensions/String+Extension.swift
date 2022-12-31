@@ -15,4 +15,18 @@ extension String {
         
         return CGFloat(doubleValue)
     }
+    
+    
+    func toDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+        dateFormatter.timeZone = TimeZone(identifier: "ko_KR")
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+    
 }
+

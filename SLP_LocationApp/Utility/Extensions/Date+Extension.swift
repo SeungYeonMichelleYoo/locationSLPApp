@@ -28,7 +28,7 @@ extension Date {
     
     func toString() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
         return formatter.string(from: self)
     }
     

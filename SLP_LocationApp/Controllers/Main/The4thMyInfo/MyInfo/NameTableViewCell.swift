@@ -16,7 +16,7 @@ class NameTableViewCell: UITableViewCell {
         img.image = UIImage(named:"profile_img")
         return img
     }()
-
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.black
@@ -46,9 +46,13 @@ class NameTableViewCell: UITableViewCell {
         titleLabel.text = nil
     }
     
-    private func layout() {
-        
+    override func awakeFromNib() {
+        super.awakeFromNib()
         self.contentView.backgroundColor = .white
+    }
+    
+    private func layout() {
+        self.selectionStyle = .none
         
         [image, titleLabel, nextBtn].forEach {
             self.contentView.addSubview($0)

@@ -31,8 +31,6 @@ class ChattingViewController: BaseViewController {
         
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
         
-        fetchChats()
-        
         mainView.menuView.reportStackView.addGestureRecognizer(getPressGesture())
         mainView.menuView.cancelStackView.addGestureRecognizer(getPressGesture2())
         mainView.menuView.reviewStackView.addGestureRecognizer(getPressGesture3())
@@ -45,7 +43,7 @@ class ChattingViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: self.view.window)
     }
     
-    func checkCurrentStatus() { //matchedNick 불러오기 위해서 씀
+    private func checkCurrentStatus() { //matchedNick 불러오기 위해서 씀
         viewModel.checkMatchStateVM { myQueueState, statusCode in
             switch statusCode {
             case APIMyQueueStatusCode.success.rawValue:
@@ -53,6 +51,7 @@ class ChattingViewController: BaseViewController {
                     self.matchedNick = myQueueState?.matchedNick ?? ""
                     self.mainView.infoLabel.text = "\(self.matchedNick)님과 매칭되었습니다"
                     self.matchedUid = myQueueState?.matchedUid ?? ""
+                    self.fetchChats()
                 }
                 return
             case APIMyQueueStatusCode.noSearch.rawValue:
@@ -178,26 +177,34 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "YourChatTableViewCell", for: indexPath) as! YourChatTableViewCell
             cell.chatLabel.text = data.chat
+            cell.timeLabel.text = data.createdAt
+            //getChatDateFormat(memodate: data.createdAt.toDate())
+            cell.backgroundColor = .white
             return cell
             
         case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatTableViewCell", for: indexPath) as! MyChatTableViewCell
             cell.chatLabel.text = data.chat
+            cell.timeLabel.text = data.createdAt
+            cell.backgroundColor = .white
             return cell
         default: return UITableViewCell()
         }
     }
 }
 
-
 extension ChattingViewController {
     //채팅 받아오기
     private func fetchChats() {
-        chatViewModel.fetchChatVM(from: matchedUid, lastchatDate: "바꿔야됨") { fetchingChatModel, statusCode in
+        print(matchedUid)
+        chatViewModel.fetchChatVM(from: matchedUid, lastchatDate: "2000-01-01") { fetchingChatModel, statusCode in
             switch statusCode {
             case APIChatStatusCode.success.rawValue:
                 self.chatList = fetchingChatModel!.payload
+                print(self.chatList)
                 self.mainView.mainTableView.reloadData()
-                self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false) //chatList.count 바꿔야될듯..!!!
+                if !self.chatList.isEmpty {
+                    self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)
+                }
                 SocketIOManager.shared.establishConnection() //소켓 통신이 연결되는 시점 (스크롤 다 내린 시점에서) ->여기부터 실시간으로 데이터 받아오는 것 가능
                 return
             case APIChatStatusCode.firebaseTokenError.rawValue:
@@ -220,6 +227,7 @@ extension ChattingViewController {
     
     //채팅 보내기
     private func sendChat() {
+        print("sendChat 되는지 확인 여기여기")
         chatViewModel.sendChatVM(chat: mainView.textView.text, to: matchedUid) { chat, statusCode in
             switch statusCode {
             case APIChatStatusCode.success.rawValue:

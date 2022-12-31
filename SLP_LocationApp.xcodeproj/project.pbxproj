@@ -116,6 +116,8 @@
 		548EEB57294C1207006F871D /* SesacFaceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548EEB56294C1207006F871D /* SesacFaceCollectionViewCell.swift */; };
 		5498682F2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5498682E2918DF3A005DBF6E /* OnboardingCollectionViewCell.swift */; };
 		549868322918DFA9005DBF6E /* OnboardingSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 549868312918DFA9005DBF6E /* OnboardingSlide.swift */; };
+		549D925A295F177000133476 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 549D9259295F177000133476 /* Realm */; };
+		549D925C295F177000133476 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 549D925B295F177000133476 /* RealmSwift */; };
 		54ACA0A4293B1635001E4252 /* EmptyBigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACA0A3293B1635001E4252 /* EmptyBigView.swift */; };
 		54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54ACF64A291D2B320002A121 /* GoogleService-Info.plist */; };
 		54ACF64E291D361A0002A121 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 54ACF64D291D361A0002A121 /* Toast */; };
@@ -269,9 +271,11 @@
 				54360A3A292259AD004B2CBA /* FirebaseMessaging in Frameworks */,
 				54523736292B372D002B8255 /* MultiSlider in Frameworks */,
 				5461B4E02918CBF70000D726 /* SnapKit in Frameworks */,
+				549D925C295F177000133476 /* RealmSwift in Frameworks */,
 				5471A1E4291D1A2B002C80D8 /* IQKeyboardManagerSwift in Frameworks */,
 				542FAEF5291BFBA800E71C87 /* AnyFormatKit in Frameworks */,
 				5408F2E1293ED37B0035E108 /* SocketIO in Frameworks */,
+				549D925A295F177000133476 /* Realm in Frameworks */,
 				5442B7BC29320F93008F8623 /* Tabman in Frameworks */,
 				545AE79F291E66B0000F73C3 /* KeychainSwift in Frameworks */,
 				545AE79A291E6015000F73C3 /* Alamofire in Frameworks */,
@@ -653,6 +657,8 @@
 				54523735292B372D002B8255 /* MultiSlider */,
 				5442B7BB29320F93008F8623 /* Tabman */,
 				5408F2E0293ED37B0035E108 /* SocketIO */,
+				549D9259295F177000133476 /* Realm */,
+				549D925B295F177000133476 /* RealmSwift */,
 			);
 			productName = SLP_LocationApp;
 			productReference = 5461B4A52918B6440000D726 /* SLP_LocationApp.app */;
@@ -693,6 +699,7 @@
 				54523734292B372D002B8255 /* XCRemoteSwiftPackageReference "MultiSlider" */,
 				5442B7BA29320F92008F8623 /* XCRemoteSwiftPackageReference "Tabman" */,
 				5408F2DF293ED37B0035E108 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				549D9258295F177000133476 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 5461B4A62918B6440000D726 /* Products */;
 			projectDirPath = "";
@@ -1127,6 +1134,14 @@
 				version = 6.5.0;
 			};
 		};
+		549D9258295F177000133476 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.33.0;
+			};
+		};
 		54ACF64C291D361A0002A121 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
@@ -1187,6 +1202,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5471A1E2291D1A2B002C80D8 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		549D9259295F177000133476 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 549D9258295F177000133476 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		549D925B295F177000133476 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 549D9258295F177000133476 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		54ACF64D291D361A0002A121 /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
