@@ -44,4 +44,19 @@ extension SesacCharacterViewController: UICollectionViewDelegate, UICollectionVi
         })
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("click index = \(indexPath.item)")
+        let cell  = collectionView.cellForItem(at: indexPath) as! SesacFaceCollectionViewCell
+        
+        var vcList = self.navigationController!.viewControllers
+        var count = 0
+        for vc in vcList {
+            if vc.isKind(of: ShopTabViewController.self) {
+                vc.mainView.backimage.image = BackgroundImage.image(level: indexPath.item)
+                continue
+            }
+            count = count + 1
+        }
+    }
 }

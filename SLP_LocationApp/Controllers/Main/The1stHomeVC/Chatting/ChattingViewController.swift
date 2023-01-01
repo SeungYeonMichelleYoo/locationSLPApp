@@ -43,7 +43,7 @@ class ChattingViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: self.view.window)
     }
     
-    private func checkCurrentStatus() { //matchedNick 불러오기 위해서 씀
+    private func checkCurrentStatus() { //matchedNick, matchedUid 불러오기 위해서 씀
         viewModel.checkMatchStateVM { myQueueState, statusCode in
             switch statusCode {
             case APIMyQueueStatusCode.success.rawValue:
@@ -201,10 +201,10 @@ extension ChattingViewController {
             case APIChatStatusCode.success.rawValue:
                 self.chatList = fetchingChatModel!.payload
                 print(self.chatList)
-                self.mainView.mainTableView.reloadData()
                 if !self.chatList.isEmpty {
                     self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)
                 }
+                self.mainView.mainTableView.reloadData()
                 SocketIOManager.shared.establishConnection() //소켓 통신이 연결되는 시점 (스크롤 다 내린 시점에서) ->여기부터 실시간으로 데이터 받아오는 것 가능
                 return
             case APIChatStatusCode.firebaseTokenError.rawValue:
@@ -227,7 +227,6 @@ extension ChattingViewController {
     
     //채팅 보내기
     private func sendChat() {
-        print("sendChat 되는지 확인 여기여기")
         chatViewModel.sendChatVM(chat: mainView.textView.text, to: matchedUid) { chat, statusCode in
             switch statusCode {
             case APIChatStatusCode.success.rawValue:
