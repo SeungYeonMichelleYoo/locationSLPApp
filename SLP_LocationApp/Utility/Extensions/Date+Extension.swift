@@ -28,7 +28,7 @@ extension Date {
     
     func toString() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         return formatter.string(from: self)
     }
     
@@ -41,11 +41,11 @@ extension Date {
     
     //MARK: - 채팅 날짜
     //MARK: - 오늘/ 과거날짜
-    func getChatDateFormat(memodate: Date) -> String {
-        if memodate.isInSameDay(as: Date()) {
+    func getChatDateFormat() -> String {
+        if self.isInSameDay(as: Date()) {
             return getTodayDate()
         } else {
-            return otherDate(memodate: memodate)
+            return otherDate(memodate: self)
         }
     }
     

@@ -23,8 +23,8 @@ class MyChatTableViewCell: UITableViewCell {
         view.clipsToBounds = true
         view.backgroundColor = Constants.BaseColor.whitegreen
         view.font = UIFont.font(.Body3_R14)
-        view.numberOfLines = 2
-        view.text = "답장 테스트 안녕하세요 답장 테스트 안녕하세요\n 알고리즘 스터디"
+        view.textColor = .black
+        view.numberOfLines = 0
         return view
     }()
 
@@ -57,7 +57,7 @@ class MyChatTableViewCell: UITableViewCell {
         timeLabel.snp.makeConstraints { make in
             make.bottom.equalTo(chatLabel.snp.bottom)
             make.trailing.equalTo(chatLabel.snp.leading).offset(-8)
-            make.leading.lessThanOrEqualTo(100)
+            make.leading.greaterThanOrEqualTo(100)
         }
     }
 }

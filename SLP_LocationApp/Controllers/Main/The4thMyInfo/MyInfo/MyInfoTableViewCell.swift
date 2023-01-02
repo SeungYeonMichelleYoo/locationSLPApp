@@ -38,13 +38,9 @@ class MyInfoTableViewCell: UITableViewCell {
         titleLabel.text = nil
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.contentView.backgroundColor = .white
-    }
-    
     private func layout() {
         self.selectionStyle = .none
+        self.contentView.backgroundColor = .white
         
         [image, titleLabel].forEach {
             self.contentView.addSubview($0)

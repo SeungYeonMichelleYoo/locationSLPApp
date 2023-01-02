@@ -27,7 +27,7 @@ class SocketIOManager {
         //연결
         socket.on(clientEvent: .connect) { data, ack in
             print("Socket is connected", data, ack)
-            self.socket.emit("changesocketid", "myUID")
+            self.socket.emit("changesocketid", UserDefaults.standard.string(forKey: "myUID")!)
         }
         
         //연결 해제
@@ -39,13 +39,15 @@ class SocketIOManager {
             print("CHAT RECEIVED", dataArray, ack)
             
             let data = dataArray[0] as! NSDictionary
-            let chat = data["text"] as! String
-            let id = data["id"] as! String
+            let chat = data["chat"] as! String
+            let id = data["_id"] as! String
             let createdAt = data["createdAt"] as! String
+            let from = data["from"] as! String
+            let to = data["to"] as! String
             
             print("CHECK >>>", chat, createdAt)
             
-            NotificationCenter.default.post(name: NSNotification.Name("getMessage"), object: self, userInfo: ["chat": chat, "id": id, "createdAt": createdAt])
+            NotificationCenter.default.post(name: NSNotification.Name("getMessage"), object: self, userInfo: ["chat": chat, "_id": id, "createdAt": createdAt, "from": from, "to": to])
         }
     }
     

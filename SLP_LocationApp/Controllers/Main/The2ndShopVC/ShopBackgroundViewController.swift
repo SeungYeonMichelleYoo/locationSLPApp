@@ -45,5 +45,19 @@ extension ShopBackgroundViewController: UICollectionViewDelegate, UICollectionVi
         cell.backgroundImg.image = BackgroundImage.image(level: indexPath.item)
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell  = collectionView.cellForItem(at: indexPath) as! ShopBackgroundCollectionViewCell
+        
+        var vcList = self.navigationController!.viewControllers
+        var count = 0
+        for vc in vcList {
+            if vc.isKind(of: ShopTabViewController.self) {
+                (vc as! ShopTabViewController).mainView.backimage.image = BackgroundImage.image(level: indexPath.item)
+                continue
+            }
+            count = count + 1
+        }
+    }
 }
 

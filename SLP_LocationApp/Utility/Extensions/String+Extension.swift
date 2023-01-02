@@ -19,14 +19,12 @@ extension String {
     
     func toDate() -> Date? {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.000Z"
-        dateFormatter.timeZone = TimeZone(identifier: "ko_KR")
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         if let date = dateFormatter.date(from: self) {
             return date
         } else {
             return nil
         }
     }
-    
 }
 

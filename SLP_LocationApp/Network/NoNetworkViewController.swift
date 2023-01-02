@@ -66,6 +66,7 @@ final class NoNetworkViewController: BaseViewController {
                 let vc = TabBarViewController()
                 vc.setNick(nick: user!.nick)
                 vc.setSesac(sesac: user!.sesac)
+                UserDefaults.standard.set(user!.uid, forKey: "myUID")
                 self.transition(vc, transitionStyle: .presentFullScreen)
                 return
             case APIStatusCode.forbiddenNickname.rawValue:

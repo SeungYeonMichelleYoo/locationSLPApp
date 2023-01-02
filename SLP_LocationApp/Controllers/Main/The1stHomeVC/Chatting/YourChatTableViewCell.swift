@@ -15,8 +15,8 @@ class YourChatTableViewCell: UITableViewCell {
         view.layer.borderWidth = 1
         view.layer.borderColor = Constants.BaseColor.gray4.cgColor
         view.font = UIFont.font(.Body3_R14)
-        view.numberOfLines = 2
-        view.text = "테스트 테스트 안녕하세요\n 알고리즘 스터디"
+        view.textColor = .black
+        view.numberOfLines = 0
         return view
     }()
     

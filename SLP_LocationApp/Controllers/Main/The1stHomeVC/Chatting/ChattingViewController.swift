@@ -7,8 +7,11 @@
 import UIKit
 import SocketIO
 import Alamofire
+//import RealmSwift
 
 class ChattingViewController: BaseViewController {
+    
+    //    var localRealm = try! Realm()
     
     var mainView = ChattingView()
     var viewModel = HomeViewModel()
@@ -174,20 +177,18 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = chatList[indexPath.row]
         
-        switch indexPath.row {
-        case 0: let cell = tableView.dequeueReusableCell(withIdentifier: "YourChatTableViewCell", for: indexPath) as! YourChatTableViewCell
+        if data.from == matchedUid {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "YourChatTableViewCell", for: indexPath) as! YourChatTableViewCell
             cell.chatLabel.text = data.chat
-            cell.timeLabel.text = data.createdAt
-            //getChatDateFormat(memodate: data.createdAt.toDate())
+            cell.timeLabel.text = data.createdAt.toDate()?.getChatDateFormat()
             cell.backgroundColor = .white
             return cell
-            
-        case 1: let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatTableViewCell", for: indexPath) as! MyChatTableViewCell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyChatTableViewCell", for: indexPath) as! MyChatTableViewCell
             cell.chatLabel.text = data.chat
-            cell.timeLabel.text = data.createdAt
+            cell.timeLabel.text = data.createdAt.toDate()?.getChatDateFormat()
             cell.backgroundColor = .white
             return cell
-        default: return UITableViewCell()
         }
     }
 }
@@ -195,16 +196,14 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
 extension ChattingViewController {
     //채팅 받아오기
     private func fetchChats() {
-        print(matchedUid)
         chatViewModel.fetchChatVM(from: matchedUid, lastchatDate: "2000-01-01") { fetchingChatModel, statusCode in
             switch statusCode {
             case APIChatStatusCode.success.rawValue:
                 self.chatList = fetchingChatModel!.payload
-                print(self.chatList)
+                self.mainView.mainTableView.reloadData()
                 if !self.chatList.isEmpty {
                     self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)
                 }
-                self.mainView.mainTableView.reloadData()
                 SocketIOManager.shared.establishConnection() //소켓 통신이 연결되는 시점 (스크롤 다 내린 시점에서) ->여기부터 실시간으로 데이터 받아오는 것 가능
                 return
             case APIChatStatusCode.firebaseTokenError.rawValue:
@@ -230,6 +229,9 @@ extension ChattingViewController {
         chatViewModel.sendChatVM(chat: mainView.textView.text, to: matchedUid) { chat, statusCode in
             switch statusCode {
             case APIChatStatusCode.success.rawValue:
+                self.chatList.append(chat!)
+                self.mainView.mainTableView.reloadData()
+                self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)
                 return
             case APIChatStatusCode.fail.rawValue: //일반상태
                 return
