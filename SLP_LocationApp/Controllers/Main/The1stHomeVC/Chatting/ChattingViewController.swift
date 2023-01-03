@@ -7,18 +7,18 @@
 import UIKit
 import SocketIO
 import Alamofire
-//import RealmSwift
+import RealmSwift
 
 class ChattingViewController: BaseViewController {
     
-    //    var localRealm = try! Realm()
-    
+    let repository = ChatListRepository()
     var mainView = ChattingView()
     var viewModel = HomeViewModel()
     var chatViewModel = ChatViewModel()
     var chatList: [Chat] = []
     var matchedUid = ""
     var matchedNick = ""
+    let refreshControl: UIRefreshControl = UIRefreshControl()
     
     override func loadView() {
         self.view = mainView
@@ -28,8 +28,9 @@ class ChattingViewController: BaseViewController {
         super.viewDidLoad()
         configureNavItems()
         configureTableView()
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        //on sesac으로 받은 이벤트를 처리하기 위한 Notification Observer (SocketIOManager의 이벤트 수신에서 달은 NSnotificationcenter 받아오기)
+        //SocketIOManager의 이벤트 수신에서 달은 NSnotificationcenter 받아오기
         NotificationCenter.default.addObserver(self, selector: #selector(getMessage(notification:)), name: NSNotification.Name("getMessage"), object: nil)
         
         mainView.sendBtn.addTarget(self, action: #selector(sendBtnClicked), for: .touchUpInside)
@@ -44,6 +45,20 @@ class ChattingViewController: BaseViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: self.view.window)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: self.view.window)
+        
+        //테이블뷰 새로고침시 realm 이전 채팅 불러오기
+        mainView.mainTableView.refreshControl = UIRefreshControl()
+        mainView.mainTableView.refreshControl?.addTarget(self, action: #selector(refreshTableView(_:)), for: .valueChanged)
+    }
+    
+    @objc func refreshTableView(_ sender: Any) {
+        print("리프레시 되나 확인.")
+        //lastDate:
+        //case 1) 배열 안에 뭐가 없는 경우: 오늘날짜 기준
+        //case 2) 배열 안에 뭐가 있는 경우: 가져온 배열 중에서 가장 오래된날짜.(0번째 인덱스)
+        mainView.mainTableView.refreshControl!.endRefreshing()
+        chatList = repository.loadDBChats(myUid: UserDefaults.standard.string(forKey: "myUID")!, matchedUid: matchedUid, lastDate: chatList.count > 0 ? chatList[0].createdAt : Date().toString()) + chatList
+        mainView.mainTableView.reloadData()
     }
     
     private func checkCurrentStatus() { //matchedNick, matchedUid 불러오기 위해서 씀
@@ -54,7 +69,8 @@ class ChattingViewController: BaseViewController {
                     self.matchedNick = myQueueState?.matchedNick ?? ""
                     self.mainView.infoLabel.text = "\(self.matchedNick)님과 매칭되었습니다"
                     self.matchedUid = myQueueState?.matchedUid ?? ""
-                    self.fetchChats()
+                    //Realm에 저장된 가장 마지막 날짜로부터 서버에서 최신 채팅 내용 불러오기
+                    self.fetchChats(lastDate: self.repository.getLastChatDate(myUid: UserDefaults.standard.string(forKey: "myUID")!, matchedUid: myQueueState?.matchedUid ?? ""))
                 }
                 return
             case APIMyQueueStatusCode.noSearch.rawValue:
@@ -123,6 +139,7 @@ class ChattingViewController: BaseViewController {
         self.chatList.append(value)
         mainView.mainTableView.reloadData()
         mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)
+        self.repository.saveChat(data: ChatRealm(id: id, to: to, from: from, chat: chat, createdAt: createdAt))
     }
     
     @objc func backBtnClicked() {
@@ -195,8 +212,8 @@ extension ChattingViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ChattingViewController {
     //채팅 받아오기
-    private func fetchChats() {
-        chatViewModel.fetchChatVM(from: matchedUid, lastchatDate: "2000-01-01") { fetchingChatModel, statusCode in
+    private func fetchChats(lastDate: String) {
+        chatViewModel.fetchChatVM(from: matchedUid, lastchatDate: lastDate) { fetchingChatModel, statusCode in
             switch statusCode {
             case APIChatStatusCode.success.rawValue:
                 self.chatList = fetchingChatModel!.payload
@@ -209,7 +226,7 @@ extension ChattingViewController {
             case APIChatStatusCode.firebaseTokenError.rawValue:
                 UserViewModel().refreshIDToken { isSuccess in
                     if isSuccess! {
-                        self.sendChat()
+                        self.fetchChats(lastDate: lastDate)
                     } else {
                         self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
                     }
@@ -232,6 +249,7 @@ extension ChattingViewController {
                 self.chatList.append(chat!)
                 self.mainView.mainTableView.reloadData()
                 self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)
+                self.repository.saveChat(data: ChatRealm(id: chat!.id, to: chat!.to, from: chat!.from, chat: chat!.chat, createdAt: chat!.createdAt))
                 return
             case APIChatStatusCode.fail.rawValue: //일반상태
                 return

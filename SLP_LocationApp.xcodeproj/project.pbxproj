@@ -122,6 +122,8 @@
 		54ACF64B291D2B320002A121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54ACF64A291D2B320002A121 /* GoogleService-Info.plist */; };
 		54ACF64E291D361A0002A121 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 54ACF64D291D361A0002A121 /* Toast */; };
 		54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54ACF650291D39220002A121 /* Toast+Extension.swift */; };
+		54AE00C52963FF6700749975 /* ChatRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE00C42963FF6700749975 /* ChatRealm.swift */; };
+		54AE00C8296400F300749975 /* ChatListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE00C7296400F300749975 /* ChatListRepository.swift */; };
 		54B2834B295E817E00D5529B /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B2834A295E817E00D5529B /* ChatViewModel.swift */; };
 		54B2834D295E818600D5529B /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B2834C295E818600D5529B /* ChatAPI.swift */; };
 		54B5F8232956CB0800E25FFE /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B5F8222956CB0800E25FFE /* Review.swift */; };
@@ -245,6 +247,8 @@
 		54ACA0A3293B1635001E4252 /* EmptyBigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBigView.swift; sourceTree = "<group>"; };
 		54ACF64A291D2B320002A121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		54ACF650291D39220002A121 /* Toast+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Toast+Extension.swift"; sourceTree = "<group>"; };
+		54AE00C42963FF6700749975 /* ChatRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRealm.swift; sourceTree = "<group>"; };
+		54AE00C7296400F300749975 /* ChatListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListRepository.swift; sourceTree = "<group>"; };
 		54B2834A295E817E00D5529B /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		54B2834C295E818600D5529B /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
 		54B5F8222956CB0800E25FFE /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -430,6 +434,7 @@
 		5461B4A72918B6440000D726 /* SLP_LocationApp */ = {
 			isa = PBXGroup;
 			children = (
+				54AE00C6296400DB00749975 /* Realm */,
 				543F042B291FBE310029F088 /* ViewModels */,
 				545AE795291E5F9B000F73C3 /* Network */,
 				549868302918DF9C005DBF6E /* Models */,
@@ -621,6 +626,15 @@
 			path = BaseViews;
 			sourceTree = "<group>";
 		};
+		54AE00C6296400DB00749975 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				54AE00C42963FF6700749975 /* ChatRealm.swift */,
+				54AE00C7296400F300749975 /* ChatListRepository.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		54FE19EB291A32BC0033BCE4 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,6 +816,7 @@
 				5452373A292B6918002B8255 /* WithdrawView.swift in Sources */,
 				547DDFA52931E88700FD7818 /* ChattingViewController.swift in Sources */,
 				5487CEFB294B5236003F15D9 /* ShopTabView.swift in Sources */,
+				54AE00C8296400F300749975 /* ChatListRepository.swift in Sources */,
 				5442B7B329320DE2008F8623 /* ReceivedRequestViewController.swift in Sources */,
 				545AE7A1291E77DC000F73C3 /* NoNetworkViewController.swift in Sources */,
 				5444C0B52923772E00728EC3 /* MyInfoTableViewCell.swift in Sources */,
@@ -839,6 +854,7 @@
 				5461B4E62918CD470000D726 /* Constants.swift in Sources */,
 				546479722940C12B00C3F112 /* SesacFace.swift in Sources */,
 				5434ACDD293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift in Sources */,
+				54AE00C52963FF6700749975 /* ChatRealm.swift in Sources */,
 				54FE19ED291A32CD0033BCE4 /* OKButton.swift in Sources */,
 				5487CEF3294B4926003F15D9 /* SesacCharacterView.swift in Sources */,
 				54B2834B295E817E00D5529B /* ChatViewModel.swift in Sources */,

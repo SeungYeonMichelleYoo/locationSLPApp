@@ -24,18 +24,24 @@ class UserViewModel {
     
     func refreshIDToken(completion: @escaping (Bool?) -> Void) {
         let currentUser = Auth.auth().currentUser
+        print(currentUser)
         currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
             if let error = error {
                 // Handle error
                 UserDefaults.standard.removeObject(forKey: "idToken")
                 completion(false) //네트워크 오류(idToken값이 없을 수가 없어)
+                print("ERROR")
                 return;
             }
+            print("new token")
             print("idToken: \(idToken)")
             UserDefaults.standard.set(idToken, forKey: "idToken")
             KeychainSwift().set(UserDefaults.standard.string(forKey: "idToken")!, forKey: "idToken")
             // Send token to your backend via HTTPS
             completion(true)
+        }
+        if currentUser == nil {
+            completion(false)
         }
     }
     

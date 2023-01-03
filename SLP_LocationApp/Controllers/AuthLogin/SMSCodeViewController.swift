@@ -45,7 +45,13 @@ final class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
             AuthManager.shared.verifyCode(smsCode: code) { [weak self] success in
                 guard success else { return }
                 DispatchQueue.main.async {
-                    self!.userCheckRecursion()
+                    self!.viewModel.refreshIDToken { isSuccess in
+                        if isSuccess! {
+                            self!.userCheckRecursion()
+                        } else {
+                            self!.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                        }
+                    }
                 }
             }
         }
@@ -55,6 +61,7 @@ final class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
         self.viewModel.userCheckVM { user, statusCode in
             switch statusCode {
             case APIStatusCode.success.rawValue:
+                UserDefaults.standard.set(user!.uid, forKey: "myUID")
                 UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
                 print("서버 가입된 회원 : 메인으로 이동")
                 let vc = TabBarViewController()
