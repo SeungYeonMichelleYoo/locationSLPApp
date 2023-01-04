@@ -52,8 +52,6 @@ class ChattingViewController: BaseViewController {
     }
     
     @objc func refreshTableView(_ sender: Any) {
-        print("리프레시 되나 확인.")
-        //lastDate:
         //case 1) 배열 안에 뭐가 없는 경우: 오늘날짜 기준
         //case 2) 배열 안에 뭐가 있는 경우: 가져온 배열 중에서 가장 오래된날짜.(0번째 인덱스)
         mainView.mainTableView.refreshControl!.endRefreshing()
@@ -217,6 +215,9 @@ extension ChattingViewController {
             switch statusCode {
             case APIChatStatusCode.success.rawValue:
                 self.chatList = fetchingChatModel!.payload
+//                for chat in self.chatList {
+//                    self.repository.saveChat(data: ChatRealm(id: chat.id, to: chat.to, from: chat.from, chat: chat.chat, createdAt: chat.createdAt))
+//                }
                 self.mainView.mainTableView.reloadData()
                 if !self.chatList.isEmpty {
                     self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)

@@ -11,7 +11,7 @@ import Firebase
 import FirebaseMessaging
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -19,15 +19,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        // 메시지 대리자 설정
-        Messaging.messaging().delegate = self
-        
-        // FCM 다시 사용 설정
+        // FCM 다시 사용 설정 밑에 있음 ?????
         Messaging.messaging().isAutoInitEnabled = true
         
+        // device token 요청 밑에 있음 ?????
+//        UIApplication.shared.registerForRemoteNotifications()
         
-        // device token 요청
-        UIApplication.shared.registerForRemoteNotifications()
+            
+        //알림 시스템에 앱을 등록
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: { _, _ in }
+            )
+        } else {
+            let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+        //메시지 대리자 설정
+        Messaging.messaging().delegate = self
+        
+        //현재 등록된 토큰 가져오기
+        //        Messaging.messaging().token { token, error in
+        //          if let error = error {
+        //            print("Error fetching FCM registration token: \(error)")
+        //          } else if let token = token {
+        //            print("FCM registration token: \(token)")
+        //          }
+        //        }
         return true
     }
     
@@ -47,9 +74,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 extension AppDelegate: MessagingDelegate {
-    /// 현재 등록 토큰 가져오기.
+    // 현재 등록 토큰 가져오기.
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("FCMToken refreshed")
         UserDefaults.standard.set(fcmToken, forKey: "FCMtoken")
     }
+    
+    //포그라운드 알림 수신
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.badge, .sound, .banner, .list])
+    }
+    
+    //받은 푸시를 사용자가 클릭했을 때의 처리
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("받은 푸시를 사용자가 클릭")
+        
+        print(response.notification.request.content.userInfo)
+    }
+    
 }
