@@ -150,6 +150,7 @@ class ChattingViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         checkCurrentStatus()
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -13,7 +13,6 @@ final class ChattingReviewViewController: BaseViewController {
     var reputation = [0,0,0,0,0,0]
     var viewModel = HomeViewModel()
     var matchedNick = ""
-    var comment = ""
     var otheruid = ""
     
     override func loadView() {
@@ -32,9 +31,6 @@ final class ChattingReviewViewController: BaseViewController {
         
         mainView.closeBtn.addTarget(self, action: #selector(closeBtnClicked), for: .touchUpInside)
         mainView.okBtn.addTarget(self, action: #selector(okBtnClicked), for: .touchUpInside)
-        
-        comment = mainView.textView.text ?? ""
-        
         mainView.detailLabel.text = "\(matchedNick)님과의 스터디는 어떠셨나요?"
         
         placeholderSetting()
@@ -49,11 +45,25 @@ final class ChattingReviewViewController: BaseViewController {
     }
     
     private func sendReview() {
-        viewModel.sendReviewVM(otheruid: otheruid, comment: comment, reputation: reputation) { statusCode in
+        viewModel.sendReviewVM(otheruid: otheruid, comment: mainView.textView.text!, reputation: reputation + [0, 0, 0]) { statusCode in
             switch statusCode {
             case APIStopStudyStatusCode.success.rawValue:
-                let vc = SearchViewController()
-                self.transition(vc, transitionStyle: .push)
+                self.dismiss(animated: false)
+                var vcList = self.navigationController!.viewControllers
+                var count = 0
+                for vc in vcList {
+                    if vc.isKind(of: FindTotalViewController.self) ||
+                        vc.isKind(of: NearViewController.self) ||
+                        vc.isKind(of: NearPopUpViewController.self) ||
+                        vc.isKind(of: ReceivedRequestViewController.self) ||
+                        vc.isKind(of: ReceivedPopUpViewController.self) ||
+                        vc.isKind(of: ChattingViewController.self) {
+                        vcList.remove(at: count)
+                        continue
+                    }
+                    count = count + 1
+                }
+                self.navigationController!.viewControllers = vcList
                 return
             case APIStopStudyStatusCode.matched.rawValue:
                 return

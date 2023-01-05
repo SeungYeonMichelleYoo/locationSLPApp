@@ -12,6 +12,7 @@ class MyInfoView: BaseView {
     lazy var mainTableView: UITableView = {
         let view = UITableView()
         view.separatorStyle = .singleLine
+        view.separatorColor = Constants.BaseColor.gray2
         view.register(NameTableViewCell.self, forCellReuseIdentifier: "NameTableViewCell")
         view.register(MyInfoTableViewCell.self, forCellReuseIdentifier: "MyInfoTableViewCell")
         view.backgroundColor = .white

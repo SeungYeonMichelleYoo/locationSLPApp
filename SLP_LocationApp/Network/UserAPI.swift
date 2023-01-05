@@ -28,7 +28,12 @@ class UserAPI {
                 let user = try decoder.decode(User.self, from: response.data!)
                 
                 switch response.result {
-                case .success(_): completion(user, statusCode, nil)
+                case .success(_):
+                    if UserDefaults.standard.string(forKey: "FCMtoken") != user.FCMtoken {
+                        print("fcm token not matched - update started")
+                        fcmRefresh()
+                    }
+                    completion(user, statusCode, nil)
                     return
                 case .failure(let error): completion(nil, statusCode, error)
                     return
@@ -36,6 +41,17 @@ class UserAPI {
             } catch let error as NSError {
                 completion(nil, statusCode, error)
             }
+        }
+    }
+    
+    //FCM 토큰 갱신
+    static func fcmRefresh() {
+        let url = "\(BASEURL)/v1/user/update_fcm_token"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        
+        AF.request(url, method: .put, headers: headers).responseJSON { response in
+            let statusCode = response.response?.statusCode
+            print(response)
         }
     }
     

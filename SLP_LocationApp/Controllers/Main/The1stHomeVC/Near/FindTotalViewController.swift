@@ -55,9 +55,12 @@ class FindTotalViewController: TabmanViewController {
         }
         bar.indicator.tintColor = Constants.BaseColor.green
         
-        // Add to view
-        addBar(bar, dataSource: self, at: .top)
+        let systemBar = bar.systemBar()
+        systemBar.backgroundStyle = .flat(color: .white)
         
+        // Add to view
+        addBar(systemBar, dataSource: self, at: .top)
+                
         //1번째 탭
         scrollToPage(.at(index: 0), animated: false)
         
@@ -195,6 +198,7 @@ class FindTotalViewController: TabmanViewController {
     override func viewWillAppear(_ animated: Bool) {
         tabBarController?.tabBar.isHidden = true
         self.hidesBottomBarWhenPushed = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {

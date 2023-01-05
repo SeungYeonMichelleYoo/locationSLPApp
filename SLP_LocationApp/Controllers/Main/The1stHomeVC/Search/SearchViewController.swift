@@ -189,7 +189,9 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         getstudyList()
+        self.navigationController?.navigationBar.isHidden = false
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         var vcList = self.navigationController!.viewControllers
         for i in 0 ..< vcList.count {//NoNetwork, TabBar, Search, FindTotal

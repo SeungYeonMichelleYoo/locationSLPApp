@@ -55,6 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         //            print("FCM registration token: \(token)")
         //          }
         //        }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = .white
+        appearance.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14), NSAttributedString.Key.foregroundColor: UIColor.black]
+        appearance.shadowColor = Constants.BaseColor.gray2
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        
         return true
     }
     
@@ -77,6 +86,7 @@ extension AppDelegate: MessagingDelegate {
     // 현재 등록 토큰 가져오기.
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("FCMToken refreshed")
+        print(fcmToken)
         UserDefaults.standard.set(fcmToken, forKey: "FCMtoken")
     }
     

@@ -15,16 +15,17 @@ class BaseViewController: UIViewController {
         configure()
     }
     
-    func setNavBar() {
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = .white
-        appearance.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)]
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-//        appearance.shadowColor = Constants.BaseColor.gray1
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
+//    func setNavBar() {
+//        let appearance = UINavigationBarAppearance()
+//        appearance.configureWithOpaqueBackground()
+//        appearance.backgroundColor = .white
+//        self.navigationController?.navigationBar.tintColor = .black
+//        appearance.titleTextAttributes = [NSAttributedString.Key.font : UIFont.font(.Title3_M14)]
+////        , NSAttributedString.Key.foregroundColor: UIColor.black
+////        appearance.shadowColor = Constants.BaseColor.gray1
+//        UINavigationBar.appearance().standardAppearance = appearance
+//        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//    }
     
     func configure() {
         view.backgroundColor = .white

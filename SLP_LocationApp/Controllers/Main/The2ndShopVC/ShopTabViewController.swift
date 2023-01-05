@@ -40,8 +40,11 @@ class ShopTabViewController: TabmanViewController {
         }
         bar.indicator.tintColor = Constants.BaseColor.green
         
+        let systemBar = bar.systemBar()
+        systemBar.backgroundStyle = .flat(color: .white)
+        
         // Add to view
-        addBar(bar, dataSource: self, at: .custom(view: mainView.tabView, layout: nil))
+        addBar(systemBar, dataSource: self, at: .custom(view: mainView.tabView, layout: nil))
     }
     
    

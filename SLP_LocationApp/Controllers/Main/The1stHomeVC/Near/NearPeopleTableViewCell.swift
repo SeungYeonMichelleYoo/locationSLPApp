@@ -100,6 +100,7 @@ class NearPeopleTableViewCell: UITableViewCell {
     let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: imageCollectionViewLayout())
         view.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
+        view.backgroundColor = .white
         return view
     }()
     
@@ -121,6 +122,7 @@ class NearPeopleTableViewCell: UITableViewCell {
         let cv = DynamicHeightCollectionView(frame: .zero, collectionViewLayout: layout)
         cv.register(DemandStudyCollectionViewCell.self, forCellWithReuseIdentifier: "DemandStudyCollectionViewCell")
         cv.isScrollEnabled = false
+        cv.backgroundColor = .white
         return cv
     }()
     
@@ -155,6 +157,8 @@ class NearPeopleTableViewCell: UITableViewCell {
     }
     
     private func layout() {
+        
+        self.contentView.backgroundColor = .white
         
         [image, requestBtn, totalStackView].forEach {
             contentView.addSubview($0)

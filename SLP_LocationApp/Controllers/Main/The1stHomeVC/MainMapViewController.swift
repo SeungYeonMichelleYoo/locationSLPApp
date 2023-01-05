@@ -140,6 +140,7 @@ final class MainMapViewController: BaseViewController, MKMapViewDelegate, CLLoca
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
         
         checkUserDeviceLocationsServiceAuthorization()
         checkCurrentStatus()

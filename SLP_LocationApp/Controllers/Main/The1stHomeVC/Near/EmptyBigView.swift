@@ -19,6 +19,7 @@ class EmptyBigView: BaseView {
     lazy var mainLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.Display1_R20)
+        label.textColor = .black
         label.text = "아쉽게도 주변에 새싹이 없어요ㅠ"
         return label
     }()
