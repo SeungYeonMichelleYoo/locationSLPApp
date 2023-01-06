@@ -9,11 +9,12 @@ import SnapKit
 
 class YourChatTableViewCell: UITableViewCell {
     
-    lazy var chatLabel: UILabel = {
-        let view = UILabel()
+    lazy var chatLabel: ChatPaddingLabel = {
+        let view = ChatPaddingLabel()
         view.layer.cornerRadius = 8
         view.layer.borderWidth = 1
         view.layer.borderColor = Constants.BaseColor.gray4.cgColor
+        view.backgroundColor = .white
         view.font = UIFont.font(.Body3_R14)
         view.textColor = .black
         view.numberOfLines = 0
@@ -44,14 +45,14 @@ class YourChatTableViewCell: UITableViewCell {
     }
     
     private func layout() {
-        
         [chatLabel, timeLabel].forEach {
             contentView.addSubview($0)
         }
         
         chatLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
-            make.trailing.lessThanOrEqualTo(100)
+            make.top.leading.equalToSuperview().offset(12)
+            make.width.lessThanOrEqualToSuperview().multipliedBy(0.6)
+            make.bottom.equalToSuperview().inset(12).priority(.low)
         }
         
         timeLabel.snp.makeConstraints { make in

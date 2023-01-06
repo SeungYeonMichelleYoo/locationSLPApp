@@ -65,6 +65,8 @@ final class SMSCodeViewController: BaseViewController, UITextFieldDelegate {
                 UserDefaults.standard.set(self.phoneNumber, forKey: "phoneNumber")
                 print("서버 가입된 회원 : 메인으로 이동")
                 let vc = TabBarViewController()
+                vc.setNick(nick: user!.nick)
+                vc.setSesac(sesac: user!.sesac)
                 self.transition(vc, transitionStyle: .presentFullScreen)
                 return
             case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:

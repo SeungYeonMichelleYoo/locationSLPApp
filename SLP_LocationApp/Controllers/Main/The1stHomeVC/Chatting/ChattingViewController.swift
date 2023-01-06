@@ -66,6 +66,7 @@ class ChattingViewController: BaseViewController {
                 if myQueueState?.matched == 1 {
                     self.matchedNick = myQueueState?.matchedNick ?? ""
                     self.mainView.infoLabel.text = "\(self.matchedNick)님과 매칭되었습니다"
+                    self.navigationItem.title = "\(self.matchedNick)"
                     self.matchedUid = myQueueState?.matchedUid ?? ""
                     //Realm에 저장된 가장 마지막 날짜로부터 서버에서 최신 채팅 내용 불러오기
                     self.fetchChats(lastDate: self.repository.getLastChatDate(myUid: UserDefaults.standard.string(forKey: "myUID")!, matchedUid: myQueueState?.matchedUid ?? ""))
@@ -216,9 +217,13 @@ extension ChattingViewController {
             switch statusCode {
             case APIChatStatusCode.success.rawValue:
                 self.chatList = fetchingChatModel!.payload
-//                for chat in self.chatList {
-//                    self.repository.saveChat(data: ChatRealm(id: chat.id, to: chat.to, from: chat.from, chat: chat.chat, createdAt: chat.createdAt))
-//                }
+                if lastDate == "2000-01-01" {
+                    for chat in self.chatList {
+                        if !self.repository.searchById(id: chat.id) {
+                            self.repository.saveChat(data: ChatRealm(id: chat.id, to: chat.to, from: chat.from, chat: chat.chat, createdAt: chat.createdAt))
+                        }
+                    }
+                }
                 self.mainView.mainTableView.reloadData()
                 if !self.chatList.isEmpty {
                     self.mainView.mainTableView.scrollToRow(at: IndexPath(row: self.chatList.count - 1, section: 0), at: .bottom, animated: false)

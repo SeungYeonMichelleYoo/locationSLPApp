@@ -17,13 +17,14 @@ class MyChatTableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var chatLabel: UILabel = {
-        let view = UILabel()
+    lazy var chatLabel: ChatPaddingLabel = {
+        let view = ChatPaddingLabel()
         view.layer.cornerRadius = 8
         view.clipsToBounds = true
         view.backgroundColor = Constants.BaseColor.whitegreen
         view.font = UIFont.font(.Body3_R14)
         view.textColor = .black
+        view.lineBreakMode = .byWordWrapping
         view.numberOfLines = 0
         return view
     }()
@@ -44,20 +45,20 @@ class MyChatTableViewCell: UITableViewCell {
     }
     
     private func layout() {
-        
         [timeLabel, chatLabel].forEach {
             contentView.addSubview($0)
         }
     
         chatLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(24)
-            make.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
+            make.trailing.equalToSuperview().inset(12)
+            make.width.lessThanOrEqualToSuperview().multipliedBy(0.6)
+            make.bottom.equalToSuperview().inset(12).priority(.low)
         }
         
         timeLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(chatLabel.snp.bottom)
             make.trailing.equalTo(chatLabel.snp.leading).offset(-8)
-            make.leading.greaterThanOrEqualTo(100)
+            make.bottom.equalTo(chatLabel.snp.bottom)
         }
     }
 }

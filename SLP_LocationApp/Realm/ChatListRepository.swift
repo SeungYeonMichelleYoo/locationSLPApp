@@ -33,11 +33,15 @@ class ChatListRepository {
         }
     }
     
+    func searchById(id: String) -> Bool {
+        return localRealm.objects(ChatRealm.self).filter("id == '\(id)'").count == 1
+    }
+    
     //MARK: - pagenation 위해 최신 날짜 이전의 Realm DB 불러오기 (5개씩)
     func loadDBChats(myUid: String, matchedUid: String, lastDate: String) -> [Chat] {
         var dbChats:[Chat] = []
         print("lastDate \(lastDate)")
-        
+        loadedChats = localRealm.objects(ChatRealm.self).filter("to == '\(myUid)' OR from == '\(matchedUid)' OR from == '\(myUid)' OR from == '\(matchedUid)'").sorted(byKeyPath: "createdAt", ascending: false) //최신이 제일 위에
         var counter = 0
         for i in 0..<loadedChats.count {
             if (loadedChats[i].createdAt >= lastDate) { //큰 값이 더 최신

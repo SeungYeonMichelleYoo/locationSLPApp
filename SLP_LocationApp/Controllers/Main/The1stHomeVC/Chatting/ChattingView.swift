@@ -129,7 +129,7 @@ class ChattingView: BaseView {
         
         mainTableView.snp.makeConstraints { make in
             make.top.equalTo(detailLabel.snp.bottom).offset(24)
-            make.leading.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.leading.trailing.equalTo(self.safeAreaLayoutGuide)
             make.bottom.equalTo(textView.snp.top)
         }
         

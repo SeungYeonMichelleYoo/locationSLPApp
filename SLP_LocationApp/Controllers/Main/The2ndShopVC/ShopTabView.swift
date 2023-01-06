@@ -29,6 +29,14 @@ class ShopTabView: BaseView {
         return view
     }()
     
+    lazy var saveBtn: OKButton = {
+        let view = OKButton(frame: .zero)
+        view.backgroundColor = Constants.BaseColor.green
+        view.setTitle("저장하기", for: .normal)
+        view.titleLabel?.font = UIFont.font(.Body3_R14)
+        return view
+    }()
+    
     lazy var tabView: UIView = {
         let view = UIView()
         return view
@@ -43,7 +51,7 @@ class ShopTabView: BaseView {
     }
     
     override func configureUI() {
-        [backimage, sesacImg, tabView].forEach {
+        [backimage, sesacImg, saveBtn, tabView].forEach {
             self.addSubview($0)
         }
     }
@@ -62,12 +70,18 @@ class ShopTabView: BaseView {
             make.bottom.equalTo(backimage.snp.bottom).offset(8)
         }
         
+        saveBtn.snp.makeConstraints { make in
+            make.top.equalTo(backimage.snp.top).offset(10)
+            make.trailing.equalTo(backimage.snp.trailing).inset(10)
+            make.width.equalTo(80)
+            make.height.equalTo(40)
+        }
+        
         tabView.snp.makeConstraints { make in
             make.top.equalTo(backimage.snp.bottom)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(44)
         }
-     
     }
 }
