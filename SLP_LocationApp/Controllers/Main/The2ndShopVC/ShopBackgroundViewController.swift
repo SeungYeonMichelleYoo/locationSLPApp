@@ -9,6 +9,10 @@ import UIKit
 class ShopBackgroundViewController: BaseViewController {
         
     var mainView = ShopBackgroundView()
+    var viewModel = ShopViewModel()
+    var backgroundCollectionList: [Int] = []
+    var backgroundPrice: [Int] = [0, 1200, 1200, 1200, 2500, 2500, 2500, 2500]
+    var selectedBackground = -1
     
     let backgroundName = ["하늘공원", "씨티 뷰", "밤의 산책로", "낮의 산책로", "연극 무대", "라틴 거실", "홈트방", "뮤지션 작업실"]
     let backgroundDescription = [
@@ -23,6 +27,38 @@ class ShopBackgroundViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
+        checkCurrentPurchaseStatus()
+    }
+    
+    func isSelectedInCollection() -> Bool {
+        return backgroundCollectionList.contains(selectedBackground)
+    }
+    
+    func checkCurrentPurchaseStatus() {
+        viewModel.checkPurchaseStateVM { user, statusCode in
+            switch statusCode {
+            case APIShopCurrentStatusCode.success.rawValue:
+                self.selectedBackground = user!.background
+                self.backgroundCollectionList = user!.backgroundCollection
+                self.mainView.collectionView.reloadData()
+                return
+            case APIShopCurrentStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.checkCurrentPurchaseStatus()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIShopCurrentStatusCode.serverError.rawValue, APIShopCurrentStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
     }
     
     func setCollectionView() {
@@ -43,12 +79,19 @@ extension ShopBackgroundViewController: UICollectionViewDelegate, UICollectionVi
         cell.titleLabel.text = backgroundName[indexPath.item]
         cell.contentLabel.text = backgroundDescription[indexPath.item]
         cell.backgroundImg.image = BackgroundImage.image(level: indexPath.item)
+        if backgroundCollectionList.contains(indexPath.item) {
+            cell.priceBtn.setTitle("보유", for: .normal)
+            cell.priceBtn.setTitleColor(Constants.BaseColor.gray7, for: .normal)
+            cell.priceBtn.cancel()
+        } else {
+            cell.priceBtn.setTitle(backgroundPrice[indexPath.item].numberFormat(), for: .normal)
+            cell.priceBtn.fill()
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell  = collectionView.cellForItem(at: indexPath) as! ShopBackgroundCollectionViewCell
-        
         var vcList = self.navigationController!.viewControllers
         var count = 0
         for vc in vcList {
@@ -58,6 +101,7 @@ extension ShopBackgroundViewController: UICollectionViewDelegate, UICollectionVi
             }
             count = count + 1
         }
+        selectedBackground = indexPath.item
     }
 }
 

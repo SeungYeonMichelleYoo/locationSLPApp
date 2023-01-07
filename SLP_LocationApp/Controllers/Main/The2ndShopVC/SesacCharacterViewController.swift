@@ -10,12 +10,16 @@ import StoreKit
 final class SesacCharacterViewController: BaseViewController {
     
     var mainView = SesacCharacterView()
+    var viewModel = ShopViewModel()
+    var sesacCollectionList: [Int] = []
+    var sesacPrice: [Int] = [0, 1200, 2500, 2500, 2500]
+    var selectedSesac = -1
     
     var sesacName = ["기본 새싹", "튼튼 새싹", "민트 새싹", "퍼플 새싹", "골드 새싹"]
     var sesacDescription = ["새싹을 대표하는 기본 식물입니다. 다른 새싹들과 함께 하는 것을 좋아합니다.", "잎이 하나 더 자라나고 튼튼해진 새나라의 새싹으로 같이 있으면 즐거워집니다.", "호불호의 대명사! 상쾌한 향이 나서 허브가 대중화된 지역에서 많이 자랍니다.", "감정을 편안하게 쉬도록 하며 슬프고 우울한 감정을 진정시켜주는 멋진 새싹입니다.", "화려하고 멋있는 삶을 살며 돈과 인생을 플렉스 하는 자유분방한 새싹입니다."]
     
     //1. 인앱 상품 ID 정의
-    var productIdentifiers: Set<String> = ["com.memolease.sesac1.sprout1"]
+    var productIdentifiers: Set<String> = ["com.memolease.sesac1.sprout1"]// !!!!!고치기
     
     //1. 인앱 상품 정보
     var productArray = Array<SKProduct>()
@@ -28,7 +32,49 @@ final class SesacCharacterViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCollectionView()
+        checkCurrentPurchaseStatus()
         requestProductData()
+    }
+    
+    func isSelectedInCollection() -> Bool {
+        return sesacCollectionList.contains(selectedSesac)
+    }
+    
+    func checkCurrentPurchaseStatus() {
+        viewModel.checkPurchaseStateVM { user, statusCode in
+            switch statusCode {
+            case APIShopCurrentStatusCode.success.rawValue:
+                self.sesacCollectionList = user!.sesacCollection
+                self.selectedSesac = user!.sesac
+                var vcList = self.navigationController!.viewControllers
+                var count = 0
+                for vc in vcList {
+                    if vc.isKind(of: ShopTabViewController.self) {
+                        (vc as! ShopTabViewController).mainView.sesacImg.image = SesacFace.image(level: user!.sesac)
+                        (vc as! ShopTabViewController).mainView.backimage.image = BackgroundImage.image(level: user!.background)
+                        continue
+                    }
+                    count = count + 1
+                }
+                self.mainView.collectionView.reloadData()
+                return
+            case APIShopCurrentStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.checkCurrentPurchaseStatus()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIShopCurrentStatusCode.serverError.rawValue, APIShopCurrentStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
     }
     
     func setCollectionView() {
@@ -51,6 +97,14 @@ extension SesacCharacterViewController: UICollectionViewDelegate, UICollectionVi
         DispatchQueue.main.async(execute:{
             cell.sesacImg.makeRoundedRadius()
         })
+        if sesacCollectionList.contains(indexPath.item) {
+            cell.priceBtn.setTitle("보유", for: .normal)
+            cell.priceBtn.setTitleColor(Constants.BaseColor.gray7, for: .normal)
+            cell.priceBtn.cancel()
+        } else {
+            cell.priceBtn.setTitle(sesacPrice[indexPath.item].numberFormat(), for: .normal)
+            cell.priceBtn.fill()
+        }
         return cell
     }
     
@@ -66,6 +120,7 @@ extension SesacCharacterViewController: UICollectionViewDelegate, UICollectionVi
             }
             count = count + 1
         }
+        selectedSesac = indexPath.item
     }
 }
 

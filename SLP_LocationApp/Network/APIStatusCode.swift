@@ -88,3 +88,29 @@ enum APIChatStatusCode: Int {
     case serverError = 500
     case clientError = 501
 }
+
+enum APIShopCurrentStatusCode: Int {
+    case success = 200 // 새싹샵 내 정보 요청 성공
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}
+
+enum APIShopUpdateStatusCode: Int {
+    case success = 200 // 업데이트 성공
+    case NeedPurchase = 201 // 보유하지 않은 아이템 요청. "구매가 필요한 아이템이 있어요” 토스트 메시지
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}
+
+enum APIPaymentStatusCode: Int {
+    case success = 200
+    case fail = 201 // 영수증 검증실패
+    case firebaseTokenError = 401
+    case unAuthorized = 406
+    case serverError = 500
+    case clientError = 501
+}

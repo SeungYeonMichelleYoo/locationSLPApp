@@ -26,7 +26,7 @@ class UserAPI {
             decoder.dateDecodingStrategy = .formatted(dateFormatter)
             do {
                 let user = try decoder.decode(User.self, from: response.data!)
-                
+                print(user)
                 switch response.result {
                 case .success(_):
                     if UserDefaults.standard.string(forKey: "FCMtoken") != user.FCMtoken {

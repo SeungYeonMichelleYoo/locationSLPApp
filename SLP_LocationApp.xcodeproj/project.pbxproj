@@ -55,6 +55,7 @@
 		544BF530294EDA3500FC27C0 /* ReceivedPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BF52F294EDA3500FC27C0 /* ReceivedPopUpViewController.swift */; };
 		544BF532294EDA7B00FC27C0 /* ReceivedPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544BF531294EDA7B00FC27C0 /* ReceivedPopUpView.swift */; };
 		544CEB96294322F000E5DEC8 /* BackgroundImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544CEB95294322F000E5DEC8 /* BackgroundImage.swift */; };
+		544E91E4296864D000A79090 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544E91E3296864D000A79090 /* Int+Extension.swift */; };
 		544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */; };
 		54523736292B372D002B8255 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 54523735292B372D002B8255 /* MultiSlider */; };
 		54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523737292B6680002B8255 /* WithdrawViewController.swift */; };
@@ -190,6 +191,7 @@
 		544BF52F294EDA3500FC27C0 /* ReceivedPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedPopUpViewController.swift; sourceTree = "<group>"; };
 		544BF531294EDA7B00FC27C0 /* ReceivedPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedPopUpView.swift; sourceTree = "<group>"; };
 		544CEB95294322F000E5DEC8 /* BackgroundImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundImage.swift; sourceTree = "<group>"; };
+		544E91E3296864D000A79090 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		544F6D4F296567A500963E66 /* SLP_LocationApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SLP_LocationApp.entitlements; sourceTree = "<group>"; };
 		544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPeopleTableViewCell.swift; sourceTree = "<group>"; };
 		54523737292B6680002B8255 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				54B95E0429378D0B005389A6 /* Sequence+Extension.swift */,
 				542C3D52294216BC00E4DC93 /* UIImage+Extension.swift */,
 				542D11892967F96B00A65380 /* UILabel+Extension.swift */,
+				544E91E3296864D000A79090 /* Int+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -790,6 +793,7 @@
 				54B95E0329377F97005389A6 /* SearchModel.swift in Sources */,
 				5473C2CE293E29E100EBF11B /* MyChatTableViewCell.swift in Sources */,
 				5444C0B72923820D00728EC3 /* NameTableViewCell.swift in Sources */,
+				544E91E4296864D000A79090 /* Int+Extension.swift in Sources */,
 				5487CEF1294B491C003F15D9 /* SesacCharacterViewController.swift in Sources */,
 				54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */,
 				5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */,

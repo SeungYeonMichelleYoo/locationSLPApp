@@ -79,8 +79,8 @@ class SesacFaceCollectionViewCell: UICollectionViewCell {
         priceBtn.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel)
             make.trailing.equalTo(sesacImg.snp.trailing).offset(-8)
-            make.height.equalTo(18)
-            make.width.equalTo(40)
+            make.height.equalTo(20)
+            make.width.equalTo(52)
         }
     }
 }

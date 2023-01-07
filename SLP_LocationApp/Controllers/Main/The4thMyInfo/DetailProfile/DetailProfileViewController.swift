@@ -119,6 +119,7 @@ final class DetailProfileViewController: BaseViewController {
                 self.ageMin = user!.ageMin
                 self.ageMax = user!.ageMax
                 self.mainView.tableView.reloadData()
+                (self.mainView.tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ExpandableTableViewCell).collectionView.reloadData()
                 return
             case APIStatusCode.unAuthorized.rawValue, APIStatusCode.forbiddenNickname.rawValue:
                 let vc = NicknameViewController()
@@ -157,7 +158,7 @@ extension DetailProfileViewController: UITableViewDelegate, UITableViewDataSourc
                 cell.moreBtn.isHidden = false
                 cell.textView.text = "\(comment[0])"
             }
-            
+        
             cell.expandableView.isHidden = is_hidden
             cell.downBtn.setImage(UIImage(systemName: is_hidden ? "chevron.down" : "chevron.up"), for: .normal)
             
@@ -212,9 +213,8 @@ extension DetailProfileViewController: UICollectionViewDelegate, UICollectionVie
             return UICollectionViewCell()
         }
         cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
-        
         //뷰가 그려지는 것보다 통신이 느려지는 경우가 있을 수 있으므로, 앞의 조건을 써줌
-        if reputation.count == 6 && reputation[indexPath.item] != 0 {
+        if reputation.count > 0 && reputation[indexPath.item] != 0 {
             cell.titleBtn.fill()
         }
         return cell

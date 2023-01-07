@@ -48,6 +48,7 @@ class ChattingView: BaseView {
         view.backgroundColor = .white
         view.register(YourChatTableViewCell.self, forCellReuseIdentifier: "YourChatTableViewCell")
         view.register(MyChatTableViewCell.self, forCellReuseIdentifier: "MyChatTableViewCell")
+        view.showsVerticalScrollIndicator = false
         return view
       }()
     
