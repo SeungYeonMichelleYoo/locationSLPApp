@@ -42,6 +42,7 @@
 		5442B7BC29320F93008F8623 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 5442B7BB29320F93008F8623 /* Tabman */; };
 		5442B7BE29323111008F8623 /* APIStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442B7BD29323111008F8623 /* APIStatusCode.swift */; };
 		5442C419292915F800A8A925 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5442C418292915F800A8A925 /* ImageTableViewCell.swift */; };
+		544306C929695FF600F12BF3 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544306C829695FF600F12BF3 /* FriendTableViewCell.swift */; };
 		544453CF293A0E3700D8E994 /* DynamicHeightCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544453CE293A0E3700D8E994 /* DynamicHeightCollectionView.swift */; };
 		5444C0A1292366C400728EC3 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A0292366C400728EC3 /* MyInfoViewController.swift */; };
 		5444C0A3292366CD00728EC3 /* MyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5444C0A2292366CD00728EC3 /* MyInfoView.swift */; };
@@ -178,6 +179,7 @@
 		5442B7B829320EF8008F8623 /* FindTotalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTotalView.swift; sourceTree = "<group>"; };
 		5442B7BD29323111008F8623 /* APIStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStatusCode.swift; sourceTree = "<group>"; };
 		5442C418292915F800A8A925 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		544306C829695FF600F12BF3 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		544453CE293A0E3700D8E994 /* DynamicHeightCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicHeightCollectionView.swift; sourceTree = "<group>"; };
 		5444C0A0292366C400728EC3 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		5444C0A2292366CD00728EC3 /* MyInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoView.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			children = (
 				5444C0A829236C3900728EC3 /* FriendViewController.swift */,
 				5444C0AC29236C7100728EC3 /* FriendView.swift */,
+				544306C829695FF600F12BF3 /* FriendTableViewCell.swift */,
 			);
 			path = The3rdFriendVC;
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 				543F1FE02921193900C31F8E /* Date+Extension.swift in Sources */,
 				547DDFA72931E8A600FD7818 /* ChattingView.swift in Sources */,
 				5442B7B529320DF1008F8623 /* ReceivedRequestView.swift in Sources */,
+				544306C929695FF600F12BF3 /* FriendTableViewCell.swift in Sources */,
 				5440A3922952E1D10067FCC4 /* ChattingReviewView.swift in Sources */,
 				544FFC4B293B701C00E83C72 /* NearPeopleTableViewCell.swift in Sources */,
 				5440A3902952E1C80067FCC4 /* ChattingReviewController.swift in Sources */,

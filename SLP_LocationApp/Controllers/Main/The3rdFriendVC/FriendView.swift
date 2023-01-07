@@ -9,15 +9,30 @@ import SnapKit
 
 class FriendView: BaseView {
     
-    lazy var infoLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.numberOfLines = 2
-        label.textAlignment = .center
-        label.textColor = .black
-        label.text = "메인뷰"
-        return label
+    lazy var textField: UITextField = {
+        let view = UITextField()
+        view.layer.cornerRadius = 8
+        view.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.foregroundColor: Constants.BaseColor.gray6])
+        view.backgroundColor = Constants.BaseColor.gray1
+        view.font = UIFont.font(.Title4_R14)
+        view.leftViewMode = UITextField.ViewMode.always
+        let txtfieldLeftView = UIView(frame: CGRect(x: 5, y: 0, width: 35, height: 20))
+        let imageView = UIImageView(frame: CGRect(x: 5, y: 0, width: 20, height: 20))
+        let image = UIImage(named: "magnifyingglass")
+        imageView.image = image
+        imageView.image = image
+        txtfieldLeftView.addSubview(imageView)
+        view.leftView = txtfieldLeftView
+        view.returnKeyType = UIReturnKeyType.done
+        return view
     }()
+
+    lazy var mainTableView: UITableView = {
+        let view = UITableView()
+        view.separatorStyle = .none
+        view.backgroundColor = .white
+        return view
+      }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,16 +43,24 @@ class FriendView: BaseView {
     }
     
     override func configureUI() {
-        [infoLabel].forEach {
+        [textField, mainTableView].forEach {
             self.addSubview($0)
         }
     }
     
     override func setConstraints() {
-        infoLabel.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(125)
-            make.centerX.equalTo(self.safeAreaLayoutGuide)
-            make.width.equalTo(228)
+        textField.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).inset(10)
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
+            make.height.equalTo(36)
+        }
+        
+        mainTableView.snp.makeConstraints { make in
+            make.top.equalTo(textField.snp.bottom).offset(10)
+            make.leading.equalToSuperview().inset(14)
+            make.trailing.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview()
         }
     }
 }

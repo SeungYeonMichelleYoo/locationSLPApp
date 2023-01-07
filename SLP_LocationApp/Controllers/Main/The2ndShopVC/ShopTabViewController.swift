@@ -27,57 +27,54 @@ class ShopTabViewController: TabmanViewController {
         configureBar()
         
         mainView.saveBtn.addTarget(self, action: #selector(saveBtnClicked), for: .touchUpInside)
+        
+        checkCurrentPurchaseStatus()
     }
     
     @objc func saveBtnClicked() {
-        //        mainView.sesacImg.image = SesacFace.image(level: sesacFace) //역으로 값 전달을 받아야 하나..? 컬렉션 뷰 선택시 1로 한다음 1이 있는 값을 인식해와야.
-        //        mainView.backimage.image = BackgroundImage.image(level: background)
-        //        var vcList = self.navigationController!.viewControllers
-        //        var count = 0
-        //        for vc in vcList {
-        //            if vc.isKind(of: SesacCharacterViewController.self) {
-        //                selectedSesac = (vc as! SesacCharacterViewController).selectedSesac
-        //                continue
-        //            }
-        //            if vc.isKind(of: ShopBackgroundViewController.self) {
-        //                selectedBackground = (vc as! ShopBackgroundViewController).selectedBackground
-        //                continue
-        //            }
-        //            count = count + 1
-        //        }
-        
         if (viewControllers[0] as!SesacCharacterViewController).isSelectedInCollection() && (viewControllers[1] as! ShopBackgroundViewController).isSelectedInCollection() {
             showToast(message: "성공적으로 저장되었습니다")
             DispatchQueue.main.async {
                 self.updateWhenSave()
             }
         } else {
-            print("hihihihi")
-            print((viewControllers[0] as! SesacCharacterViewController).selectedSesac)
-            print((viewControllers[1] as! ShopBackgroundViewController).selectedBackground)
             showToast(message: "구매가 필요한 아이템이 있어요")
         }
-        //        for vc in vcList {
-        //            if (vc as! SesacCharacterViewController).sesacCollectionList.contains(selectedSesac) && (vc as! ShopBackgroundViewController).backgroundCollectionList.contains(selectedBackground) {
-        //
-        //            } else {
-        //                showToast(message: "구매가 필요한 아이템이 있어요")
-        //            }
-        //        }
-        //        for vc in vcList {
-        //            if vc.isKind(of: SesacCharacterViewController.self) {
-        //                if (vc as! SesacCharacterViewController).sesacCollectionList.contains(selectedSesac) && (vc as! ShopBackgroundViewController).sesacCollectionList.contains(selectedBackground) {
-        //                    showToast(message: "성공적으로 저장되었습니다")
-        //                    DispatchQueue.main.async {
-        //                        self.updateWhenSave()
-        //                    }
-        //                } else {
-        //                    showToast(message: "구매가 필요한 아이템이 있어요")
-        //                }
-        //                continue
-        //            }
-        //            count = count + 1
-        //        }
+    }
+    
+    func checkCurrentPurchaseStatus() {
+        viewModel.checkPurchaseStateVM { user, statusCode in
+            switch statusCode {
+            case APIShopCurrentStatusCode.success.rawValue:
+                (self.viewControllers[0] as! SesacCharacterViewController).sesacCollectionList = user!.sesacCollection
+                (self.viewControllers[1] as! ShopBackgroundViewController).backgroundCollectionList = user!.backgroundCollection
+                
+                (self.viewControllers[0] as! SesacCharacterViewController).selectedSesac = user!.sesac
+                (self.viewControllers[1] as! ShopBackgroundViewController).selectedBackground = user!.background
+                
+                self.mainView.sesacImg.image = SesacFace.image(level: user!.sesac)
+                self.mainView.backimage.image = BackgroundImage.image(level: user!.background)
+                
+                (self.viewControllers[0] as! SesacCharacterViewController).mainView.collectionView.reloadData()
+                (self.viewControllers[1] as! ShopBackgroundViewController).mainView.collectionView.reloadData()
+                return
+            case APIShopCurrentStatusCode.firebaseTokenError.rawValue:
+                UserViewModel().refreshIDToken { isSuccess in
+                    if isSuccess! {
+                        self.checkCurrentPurchaseStatus()
+                    } else {
+                        self.showToast(message: "네트워크 연결을 확인해주세요. (Token 갱신 오류)")
+                    }
+                }
+                return
+            case APIShopCurrentStatusCode.serverError.rawValue, APIShopCurrentStatusCode.clientError.rawValue:
+                print("서버 점검중입니다. 관리자에게 문의해주세요.")
+                self.showToast(message: "서버 점검중입니다. 관리자에게 문의해주세요.")
+                return
+            default: self.showToast(message: "네트워크 연결을 확인해주세요.")
+                return
+            }
+        }
     }
     
     func updateWhenSave() {
