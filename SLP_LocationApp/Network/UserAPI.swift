@@ -48,10 +48,14 @@ class UserAPI {
     static func fcmRefresh() {
         let url = "\(BASEURL)/v1/user/update_fcm_token"
         let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        let params: Parameters = ["FCMtoken": UserDefaults.standard.string(forKey: "FCMtoken")]
+        print("token : \(UserDefaults.standard.string(forKey: "FCMtoken"))")
         
-        AF.request(url, method: .put, headers: headers).responseJSON { response in
+        AF.request(url, method: .put, parameters: params, headers: headers).responseString { response in
             let statusCode = response.response?.statusCode
+            print("fcm refresh api called start")
             print(response)
+            print("fcm refresh api called end")
         }
     }
     

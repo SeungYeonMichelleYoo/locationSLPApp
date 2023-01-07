@@ -75,14 +75,13 @@ extension SesacCharacterViewController: UICollectionViewDelegate, UICollectionVi
         return cell
     }
     @objc func priceBtnClicked(_ sender: UIButton) {
-        print("클릭클릭클릭")
         let payment = SKPayment(product: productArray[sender.tag - 1])
         SKPaymentQueue.default().add(payment)
         SKPaymentQueue.default().add(self)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell  = collectionView.cellForItem(at: indexPath) as! SesacFaceCollectionViewCell
+        let cell = collectionView.cellForItem(at: indexPath) as! SesacFaceCollectionViewCell
         
         var vcList = self.navigationController!.viewControllers
         var count = 0
