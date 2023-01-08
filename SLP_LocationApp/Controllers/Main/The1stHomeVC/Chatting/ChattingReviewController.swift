@@ -48,22 +48,13 @@ final class ChattingReviewViewController: BaseViewController {
         viewModel.sendReviewVM(otheruid: otheruid, comment: mainView.textView.text!, reputation: reputation + [0, 0, 0]) { statusCode in
             switch statusCode {
             case APIStopStudyStatusCode.success.rawValue:
-                self.dismiss(animated: false)
-                var vcList = self.navigationController!.viewControllers
-                var count = 0
-                for vc in vcList {
-                    if vc.isKind(of: FindTotalViewController.self) ||
-                        vc.isKind(of: NearViewController.self) ||
-                        vc.isKind(of: NearPopUpViewController.self) ||
-                        vc.isKind(of: ReceivedRequestViewController.self) ||
-                        vc.isKind(of: ReceivedPopUpViewController.self) ||
-                        vc.isKind(of: ChattingViewController.self) {
-                        vcList.remove(at: count)
-                        continue
-                    }
-                    count = count + 1
+                self.showToast(message: "리뷰 등록에 성공하였습니다.")
+                let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+                guard let delegate = sceneDelegate else {
+                    print("error")
+                    return
                 }
-                self.navigationController!.viewControllers = vcList
+                delegate.window?.rootViewController = TabBarViewController()
                 return
             case APIStopStudyStatusCode.matched.rawValue:
                 return
@@ -84,7 +75,7 @@ final class ChattingReviewViewController: BaseViewController {
             }
         }
     }
-                               
+    
     //popup뷰 이외에 클릭시 내려감 (탭제스쳐 효과) + textview 외의 화면 클릭시 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
@@ -107,6 +98,10 @@ extension ChattingReviewViewController: UICollectionViewDelegate, UICollectionVi
         cell.titleBtn.tag = indexPath.item
         cell.titleBtn.addGestureRecognizer(getPressGesture())
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.visibleSize.width / 2 - 8, height: collectionView.visibleSize.height / 3 - 8)
     }
 }
 

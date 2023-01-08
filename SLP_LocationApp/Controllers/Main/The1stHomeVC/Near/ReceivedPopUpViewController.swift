@@ -10,6 +10,7 @@ final class ReceivedPopUpViewController: BaseViewController {
     
     var mainView = ReceivedPopUpView()
     var receivedUid = ""
+    var receivedNick: String = ""
     var viewModel = HomeViewModel()
     var nick = ""
     
@@ -46,7 +47,6 @@ final class ReceivedPopUpViewController: BaseViewController {
         viewModel.studyacceptVM(otheruid: receivedUid) { statusCode in
             switch statusCode {
             case APIStudyAcceptStatusCode.success.rawValue:
-                self.dismiss(animated: true)
                 self.checkCurrentStatus()
                 return
             case APIStudyAcceptStatusCode.alreadyOpponentMatched.rawValue:
@@ -86,11 +86,7 @@ final class ReceivedPopUpViewController: BaseViewController {
             switch statusCode {
             case APIMyQueueStatusCode.success.rawValue:
                 if myQueueState?.matched == 1 {
-                    self.showToast(message: "\(myQueueState?.matchedUid)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
-                    DispatchQueue.main.async {
-                        let vc = ChattingViewController()
-                        self.transition(vc, transitionStyle: .push)
-                    }
+                    self.dismiss(animated: true)
                 }
                 return
             case APIMyQueueStatusCode.noSearch.rawValue:

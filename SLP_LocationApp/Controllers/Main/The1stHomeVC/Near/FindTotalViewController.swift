@@ -167,7 +167,7 @@ class FindTotalViewController: TabmanViewController {
             switch statusCode {
             case APIMyQueueStatusCode.success.rawValue:
                 if myQueueState?.matched == 1 {
-                    self.showToast(message: "\(myQueueState?.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
+                    self.showLongToast(message: "\(myQueueState!.matchedNick!)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다")
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                         let vc = ChattingViewController()
                         self.transition(vc, transitionStyle: .push)

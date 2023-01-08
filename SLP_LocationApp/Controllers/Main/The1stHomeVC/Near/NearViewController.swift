@@ -147,6 +147,9 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         cell.cellDelegate = self
         
         cell.requestBtn.tag = indexPath.row
+        
+        cell.image.image = BackgroundImage.image(level: opponentList[indexPath.row].background)
+        cell.sesacImg.image = SesacFace.image(level: opponentList[indexPath.row].sesac)
     
         cell.nickLabel.text = opponentList[indexPath.row].nick
         cell.nickView.addGestureRecognizer(getPressGesture())
@@ -156,13 +159,19 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
         cell.collectionView.tag = -1 - indexPath.row
-        
+        // -1, -2
         cell.studyCollectionView.delegate = self
         cell.studyCollectionView.dataSource = self
         cell.studyCollectionView.tag = indexPath.row
         cell.collectionView.register(TitleCollectionViewCell.self, forCellWithReuseIdentifier: "TitleCollectionViewCell")
         cell.studyCollectionView.register(DemandStudyCollectionViewCell.self, forCellWithReuseIdentifier: "DemandStudyCollectionViewCell")
 //        print("index: \(indexPath.row) - \(opponentList[indexPath.row].nick) - \(opponentList[indexPath.row].studylist.count)")
+        
+        if opponentList[indexPath.row].reviews.isEmpty {
+            cell.textView.text = "첫 리뷰를 기다리는 중이에요!"
+        } else {
+            cell.textView.text = opponentList[indexPath.row].reviews[0]
+        }
         
         cell.studyCollectionView.collectionViewLayout = CollectionViewLeftAlignFlowLayout()
         
@@ -181,7 +190,7 @@ extension NearViewController: UITableViewDelegate, UITableViewDataSource {
         if !opponentList[indexPath.row].expanded {
             return 260
         } else {
-            return 700
+            return 620
         }
     }
 }
@@ -223,8 +232,16 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TitleCollectionViewCell", for: indexPath) as? TitleCollectionViewCell else {
                 return UICollectionViewCell()
             }
-            
+
             cell.titleBtn.setTitle("\(buttonTitle[indexPath.item])", for: .normal)
+            if opponentList[(collectionView.tag - 1) * -1].reputation[indexPath.item] != 0 {
+                cell.titleBtn.fill()
+                cell.titleBtn.setTitleColor(.white, for: .normal)
+            } else {
+                cell.titleBtn.white()
+                cell.titleBtn.setTitleColor(.black, for: .normal)
+            }
+            
             
             return cell
         } else {
@@ -235,6 +252,18 @@ extension NearViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.titleBtn.setTitle("\(opponentList[collectionView.tag].studylist[indexPath.item])", for: .normal)
             return cell
             
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView.tag >= 0 {
+//            if collectionView == mainView.nearCollectionView {
+            return CGSize(width: (indexPath.item < opponentList[collectionView.tag].studylist.count ? opponentList[collectionView.tag].studylist[indexPath.item] : opponentList[collectionView.tag].studylist[indexPath.item - opponentList[collectionView.tag].studylist.count]).size(withAttributes: [NSAttributedString.Key.font : UIFont.font(.Title4_R14)]).width + 32 + 14, height: 32)
+//            } else {
+//                return CGSize(width: myStudy[indexPath.item].size(withAttributes: [NSAttributedString.Key.font : UIFont.font(.Title4_R14)]).width + 32 + 22, height: 32)
+//            }
+        } else {
+            return CGSize(width: collectionView.visibleSize.width / 2 - 8, height: collectionView.visibleSize.height / 3 - 8)
         }
     }
 }

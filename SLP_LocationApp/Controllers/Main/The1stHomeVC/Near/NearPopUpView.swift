@@ -27,6 +27,7 @@ class NearPopUpView: BaseView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "스터디를 요청할게요!"
+        label.textColor = .black
         label.font = UIFont.font(.Body1_M16)
         return label
     }()

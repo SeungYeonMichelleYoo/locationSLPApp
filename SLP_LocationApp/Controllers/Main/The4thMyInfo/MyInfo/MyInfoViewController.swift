@@ -27,7 +27,7 @@ final class MyInfoViewController: BaseViewController {
         super.viewDidLoad()
         setupTableView()
     }
-    
+      
     func setupTableView() {
         mainView.mainTableView.delegate = self
         mainView.mainTableView.dataSource = self

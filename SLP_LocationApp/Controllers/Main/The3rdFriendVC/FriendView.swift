@@ -12,7 +12,7 @@ class FriendView: BaseView {
     lazy var textField: UITextField = {
         let view = UITextField()
         view.layer.cornerRadius = 8
-        view.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.foregroundColor: Constants.BaseColor.gray6])
+        view.attributedPlaceholder = NSAttributedString(string: "새싹친구를 검색해보세요", attributes: [.foregroundColor: Constants.BaseColor.gray6])
         view.backgroundColor = Constants.BaseColor.gray1
         view.font = UIFont.font(.Title4_R14)
         view.leftViewMode = UITextField.ViewMode.always
@@ -50,17 +50,17 @@ class FriendView: BaseView {
     
     override func setConstraints() {
         textField.snp.makeConstraints { make in
-            make.top.equalTo(self.safeAreaLayoutGuide).inset(10)
-            make.leading.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().inset(16)
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(10)
+            make.leading.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
             make.height.equalTo(36)
         }
         
         mainTableView.snp.makeConstraints { make in
             make.top.equalTo(textField.snp.bottom).offset(10)
-            make.leading.equalToSuperview().inset(14)
-            make.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview()
+            make.leading.equalTo(self.safeAreaLayoutGuide)
+            make.trailing.equalTo(self.safeAreaLayoutGuide)
+            make.bottom.equalTo(self.safeAreaLayoutGuide)
         }
     }
 }

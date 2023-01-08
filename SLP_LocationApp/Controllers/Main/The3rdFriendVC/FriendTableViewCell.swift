@@ -35,7 +35,7 @@ class FriendTableViewCell: UITableViewCell {
     lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.text = "22.01.12"
-        label.textColor = .black
+        label.textColor = Constants.BaseColor.gray7
         label.font = UIFont.font(.Body4_R12)
         return label
     }()
@@ -50,26 +50,24 @@ class FriendTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
         layout()
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.contentView.backgroundColor = .white
-    }
-    
     private func layout() {
-        [image, nameLabel, chatLabel].forEach {
+        self.contentView.backgroundColor = .white
+        
+        [image, nameLabel, studyLabel, dateLabel, chatLabel].forEach {
             contentView.addSubview($0)
         }
         
         image.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().inset(14)
             make.bottom.equalToSuperview().inset(10)
             make.size.equalTo(50)
         }
@@ -77,6 +75,11 @@ class FriendTableViewCell: UITableViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.leading.equalTo(image.snp.trailing).offset(8)
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(16)
         }
         
         studyLabel.snp.makeConstraints { make in

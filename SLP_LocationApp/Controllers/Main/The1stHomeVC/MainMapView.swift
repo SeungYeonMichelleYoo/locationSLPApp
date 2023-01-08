@@ -62,7 +62,7 @@ class MainMapView: BaseView {
         
     lazy var centerpinImg: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleToFill
+        view.contentMode = .scaleAspectFit
         view.image = UIImage(named: "centerpin")
         return view
     }()
@@ -107,9 +107,9 @@ class MainMapView: BaseView {
         }
         
         centerpinImg.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.width.equalTo(35)
-            make.height.equalTo(46)
+            make.centerX.equalTo(mapView)
+            make.centerY.equalTo(mapView).offset(-24)
+            make.size.equalTo(48)
         }
         
         floatingBtn.snp.makeConstraints { make in

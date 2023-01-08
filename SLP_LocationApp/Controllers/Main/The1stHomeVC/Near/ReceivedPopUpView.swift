@@ -31,6 +31,7 @@ class ReceivedPopUpView: BaseView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "스터디를 수락할까요?"
+        label.textColor = .black
         label.font = UIFont.font(.Body1_M16)
         return label
     }()

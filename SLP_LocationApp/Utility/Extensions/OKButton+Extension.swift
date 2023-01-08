@@ -27,4 +27,8 @@ extension UIButton {
     func cancel() {
         backgroundColor = Constants.BaseColor.gray2
     }
+    
+    func white() {
+        backgroundColor = .white
+    }
 }

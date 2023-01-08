@@ -26,15 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // FCM 다시 사용 설정
         Messaging.messaging().isAutoInitEnabled = true
         
-        // 푸시 알림 권한 설정 및 푸시 알림에 앱 등록
-        //        UNUserNotificationCenter.current().delegate = self
-        //        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        //        UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _, _ in })
-        //        application.registerForRemoteNotifications()
-        
-        // device token 요청.
-        //        UIApplication.shared.registerForRemoteNotifications()
-        
         //현재 등록된 토큰 가져오기
         Messaging.messaging().delegate = self
         Messaging.messaging().token { token, error in
@@ -45,13 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("FCM registration token: \(token)")
             }
         }
-        //        Messaging.messaging().token { token, error in
-        //          if let error = error {
-        //            print("Error fetching FCM registration token: \(error)")
-        //          } else if let token = token {
-        //            print("FCM registration token: \(token)")
-        //          }
-        //        }
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
@@ -112,7 +96,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let userInfo = notification.request.content.userInfo
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        print("여기여기여기111111")
         print(userInfo)
         completionHandler([.sound, .banner, .list])
     }
@@ -125,17 +108,13 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         
         completionHandler()
         print(response)
-        print("여기여기여기2222222")
         print(userInfo)
     }
     
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Messaging.messaging().appDidReceiveMessage(userInfo)
-        
         completionHandler(.noData)
-        print(userInfo)
-        print("여기여기여기333333333333")
         print(userInfo)
     }
 }

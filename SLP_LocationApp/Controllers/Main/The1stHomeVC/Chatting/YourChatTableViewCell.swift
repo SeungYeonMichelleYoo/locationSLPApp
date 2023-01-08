@@ -51,6 +51,7 @@ class YourChatTableViewCell: UITableViewCell {
         
         chatLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(12)
+            make.leading.equalToSuperview().inset(12)
             make.width.lessThanOrEqualToSuperview().multipliedBy(0.6)
             make.bottom.equalToSuperview().inset(12).priority(.low)
         }

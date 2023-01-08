@@ -153,6 +153,7 @@ final class SearchViewController: BaseViewController, UITextFieldDelegate {
         txtfield.attributedPlaceholder = NSAttributedString(string: "띄어쓰기로 복수 입력이 가능해요", attributes: [.foregroundColor: Constants.BaseColor.gray6])
         txtfield.backgroundColor = Constants.BaseColor.gray1
         txtfield.font = UIFont.font(.Title4_R14)
+        txtfield.textColor = .black
         txtfield.leftViewMode = UITextField.ViewMode.always
         let txtfieldLeftView = UIView(frame: CGRect(x: 5, y: 0, width: 35, height: 20))
         let imageView = UIImageView(frame: CGRect(x: 5, y: 0, width: 20, height: 20))
@@ -219,6 +220,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         if collectionView == mainView.nearCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StudyCollectionViewCell", for: indexPath) as! StudyCollectionViewCell
+            cell.backgroundColor = .white
             
             if indexPath.item < recommendStudy.count {
                 cell.nearBtn.setTitle(recommendStudy[indexPath.item], for: .normal)

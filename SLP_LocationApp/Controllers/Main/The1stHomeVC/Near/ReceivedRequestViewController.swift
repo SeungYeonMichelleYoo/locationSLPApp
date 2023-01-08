@@ -97,6 +97,9 @@ extension ReceivedRequestViewController: UITableViewDelegate, UITableViewDataSou
         
         cell.requestBtn.tag = indexPath.row
         
+        cell.image.image = BackgroundImage.image(level: receivedList[indexPath.row].background)
+        cell.sesacImg.image = SesacFace.image(level: receivedList[indexPath.row].sesac)
+        
         cell.nickLabel.text = receivedList[indexPath.row].nick
         cell.nickView.addGestureRecognizer(getPressGesture())
         cell.nickView.tag = indexPath.row

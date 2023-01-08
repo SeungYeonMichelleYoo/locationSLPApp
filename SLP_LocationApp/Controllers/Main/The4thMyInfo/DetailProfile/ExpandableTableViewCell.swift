@@ -184,7 +184,7 @@ class ExpandableTableViewCell: UITableViewCell {
         }
         
         moreBtn.snp.makeConstraints { make in
-            make.top.equalTo(textView.snp.top)
+            make.centerY.equalTo(textView)
             make.leading.equalTo(textView.snp.trailing).offset(4)
             make.trailing.equalToSuperview().inset(16)
             make.size.equalTo(24)

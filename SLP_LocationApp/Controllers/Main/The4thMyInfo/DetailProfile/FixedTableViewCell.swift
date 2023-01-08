@@ -83,6 +83,7 @@ class FixedTableViewCell: UITableViewCell {
         view.addLeftPadding()
         view.attributedPlaceholder = NSAttributedString(string: "스터디를 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : Constants.BaseColor.gray7])
         view.textColor = Constants.BaseColor.black
+        view.font = UIFont.font(.Title4_R14)
         view.keyboardType = .numberPad
         return view
     }()
@@ -141,7 +142,7 @@ class FixedTableViewCell: UITableViewCell {
         slider.trackWidth = 10
         slider.hasRoundTrackEnds = true
         slider.showsThumbImageShadow = true
-        slider.thumbCount = 2
+        slider.thumbCount = 1
         slider.thumbImage = UIImage(named: "sliderimage")
         slider.value = [18, 35]
         return slider

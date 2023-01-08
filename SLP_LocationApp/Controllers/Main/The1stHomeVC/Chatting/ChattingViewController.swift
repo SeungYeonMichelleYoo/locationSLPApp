@@ -121,7 +121,9 @@ class ChattingViewController: BaseViewController {
     @objc func sendBtnClicked() {
         if mainView.textView.text!.count >= 1 {
             sendChat()
-            mainView.textView.text = ""
+            mainView.textView.text = "메시지를 입력하세요"
+            mainView.textView.textColor = Constants.BaseColor.gray7
+            mainView.textView.resignFirstResponder()
             mainView.sendBtn.setImage(UIImage(named: "chat_send_gray"), for: .normal)
         }
     }

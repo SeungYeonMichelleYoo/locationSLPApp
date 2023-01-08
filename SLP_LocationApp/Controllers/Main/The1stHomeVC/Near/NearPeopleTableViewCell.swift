@@ -24,6 +24,15 @@ class NearPeopleTableViewCell: UITableViewCell {
         return view
     }()
     
+    lazy var sesacImg: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleToFill
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        view.image = UIImage(named: "sesac_face_1")
+        return view
+    }()
+    
     lazy var requestBtn: UIButton = {
         let view = UIButton()
         view.backgroundColor = Constants.BaseColor.error
@@ -139,6 +148,7 @@ class NearPeopleTableViewCell: UITableViewCell {
         textView.font = UIFont.font(.Body3_R14)
         textView.text = "첫 리뷰를 기다리는 중이에요!"
         textView.textColor = Constants.BaseColor.gray6
+        textView.numberOfLines = 0
         return textView
     }()
     
@@ -160,7 +170,7 @@ class NearPeopleTableViewCell: UITableViewCell {
         
         self.contentView.backgroundColor = .white
         
-        [image, requestBtn, totalStackView].forEach {
+        [image, sesacImg, requestBtn, totalStackView].forEach {
             contentView.addSubview($0)
         }
 
@@ -180,6 +190,12 @@ class NearPeopleTableViewCell: UITableViewCell {
         image.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(200)
+        }
+        
+        sesacImg.snp.makeConstraints { make in
+            make.centerX.equalTo(image)
+            make.top.equalTo(image.snp.top).offset(32)
+            make.bottom.equalTo(image.snp.bottom).offset(8)
         }
         
         requestBtn.snp.makeConstraints { make in
@@ -254,6 +270,7 @@ class NearPeopleTableViewCell: UITableViewCell {
         textView.snp.makeConstraints { make in
             make.top.equalTo(reviewLabel.snp.bottom).offset(16)
             make.leading.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
             make.height.equalTo(30)
         }
     }
