@@ -153,8 +153,8 @@ class BirthView: BaseView {
         
         datePicker.snp.makeConstraints { make in
             make.top.equalTo(sendBtn.snp.bottom).offset(50)
-            make.leading.equalTo(self.safeAreaLayoutGuide).inset(16)
-            make.trailing.equalTo(self.safeAreaLayoutGuide).inset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(self.safeAreaLayoutGuide).inset(16)
         }
     }

@@ -10,13 +10,11 @@ import UIKit
 final class BirthViewController: BaseViewController {
     
     var mainView = BirthView()
-    
     var nickname = ""
     var phoneNumber = ""
     var FCMtoken = ""
     
     override func loadView() {
-        print("loadview")
         self.view = mainView
     }
     
