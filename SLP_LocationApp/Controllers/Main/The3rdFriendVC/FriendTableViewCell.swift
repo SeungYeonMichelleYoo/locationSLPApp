@@ -6,8 +6,17 @@
 //
 import UIKit
 import SnapKit
+import RxSwift
 
 class FriendTableViewCell: UITableViewCell {
+    static let identifier = "FriendTableViewCell"
+    
+    private let onChatChanged: (String) -> Void // 채팅 내용 바뀜
+    private let cellDisposeBag = DisposeBag()
+    
+    var disposeBag = DisposeBag()
+    let onData: AnyObserver<Friend>
+    let onChanged: Observable<String>
     
     lazy var image: UIImageView = {
         let img = UIImageView()
@@ -54,8 +63,29 @@ class FriendTableViewCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder aDecoder: NSCoder) {
+      let data = PublishSubject<Friend>()
+        let changing = PublishSubject<String>()
+        onChatChanged = { changing.onNext($0) }
+        
+        onData = data.asObserver()
+        onChanged = changing
+        
+        super.init(coder: aDecoder)
+        
+        data.observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] friend in
+                self?.image.image = friend.image
+                self?.nameLabel.text = friend.matchedNick
+                self?.studyLabel.text = friend.study
+                self?.chatLabel.text = friend.chat
+                self?.dateLabel.date = friend.date
+            })
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     private func layout() {

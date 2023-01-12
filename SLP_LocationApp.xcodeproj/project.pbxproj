@@ -61,10 +61,15 @@
 		54523736292B372D002B8255 /* MultiSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 54523735292B372D002B8255 /* MultiSlider */; };
 		54523738292B6680002B8255 /* WithdrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523737292B6680002B8255 /* WithdrawViewController.swift */; };
 		5452373A292B6918002B8255 /* WithdrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54523739292B6918002B8255 /* WithdrawView.swift */; };
+		5455B91D296FD97F00362263 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 5455B91C296FD97F00362263 /* RxCocoa */; };
+		5455B91F296FD97F00362263 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 5455B91E296FD97F00362263 /* RxSwift */; };
+		5455B921296FDBD700362263 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455B920296FDBD700362263 /* FriendViewModel.swift */; };
+		5455B923296FDC2900362263 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5455B922296FDC2900362263 /* Friend.swift */; };
 		5456122F2945CEAC00AC6C9F /* Annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456122E2945CEAC00AC6C9F /* Annotations.swift */; };
 		54569A3E2924D3A1008F3FC6 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */; };
 		54569A402924DCDE008F3FC6 /* FixedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54569A3F2924DCDE008F3FC6 /* FixedTableViewCell.swift */; };
 		5456F6E0292F2B3A0004A98E /* MyStudyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5456F6DF292F2B3A0004A98E /* MyStudyCollectionViewCell.swift */; };
+		5457A67D297008A900A43516 /* FriendStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457A67C297008A900A43516 /* FriendStore.swift */; };
 		5457B18B293CC9B100C600C6 /* CollectionViewLeftAlignFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5457B18A293CC9B100C600C6 /* CollectionViewLeftAlignFlowLayout.swift */; };
 		545AE797291E5FBA000F73C3 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545AE796291E5FBA000F73C3 /* UserAPI.swift */; };
 		545AE79A291E6015000F73C3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 545AE799291E6015000F73C3 /* Alamofire */; };
@@ -198,10 +203,13 @@
 		544FFC4A293B701C00E83C72 /* NearPeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearPeopleTableViewCell.swift; sourceTree = "<group>"; };
 		54523737292B6680002B8255 /* WithdrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawViewController.swift; sourceTree = "<group>"; };
 		54523739292B6918002B8255 /* WithdrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithdrawView.swift; sourceTree = "<group>"; };
+		5455B920296FDBD700362263 /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
+		5455B922296FDC2900362263 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		5456122E2945CEAC00AC6C9F /* Annotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotations.swift; sourceTree = "<group>"; };
 		54569A3D2924D3A1008F3FC6 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		54569A3F2924DCDE008F3FC6 /* FixedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedTableViewCell.swift; sourceTree = "<group>"; };
 		5456F6DF292F2B3A0004A98E /* MyStudyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStudyCollectionViewCell.swift; sourceTree = "<group>"; };
+		5457A67C297008A900A43516 /* FriendStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendStore.swift; sourceTree = "<group>"; };
 		5457B18A293CC9B100C600C6 /* CollectionViewLeftAlignFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLeftAlignFlowLayout.swift; sourceTree = "<group>"; };
 		545AE796291E5FBA000F73C3 /* UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
 		545AE79B291E608D000F73C3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -297,7 +305,9 @@
 				5442B7BC29320F93008F8623 /* Tabman in Frameworks */,
 				545AE79F291E66B0000F73C3 /* KeychainSwift in Frameworks */,
 				545AE79A291E6015000F73C3 /* Alamofire in Frameworks */,
+				5455B91D296FD97F00362263 /* RxCocoa in Frameworks */,
 				54360A38292259AD004B2CBA /* FirebaseAuth in Frameworks */,
+				5455B91F296FD97F00362263 /* RxSwift in Frameworks */,
 				54ACF64E291D361A0002A121 /* Toast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -386,6 +396,9 @@
 				5444C0A829236C3900728EC3 /* FriendViewController.swift */,
 				5444C0AC29236C7100728EC3 /* FriendView.swift */,
 				544306C829695FF600F12BF3 /* FriendTableViewCell.swift */,
+				5455B920296FDBD700362263 /* FriendViewModel.swift */,
+				5455B922296FDC2900362263 /* Friend.swift */,
+				5457A67C297008A900A43516 /* FriendStore.swift */,
 			);
 			path = The3rdFriendVC;
 			sourceTree = "<group>";
@@ -702,6 +715,8 @@
 				5408F2E0293ED37B0035E108 /* SocketIO */,
 				549D9259295F177000133476 /* Realm */,
 				549D925B295F177000133476 /* RealmSwift */,
+				5455B91C296FD97F00362263 /* RxCocoa */,
+				5455B91E296FD97F00362263 /* RxSwift */,
 			);
 			productName = SLP_LocationApp;
 			productReference = 5461B4A52918B6440000D726 /* SLP_LocationApp.app */;
@@ -743,6 +758,7 @@
 				5442B7BA29320F92008F8623 /* XCRemoteSwiftPackageReference "Tabman" */,
 				5408F2DF293ED37B0035E108 /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				549D9258295F177000133476 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				5455B91B296FD97F00362263 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 5461B4A62918B6440000D726 /* Products */;
 			projectDirPath = "";
@@ -802,6 +818,7 @@
 				54B95E0529378D0B005389A6 /* Sequence+Extension.swift in Sources */,
 				5444C0AD29236C7100728EC3 /* FriendView.swift in Sources */,
 				5444C0A529236B7C00728EC3 /* TabBarViewController.swift in Sources */,
+				5457A67D297008A900A43516 /* FriendStore.swift in Sources */,
 				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,
 				54569A402924DCDE008F3FC6 /* FixedTableViewCell.swift in Sources */,
 				5440A38C2952E1B30067FCC4 /* ChattingCancelViewController.swift in Sources */,
@@ -862,12 +879,14 @@
 				5461B4AB2918B6440000D726 /* SceneDelegate.swift in Sources */,
 				5456122F2945CEAC00AC6C9F /* Annotations.swift in Sources */,
 				5442B7B929320EF8008F8623 /* FindTotalView.swift in Sources */,
+				5455B923296FDC2900362263 /* Friend.swift in Sources */,
 				5461B4E82918CD570000D726 /* Color.swift in Sources */,
 				54CEEC19292C53E800C0D8CA /* SearchViewController.swift in Sources */,
 				545AE797291E5FBA000F73C3 /* UserAPI.swift in Sources */,
 				5461B4D02918C5B70000D726 /* GenderViewController.swift in Sources */,
 				5473C2C8293DD40800EBF11B /* NearPopUpView.swift in Sources */,
 				5461B4D42918C5F90000D726 /* OnboardingViewController.swift in Sources */,
+				5455B921296FDBD700362263 /* FriendViewModel.swift in Sources */,
 				5461B4CA2918C56C0000D726 /* BirthView.swift in Sources */,
 				5461B4E32918CD090000D726 /* Color+Extension.swift in Sources */,
 				5408F2E5293EEE2A0035E108 /* Chat.swift in Sources */,
@@ -1156,6 +1175,14 @@
 				version = 1.13.2;
 			};
 		};
+		5455B91B296FD97F00362263 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		545AE798291E6015000F73C3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -1236,6 +1263,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 54523734292B372D002B8255 /* XCRemoteSwiftPackageReference "MultiSlider" */;
 			productName = MultiSlider;
+		};
+		5455B91C296FD97F00362263 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5455B91B296FD97F00362263 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		5455B91E296FD97F00362263 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5455B91B296FD97F00362263 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 		545AE799291E6015000F73C3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

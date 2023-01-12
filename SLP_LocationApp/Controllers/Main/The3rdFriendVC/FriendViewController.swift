@@ -6,6 +6,7 @@
 //
 import UIKit
 import SnapKit
+import RxSwift
 
 class FriendViewController: BaseViewController {
     
@@ -13,6 +14,8 @@ class FriendViewController: BaseViewController {
     var viewModel = HomeViewModel()
     var matchedUid = ""
     var matchedNick = ""
+    
+    var disposeBag = DisposeBag()
     
     override func loadView() {
         self.view = mainView
@@ -60,13 +63,16 @@ class FriendViewController: BaseViewController {
             }
         }
     }
+    
+    func setupBindings() {
+        viewModel.
+    }
 }
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
     func configureTableView() {
         mainView.mainTableView.delegate = self
         mainView.mainTableView.dataSource = self
         mainView.mainTableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "FriendTableViewCell")
-        //        mainView.mainTableView.allowsSelection = false
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,7 +90,6 @@ extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
         
         if editingStyle == .delete {
             tableView.deleteRows(at: [indexPath], with: .fade)
-            
         } else if editingStyle == .insert {
             
         }
