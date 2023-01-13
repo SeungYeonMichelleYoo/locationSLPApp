@@ -12,6 +12,7 @@ class FriendViewController: BaseViewController {
     
     var mainView = FriendView()
     var viewModel = HomeViewModel()
+    var friendViewModel = FriendViewModel()
     var matchedUid = ""
     var matchedNick = ""
     
@@ -65,7 +66,12 @@ class FriendViewController: BaseViewController {
     }
     
     func setupBindings() {
-        viewModel.
+        friendViewModel.allFriends
+            .bind(to: tableView.rx.items(cellIdentifier: FriendTableViewCell.identifier,
+                                         cellType: FriendTableViewCell.self)) {
+                _, item, cell in
+                cell.onData.onNext(item)
+            }
     }
 }
 extension FriendViewController: UITableViewDelegate, UITableViewDataSource {

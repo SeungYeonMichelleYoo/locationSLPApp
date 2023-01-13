@@ -65,3 +65,20 @@ class ChatAPI {
         }
     }
 }
+
+extension ChatAPI {
+    static func fetchAllFriendsRx() -> Observable<Data> {
+        return Observable.create { emitter in
+            fetchChat(from: from, lastchatDate: lastChatDate) { Chat, StatusCode, error in
+                switch result {
+                case let .success(data):
+                    emitter.onNext(data)
+                    emitter.onCompleted()
+                case let .failure(error):
+                    emitter.onError(error)
+                }
+            }
+            return Disposables.create()
+        }
+    }
+}

@@ -18,6 +18,12 @@ class FriendStore: FriendFetchable {
             let friends: [Friend]
         }
         
-        return HomeAPI.
+        return ChatAPI.fetchAllFriendsRx()
+            .map { data in
+                guard let response = try? JSONDecoder().decode(Response.self, from: data) else {
+                    throw NSError(domain: "Decoding error", code: -1)
+                }
+                return response.friends
+            }
     }
 }

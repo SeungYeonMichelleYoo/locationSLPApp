@@ -7,7 +7,7 @@
 import Foundation
 
 struct Friend {
-    var image: String
+    var image: Int
     var matchedNick: String
     var study: String
     var chat: String

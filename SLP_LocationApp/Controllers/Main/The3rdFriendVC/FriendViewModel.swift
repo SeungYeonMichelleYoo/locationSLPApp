@@ -19,5 +19,23 @@ class FriendViewModel {
     // OUTPUT
     let activated: Observable<Bool>
     
+    init(domain: FriendFetchable = FriendStore()) {
+        let fetching = PublishSubject<Void>()
+        
+        let friends = BehaviorSubject<[Friend]>(value: [])
+        let activating = BehaviorSubject<Bool>(value: false)
+        let error = PublishSubject<Error>()
+        
+        // INPUT
+        fetchFriends = fetching.asObserver()
+        
+        fetching
+            .do(onNext: { _ in activating.onNext(true) })
+            .flatMap(domain.fetchFriends)
+                .do(onNext: { _ in activating.onNext(false)})
+                .do(onError: { err in error.onNext(err)})
+                    .subscribe(onNext: friends.onNext)
+                    .disposed(by: disposeBag)
+    }
     
 }

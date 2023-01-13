@@ -75,11 +75,11 @@ class FriendTableViewCell: UITableViewCell {
         
         data.observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] friend in
-                self?.image.image = friend.image
+                self?.image.image = SesacFace.image(level: friend.image)
                 self?.nameLabel.text = friend.matchedNick
                 self?.studyLabel.text = friend.study
                 self?.chatLabel.text = friend.chat
-                self?.dateLabel.date = friend.date
+                self?.dateLabel.text = friend.date
             })
     }
     

@@ -164,11 +164,3 @@ class HomeAPI {
         }
     }
 }
-
-class HomeAPI {
-    static func fetchAllFriendsRx() -> Observable<Data> {
-        return Observable.create { emitter in
-            
-        }
-    }
-}
