@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import KeychainSwift
+import RxSwift
 
 class ChatAPI {
     static let BASEURL: String = "http://api.sesac.co.kr:1210"
@@ -64,12 +65,37 @@ class ChatAPI {
             }
         }
     }
+    
+    //채팅 받아오기
+    static func fetchChatRx(from: String, lastchatDate: String, completion: @escaping (Result<Data, Error>) -> Void) {
+        let url = "\(BASEURL)/v1/chat/\(from)?lastchatDate=\(lastchatDate)"
+        let headers: HTTPHeaders = ["idtoken" : KeychainSwift().get("idToken")!]
+        
+        AF.request(url, method: .get, headers: headers).responseJSON { response in
+            let statusCode = response.response?.statusCode
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(dateFormatter)
+            print(response.data!)
+            if let err = response.error {
+                completion(.failure(err))
+                return
+            }
+            guard let data = response.data else {
+                let httpResponse = response.response!
+                completion(.failure(NSError(domain: "no data", code: httpResponse.statusCode, userInfo: nil)))
+                return
+            }
+            completion(.success(data))
+        }
+    }
 }
 
 extension ChatAPI {
-    static func fetchAllFriendsRx() -> Observable<Data> {
+    static func fetchAllFriendsRx(from: String, lastChatDate: String) -> Observable<Data> {
         return Observable.create { emitter in
-            fetchChat(from: from, lastchatDate: lastChatDate) { Chat, StatusCode, error in
+            fetchChatRx(from: from, lastchatDate: lastChatDate) { result in
                 switch result {
                 case let .success(data):
                     emitter.onNext(data)

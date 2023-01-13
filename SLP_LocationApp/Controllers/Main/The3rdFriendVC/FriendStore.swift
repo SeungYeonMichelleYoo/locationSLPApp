@@ -9,18 +9,18 @@ import Foundation
 import RxSwift
 
 protocol FriendFetchable {
-    func fetchFriends() -> Observable<[Friend]>
+    func fetchFriends(from: String, lastChatDate: String) -> Observable<[Friend]>
 }
 
 class FriendStore: FriendFetchable {
-    func fetchFriends() -> Observable<[Friend]> {
-        struct Response: Decodable {
+    func fetchFriends(from: String, lastChatDate: String) -> Observable<[Friend]> {
+        struct ResponseRx: Decodable {
             let friends: [Friend]
         }
         
-        return ChatAPI.fetchAllFriendsRx()
+        return ChatAPI.fetchAllFriendsRx(from: from, lastChatDate: lastChatDate)
             .map { data in
-                guard let response = try? JSONDecoder().decode(Response.self, from: data) else {
+                guard let response = try? JSONDecoder().decode(ResponseRx.self, from: data) else {
                     throw NSError(domain: "Decoding error", code: -1)
                 }
                 return response.friends

@@ -9,14 +9,7 @@ import SnapKit
 import RxSwift
 
 class FriendTableViewCell: UITableViewCell {
-    static let identifier = "FriendTableViewCell"
-    
-    private let onChatChanged: (String) -> Void // 채팅 내용 바뀜
-    private let cellDisposeBag = DisposeBag()
-    
-    var disposeBag = DisposeBag()
-    let onData: AnyObserver<Friend>
-    let onChanged: Observable<String>
+    static let registerId = "\(FriendTableViewCell.self)"
     
     lazy var image: UIImageView = {
         let img = UIImageView()
@@ -56,36 +49,15 @@ class FriendTableViewCell: UITableViewCell {
         label.font = UIFont.font(.Body3_R14)
         return label
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
         selectionStyle = .none
     }
     
-    required init?(coder aDecoder: NSCoder) {
-      let data = PublishSubject<Friend>()
-        let changing = PublishSubject<String>()
-        onChatChanged = { changing.onNext($0) }
-        
-        onData = data.asObserver()
-        onChanged = changing
-        
-        super.init(coder: aDecoder)
-        
-        data.observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] friend in
-                self?.image.image = SesacFace.image(level: friend.image)
-                self?.nameLabel.text = friend.matchedNick
-                self?.studyLabel.text = friend.study
-                self?.chatLabel.text = friend.chat
-                self?.dateLabel.text = friend.date
-            })
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        disposeBag = DisposeBag()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func layout() {
@@ -101,7 +73,7 @@ class FriendTableViewCell: UITableViewCell {
             make.bottom.equalToSuperview().inset(10)
             make.size.equalTo(50)
         }
-    
+        
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(10)
             make.leading.equalTo(image.snp.trailing).offset(8)
@@ -121,6 +93,13 @@ class FriendTableViewCell: UITableViewCell {
             make.top.equalTo(nameLabel.snp.bottom).offset(2)
             make.leading.equalTo(image.snp.trailing).offset(8)
         }
-        
+    }
+    
+    func setData(_ dataEntity : Friend) {
+        image.image = SesacFace.image(level: dataEntity.image)
+        nameLabel.text = dataEntity.matchedNick
+        dateLabel.text = dataEntity.date
+        studyLabel.text = dataEntity.study
+        chatLabel.text = dataEntity.chat
     }
 }

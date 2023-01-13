@@ -24,6 +24,7 @@
 		5434ACDD293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434ACDC293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift */; };
 		54360A38292259AD004B2CBA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A37292259AD004B2CBA /* FirebaseAuth */; };
 		54360A3A292259AD004B2CBA /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 54360A39292259AD004B2CBA /* FirebaseMessaging */; };
+		543B8CC8297182D600E97946 /* ViewFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543B8CC7297182D600E97946 /* ViewFriend.swift */; };
 		543CBF0A291947D300563856 /* Transition+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543CBF09291947D300563856 /* Transition+Extension.swift */; };
 		543D579C291E354F00481019 /* OKButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543D579B291E354F00481019 /* OKButton+Extension.swift */; };
 		543F042D291FBE5C0029F088 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F042C291FBE5C0029F088 /* UserViewModel.swift */; };
@@ -167,6 +168,7 @@
 		542D11872967F37E00A65380 /* ShopAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopAPI.swift; sourceTree = "<group>"; };
 		542D11892967F96B00A65380 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 		5434ACDC293C53BA00AB3AA6 /* DemandStudyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemandStudyCollectionViewCell.swift; sourceTree = "<group>"; };
+		543B8CC7297182D600E97946 /* ViewFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFriend.swift; sourceTree = "<group>"; };
 		543CBF09291947D300563856 /* Transition+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transition+Extension.swift"; sourceTree = "<group>"; };
 		543D579B291E354F00481019 /* OKButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OKButton+Extension.swift"; sourceTree = "<group>"; };
 		543F042C291FBE5C0029F088 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				544306C829695FF600F12BF3 /* FriendTableViewCell.swift */,
 				5455B920296FDBD700362263 /* FriendViewModel.swift */,
 				5455B922296FDC2900362263 /* Friend.swift */,
+				543B8CC7297182D600E97946 /* ViewFriend.swift */,
 				5457A67C297008A900A43516 /* FriendStore.swift */,
 			);
 			path = The3rdFriendVC;
@@ -821,6 +824,7 @@
 				5457A67D297008A900A43516 /* FriendStore.swift in Sources */,
 				54ACF651291D39220002A121 /* Toast+Extension.swift in Sources */,
 				54569A402924DCDE008F3FC6 /* FixedTableViewCell.swift in Sources */,
+				543B8CC8297182D600E97946 /* ViewFriend.swift in Sources */,
 				5440A38C2952E1B30067FCC4 /* ChattingCancelViewController.swift in Sources */,
 				542D11882967F37E00A65380 /* ShopAPI.swift in Sources */,
 				547264B42923D1E00010953B /* ExpandableTableViewCell.swift in Sources */,

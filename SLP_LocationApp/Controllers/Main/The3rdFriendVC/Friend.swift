@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct Friend {
+struct Friend: Decodable {
     var image: Int
     var matchedNick: String
     var study: String

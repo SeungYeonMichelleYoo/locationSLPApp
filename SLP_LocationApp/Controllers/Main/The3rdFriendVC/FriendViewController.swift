@@ -7,6 +7,7 @@
 import UIKit
 import SnapKit
 import RxSwift
+import RxCocoa
 
 class FriendViewController: BaseViewController {
     
@@ -18,14 +19,23 @@ class FriendViewController: BaseViewController {
     
     var disposeBag = DisposeBag()
     
+    var allObservable = Observable.of(Friend)
+    
     override func loadView() {
         self.view = mainView
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
+        //        configureTableView()
         checkCurrentStatus()
+        attributeTableView()
+        
+        allObservable.bind(to: mainView.mainTableView.rx.items(cellIdentifier: FriendTableViewCell.registerId, cellType: FriendTableViewCell.self)) { [weak self] row, element, cell in
+            cell.setData(element)
+        }
+        .disposed(by: disposeBag)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "friends_plus"), style: .plain, target: self, action: #selector(plusBtnClicked))
         navigationItem.rightBarButtonItem?.tintColor = Constants.BaseColor.black
     }
@@ -42,7 +52,7 @@ class FriendViewController: BaseViewController {
                     self.mainView.mainTableView.reloadData()
                     self.matchedUid = myQueueState?.matchedUid ?? ""
                     //Realm에 저장된 가장 마지막 날짜로부터 서버에서 최신 채팅 내용 불러오기
-//                    self.fetchChats(lastDate: self.repository.getLastChatDate(myUid: UserDefaults.standard.string(forKey: "myUID")!, matchedUid: myQueueState?.matchedUid ?? ""))
+                    //                    self.fetchChats(lastDate: self.repository.getLastChatDate(myUid: UserDefaults.standard.string(forKey: "myUID")!, matchedUid: myQueueState?.matchedUid ?? ""))
                 }
                 return
             case APIMyQueueStatusCode.noSearch.rawValue:
@@ -64,45 +74,45 @@ class FriendViewController: BaseViewController {
             }
         }
     }
-    
-    func setupBindings() {
-        friendViewModel.allFriends
-            .bind(to: tableView.rx.items(cellIdentifier: FriendTableViewCell.identifier,
-                                         cellType: FriendTableViewCell.self)) {
-                _, item, cell in
-                cell.onData.onNext(item)
-            }
+}
+
+extension FriendViewController {
+    private func attributeTableView() {
+        view.backgroundColor = .white
+        mainView.mainTableView.register(FriendTableViewCell.self, forCellReuseIdentifier: FriendTableViewCell.registerId)
     }
 }
-extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
-    func configureTableView() {
-        mainView.mainTableView.delegate = self
-        mainView.mainTableView.dataSource = self
-        mainView.mainTableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "FriendTableViewCell")
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell", for: indexPath) as! FriendTableViewCell
-        cell.nameLabel.text = matchedNick
-        return cell
-    }
-    
-    //스와이프해서 삭제하기
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            
-        }
-    }
-    
-    //테이블 삭제 코멘트 Delete에서 삭제로 바꾸기
-    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "삭제"
-    }
-}
+
+
+//extension FriendViewController: UITableViewDelegate, UITableViewDataSource {
+//    func configureTableView() {
+//        mainView.mainTableView.delegate = self
+//        mainView.mainTableView.dataSource = self
+//        mainView.mainTableView.register(FriendTableViewCell.self, forCellReuseIdentifier: "FriendTableViewCell")
+//    }
+//
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 1
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell", for: indexPath) as! FriendTableViewCell
+//        cell.nameLabel.text = matchedNick
+//        return cell
+//    }
+//
+//    //스와이프해서 삭제하기
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if editingStyle == .delete {
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        } else if editingStyle == .insert {
+//
+//        }
+//    }
+//
+//    //테이블 삭제 코멘트 Delete에서 삭제로 바꾸기
+//    func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+//        return "삭제"
+//    }
+//}
