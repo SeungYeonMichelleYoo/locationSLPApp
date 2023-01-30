@@ -24,9 +24,8 @@ An App which can help to find out nearby study-friends based on current location
 ## 개발 기간 / 개발 환경
 2022.11.08 - 2022.01.07 (8주)
 
-<img width="95" src="https://img.shields.io/badge/Xcode-14.1.0-blue">
-<img width="77" src="https://img.shields.io/badge/iOS-15.0+-silver">
-
+<img width="95" src="https://img.shields.io/badge/Xcode-14.1.0-blue"> <img width="77" src="https://img.shields.io/badge/iOS-15.0+-silver">  
+  
 
 ## 사용한 기술 및 오픈소스 라이브러리   
 <b>UI</b>   
@@ -41,7 +40,7 @@ MVC 기반 MVVM 일부 구현
 <b>네트워크</b>   
 Alamofire   
    
-<b>DB</<b>   
+<b>DB</b>   
 Realm   
     
 <b>기타</b>   
