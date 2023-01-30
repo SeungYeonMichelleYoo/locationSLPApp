@@ -1,14 +1,14 @@
-# 🌱 현업 서비스 레벨 프로젝트 <새싹 스터디> 앱 - 위치 기반, 매칭 후 채팅
+# 🌱 현업 서비스 레벨 프로젝트 <새싹 스터디> 앱
 
 <img width="1043" alt="스크린샷 2023-01-28 오전 9 38 27" src="https://user-images.githubusercontent.com/87454813/215230478-7e002591-da61-46b0-9bcc-55d386d9b8a2.png">
 
 
 ## 소개
 
-내가 하고 싶은 '스터디'를 '주변 친구'를 찾아 함께 공부하고 싶을 때 사용하는 앱
-An App which can help to find out nearby study-friends based on current location
+내가 하고 싶은 '스터디'를 '주변 친구'를 찾아 함께 공부하고 싶을 때 사용하는 앱   
+An App which can help to find out nearby study-friends based on current location    
 
-지도에서 주변에 스터디를 원하는 사람을 검색 -> 함께 스터디를 하고 싶은 사람에게 '스터디 요청'을 전송 -> 상대방이 '스터디 수락'하면 채팅방이 열리고 채팅 시작.
+지도에서 주변에 스터디를 원하는 사람을 검색 -> 함께 스터디를 하고 싶은 사람에게 '스터디 요청'을 전송 -> 상대방이 '스터디 수락'하면 채팅방이 열리고 채팅 시작    
 
 
 ## 화면 구성
@@ -16,10 +16,9 @@ An App which can help to find out nearby study-friends based on current location
 
 
 ## 특징
-- 서울 청년 취업사관학교 새싹 iOS 개발자 데뷔과정 중 진행한 마지막 프로젝트
-- 메모리스 회사에서 제공한 기획서(Confluence / Swagger), 디자인(Figma) 기반으로 제작
-<img width="300" alt="스크린샷 2023-01-28 오전 9 10 41" src="https://user-images.githubusercontent.com/87454813/215228581-10378e07-8e20-46e5-bf0c-4fba0f05d3f4.png">
-- 의도된 서버 변경 및 장애 대응
+- 서울 청년 취업사관학교 새싹 iOS 개발자 데뷔과정 중 진행한 마지막 프로젝트   
+- 메모리스 회사에서 제공한 기획서(Confluence / Swagger), 디자인(Figma) 기반으로 제작   
+- 의도된 서버 변경 및 장애 대응   
 
 
 ## 개발 기간 / 개발 환경
@@ -30,18 +29,18 @@ An App which can help to find out nearby study-friends based on current location
 
 
 ## 사용한 기술 및 오픈소스 라이브러리
-<b>UI</b>
-Snapkit, UIKit, Autolayout, Toast, Tabman, IQKeyboardManager
-<b>지도</b>
-CLLocation, MapKit
-<b>디자인패턴</b>
-MVC 기반 MVVM 일부 구현
-<b>네트워크</b>
-Alamofire
-<b>DB</<b>
-Realm
-<b>기타</b>
-Firebase Auth, Firebase Messaging, async/await, Socket.IO, SPM, UserDefaults
+<b>UI</b>   
+Snapkit, UIKit, Autolayout, Toast, Tabman, IQKeyboardManager      
+<b>지도</b>   
+CLLocation, MapKit   
+<b>디자인패턴</b>   
+MVC 기반 MVVM 일부 구현   
+<b>네트워크</b>   
+Alamofire   
+<b>DB</<b>   
+Realm   
+<b>기타</b>   
+Firebase Auth, Firebase Messaging, async/await, Socket.IO, SPM, UserDefaults   
 
 
 ## 화면별 핵심 기능
@@ -163,8 +162,7 @@ func userCheckRecursion() {
 ```
 
 ✅ **클릭시 접혔다 펴지는 CollectionViewCell에 대한 구현**
-
-![ezgif.com-gif-maker.gif](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5d99f2db-b07f-43c3-b88d-440cf6228e68/ezgif.com-gif-maker.gif)
+![접었다폈다](https://user-images.githubusercontent.com/87454813/215513822-657cc96a-0ac0-4967-8cfe-4e7a82c98d56.gif)
 
 ```swift
 extension NearViewController: UIGestureRecognizerDelegate {
@@ -184,6 +182,22 @@ extension NearViewController: UIGestureRecognizerDelegate {
         }
     }
 }
+```
+
+✅ 테이블뷰 새로고침시 Realm 활용하여 과거 채팅 내역 불러오기
+![채팅RealmGIF](https://user-images.githubusercontent.com/87454813/215514086-63e3c3fb-b028-4e70-b4f2-e4d2eb98e667.gif)
+
+```swift
+        mainView.mainTableView.refreshControl = UIRefreshControl()
+        mainView.mainTableView.refreshControl?.addTarget(self, action: #selector(refreshTableView(_:)), for: .valueChanged)
+    }
+    
+    @objc func refreshTableView(_ sender: Any) {
+        //case 1) 배열 안에 뭐가 없는 경우: 오늘날짜 기준
+        //case 2) 배열 안에 뭐가 있는 경우: 가져온 배열 중에서 가장 오래된날짜(0번째 인덱스)
+        mainView.mainTableView.refreshControl!.endRefreshing()
+        chatList = repository.loadDBChats(myUid: UserDefaults.standard.string(forKey: "myUID")!, matchedUid: matchedUid, lastDate: chatList.count > 0 ? chatList[0].createdAt : Date().toString()) + chatList
+        mainView.mainTableView.reloadData()
 ```
 
 
