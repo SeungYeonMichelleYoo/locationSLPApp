@@ -28,17 +28,22 @@ An App which can help to find out nearby study-friends based on current location
 <img width="77" src="https://img.shields.io/badge/iOS-15.0+-silver">
 
 
-## 사용한 기술 및 오픈소스 라이브러리
+## 사용한 기술 및 오픈소스 라이브러리   
 <b>UI</b>   
 Snapkit, UIKit, Autolayout, Toast, Tabman, IQKeyboardManager      
+   
 <b>지도</b>   
 CLLocation, MapKit   
+   
 <b>디자인패턴</b>   
 MVC 기반 MVVM 일부 구현   
+   
 <b>네트워크</b>   
 Alamofire   
+   
 <b>DB</<b>   
 Realm   
+    
 <b>기타</b>   
 Firebase Auth, Firebase Messaging, async/await, Socket.IO, SPM, UserDefaults   
 
@@ -111,8 +116,8 @@ class SesacFace {
         return UIImage(named: "sesac_face_\(level + 1)")!
     }
 }
-```
-
+```   
+   
 ✅ **1시간마다 firebase idToken이 만료되는 것에 대한 대응 / API StatusCode 에 따른 분기처리**
 
 ```swift
@@ -159,11 +164,13 @@ func userCheckRecursion() {
             }
         }
     }
-```
-
-✅ **클릭시 접혔다 펴지는 CollectionViewCell에 대한 구현**
-![접었다폈다](https://user-images.githubusercontent.com/87454813/215513822-657cc96a-0ac0-4967-8cfe-4e7a82c98d56.gif)
-
+```   
+    
+   
+✅ **클릭시 접혔다 펴지는 CollectionViewCell에 대한 구현**   
+![접었다폈다](https://user-images.githubusercontent.com/87454813/215513822-657cc96a-0ac0-4967-8cfe-4e7a82c98d56.gif)   
+   
+    
 ```swift
 extension NearViewController: UIGestureRecognizerDelegate {
     
@@ -182,10 +189,12 @@ extension NearViewController: UIGestureRecognizerDelegate {
         }
     }
 }
-```
-
-✅ 테이블뷰 새로고침시 Realm 활용하여 과거 채팅 내역 불러오기
-![채팅RealmGIF](https://user-images.githubusercontent.com/87454813/215514086-63e3c3fb-b028-4e70-b4f2-e4d2eb98e667.gif)
+```  
+    
+  
+✅ 테이블뷰 새로고침시 Realm 활용하여 과거 채팅 내역 불러오기  
+    
+![채팅RealmGIF](https://user-images.githubusercontent.com/87454813/215514086-63e3c3fb-b028-4e70-b4f2-e4d2eb98e667.gif)  
 
 ```swift
         mainView.mainTableView.refreshControl = UIRefreshControl()
@@ -199,8 +208,8 @@ extension NearViewController: UIGestureRecognizerDelegate {
         chatList = repository.loadDBChats(myUid: UserDefaults.standard.string(forKey: "myUID")!, matchedUid: matchedUid, lastDate: chatList.count > 0 ? chatList[0].createdAt : Date().toString()) + chatList
         mainView.mainTableView.reloadData()
 ```
-
-
+  
+  
 ## 회고
 **🐣 성장한 부분** 
 
